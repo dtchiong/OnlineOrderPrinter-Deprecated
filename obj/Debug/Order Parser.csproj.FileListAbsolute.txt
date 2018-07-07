@@ -1,0 +1,33 @@
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Debug\Order Parser.csprojAssemblyReference.cache
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Debug\Order Parser.csproj.CoreCompileInputs.cache
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\credentials.json
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Order Parser.exe.config
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Order Parser.exe
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Order Parser.pdb
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Google.Apis.Auth.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Google.Apis.Core.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Google.Apis.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Google.Apis.Gmail.v1.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Google.Apis.PlatformServices.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.Net.Http.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.Security.Cryptography.Algorithms.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.Security.Cryptography.Encoding.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.Security.Cryptography.Primitives.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Google.Apis.pdb
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Google.Apis.xml
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Google.Apis.Auth.pdb
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Google.Apis.Auth.xml
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Google.Apis.Core.pdb
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Google.Apis.Core.xml
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Google.Apis.Gmail.v1.pdb
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Google.Apis.Gmail.v1.xml
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Debug\Order Parser.csproj.CopyComplete
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Debug\Order Parser.exe
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Debug\Order Parser.pdb
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\HtmlAgilityPack.xml

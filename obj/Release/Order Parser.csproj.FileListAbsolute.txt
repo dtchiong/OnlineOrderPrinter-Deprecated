@@ -1,0 +1,32 @@
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\credentials.json
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\Order Parser.exe.config
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\Order Parser.exe
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\Order Parser.pdb
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\Google.Apis.Auth.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\Google.Apis.Auth.PlatformServices.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\Google.Apis.Core.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\Google.Apis.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\Google.Apis.Gmail.v1.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\Google.Apis.PlatformServices.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\HtmlAgilityPack.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\Newtonsoft.Json.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\System.Net.Http.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\System.Security.Cryptography.Algorithms.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\System.Security.Cryptography.Encoding.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\System.Security.Cryptography.Primitives.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\Google.Apis.pdb
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\Google.Apis.xml
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\Google.Apis.Auth.pdb
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\Google.Apis.Auth.xml
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\Google.Apis.Core.pdb
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\Google.Apis.Core.xml
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\Google.Apis.Gmail.v1.pdb
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\Google.Apis.Gmail.v1.xml
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\HtmlAgilityPack.pdb
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\HtmlAgilityPack.xml
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Release\Newtonsoft.Json.xml
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Release\Order Parser.csproj.CoreCompileInputs.cache
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Release\Order Parser.csproj.CopyComplete
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Release\Order Parser.exe
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Release\Order Parser.pdb
