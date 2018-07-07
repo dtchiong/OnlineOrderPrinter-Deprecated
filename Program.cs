@@ -95,10 +95,19 @@ namespace GmailQuickstart {
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
 
-            var orderNumberPath = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[2]/tbody/tr/th/table/tbody/tr/th/div/div[4]/span[2]");
-            //var pickupByNamePath = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table/tbody")
-            Console.WriteLine("Order Number: "+ orderNumberPath.InnerHtml);
-       
+            var orderNumberNode   = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[2]/tbody/tr/th/table/tbody/tr/th/div/div[4]/span[2]");
+            var pickupByNameNode  = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[3]/tbody/tr/th[2]/table/tbody/tr/th/div/div[2]/div/div[2]");
+            var contactNumberNode = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[3]/tbody/tr/th[2]/table/tbody/tr/th/div/div[2]/div/div[4]");
+            var orderContentNodes  = htmlDoc.DocumentNode.SelectNodes("//tbody[@class='orderSummary__body']/tr");
+
+            Console.WriteLine("Order Number: "+ orderNumberNode.InnerHtml);
+            Console.WriteLine("Pickup By Name: " + pickupByNameNode.InnerHtml);
+            Console.WriteLine("Contact Number: " + contactNumberNode.InnerHtml);
+
+            for (int i=0; i<orderContentNodes.Count; i++) {
+                Console.WriteLine("tr elem: "+ i);
+            }
+
             
         }
         
