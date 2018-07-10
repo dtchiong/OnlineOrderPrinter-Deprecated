@@ -134,10 +134,37 @@ namespace GmailQuickstart {
             PrintNode("Pickup By Name", pickupByNameNode);
             PrintNode("Contact Number", contactNumberNode);
 
-            for (int i=0; i<orderContentNodes.Count; i++) {
-                Console.WriteLine("tr elem: "+ i);
+            Console.WriteLine("tr node count: " + orderContentNodes.Count);
+
+            int nonItemCount = 5; //the last 5 <tr> of the <tbody> that don't contain items
+            int itemCount = orderContentNodes.Count - nonItemCount;
+
+            for (int i=0; i<itemCount; i++) {
+                //Console.WriteLine(orderContentNodes[i].InnerHtml);
+                Console.WriteLine("tr elem: " + i);
+                //string nodePath = orderContentNodes[i].XPath;
+                //Console.WriteLine(orderContentNodes.OfType("tr"));
+                //Console.WriteLine("tr elem " + i + " node path: " + nodePath);
+
+                var tdNodes = orderContentNodes[i].Elements("td");
+                ParseQuantity(tdNodes.ElementAt(0));
+                ParseName(tdNodes.ElementAt(1));
+                ParsePrice(tdNodes.ElementAt(2));
+
             }
   
+        }
+
+        public static void ParseQuantity(HtmlNode node) {
+            PrintNode("Quantity", node.Element("div"));
+        }
+
+        public static void ParseName(HtmlNode node) {
+
+        }
+
+        public static void ParsePrice(HtmlNode Node) {
+
         }
 
         //Node printing function for debugging
