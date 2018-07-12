@@ -151,18 +151,14 @@ namespace GmailQuickstart {
             int itemCount = orderContentNodes.Count - nonItemCount;
 
             for (int i=0; i<itemCount; i++) {
-                //Console.WriteLine(orderContentNodes[i].InnerHtml);
-                Console.WriteLine("tr elem: " + i);
-                //string nodePath = orderContentNodes[i].XPath;
-                //Console.WriteLine(orderContentNodes.OfType("tr"));
-                //Console.WriteLine("tr elem " + i + " node path: " + nodePath);
+                //Console.WriteLine("tr elem: " + i);
 
                 var tdNodes = orderContentNodes[i].Elements("td");
+                Console.WriteLine("-----");
                 ParseQuantity(tdNodes.ElementAt(0));
                 ParseName(tdNodes.ElementAt(1));
                 ParsePrice(tdNodes.ElementAt(2));
                 Console.WriteLine();
-
             }
   
         }
@@ -172,7 +168,39 @@ namespace GmailQuickstart {
         }
 
         public static void ParseName(HtmlNode node) {
+            var divNodes = node.Elements("div"); 
+            var divNodeCount = divNodes.Count();
+  
+            PrintNode("Item Name", divNodes.ElementAt(0));
 
+            //If there's 2 div nodes, then the 2nd is either addons or special instructions
+            if (divNodeCount == 2) {
+
+                //If there's add-ons, then they're enclosed in a <ul>
+                var addOnNode = divNodes.ElementAt(1).Element("ul");
+
+                //Parse the add-on node if it exists, otherwise parse the special instructions instead
+                if (addOnNode != null) {
+                    ParseAddOns(addOnNode);
+                }else {
+                    ParseSpecialInstruction(divNodes.ElementAt(1));
+                }
+            }else if (divNodeCount == 3) { //There's both addons and special instructions
+                ParseAddOns(divNodes.ElementAt(1).Element("ul"));
+                ParseSpecialInstruction(divNodes.ElementAt(1));
+            }
+
+        }
+
+        public static void ParseAddOns(HtmlNode node) {
+            var liNodes = node.Elements("li");
+            foreach (var liNode in liNodes) {
+                PrintNode("Add On", liNode);
+            }
+        }
+
+        public static void ParseSpecialInstruction(HtmlNode node) {
+            PrintNode("Special Instruction", node);
         }
 
         public static void ParsePrice(HtmlNode node) {
