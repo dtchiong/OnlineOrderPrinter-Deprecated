@@ -63,12 +63,14 @@ namespace GmailQuickstart {
 
 
             //Example orders to base off of
-            /* 16405c305bf594bc
+            /* 16405c305bf594bc - has extra SCHEDULED ORDER <table>
              * 16480ed086d23503
              * 160e78db8539e9da
+             * 164867c4762cffcc - lot of instructions
+             * 164860dc2feb5155
              */
 
-            string orderId = "16405c305bf594bc";
+            string orderId = "164867c4762cffcc";
             string orderStorageDir = @"C:\Users\Derek\Desktop\T4 Tech Upgrade Ideas\Gmail_API\html_grubhub_orders";
             string htmlFile = orderStorageDir + "\\" + orderId + ".html";
 
@@ -111,32 +113,41 @@ namespace GmailQuickstart {
         }
 
         
-        /* Takes grubhub order as an html file in text form and extracts the the relevant information
+        /* Takes grubhub order as an html file in a string and extracts the the relevant information
          */
         public static void ScanGrubHub(string html) {
+            Console.WriteLine("------------------------------------------");
+
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
 
             var orderNumberNode   = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[2]/tbody/tr/th/table/tbody/tr/th/div/div[4]/span[2]");
             var pickupByNameNode  = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[3]/tbody/tr/th[2]/table/tbody/tr/th/div/div[2]/div/div[2]");
             var contactNumberNode = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[3]/tbody/tr/th[2]/table/tbody/tr/th/div/div[2]/div/div[4]");
+            var metaInfoNodes = htmlDoc.DocumentNode.SelectNodes("//body/table/tbody/tr/td/table/tbody/tr/td/table[3]/tbody/tr/th[2]/table/tbody/tr/th/div/div[2]/div/div");
+            var orderContentNodes = htmlDoc.DocumentNode.SelectNodes("//tbody[@class='orderSummary__body']/tr");
 
             //If this is null, then there's an extra <table> "SCHEDULED ORDER: PREVIEW" before the pickup/delivery <table>
             if (pickupByNameNode == null) {
-                Console.WriteLine("--Extra table detected-using table 4");
                 pickupByNameNode  = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[4]/tbody/tr/th[2]/table/tbody/tr/th/div/div/div/div[2]");
                 contactNumberNode = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[4]/tbody/tr/th[2]/table/tbody/tr/th/div/div/div/div[4]");
+                metaInfoNodes     = htmlDoc.DocumentNode.SelectNodes("//body/table/tbody/tr/td/table/tbody/tr/td/table[4]/tbody/tr/th[2]/table/tbody/tr/th/div/div/div/div");
             }
-
-            var orderContentNodes  = htmlDoc.DocumentNode.SelectNodes("//tbody[@class='orderSummary__body']/tr");
 
             PrintNode("Order Number", orderNumberNode);
             PrintNode("Pickup By Name", pickupByNameNode);
             PrintNode("Contact Number", contactNumberNode);
 
-            Console.WriteLine("tr node count: " + orderContentNodes.Count);
+            int metaDivCount              = metaInfoNodes.Count; //the # of <div> elems
+            const int PickupOrderDivCount = 4; //the # of <div> elems associated with a PickUp order
+            bool isDeliveryOrder          = metaDivCount > PickupOrderDivCount;
+            int nonItemCount              = 5; //the last 5 <tr>'s of the <tbody> is meta information
 
-            int nonItemCount = 5; //the last 5 <tr> of the <tbody> that don't contain items
+            //There's one more <tr> of meta information if the order is Delivery
+            if (isDeliveryOrder) {
+                nonItemCount = 6;
+            }
+
             int itemCount = orderContentNodes.Count - nonItemCount;
 
             for (int i=0; i<itemCount; i++) {
@@ -150,6 +161,7 @@ namespace GmailQuickstart {
                 ParseQuantity(tdNodes.ElementAt(0));
                 ParseName(tdNodes.ElementAt(1));
                 ParsePrice(tdNodes.ElementAt(2));
+                Console.WriteLine();
 
             }
   
@@ -163,8 +175,9 @@ namespace GmailQuickstart {
 
         }
 
-        public static void ParsePrice(HtmlNode Node) {
-
+        public static void ParsePrice(HtmlNode node) {
+            node.InnerHtml = node.InnerHtml.Trim(); //trim the white space
+            PrintNode("Price", node);
         }
 
         //Node printing function for debugging
