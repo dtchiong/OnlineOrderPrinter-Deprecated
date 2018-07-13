@@ -46,9 +46,10 @@ namespace GmailQuickstart {
                 ApplicationName = ApplicationName,
             });
 
+            /*
             // Define parameters of request.
             UsersResource.LabelsResource.ListRequest request = service.Users.Labels.List("me");
-            /*
+            
             // List labels.
             IList<Label> labels = request.Execute().Labels;
             Console.WriteLine("Labels:");
@@ -70,7 +71,7 @@ namespace GmailQuickstart {
              * 164860dc2feb5155
              */
 
-            string orderId = "164867c4762cffcc";
+            string orderId = "16405c305bf594bc";
             string orderStorageDir = @"C:\Users\Derek\Desktop\T4 Tech Upgrade Ideas\Gmail_API\html_grubhub_orders";
             string htmlFile = orderStorageDir + "\\" + orderId + ".html";
 
@@ -88,7 +89,7 @@ namespace GmailQuickstart {
             }
 
             ScanGrubHub(decodedBody);
-
+            
             Console.Read();
         }
 
