@@ -4,6 +4,9 @@ using System.Collections.Generic;
 namespace GmailQuickstart {
     public class Order {
 
+        public const int Sixteen = 16; //used to format printing with padding
+        public const int Nine = 9;
+
         public string Service        { get; set; } //Grubhub,DoorDash, or UberEats
         public string OrderNumber    { get; set; }
 
@@ -25,17 +28,17 @@ namespace GmailQuickstart {
             this.ItemList = new List<Item>();
         }
         
-        public void PrintField(string field, string data) {
+        public void PrintField(string field, string data, int padAmount) {
             if (data != null) {
-                Console.WriteLine(field + ": " + data);
+                Console.WriteLine(field.PadRight(padAmount) + ": " + data);
             } else {
-                Console.WriteLine(field + ": null");
+                Console.WriteLine(field.PadRight(padAmount) + ": null");
             }
             
         }
 
-        public void PrintField(string field, int data) {
-            Console.WriteLine(field + ": " + data);
+        public void PrintField(string field, int data, int padAmount) {
+            Console.WriteLine(field.PadRight(padAmount) + ": " + data);
         }
     }
 
@@ -82,19 +85,19 @@ namespace GmailQuickstart {
 
         //Prints all information of the order
         public void PrintOrder() {
-            PrintField("Service", this.Service);
-            PrintField("Order Number", this.OrderNumber);
-            PrintField("Delivery Method", this.DeliveryMethod);
+            PrintField("Service", this.Service, Sixteen);
+            PrintField("Order Number", this.OrderNumber, Sixteen);
+            PrintField("Delivery Method", this.DeliveryMethod, Sixteen);
 
             Console.WriteLine("-----------------------");
 
-            PrintField("CustomerName", this.CustomerName);
-            PrintField("Contact Number", this.ContactNumber);
+            PrintField("Customer Name", this.CustomerName, Sixteen);
+            PrintField("Contact Number", this.ContactNumber, Sixteen);
 
             if (this.DeliveryMethod == "Delivery")
-                PrintField("Delivery Address", this.DeliverAddress);
+                PrintField("Delivery Address", this.DeliverAddress, Sixteen);
 
-            PrintField("Total Item Count", this.TotalItemCount);
+            PrintField("Total Item Count", this.TotalItemCount, Sixteen);
 
             Console.WriteLine("-----------------------");
 
@@ -102,18 +105,18 @@ namespace GmailQuickstart {
                 var item = ItemList[i];
                 Console.WriteLine("Item " + (i + 1) + ":");
 
-                PrintField("Item Name", item.ItemName);
-                PrintField("Quantity", item.Quantity);
+                PrintField("Item Name", item.ItemName, Nine);
+                PrintField("Quantity", item.Quantity, Nine);
 
                 if (item.ItemType == "Drink") {
-                    PrintField("Size", item.Size);
+                    PrintField("Size", item.Size, Nine);
                     if (item.Temperature == "Hot")
-                        PrintField("Temperature", item.Temperature);
-                    PrintField("Temperature", item.Temperature);
-                    PrintField("Sugar Level", item.SugarLevel);
-                    PrintField("Ice Level", item.IceLevel);
+                        PrintField("Temperature", item.Temperature, Nine);
+                    PrintField("Temperature", item.Temperature, Nine);
+                    PrintField("Sugar Level", item.SugarLevel, Nine);
+                    PrintField("Ice Level", item.IceLevel, Nine);
                     if (item.MilkSubsitution != null) {
-                        PrintField("Milk Subsitution", item.MilkSubsitution);
+                        PrintField("Milk Subsitution", item.MilkSubsitution, Nine);
                     }   
                 }
 
@@ -124,7 +127,7 @@ namespace GmailQuickstart {
                     }
                 }
 
-                PrintField("Price", item.Price);
+                PrintField("Price", item.Price, Nine);
             
                 Console.WriteLine(); 
             }
