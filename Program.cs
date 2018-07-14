@@ -55,7 +55,11 @@ namespace GmailQuickstart {
              */
 
             string orderId = "16405c305bf594bc";
+
             string orderStorageDir = @"C:\Users\Derek\Desktop\T4 Tech Upgrade Ideas\Gmail_API\html_grubhub_orders";
+            if (System.Environment.MachineName == "your machine name") {
+                orderStorageDir = "";
+            }
             string htmlFile = orderStorageDir + "\\" + orderId + ".html";
 
             var emailResponse = GetMessage(service, "t4milpitas@gmail.com", orderId);

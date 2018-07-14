@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 
 namespace GmailQuickstart {
+    
+    /* Base class for orders */
     public class Order {
 
         public const int Sixteen = 16; //used to format printing with padding
