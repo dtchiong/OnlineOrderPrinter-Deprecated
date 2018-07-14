@@ -76,6 +76,8 @@ namespace GmailQuickstart {
         //Constructor
         public GrubHubOrder() {
             this.Service = "GrubHub";
+            this.DeliveryMethod = "Pickup";
+            this.ReadyForPickUpTime = null;
         }
 
         //Prints all information of the order
@@ -98,7 +100,7 @@ namespace GmailQuickstart {
 
             for (int i=0; i<ItemList.Count; i++) {
                 var item = ItemList[i];
-                Console.WriteLine("Item " + i + 1 + ":");
+                Console.WriteLine("Item " + (i + 1) + ":");
 
                 PrintField("Item Name", item.ItemName);
                 PrintField("Quantity", item.Quantity);
@@ -115,13 +117,18 @@ namespace GmailQuickstart {
                     }   
                 }
 
-                Console.WriteLine("Add Ons: ");
-                foreach (var addOn in item.AddOnList) {
-                    Console.WriteLine("   " + addOn);
+                if (item.AddOnList != null) {
+                    Console.WriteLine("Add Ons: ");
+                    foreach (var addOn in item.AddOnList) {
+                        Console.WriteLine("   " + addOn);
+                    }
                 }
 
+                PrintField("Price", item.Price);
+            
                 Console.WriteLine(); 
             }
+            
 
 
 

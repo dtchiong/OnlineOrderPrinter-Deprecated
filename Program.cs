@@ -46,23 +46,6 @@ namespace GmailQuickstart {
                 ApplicationName = ApplicationName,
             });
 
-            /*
-            // Define parameters of request.
-            UsersResource.LabelsResource.ListRequest request = service.Users.Labels.List("me");
-            
-            // List labels.
-            IList<Label> labels = request.Execute().Labels;
-            Console.WriteLine("Labels:");
-            if (labels != null && labels.Count > 0) {
-                foreach (var labelItem in labels) {
-                    Console.WriteLine("{0}", labelItem.Name);
-                }
-            } else {
-                Console.WriteLine("No labels found.");
-            }
-            */
-
-
             //Example orders to base off of
             /* 16405c305bf594bc - has extra SCHEDULED ORDER <table>
              * 16480ed086d23503
@@ -87,8 +70,11 @@ namespace GmailQuickstart {
             }else {
                 Console.WriteLine("File already exists: " + orderId + ".html");
             }
+            Console.WriteLine("----------------------");
 
-            ScanGrubHub(decodedBody);
+            GrubHubOrder order = new GrubHubOrder();
+            ScanGrubHub(decodedBody, order);
+            order.PrintOrder();
             
             Console.Read();
         }
@@ -116,9 +102,7 @@ namespace GmailQuickstart {
         
         /* Takes grubhub order as an html file in a string and extracts the the relevant information
          */
-        public static void ScanGrubHub(string html) {
-            Console.WriteLine("------------------------------------------");
-
+        public static void ScanGrubHub(string html, GrubHubOrder order) {
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
 
@@ -135,9 +119,9 @@ namespace GmailQuickstart {
                 metaInfoNodes     = htmlDoc.DocumentNode.SelectNodes("//body/table/tbody/tr/td/table/tbody/tr/td/table[4]/tbody/tr/th[2]/table/tbody/tr/th/div/div/div/div");
             }
 
-            PrintNode("Order Number", orderNumberNode);
-            PrintNode("Pickup By Name", pickupByNameNode);
-            PrintNode("Contact Number", contactNumberNode);
+            ParseOrderNumber(orderNumberNode, order);
+            ParsePickupName(pickupByNameNode, order);
+            ParseContactNumber(contactNumberNode, order);
 
             int metaDivCount              = metaInfoNodes.Count; //the # of <div> elems
             const int PickupOrderDivCount = 4; //the # of <div> elems associated with a PickUp order
@@ -147,32 +131,50 @@ namespace GmailQuickstart {
             //There's one more <tr> of meta information if the order is Delivery
             if (isDeliveryOrder) {
                 nonItemCount = 6;
+                order.DeliveryMethod = "Delivery";
             }
 
-            int itemCount = orderContentNodes.Count - nonItemCount;
+            order.TotalItemCount = orderContentNodes.Count - nonItemCount;
 
-            for (int i=0; i<itemCount; i++) {
+            for (int i=0; i<order.TotalItemCount; i++) {
                 //Console.WriteLine("tr elem: " + i);
-
                 var tdNodes = orderContentNodes[i].Elements("td");
-                Console.WriteLine("-----");
-                ParseQuantity(tdNodes.ElementAt(0));
-                ParseName(tdNodes.ElementAt(1));
-                ParsePrice(tdNodes.ElementAt(2));
-                Console.WriteLine();
+               
+                Item item = new Item();
+                ParseQuantity( tdNodes.ElementAt(0), item);
+                ParseName(     tdNodes.ElementAt(1), item);
+                ParsePrice(    tdNodes.ElementAt(2), item);
+                order.ItemList.Add(item);
             }
-  
         }
 
-        public static void ParseQuantity(HtmlNode node) {
-            PrintNode("Quantity", node.Element("div"));
+
+        public static void ParseOrderNumber(HtmlNode node, Order order) {
+            order.OrderNumber = node.InnerHtml;
+            //PrintNode("Order Number", node);
         }
 
-        public static void ParseName(HtmlNode node) {
+        public static void ParsePickupName(HtmlNode node, Order order) {
+            order.CustomerName = node.InnerHtml;
+            //PrintNode("Customer Name", node);
+        }
+
+        public static void ParseContactNumber(HtmlNode node, Order order) {
+            order.ContactNumber = node.InnerHtml;
+            //PrintNode("Contact Number", node);
+        }
+
+        public static void ParseQuantity(HtmlNode node, Item item) {
+            item.Quantity = Int32.Parse(node.Element("div").InnerHtml);
+            //PrintNode("Quantity", node.Element("div"));
+        }
+
+        public static void ParseName(HtmlNode node, Item item) {
             var divNodes = node.Elements("div"); 
             var divNodeCount = divNodes.Count();
-  
-            PrintNode("Item Name", divNodes.ElementAt(0));
+
+            item.ItemName = divNodes.ElementAt(0).InnerHtml;
+            //PrintNode("Item Name", divNodes.ElementAt(0));
 
             //If there's 2 div nodes, then the 2nd is either addons or special instructions
             if (divNodeCount == 2) {
@@ -182,31 +184,39 @@ namespace GmailQuickstart {
 
                 //Parse the add-on node if it exists, otherwise parse the special instructions instead
                 if (addOnNode != null) {
-                    ParseAddOns(addOnNode);
+                    ParseAddOns(addOnNode, item);
                 }else {
-                    ParseSpecialInstruction(divNodes.ElementAt(1));
+                    ParseSpecialInstruction(divNodes.ElementAt(1), item);
                 }
             }else if (divNodeCount == 3) { //There's both addons and special instructions
-                ParseAddOns(divNodes.ElementAt(1).Element("ul"));
-                ParseSpecialInstruction(divNodes.ElementAt(1));
+                ParseAddOns(divNodes.ElementAt(1).Element("ul"), item);
+                ParseSpecialInstruction(divNodes.ElementAt(1), item);
             }
 
         }
 
-        public static void ParseAddOns(HtmlNode node) {
+        public static void ParseAddOns(HtmlNode node, Item item) {
             var liNodes = node.Elements("li");
-            foreach (var liNode in liNodes) {
-                PrintNode("Add On", liNode);
+
+            if (liNodes != null) {
+                item.AddOnList = new List<string>();
+
+                foreach (var liNode in liNodes) {
+                    item.AddOnList.Add(liNode.InnerHtml);
+                    //PrintNode("Add On", liNode);
+                }
             }
         }
 
-        public static void ParseSpecialInstruction(HtmlNode node) {
-            PrintNode("Special Instruction", node);
+        public static void ParseSpecialInstruction(HtmlNode node, Item item) {
+            item.SpecialInstructions = node.InnerHtml;
+            //PrintNode("Special Instruction", node);
         }
 
-        public static void ParsePrice(HtmlNode node) {
+        public static void ParsePrice(HtmlNode node, Item item) {
             node.InnerHtml = node.InnerHtml.Trim(); //trim the white space
-            PrintNode("Price", node);
+            item.Price = node.InnerHtml;
+            //PrintNode("Price", node);
         }
 
         //Node printing function for debugging
