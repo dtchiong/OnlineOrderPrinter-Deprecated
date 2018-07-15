@@ -46,23 +46,21 @@ namespace GmailQuickstart {
                 ApplicationName = ApplicationName,
             });
 
-            //Example orders to base off of
-            /* 16405c305bf594bc - has extra SCHEDULED ORDER <table>
-             * 16480ed086d23503
-             * 160e78db8539e9da
-             * 164867c4762cffcc - lot of instructions
-             * 164860dc2feb5155
+            /* Example order ids to test from
+             * 16496c1551e4bdb6 - delivery
+             * 16494e24be61d2ca - pickup
              */
 
-            string orderId = "16405c305bf594bc";
+            string orderId = "16494e24be61d2ca";
 
-            string orderStorageDir = @"C:\Users\Derek\Desktop\T4 Tech Upgrade Ideas\Gmail_API\html_grubhub_orders";
+            string orderStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\GrubHub Orders";
             if (System.Environment.MachineName == "your machine name") {
                 orderStorageDir = "";
             }
+
             string htmlFile = orderStorageDir + "\\" + orderId + ".html";
 
-            var emailResponse = GetMessage(service, "t4milpitas@gmail.com", orderId);
+            var emailResponse = GetMessage(service, "t4milpitasonline@gmail.com", orderId);
             var body = emailResponse.Payload.Body.Data;
             byte[] data = FromBase64ForUrlString(body);
             string decodedBody = Encoding.UTF8.GetString(data);
@@ -77,7 +75,7 @@ namespace GmailQuickstart {
             Console.WriteLine("----------------------");
 
             GrubHubOrder order = new GrubHubOrder();
-            ScanGrubHub(decodedBody, order);
+            ParseGrubHubOrder(decodedBody, order);
             order.PrintOrder();
             
             Console.Read();
@@ -106,7 +104,7 @@ namespace GmailQuickstart {
         
         /* Takes grubhub order as an html file in a string and extracts the the relevant information
          */
-        public static void ScanGrubHub(string html, GrubHubOrder order) {
+        public static void ParseGrubHubOrder(string html, GrubHubOrder order) {
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
 
@@ -141,7 +139,7 @@ namespace GmailQuickstart {
             order.TotalItemCount = orderContentNodes.Count - nonItemCount;
 
             for (int i=0; i<order.TotalItemCount; i++) {
-                //Console.WriteLine("tr elem: " + i);
+
                 var tdNodes = orderContentNodes[i].Elements("td");
                
                 Item item = new Item();
@@ -155,22 +153,18 @@ namespace GmailQuickstart {
 
         public static void ParseOrderNumber(HtmlNode node, Order order) {
             order.OrderNumber = node.InnerHtml;
-            //PrintNode("Order Number", node);
         }
 
         public static void ParsePickupName(HtmlNode node, Order order) {
             order.CustomerName = node.InnerHtml;
-            //PrintNode("Customer Name", node);
         }
 
         public static void ParseContactNumber(HtmlNode node, Order order) {
             order.ContactNumber = node.InnerHtml;
-            //PrintNode("Contact Number", node);
         }
 
         public static void ParseQuantity(HtmlNode node, Item item) {
             item.Quantity = Int32.Parse(node.Element("div").InnerHtml);
-            //PrintNode("Quantity", node.Element("div"));
         }
 
         public static void ParseName(HtmlNode node, Item item) {
@@ -178,7 +172,6 @@ namespace GmailQuickstart {
             var divNodeCount = divNodes.Count();
 
             item.ItemName = divNodes.ElementAt(0).InnerHtml;
-            //PrintNode("Item Name", divNodes.ElementAt(0));
 
             //If there's 2 div nodes, then the 2nd is either addons or special instructions
             if (divNodeCount == 2) {
@@ -207,20 +200,17 @@ namespace GmailQuickstart {
 
                 foreach (var liNode in liNodes) {
                     item.AddOnList.Add(liNode.InnerHtml);
-                    //PrintNode("Add On", liNode);
                 }
             }
         }
 
         public static void ParseSpecialInstruction(HtmlNode node, Item item) {
             item.SpecialInstructions = node.InnerHtml;
-            //PrintNode("Special Instruction", node);
         }
 
         public static void ParsePrice(HtmlNode node, Item item) {
-            node.InnerHtml = node.InnerHtml.Trim(); //trim the white space
+            node.InnerHtml  = node.InnerHtml.Trim(); //trim the white space
             item.Price = node.InnerHtml;
-            //PrintNode("Price", node);
         }
 
         //Node printing function for debugging

@@ -70,7 +70,7 @@ namespace GmailQuickstart {
             this.MilkSubsitution = null;
             this.SpecialInstructions = null;
             this.AddOnList   = null;
-            this.Price       = null;
+            this.Price  = null;
         }
     }
 
@@ -87,13 +87,13 @@ namespace GmailQuickstart {
 
         //Prints all information of the order
         public void PrintOrder() {
-            PrintField("Service", this.Service, Sixteen);
-            PrintField("Order Number", this.OrderNumber, Sixteen);
+            PrintField("Service"        , this.Service, Sixteen);
+            PrintField("Order Number"   , this.OrderNumber, Sixteen);
             PrintField("Delivery Method", this.DeliveryMethod, Sixteen);
 
             Console.WriteLine("-----------------------");
 
-            PrintField("Customer Name", this.CustomerName, Sixteen);
+            PrintField("Customer Name" , this.CustomerName, Sixteen);
             PrintField("Contact Number", this.ContactNumber, Sixteen);
 
             if (this.DeliveryMethod == "Delivery")
@@ -108,7 +108,7 @@ namespace GmailQuickstart {
                 Console.WriteLine("Item " + (i + 1) + ":");
 
                 PrintField("Item Name", item.ItemName, Nine);
-                PrintField("Quantity", item.Quantity, Nine);
+                PrintField("Quantity" , item.Quantity, Nine);
 
                 if (item.ItemType == "Drink") {
                     PrintField("Size", item.Size, Nine);
@@ -116,7 +116,7 @@ namespace GmailQuickstart {
                         PrintField("Temperature", item.Temperature, Nine);
                     PrintField("Temperature", item.Temperature, Nine);
                     PrintField("Sugar Level", item.SugarLevel, Nine);
-                    PrintField("Ice Level", item.IceLevel, Nine);
+                    PrintField("Ice Level"  , item.IceLevel, Nine);
                     if (item.MilkSubsitution != null) {
                         PrintField("Milk Subsitution", item.MilkSubsitution, Nine);
                     }   
@@ -133,14 +133,7 @@ namespace GmailQuickstart {
             
                 Console.WriteLine(); 
             }
-            
-
-
-
         }
-
-
-
     }
 
     public class DoorDashOrder : Order {
