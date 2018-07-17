@@ -21,13 +21,13 @@ namespace GmailQuickstart {
 
         //Constructor
         public Order() {
-            this.Service = null;
-            this.OrderNumber = null;
-            this.CustomerName = null;
-            this.ContactNumber = null;
+            this.Service        = null;
+            this.OrderNumber    = null;
+            this.CustomerName   = null;
+            this.ContactNumber  = null;
             this.DeliverAddress = null;
             this.TotalItemCount = 0;
-            this.ItemList = new List<Item>();
+            this.ItemList       = new List<Item>();
         }
         
         public void PrintField(string field, string data, int padAmount) {
@@ -70,7 +70,7 @@ namespace GmailQuickstart {
             this.MilkSubsitution = null;
             this.SpecialInstructions = null;
             this.AddOnList   = null;
-            this.Price  = null;
+            this.Price       = null;
         }
     }
 
@@ -108,6 +108,7 @@ namespace GmailQuickstart {
                 Console.WriteLine("Item " + (i + 1) + ":");
 
                 PrintField("Item Name", item.ItemName, Nine);
+                PrintField("Item Type", item.ItemType, Nine);
                 PrintField("Quantity" , item.Quantity, Nine);
 
                 if (item.ItemType == "Drink") {
@@ -123,7 +124,7 @@ namespace GmailQuickstart {
                 }
 
                 if (item.AddOnList != null) {
-                    Console.WriteLine("Add Ons: ");
+                    Console.WriteLine("Add Ons".PadRight(Nine) + ":");
                     foreach (var addOn in item.AddOnList) {
                         Console.WriteLine("   " + addOn);
                     }
