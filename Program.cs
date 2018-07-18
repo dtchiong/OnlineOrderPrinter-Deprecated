@@ -50,7 +50,6 @@ namespace GmailQuickstart {
              * 16496c1551e4bdb6 - delivery
              * 16494e24be61d2ca - pickup
              */
-
             string orderId = "1648b6cfd2a063ee";
 
             string orderStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\GrubHub Orders";
@@ -74,6 +73,7 @@ namespace GmailQuickstart {
             }
             Console.WriteLine("----------------------");
 
+            GrubHubMenu menu = new GrubHubMenu();
             GrubHubOrder order = new GrubHubOrder();
             ParseGrubHubOrder(decodedBody, order);
             order.PrintOrder();

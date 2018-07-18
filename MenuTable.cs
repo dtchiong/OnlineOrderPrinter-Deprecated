@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Tuple;
-using System.Collections.Generic.Dictionary;
+using System.Collections.Generic;
 
 namespace GmailQuickstart {
 
@@ -14,8 +13,8 @@ namespace GmailQuickstart {
          * Key - name of addon on the menu
          * Value - {Corrected Name, Type of Addon = {Size|Temp|Ice|Sugar|Milk Sub|Topping} }
          */
-        public Dictionary<string, Tuple<string, string>> MenuTable;
-        public Dictionary<string, Tuple<string, string>> AddOnTable;
+        public static Dictionary<string, Tuple<string, string>> MenuTable;
+        public static Dictionary<string, Tuple<string, string>> AddOnTable;
 
         //Constructor
         public Menu() {
@@ -62,7 +61,7 @@ namespace GmailQuickstart {
         }
     }
 
-    public class Menu : GrubHubMenu {
+    public class GrubHubMenu : Menu {
         
         //Constructor
         public GrubHubMenu() {
@@ -123,7 +122,7 @@ namespace GmailQuickstart {
                 { "Honey Peach Tea"        , new Tuple<string, string>( null, "Drink") },
                 { "Grapefruit Tea"         , new Tuple<string, string>( null, "Drink") },
                 { "Elegant Rose Royal Tea" , new Tuple<string, string>( null, "Drink") },
-                { "Fresh Lemon Bomb Green Tea W/Aloe", new Tuple<string, string>("Fresh Lemon Bomb Green Tea w/ Aloe") },
+                { "Fresh Lemon Bomb Green Tea W/Aloe", new Tuple<string, string>("Fresh Lemon Bomb Green Tea w/ Aloe", "Drink") },
                 { "Jasmine Green Tea"      , new Tuple<string, string>( null, "Drink") },
                 { "Yogurt Green Tea"       , new Tuple<string, string>( null, "Drink") },
                 { "Mulberry Fruit Tea"     , new Tuple<string, string>( null, "Drink") },
@@ -245,14 +244,15 @@ namespace GmailQuickstart {
         }     
     }
 
-    public class Menu : DoorDashMenu {
-
+    public class DoorDashMenu : Menu {
+        
         //Constructor
         public DoorDashMenu() {
         }
+
     }
 
-    public class Menu : UberEatsMenu {
+    public class UberEatsMenu : Menu {
 
         //Constructor
         public UberEatsMenu() {
