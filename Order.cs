@@ -7,7 +7,7 @@ namespace GmailQuickstart {
     public class Order {
 
         public const int Sixteen = 16; //used to format printing with padding
-        public const int Nine = 9;
+        public const int Eleven = 11;
 
         public string Service        { get; set; } //Grubhub,DoorDash, or UberEats
         public string OrderNumber    { get; set; }
@@ -45,6 +45,7 @@ namespace GmailQuickstart {
     }
 
     public class Item {
+        public string ItemCount       { get; set; } // "Item Index / Total Items"
         public string ItemType        { get; set; } // Drink or Snack
         public string ItemName        { get; set; }
         public int    Quantity        { get; set; }
@@ -105,32 +106,31 @@ namespace GmailQuickstart {
 
             for (int i=0; i<ItemList.Count; i++) {
                 var item = ItemList[i];
-                Console.WriteLine("Item " + (i + 1) + ":");
-
-                PrintField("Item Name", item.ItemName, Nine);
-                PrintField("Item Type", item.ItemType, Nine);
-                PrintField("Quantity" , item.Quantity, Nine);
+  
+                PrintField("Item Count", item.ItemCount, Eleven);
+                PrintField("Item Name", item.ItemName, Eleven);
+                PrintField("Item Type", item.ItemType, Eleven);
+                PrintField("Quantity" , item.Quantity, Eleven);
 
                 if (item.ItemType == "Drink") {
-                    PrintField("Size", item.Size, Nine);
-                    if (item.Temperature == "Hot")
-                        PrintField("Temperature", item.Temperature, Nine);
-                    PrintField("Temperature", item.Temperature, Nine);
-                    PrintField("Sugar Level", item.SugarLevel, Nine);
-                    PrintField("Ice Level"  , item.IceLevel, Nine);
+                    PrintField("Size", item.Size, Eleven);
+                    PrintField("Temperature", item.Temperature, Eleven);
+                    PrintField("Sugar Level", item.SugarLevel, Eleven);
+                    PrintField("Ice Level"  , item.IceLevel, Eleven);
                     if (item.MilkSubsitution != null) {
-                        PrintField("Milk Subsitution", item.MilkSubsitution, Nine);
+                        PrintField("Milk Subsitution", item.MilkSubsitution, Eleven);
                     }   
                 }
 
-                if (item.AddOnList != null) {
-                    Console.WriteLine("Add Ons".PadRight(Nine) + ":");
+                bool AddOnListIsEmpty = item.AddOnList == null || item.AddOnList.Count == 0;
+                if (!AddOnListIsEmpty) {
+                    Console.WriteLine("Add Ons".PadRight(Eleven) + ":");
                     foreach (var addOn in item.AddOnList) {
-                        Console.WriteLine("   " + addOn);
+                        Console.WriteLine("---" + addOn + "---");
                     }
                 }
 
-                PrintField("Price", item.Price, Nine);
+                PrintField("Price", item.Price, Eleven);
             
                 Console.WriteLine(); 
             }

@@ -13,15 +13,15 @@ namespace GmailQuickstart {
          * Key - name of addon on the menu
          * Value - {Corrected Name, Type of Addon = {Size|Temp|Ice|Sugar|Milk Sub|Topping} }
          */
-        public static Dictionary<string, Tuple<string, string>> MenuTable;
-        public static Dictionary<string, Tuple<string, string>> AddOnTable;
+        public Dictionary<string, Tuple<string, string>> MenuTable;
+        public Dictionary<string, Tuple<string, string>> AddOnTable;
 
         //Constructor
         public Menu() {
         }
 
         /* Gets the corrected name of the given item */
-        public static string GetCorrectedItemName(string name) {
+        public string GetCorrectedItemName(string name) {           
             Tuple<string, string> value;
 
             if (MenuTable.TryGetValue(name, out value)) {
@@ -31,7 +31,7 @@ namespace GmailQuickstart {
         }
 
         /* Gets the item type of the given item */
-        public static string GetItemType(string name) {
+        public string GetItemType(string name) { 
             Tuple<string, string> value;
 
             if (MenuTable.TryGetValue(name, out value)) {
@@ -41,20 +41,20 @@ namespace GmailQuickstart {
         }
 
         /* Gets the corrected name of the given addon */
-        public static string GetCorrectedAddOnName(string name) {
+        public string GetCorrectedAddOnName(string name) {
             Tuple<string, string> value;
 
-            if (MenuTable.TryGetValue(name, out value)) {
+            if (AddOnTable.TryGetValue(name, out value)) {
                 return value.Item1;
             }
             return null;
         }
 
         /* Gets the type of the given addon */
-        public static string GetAddOnType(string name) {
+        public string GetAddOnType(string name) {
             Tuple<string, string> value;
 
-            if (MenuTable.TryGetValue(name, out value)) {
+            if (AddOnTable.TryGetValue(name, out value)) {
                 return value.Item2;
             }
             return null;
@@ -65,7 +65,7 @@ namespace GmailQuickstart {
         
         //Constructor
         public GrubHubMenu() {
-            MenuTable = new Dictionary<string, Tuple<string, string>> {
+            MenuTable = new Dictionary<string, Tuple<string, string>>() {
 
                 //Milk Tea
                 { "Pearl Milk Tea"          , new Tuple<string, string>( null, "Drink")  },
@@ -200,7 +200,7 @@ namespace GmailQuickstart {
             AddOnTable = new Dictionary<string, Tuple<string, string>> {
                 
                 //Tempurature
-                { "Make It Hot", new Tuple<string, string>( "Hot", "Tempurature") },
+                { "Make It Hot", new Tuple<string, string>( "Hot", "Temperature") },
                 
                 //Size
                 { "Up Size", new Tuple<string, string>( "Large", "Size") },
@@ -240,6 +240,13 @@ namespace GmailQuickstart {
                 //Milk Subsitute
                 { "Substitute with Whole Milk" , new Tuple<string, string>("Whole Milk Sub", "Milk Subsitute") },
                 { "Substitute with Soy Milk"   , new Tuple<string, string>("Soy Milk Sub"  , "Milk Subsitute") },
+
+                //Tea
+                { "Black Tea"  , new Tuple<string, string>(null, "Tea") },
+                { "Green Tea"  , new Tuple<string, string>(null, "Tea") },
+                { "Oolong Tea" , new Tuple<string, string>(null, "Tea") },
+                { "Royal Tea"  , new Tuple<string, string>(null, "Tea") }
+                
             };    
         }     
     }

@@ -21,6 +21,8 @@ namespace GmailQuickstart {
         // at ~/.credentials/gmail-dotnet-quickstart.json
         static string[] Scopes = { GmailService.Scope.GmailReadonly };
         static string ApplicationName = "Gmail API .NET Quickstart";
+        public static GrubHubMenu menu = new GrubHubMenu();
+
 
         static void Main(string[] args){
             UserCredential credential;
@@ -50,7 +52,7 @@ namespace GmailQuickstart {
              * 16496c1551e4bdb6 - delivery
              * 16494e24be61d2ca - pickup
              */
-            string orderId = "1648b6cfd2a063ee";
+            string orderId = "16494e24be61d2ca";
 
             string orderStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\GrubHub Orders";
             if (System.Environment.MachineName == "your machine name") {
@@ -73,7 +75,6 @@ namespace GmailQuickstart {
             }
             Console.WriteLine("----------------------");
 
-            GrubHubMenu menu = new GrubHubMenu();
             GrubHubOrder order = new GrubHubOrder();
             ParseGrubHubOrder(decodedBody, order);
             order.PrintOrder();
@@ -144,8 +145,11 @@ namespace GmailQuickstart {
                
                 Item item = new Item();
                 ParseQuantity( tdNodes.ElementAt(0), item);
-                ParseName(     tdNodes.ElementAt(1), item);
+                ParseItem(     tdNodes.ElementAt(1), item);
                 ParsePrice(    tdNodes.ElementAt(2), item);
+
+                SetItemCount(i + 1, order.TotalItemCount, item);
+
                 order.ItemList.Add(item);
             }
         }
@@ -163,16 +167,36 @@ namespace GmailQuickstart {
             order.ContactNumber = node.InnerHtml;
         }
 
+        public static void ParseName(HtmlNode node, Item item) {
+
+            string name = node.InnerHtml;
+            item.ItemName = name;
+
+            string correctedName = menu.GetCorrectedItemName(name);
+            if (correctedName != null) {
+                item.ItemName = correctedName;
+            }
+        }
+
+        public static void ParseType(HtmlNode node, Item item) {
+            string name = node.InnerHtml;
+            string type = menu.GetItemType(name);
+
+            item.ItemType = type; 
+        }
+
         public static void ParseQuantity(HtmlNode node, Item item) {
             item.Quantity = Int32.Parse(node.Element("div").InnerHtml);
         }
 
-        public static void ParseName(HtmlNode node, Item item) {
+        public static void ParseItem(HtmlNode node, Item item) {
             var divNodes = node.Elements("div"); 
             var divNodeCount = divNodes.Count();
+            var nameNode = divNodes.ElementAt(0);
 
-            item.ItemName = divNodes.ElementAt(0).InnerHtml;
-
+            ParseName(nameNode, item);
+            ParseType(nameNode, item);
+            
             //If there's 2 div nodes, then the 2nd is either addons or special instructions
             if (divNodeCount == 2) {
 
@@ -192,6 +216,10 @@ namespace GmailQuickstart {
 
         }
 
+        public static void SetItemCount(int itemIndex, int totalItems, Item item) {
+            item.ItemCount = itemIndex + "/" + totalItems;
+        }
+
         public static void ParseAddOns(HtmlNode node, Item item) {
             var liNodes = node.Elements("li");
 
@@ -199,8 +227,52 @@ namespace GmailQuickstart {
                 item.AddOnList = new List<string>();
 
                 foreach (var liNode in liNodes) {
-                    item.AddOnList.Add(liNode.InnerHtml);
+                    string addOnName = liNode.InnerHtml;
+                    string addOnType = menu.GetAddOnType(addOnName);
+
+                    if (addOnType != null) {
+                        ParseAddOnTypeAndName(addOnType, addOnName, item);
+                    }else {
+                        item.AddOnList.Add(addOnName);
+                    }    
                 }
+            }
+        }
+
+        public static void ParseAddOnTypeAndName(string type, string name, Item item) {
+
+            string correctedAddOnName = menu.GetCorrectedAddOnName(name);
+            if (correctedAddOnName != null) {
+                name = correctedAddOnName;
+            }
+
+            //Console.WriteLine("Got addOn type: " + type);
+            switch (type) {
+                case "Temperature":
+                    item.Temperature = name;
+                    break;
+                case "Size":
+                    item.Size = name;
+                    break;
+                case "Ice":
+                    item.IceLevel = name;
+                    break;
+                case "Sugar":
+                    item.SugarLevel = name;
+                    break;
+                case "Topping":
+                    item.AddOnList.Add(name);
+                    break;
+                case "Milk Subsitute":
+                    item.MilkSubsitution = name;
+                    break;
+                case "Tea":
+                    //Console.WriteLine("Identified Tea Type: " + name);
+                    item.ItemName = item.ItemName.Replace("Tea", name);
+                    break;
+                default:
+                    Console.WriteLine("Unidentified add on type: " + name);
+                    break;
             }
         }
 
