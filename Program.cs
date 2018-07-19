@@ -51,10 +51,10 @@ namespace GmailQuickstart {
 
             /* Example order ids to test from
              * 16496c1551e4bdb6 - delivery
-             * 16494e24be61d2ca - pickup
+             * 16494e24be61d2ca - pickup - doesn't get instructions
              * 164a0be8486f56d7
              */
-            string orderId = "16496c1551e4bdb6";
+            string orderId = "164a0be8486f56d7";
 
             string orderStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\GrubHub Orders";
             if (System.Environment.MachineName == "your machine name") {
@@ -104,39 +104,32 @@ namespace GmailQuickstart {
             return Convert.FromBase64String(result.ToString());
         }
 
-        
+        //************************************************* GrubHub parsing functions ****************************************************
+
         /* Takes grubhub order as an html file in a string and extracts the the relevant information
          */
         public static void ParseGrubHubOrder(string html, GrubHubOrder order) {
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
 
-            var orderNumberNode   = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[2]/tbody/tr/th/table/tbody/tr/th/div/div[4]/span[2]");
-            var pickupByNameNode  = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[3]/tbody/tr/th[2]/table/tbody/tr/th/div/div[2]/div/div[2]");
-            var contactNumberNode = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[3]/tbody/tr/th[2]/table/tbody/tr/th/div/div[2]/div/div[4]");
             var metaInfoNodes = htmlDoc.DocumentNode.SelectNodes("//body/table/tbody/tr/td/table/tbody/tr/td/table[3]/tbody/tr/th[2]/table/tbody/tr/th/div/div[2]/div/div");
-            var orderContentNodes = htmlDoc.DocumentNode.SelectNodes("//tbody[@class='orderSummary__body']/tr");
+            var pickupByNameNode = metaInfoNodes.ElementAt(1);
 
             //If this is null, then there's an extra <table> "SCHEDULED ORDER: PREVIEW" before the pickup/delivery <table>
             if (pickupByNameNode == null) {
-                pickupByNameNode  = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[4]/tbody/tr/th[2]/table/tbody/tr/th/div/div/div/div[2]");
-                contactNumberNode = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[4]/tbody/tr/th[2]/table/tbody/tr/th/div/div/div/div[4]");
                 metaInfoNodes     = htmlDoc.DocumentNode.SelectNodes("//body/table/tbody/tr/td/table/tbody/tr/td/table[4]/tbody/tr/th[2]/table/tbody/tr/th/div/div/div/div");
             }
 
-
-
+            var orderNumberNode = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[2]/tbody/tr/th/table/tbody/tr/th/div/div[4]/span[2]");
             ParseOrderNumber(orderNumberNode, order);
-            ParsePickupName(pickupByNameNode, order);
-            ParseContactNumber(contactNumberNode, order);
 
-            int metaDivCount              = metaInfoNodes.Count; //the # of <div> elems
             const int PickupOrderDivCount = 4; //the # of <div> elems associated with a PickUp order
+            int metaDivCount              = metaInfoNodes.Count; //the # of <div> elems 
             bool isDeliveryOrder          = metaDivCount > PickupOrderDivCount;
             int nonItemCount              = 5; //the last 5 <tr>'s of the <tbody> is meta information
             int lastAddressIndex          = metaDivCount - 3;
 
-            ParsePickupName(metaInfoNodes.ElementAt(1), order);
+            ParsePickupName(pickupByNameNode, order);
             ParseContactNumber(metaInfoNodes.ElementAt(metaDivCount - 1), order);
             //There's one more <tr> of meta information if the order is Delivery
             if (isDeliveryOrder) {
@@ -146,8 +139,7 @@ namespace GmailQuickstart {
                 ParseDeliveryAddress(metaInfoNodes, 2, lastAddressIndex, order);   
             }
 
-            
-
+            var orderContentNodes = htmlDoc.DocumentNode.SelectNodes("//tbody[@class='orderSummary__body']/tr");
             order.TotalItemCount = orderContentNodes.Count - nonItemCount;
 
             for (int i=0; i<order.TotalItemCount; i++) {
@@ -165,7 +157,6 @@ namespace GmailQuickstart {
             }
         }
 
-
         public static void ParseOrderNumber(HtmlNode node, Order order) {
             order.OrderNumber = node.InnerHtml;
         }
@@ -178,6 +169,7 @@ namespace GmailQuickstart {
             order.ContactNumber = node.InnerHtml;
         }
 
+        /* Child nodes of parentNode from startInd to endInd are part of the address */
         public static void ParseDeliveryAddress(HtmlNodeCollection parentNode, int startInd, int endInd, Order order) {
             string address = "";
             for (int i=startInd; i <= endInd; i++) {
@@ -190,6 +182,7 @@ namespace GmailQuickstart {
             order.DeliverAddress = address;
         }
 
+        /* We get the name of the item, then correct it through the menu dictionary */
         public static void ParseName(HtmlNode node, Item item) {
 
             string name = node.InnerHtml;
@@ -201,6 +194,7 @@ namespace GmailQuickstart {
             }
         }
 
+        /* Looks up the item in the menu dictionary to set the item type */
         public static void ParseType(HtmlNode node, Item item) {
             string name = node.InnerHtml;
             string type = menu.GetItemType(name);
@@ -212,6 +206,7 @@ namespace GmailQuickstart {
             item.Quantity = Int32.Parse(node.Element("div").InnerHtml);
         }
 
+        /* Parse the item name, type, and addons */
         public static void ParseItem(HtmlNode node, Item item) {
             var divNodes = node.Elements("div"); 
             var divNodeCount = divNodes.Count();
@@ -232,7 +227,7 @@ namespace GmailQuickstart {
                 }else {
                     ParseSpecialInstruction(divNodes.ElementAt(1), item);
                 }
-            }else if (divNodeCount == 3) { //There's both addons and special instructions
+            }else if (divNodeCount == 4) { //There's both addons and special instructions
                 ParseAddOns(divNodes.ElementAt(1).Element("ul"), item);
                 ParseSpecialInstruction(divNodes.ElementAt(3), item);
             }
@@ -243,6 +238,7 @@ namespace GmailQuickstart {
             item.ItemCount = itemIndex + "/" + totalItems;
         }
 
+        /* Sorts each addon into a topping, or an item attribute such as size, sugar level, etc */
         public static void ParseAddOns(HtmlNode node, Item item) {
             var liNodes = node.Elements("li");
 
@@ -263,6 +259,7 @@ namespace GmailQuickstart {
             }
         }
 
+        /* Categorizes each addon and sets the associated field in the item */
         public static void ParseAddOnTypeAndName(string type, string name, Item item) {
 
             string correctedAddOnName = menu.GetCorrectedAddOnName(name);
