@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace GmailQuickstart {
     class Program {
@@ -51,8 +52,9 @@ namespace GmailQuickstart {
             /* Example order ids to test from
              * 16496c1551e4bdb6 - delivery
              * 16494e24be61d2ca - pickup
+             * 164a0be8486f56d7
              */
-            string orderId = "164a0be8486f56d7";
+            string orderId = "16496c1551e4bdb6";
 
             string orderStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\GrubHub Orders";
             if (System.Environment.MachineName == "your machine name") {
@@ -122,6 +124,8 @@ namespace GmailQuickstart {
                 metaInfoNodes     = htmlDoc.DocumentNode.SelectNodes("//body/table/tbody/tr/td/table/tbody/tr/td/table[4]/tbody/tr/th[2]/table/tbody/tr/th/div/div/div/div");
             }
 
+
+
             ParseOrderNumber(orderNumberNode, order);
             ParsePickupName(pickupByNameNode, order);
             ParseContactNumber(contactNumberNode, order);
@@ -130,12 +134,19 @@ namespace GmailQuickstart {
             const int PickupOrderDivCount = 4; //the # of <div> elems associated with a PickUp order
             bool isDeliveryOrder          = metaDivCount > PickupOrderDivCount;
             int nonItemCount              = 5; //the last 5 <tr>'s of the <tbody> is meta information
+            int lastAddressIndex          = metaDivCount - 3;
 
+            ParsePickupName(metaInfoNodes.ElementAt(1), order);
+            ParseContactNumber(metaInfoNodes.ElementAt(metaDivCount - 1), order);
             //There's one more <tr> of meta information if the order is Delivery
             if (isDeliveryOrder) {
                 nonItemCount = 6;
                 order.DeliveryMethod = "Delivery";
+
+                ParseDeliveryAddress(metaInfoNodes, 2, lastAddressIndex, order);   
             }
+
+            
 
             order.TotalItemCount = orderContentNodes.Count - nonItemCount;
 
@@ -165,6 +176,18 @@ namespace GmailQuickstart {
 
         public static void ParseContactNumber(HtmlNode node, Order order) {
             order.ContactNumber = node.InnerHtml;
+        }
+
+        public static void ParseDeliveryAddress(HtmlNodeCollection parentNode, int startInd, int endInd, Order order) {
+            string address = "";
+            for (int i=startInd; i <= endInd; i++) {
+
+                string addressPart = parentNode.ElementAt(i).InnerHtml;
+                string actual1 = Regex.Replace(addressPart, @"\t|\n|\r", "");
+                string actual2 = Regex.Replace(actual1, @"\s+", " ");
+                address = address + actual2 + ",";
+            }
+            order.DeliverAddress = address;
         }
 
         public static void ParseName(HtmlNode node, Item item) {
