@@ -52,7 +52,7 @@ namespace GmailQuickstart {
              * 16496c1551e4bdb6 - delivery
              * 16494e24be61d2ca - pickup
              */
-            string orderId = "16494e24be61d2ca";
+            string orderId = "164a0be8486f56d7";
 
             string orderStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\GrubHub Orders";
             if (System.Environment.MachineName == "your machine name") {
@@ -211,7 +211,7 @@ namespace GmailQuickstart {
                 }
             }else if (divNodeCount == 3) { //There's both addons and special instructions
                 ParseAddOns(divNodes.ElementAt(1).Element("ul"), item);
-                ParseSpecialInstruction(divNodes.ElementAt(1), item);
+                ParseSpecialInstruction(divNodes.ElementAt(3), item);
             }
 
         }
@@ -234,6 +234,7 @@ namespace GmailQuickstart {
                         ParseAddOnTypeAndName(addOnType, addOnName, item);
                     }else {
                         item.AddOnList.Add(addOnName);
+                        Console.WriteLine("Unidentified add on type: " + addOnName);
                     }    
                 }
             }
@@ -277,7 +278,8 @@ namespace GmailQuickstart {
         }
 
         public static void ParseSpecialInstruction(HtmlNode node, Item item) {
-            item.SpecialInstructions = node.InnerHtml;
+            string instructions = node.InnerHtml.Replace("Instructions: ", "");
+            item.SpecialInstructions = instructions;
         }
 
         public static void ParsePrice(HtmlNode node, Item item) {

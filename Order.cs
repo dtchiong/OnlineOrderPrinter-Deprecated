@@ -7,7 +7,7 @@ namespace GmailQuickstart {
     public class Order {
 
         public const int Sixteen = 16; //used to format printing with padding
-        public const int Eleven = 11;
+        public const int Twelve = 12;
 
         public string Service        { get; set; } //Grubhub,DoorDash, or UberEats
         public string OrderNumber    { get; set; }
@@ -107,30 +107,30 @@ namespace GmailQuickstart {
             for (int i=0; i<ItemList.Count; i++) {
                 var item = ItemList[i];
   
-                PrintField("Item Count", item.ItemCount, Eleven);
-                PrintField("Item Name", item.ItemName, Eleven);
-                PrintField("Item Type", item.ItemType, Eleven);
-                PrintField("Quantity" , item.Quantity, Eleven);
+                PrintField("Item Count", item.ItemCount, Twelve);
+                PrintField("Item Name", item.ItemName, Twelve);
+                PrintField("Item Type", item.ItemType, Twelve);
+                PrintField("Quantity" , item.Quantity, Twelve);
 
                 if (item.ItemType == "Drink") {
-                    PrintField("Size", item.Size, Eleven);
-                    PrintField("Temperature", item.Temperature, Eleven);
-                    PrintField("Sugar Level", item.SugarLevel, Eleven);
-                    PrintField("Ice Level"  , item.IceLevel, Eleven);
+                    PrintField("Size", item.Size, Twelve);
+                    PrintField("Temperature", item.Temperature, Twelve);
+                    PrintField("Sugar Level", item.SugarLevel, Twelve);
+                    PrintField("Ice Level"  , item.IceLevel, Twelve);
                     if (item.MilkSubsitution != null) {
-                        PrintField("Milk Subsitution", item.MilkSubsitution, Eleven);
+                        PrintField("Milk Subsitution", item.MilkSubsitution, Twelve);
                     }   
                 }
 
                 bool AddOnListIsEmpty = item.AddOnList == null || item.AddOnList.Count == 0;
                 if (!AddOnListIsEmpty) {
-                    Console.WriteLine("Add Ons".PadRight(Eleven) + ":");
+                    Console.WriteLine("Add Ons".PadRight(Twelve) + ":");
                     foreach (var addOn in item.AddOnList) {
                         Console.WriteLine("---" + addOn + "---");
                     }
                 }
-
-                PrintField("Price", item.Price, Eleven);
+                PrintField("Instructions", item.SpecialInstructions, Twelve);
+                PrintField("Price", item.Price, Twelve);
             
                 Console.WriteLine(); 
             }
