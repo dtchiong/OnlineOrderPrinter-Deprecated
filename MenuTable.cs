@@ -3,10 +3,17 @@ using System.Collections.Generic;
 
 namespace GmailQuickstart {
 
+
+    /* The keys stored in these hashtables are the exact string as they appear in the associated menu
+     * So these tables serve 2 purposes:
+     * - to look up the corrected name (in case of a typo)
+     * - to get the type of the item or addon, so that we can set the appropriate fields
+     */
+      
     public class Menu {
 
         /* MenuTable
-         * Key - name of item on menu
+         * Key - name of item on menu 
          * Value - {Corrected Name, Type of Item = {Drink|Snack} }
          * 
          * AddOnTable
