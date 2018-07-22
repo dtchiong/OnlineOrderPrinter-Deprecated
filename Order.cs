@@ -138,6 +138,15 @@ namespace GmailQuickstart {
     }
 
     public class DoorDashOrder : Order {
+
+        //Constructor
+        public DoorDashOrder() {
+
+        }
+
+        public void PrintOrder() {
+            Console.WriteLine("DoorDash.PrintOrder() - Unimplemented");
+        }
     }
 
     public class UberEatsOrder : Order {

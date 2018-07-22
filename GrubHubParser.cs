@@ -17,7 +17,7 @@ namespace GmailQuickstart {
         }
 
         /* Takes grubhub order as an html file in a string and extracts the the relevant information*/
-        public void ParseGrubHubOrder(string html, GrubHubOrder order) {
+        public void ParseOrder(string html, GrubHubOrder order) {
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
 

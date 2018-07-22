@@ -12,7 +12,9 @@ namespace GmailQuickstart {
 
         }
 
+        public void ParseOrder(string pdfFile, DoorDashOrder order) {
 
+        }
 
     }
 

@@ -53,50 +53,72 @@ namespace GmailQuickstart {
              * DoorDash:
              * 164b501111cebfe1
              */
-            string messageId = "164a0be8486f56d7";
+            string messageId = "164b501111cebfe1";
 
-            string GrubHubStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\GrubHub Orders";
-            string DoorDashStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\DoorDash Orders";
+            const string GrubHubStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\GrubHub Orders";
+            const string DoorDashStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\DoorDash Orders";
 
-            string htmlFile = GrubHubStorageDir + "\\" + messageId + ".html";
+            bool   isGrubHubOrder = false;
+            string base64Input    = null;  //the input to be converted to base64url encoding format
+            string fileName       = null;
+            string storageDir     = null;  //the file saving directory
+            string filePath       = null;  //the full path to the file
 
             var emailResponse = GetMessage(service, "t4milpitasonline@gmail.com", messageId);
-            
+
             //If the Parts is not null, then this is a DoorDash email
             if (emailResponse.Payload.Parts != null) {
                 Console.WriteLine("Email Type: DoorDash");
 
                 var attachId = emailResponse.Payload.Parts[1].Body.AttachmentId;
 
+                //Need to do another API call to get the actual attachment from the attachment id
                 MessagePartBody attachPart = GetAttachment(service, "t4milpitasonline@gmail.com", messageId, attachId);
-                
-                byte[] data = FromBase64ForUrlString(attachPart.Data);
-                string fileName = messageId + ".pdf";
-                File.WriteAllBytes(Path.Combine(DoorDashStorageDir, fileName), data);
+
+                base64Input = attachPart.Data;
+                fileName = messageId + ".pdf";
+                storageDir = DoorDashStorageDir;
 
             } else { //GrubHub email
                 Console.WriteLine("Email Type: GrubHub");
+                isGrubHubOrder = true;
 
                 var body = emailResponse.Payload.Body.Data;
-                byte[] data = FromBase64ForUrlString(body);
-                string decodedBody = Encoding.UTF8.GetString(data);
 
-                //Saves the order to file if it doesn't exist
-                if (!File.Exists(htmlFile)) {
-                    Console.WriteLine("Writing new file: " + messageId + ".html");
-                    File.WriteAllBytes(htmlFile, data);
-                } else {
-                    Console.WriteLine("File already exists: " + messageId + ".html");
-                }
-                Console.WriteLine("----------------------");
+                base64Input = body;
+                fileName = messageId + ".html";
+                storageDir = GrubHubStorageDir;
+            }
 
+            byte[] data = FromBase64ForUrlString(base64Input);
+            filePath = Path.Combine(storageDir, fileName);
+            
+            //Saves the order to file if it doesn't exist
+            if (!File.Exists(filePath)) {
+                Console.WriteLine("Writing new file: " + fileName);
+                File.WriteAllBytes(filePath, data);
+            } else {
+                Console.WriteLine("File already exists: " + fileName);
+            }
+            Console.WriteLine("----------------------");
+
+            if (isGrubHubOrder) {
                 GrubHubOrder order = new GrubHubOrder();
                 GrubHubParser grubHubParser = new GrubHubParser();
 
-                grubHubParser.ParseGrubHubOrder(decodedBody, order);
+                string decodedBody = Encoding.UTF8.GetString(data);
+                grubHubParser.ParseOrder(decodedBody, order);
+
+                order.PrintOrder();
+            } else {
+                DoorDashOrder order = new DoorDashOrder();
+                DoorDashParser doorDashParser = new DoorDashParser();
+
+                string decodedBody = Encoding.UTF8.GetString(data);
+                doorDashParser.ParseOrder(decodedBody, order);
+
                 order.PrintOrder();
             }
-
             Console.Read();
         }
 
