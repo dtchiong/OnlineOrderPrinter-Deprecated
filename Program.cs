@@ -46,11 +46,14 @@ namespace GmailQuickstart {
             });
 
             /* Example order ids to test from
+             * GrubHub:
              * 16496c1551e4bdb6 - delivery
              * 16494e24be61d2ca - pickup - 
              * 164a0be8486f56d7
+             * DoorDash:
+             * 164b501111cebfe1
              */
-            string messageId = "164bfe79a8299258";
+            string messageId = "164a0be8486f56d7";
 
             string GrubHubStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\GrubHub Orders";
             string DoorDashStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\DoorDash Orders";
@@ -59,23 +62,17 @@ namespace GmailQuickstart {
 
             var emailResponse = GetMessage(service, "t4milpitasonline@gmail.com", messageId);
             
-            var attachId = emailResponse.Payload.Parts[1].Body.AttachmentId;
-
-            //If the attachmentId is not null, then this is a DoorDash email
-            if (attachId != null) {
+            //If the Parts is not null, then this is a DoorDash email
+            if (emailResponse.Payload.Parts != null) {
                 Console.WriteLine("Email Type: DoorDash");
+
+                var attachId = emailResponse.Payload.Parts[1].Body.AttachmentId;
 
                 MessagePartBody attachPart = GetAttachment(service, "t4milpitasonline@gmail.com", messageId, attachId);
                 
-                // Converting from RFC 4648 base64 to base64url encoding
-                // see http://en.wikipedia.org/wiki/Base64#Implementations_and_history
-                String attachData = attachPart.Data.Replace('-', '+');
-                attachData = attachData.Replace('_', '/');
-
-                byte[] data = Convert.FromBase64String(attachData);
+                byte[] data = FromBase64ForUrlString(attachPart.Data);
                 string fileName = messageId + ".pdf";
                 File.WriteAllBytes(Path.Combine(DoorDashStorageDir, fileName), data);
-
 
             } else { //GrubHub email
                 Console.WriteLine("Email Type: GrubHub");
@@ -87,7 +84,7 @@ namespace GmailQuickstart {
                 //Saves the order to file if it doesn't exist
                 if (!File.Exists(htmlFile)) {
                     Console.WriteLine("Writing new file: " + messageId + ".html");
-                    System.IO.File.WriteAllText(htmlFile, decodedBody);
+                    File.WriteAllBytes(htmlFile, data);
                 } else {
                     Console.WriteLine("File already exists: " + messageId + ".html");
                 }
@@ -123,7 +120,9 @@ namespace GmailQuickstart {
             return null;
         }
 
-        //Converting function
+        /* Converting from RFC 4648 base64 to base64url encoding
+         * see http://en.wikipedia.org/wiki/Base64#Implementations_and_history
+         */
         public static byte[] FromBase64ForUrlString(string base64ForUrlInput) {
             int padChars = (base64ForUrlInput.Length % 4) == 0 ? 0 : (4 - (base64ForUrlInput.Length % 4));
             StringBuilder result = new StringBuilder(base64ForUrlInput, base64ForUrlInput.Length + padChars);
