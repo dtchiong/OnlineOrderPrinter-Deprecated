@@ -7,7 +7,7 @@ namespace GmailQuickstart {
     public class Order {
 
         public const int Sixteen = 16; //used to format printing with padding
-        public const int Twelve = 12;
+        public const int Twelve  = 12;
 
         public string Service        { get; set; } //Grubhub,DoorDash, or UberEats
         public string OrderNumber    { get; set; }
