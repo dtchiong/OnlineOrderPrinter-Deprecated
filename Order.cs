@@ -56,6 +56,7 @@ namespace GmailQuickstart {
         public string MilkSubsitution { get; set; } // null, Wholemilk, or Soymilk
         public string SpecialInstructions { get; set; }
         public string Price           { get; set; }
+        public string LabelName       { get; set; } // (doordash) specific name for who the drink is for
 
         public List<string> AddOnList;
 
@@ -72,6 +73,7 @@ namespace GmailQuickstart {
             this.SpecialInstructions = null;
             this.AddOnList   = null;
             this.Price       = null;
+            this.LabelName   = null;
         }
     }
 
