@@ -141,7 +141,7 @@ namespace GmailQuickstart {
 
         //Constructor
         public DoorDashOrder() {
-
+            this.Service = "DoorDash";
         }
 
         public void PrintOrder() {

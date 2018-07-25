@@ -5,17 +5,10 @@ using Google.Apis.Services;
 using Google.Apis.Util.Store;
 
 using System;
-
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
-
-using iText.License;
-using iText.Kernel.Pdf.Canvas.Parser;
-using iText.Kernel.Pdf;
-using iText.Kernel.Pdf.Canvas.Parser.Listener;
-
-
 
 namespace GmailQuickstart {
 
@@ -52,14 +45,6 @@ namespace GmailQuickstart {
                 ApplicationName = ApplicationName,
             });
 
-            string pathToItextKeyLicense = @"C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\itextkeyLicense\itextkey1532408848616_0";
-
-            try {
-                LicenseKey.LoadLicenseFile(pathToItextKeyLicense);
-            }catch(LicenseKeyException e) {
-                Console.WriteLine(e);
-            }
-
             /* Example order ids to test from
              * GrubHub:
              * 16496c1551e4bdb6 - delivery
@@ -68,14 +53,14 @@ namespace GmailQuickstart {
              * DoorDash:
              * 164b501111cebfe1
              */
-            string messageId = "164b501111cebfe1";
+            string messageId = "164aebfdb8b7a59a";
 
             const string GrubHubStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\GrubHub Orders";
             const string DoorDashStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\DoorDash Orders";
 
             bool   isGrubHubOrder = false;
             string base64Input    = null;  //the input to be converted to base64url encoding format
-            string fileName       = null;
+            string fileName       = null;  //the file name without the complete path
             string storageDir     = null;  //the file saving directory
             string filePath       = null;  //the full path to the file
 
@@ -129,10 +114,8 @@ namespace GmailQuickstart {
                 DoorDashOrder order = new DoorDashOrder();
                 DoorDashParser doorDashParser = new DoorDashParser();
 
-                string decodedBody = Encoding.UTF8.GetString(data);
-                doorDashParser.ParseOrder(decodedBody, order);
-
-                ExtractTextFromPdf(filePath);
+                List<string> lines = doorDashParser.ExtractTextFromPDF(filePath, messageId);
+                doorDashParser.ParseOrder(lines, order);
 
                 order.PrintOrder();
             }
@@ -169,25 +152,6 @@ namespace GmailQuickstart {
             result.Replace('-', '+');
             result.Replace('_', '/');
             return Convert.FromBase64String(result.ToString());
-        }
-
-
-        public static void ExtractTextFromPdf(string path) {
-
-            PdfReader reader = new PdfReader(path);
-            PdfDocument doc = new PdfDocument(reader);
-
-            for (int i=1; i<=doc.GetNumberOfPages(); i++) {
-                PdfPage page = doc.GetPage(i);
-                string text = PdfTextExtractor.GetTextFromPage(page);
-                //Console.WriteLine("Page " + i + " text: " + text);
-                string[] lines = text.Split('\n');
-                for (int j=0; j<lines.Length; j++) {
-                    Console.WriteLine("Page " + i + ", Line " + j + " " + lines[j]);
-                }
-            }
-
-
         }
 
     }
