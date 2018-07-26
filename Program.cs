@@ -19,14 +19,36 @@ namespace GmailQuickstart {
         // at ~/.credentials/gmail-dotnet-quickstart.json
         static string[] Scopes = { GmailService.Scope.GmailReadonly };
         static string ApplicationName = "Gmail API .NET Quickstart";
+
+        static GmailService service;
+
         static string historyIDPath = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\historyID\historyID.txt";
 
+        static string GrubHubStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\GrubHub Orders";
+        static string DoorDashStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\DoorDash Orders";
+
+        /* Example order ids to test from
+        * GrubHub:
+        * 16496c1551e4bdb6 - delivery
+        * 16494e24be61d2ca - pickup - 
+        * 164a0be8486f56d7
+        * DoorDash:
+        * 164b501111cebfe1
+        * 164aebfdb8b7a59a
+        */
+        static string testMessageId = "164aebfdb8b7a59a";
+        static string userId = "t4milpitasonline@gmail.com";
+
         static Timer timer;
+
+        //If true: tests the app in sync mode by chechking for emails, else it tests the testMessageId once
+        static bool debugSyncMode = true;
 
         static void Main(string[] args) {
 
             UserCredential credential;
 
+            //Initialize credentials
             using (var stream =
                 new FileStream("client_secret.json", FileMode.Open, FileAccess.Read)) {
                 string credPath = System.Environment.GetFolderPath(
@@ -43,34 +65,92 @@ namespace GmailQuickstart {
             }
 
             // Create Gmail API service.
-            var service = new GmailService(new BaseClientService.Initializer() {
+            service = new GmailService(new BaseClientService.Initializer() {
                 HttpClientInitializer = credential,
                 ApplicationName = ApplicationName,
             });
 
-            /* Example order ids to test from
-             * GrubHub:
-             * 16496c1551e4bdb6 - delivery
-             * 16494e24be61d2ca - pickup - 
-             * 164a0be8486f56d7
-             * DoorDash:
-             * 164b501111cebfe1
-             * 164aebfdb8b7a59a
-             */
+            //We check if we need to perform a full sync or a partial sync
+            //If the file doesn't exist, this is the first time running the app, so execute full sync
+            if (!File.Exists(historyIDPath)) {
 
-            string messageId = "164aebfdb8b7a59a";
-            string userId = "t4milpitasonline@gmail.com";
+                FullSyncAppToEmail();
 
-            const string GrubHubStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\GrubHub Orders";
-            const string DoorDashStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\DoorDash Orders";
+            } else {
 
-            bool   isGrubHubOrder = false;
-            string base64Input    = null;  //the input to be converted to base64url encoding format
-            string fileName       = null;  //the file name without the complete path
-            string storageDir     = null;  //the file saving directory
-            string filePath       = null;  //the full path to the file
+                PartialSyncAppToEmail();
+            }
 
-            List<string> messageIdList = null; //the list the messageIds to parse
+            int dueTime = 0;
+            int period = 2000; //in miliseconds
+            //timer = new Timer(TimerCallback, "4Head", dueTime, period);
+
+            Console.Read();
+        }
+
+        /* Full sync grabs the latest messages and stores the historyId. 
+         * Still need to save messageIds to list though 
+         */
+        private static void FullSyncAppToEmail() {
+
+            List<Message> messageList = ListMessages(service, userId, "", 30);
+
+            string historyId = getNewestHistoryId(messageList[0].Id);
+
+            Console.WriteLine("Wrote History ID: " + historyId);
+
+            //Save the historyId to file
+            UpdateHistoryId(historyId);
+        }
+
+        /* Partial sync uses the saved historyId to only retrieve emails past that id */
+        private static void PartialSyncAppToEmail() {
+
+            string historyIdAsString = File.ReadAllText(historyIDPath);
+            ulong historyId = Convert.ToUInt64(historyIdAsString, 10);
+            Console.WriteLine("Read History ID: " + historyIdAsString);
+
+            List<string> messageIdList = ListHistory(service, userId, historyId);
+
+            if (messageIdList != null) {
+                HandleMessages(messageIdList);
+            } else {
+                Console.WriteLine("Email up to date: No new messages");
+            }
+        }
+
+        /* Returns the associated historyId given the messageId */
+        private static string getNewestHistoryId(string newestMessageId) {
+
+            Message newestMessage = GetMessage(service, userId, newestMessageId);
+
+            ulong historyId = (ulong)newestMessage.HistoryId;
+
+            return historyId.ToString();
+        }
+
+        /* Saves the newly fetched historyId to file for future partial syncs */
+        private static void UpdateHistoryId(string historyId) {
+            File.WriteAllText(historyIDPath, historyId);
+        }
+
+        /* Calls HandleMessage() for each messageId in the list */
+        private static void HandleMessages(List<string> messageIdList) {
+            foreach (string messageId in messageIdList) {
+                HandleMessage(messageId);
+            }
+        }
+
+        /* Checks if the email needs to be parsed for Door Dash or GrubHub,
+         * and saves the order to file for reference
+         */
+        private static void HandleMessage(string messageId) {
+
+            bool isGrubHubOrder = false;
+            string base64Input = null;  //the input to be converted to base64url encoding format
+            string fileName = null;  //the file name without the complete path
+            string storageDir = null;  //the file saving directory
+            string filePath = null;  //the full path to the file
 
             var emailResponse = GetMessage(service, userId, messageId);
 
@@ -100,7 +180,7 @@ namespace GmailQuickstart {
 
             byte[] data = FromBase64ForUrlString(base64Input);
             filePath = Path.Combine(storageDir, fileName);
-            
+
             //Saves the order to file if it doesn't exist
             if (!File.Exists(filePath)) {
                 Console.WriteLine("Writing new file: " + fileName);
@@ -127,37 +207,14 @@ namespace GmailQuickstart {
 
                 order.PrintOrder();
             }
+        }
 
-            int dueTime = 0;
-            int period = 2000; //in miliseconds
-            //timer = new Timer(TimerCallback, "4Head", dueTime, period);
-
-            //If the file doesn't exist, this is the first time running the app, so execute full sync
-            if (!File.Exists(historyIDPath)) {
-                List<Message> messageList = ListMessages(service, userId, "", 30);
-
-                string newestMessageId = messageList[0].Id;
-
-                Message newestMessage = GetMessage(service, userId, newestMessageId);
-
-                ulong historyId = (ulong)newestMessage.HistoryId;
-
-                Console.WriteLine("Wrote History ID: " + historyId.ToString());
-
-                //Save the historyId to file
-                UpdateHistoryId(historyId.ToString());
-
-            }else {//Do partial sync
-                string historyIdAsString = File.ReadAllText(historyIDPath);
-                ulong historyId = Convert.ToUInt64(historyIdAsString, 10);
-                Console.WriteLine("Read History ID: " + historyIdAsString);
-
-                messageIdList = ListHistory(service, userId, historyId);
-                
-
-            }
-
-            Console.Read();
+        /* The callback function of the timer that checks if there are new emails to handle
+         * by calling the PartialSync()
+         */
+        private static void TimerCallback(object state) {
+            Console.WriteLine("dis game doo doo");
+            Console.WriteLine(state);
         }
 
         /* Retrieves the attachment file(s) with attachemntId, of the messageId */
@@ -204,7 +261,7 @@ namespace GmailQuickstart {
         /* Returns the list of messagesId since startHistoryId. Used in partial sync */
         public static List<string> ListHistory(GmailService service, String userId, ulong startHistoryId) {
 
-            List<string> messageIdList = new List<string>();
+            List<string> messageIdList = null;
 
             UsersResource.HistoryResource.ListRequest request = service.Users.History.List(userId);
             request.StartHistoryId = startHistoryId;
@@ -217,6 +274,7 @@ namespace GmailQuickstart {
                     //If there's a list of history records, then we need to store the messageId of each new record
                     if (response.History != null) {
 
+                        messageIdList = new List<string>();
                         foreach (var historyRecord in response.History) {
 
                             string newMessageId = historyRecord.MessagesAdded[0].Message.Id;
@@ -249,16 +307,5 @@ namespace GmailQuickstart {
             result.Replace('_', '/');
             return Convert.FromBase64String(result.ToString());
         }
-
-        private static void TimerCallback(object state) {
-            Console.WriteLine("dis game doo doo");
-            Console.WriteLine(state);
-        }
-
-        /* Saves the newly fetched historyId to file for future partial syncs */
-        private static void UpdateHistoryId(string historyId) {
-            File.WriteAllText(historyIDPath, historyId);
-        }
-
     }
 }
