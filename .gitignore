@@ -1,1 +1,6 @@
 client_secret.json
+itextKeyLicense/
+bin/*
+bin/Debug
+bin/Release
+obj/
