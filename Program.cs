@@ -42,8 +42,8 @@ namespace GmailQuickstart {
 
         static Timer timer;
 
-        //If true: tests the app in sync mode by chechking for emails, else it tests the testMessageId once
-        static bool debugSyncMode = true;
+        //If true: tests the app by only handling the email with testMessageId once, then stops, else app runs in full sync mode
+        static bool debugMailMode = false;
 
         static void Main(string[] args) {
 
@@ -71,6 +71,13 @@ namespace GmailQuickstart {
                 ApplicationName = ApplicationName,
             });
 
+            //If this mode is on, then we're just going to check the testMessageID and exit
+            if (debugMailMode) {
+                HandleMessage(testMessageId);
+                Console.Read();
+                return;
+            }
+
             //We check if we need to perform a full sync or a partial sync
             //If the file doesn't exist, this is the first time running the app, so execute full sync
             if (!File.Exists(historyIDPath)) {
@@ -82,9 +89,9 @@ namespace GmailQuickstart {
                 PartialSyncAppToEmail();
             }
 
-            int dueTime = 0;
-            int period = 2000; //in miliseconds
-            //timer = new Timer(TimerCallback, "4Head", dueTime, period);
+            const int dueTime = 5000;
+            const int period = 4000; //in miliseconds
+            timer = new Timer(CheckEmail, "4Head", dueTime, period);
 
             Console.Read();
         }
@@ -238,9 +245,9 @@ namespace GmailQuickstart {
         /* The callback function of the timer that checks if there are new emails to handle
          * by calling the PartialSync()
          */
-        private static void TimerCallback(object state) {
-            Console.WriteLine("dis game doo doo");
-            Console.WriteLine(state);
+        private static void CheckEmail(object state) {
+            //Console.WriteLine(state);
+            PartialSyncAppToEmail();
         }
 
         /* Retrieves the attachment file(s) with attachemntId, of the messageId */
