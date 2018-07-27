@@ -7,6 +7,7 @@ using Google.Apis.Util.Store;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using static Google.Apis.Gmail.v1.UsersResource.HistoryResource.ListRequest;
@@ -93,7 +94,10 @@ namespace GmailQuickstart {
          */
         private static void FullSyncAppToEmail() {
 
-            List<Message> messageList = ListMessages(service, userId, "", 30);
+            const int maxResults = 30;
+            const string query = "";
+
+            List<Message> messageList = ListMessages(service, userId, query, maxResults);
 
             string historyId = getNewestHistoryId(messageList[0].Id);
 
@@ -101,6 +105,8 @@ namespace GmailQuickstart {
 
             //Save the historyId to file
             UpdateHistoryId(historyId);
+
+            
         }
 
         /* Partial sync uses the saved historyId to only retrieve emails past that id */
@@ -137,7 +143,9 @@ namespace GmailQuickstart {
         /* Calls HandleMessage() for each messageId in the list */
         private static void HandleMessages(List<string> messageIdList) {
             foreach (string messageId in messageIdList) {
+                Console.WriteLine("***************************** START MESSAGE **********************************");
                 HandleMessage(messageId);
+                Console.WriteLine("***************************** END MESSAGE ************************************");
             }
         }
 
@@ -145,6 +153,8 @@ namespace GmailQuickstart {
          * and saves the order to file for reference
          */
         private static void HandleMessage(string messageId) {
+
+            Console.WriteLine("Handling message: " + messageId);
 
             bool isGrubHubOrder = false;
             string base64Input = null;  //the input to be converted to base64url encoding format
@@ -154,29 +164,45 @@ namespace GmailQuickstart {
 
             var emailResponse = GetMessage(service, userId, messageId);
 
-            //If the Parts is not null, then this is a DoorDash email
-            if (emailResponse.Payload.Parts != null) {
-                Console.WriteLine("Email Type: DoorDash");
+            var headers = emailResponse.Payload.Headers;
+            MessagePartHeader header = headers.FirstOrDefault(item => item.Name == "From");
+            string senderAddress = header.Value;
+            
+            //Check if the email is from GrubHub
+            if (header.Value == "orders@eat.grubhub.com") {
 
-                var attachId = emailResponse.Payload.Parts[1].Body.AttachmentId;
-
-                //Need to do another API call to get the actual attachment from the attachment id
-                MessagePartBody attachPart = GetAttachment(service, userId, messageId, attachId);
-
-                base64Input = attachPart.Data;
-                fileName = messageId + ".pdf";
-                storageDir = DoorDashStorageDir;
-
-            } else { //GrubHub email
                 Console.WriteLine("Email Type: GrubHub");
                 isGrubHubOrder = true;
+                try {
+                    var body = emailResponse.Payload.Body.Data;
 
-                var body = emailResponse.Payload.Body.Data;
+                    base64Input = body;
+                    fileName = messageId + ".html";
+                    storageDir = GrubHubStorageDir;
+                } catch (Exception e) {
+                    Console.WriteLine(e.Message);
+                }
+            //Otherwise check if the email is from DoorDash
+            } else if (header.Value == @"DoorDash <orders@doordash.com>") {
 
-                base64Input = body;
-                fileName = messageId + ".html";
-                storageDir = GrubHubStorageDir;
-            }
+                Console.WriteLine("Email Type: DoorDash");
+                try {
+                    
+                    var attachId = emailResponse.Payload.Parts[1].Body.AttachmentId;
+
+                    //Need to do another API call to get the actual attachment from the attachment id
+                    MessagePartBody attachPart = GetAttachment(service, userId, messageId, attachId);
+
+                    base64Input = attachPart.Data;
+                    fileName = messageId + ".pdf";
+                    storageDir = DoorDashStorageDir;
+                }catch(Exception e) {
+                    Console.WriteLine(e.Message);
+                }
+            }else {
+                Console.WriteLine("Not an order, returning");
+                return;
+            }          
 
             byte[] data = FromBase64ForUrlString(base64Input);
             filePath = Path.Combine(storageDir, fileName);

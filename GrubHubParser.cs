@@ -22,12 +22,12 @@ namespace GmailQuickstart {
             htmlDoc.LoadHtml(html);
 
             var metaInfoNodes = htmlDoc.DocumentNode.SelectNodes("//body/table/tbody/tr/td/table/tbody/tr/td/table[3]/tbody/tr/th[2]/table/tbody/tr/th/div/div[2]/div/div");
-            var pickupByNameNode = metaInfoNodes.ElementAt(1);
 
             //If this is null, then there's an extra <table> "SCHEDULED ORDER: PREVIEW" before the pickup/delivery <table>
-            if (pickupByNameNode == null) {
+            if (metaInfoNodes == null) {
                 metaInfoNodes = htmlDoc.DocumentNode.SelectNodes("//body/table/tbody/tr/td/table/tbody/tr/td/table[4]/tbody/tr/th[2]/table/tbody/tr/th/div/div/div/div");
             }
+            var pickupByNameNode = metaInfoNodes.ElementAt(1);
 
             var orderNumberNode = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[2]/tbody/tr/th/table/tbody/tr/th/div/div[4]/span[2]");
             ParseOrderNumber(orderNumberNode, order);
