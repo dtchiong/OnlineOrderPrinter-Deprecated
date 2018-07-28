@@ -3,78 +3,77 @@ using Zebra.Sdk.Comm;
 using Zebra.Sdk.Printer.Discovery;
 using Zebra.Sdk.Printer;
 using System.Collections.Generic;
+using System.Text;
 
 namespace GmailQuickstart {
 
     public class PrinterUtility {
 
+        const string printTemplatePath = "E:T4FORM3.ZPL";
+
         public PrinterUtility() {
 
         }
 
+        /* Printing Item Template
+         * Field1: "Item Count"       e.g "100/100"
+         * Field2: "Service"          e.g "GrubHub"
+         * Field3: "Customer Name"     
+         * Field4: "Item Name"
+         * Field5: "Size"             e.g "Large"
+         * Field6: "Temperature"      e.g "Hot"
+         * Field7: "Ice Level"        e.g "80% I"
+         * Field8: "Sugar Level"      e.g "50% S"
+         * Field9: "Milk Subsitution" e.g "Whole Milk Sub"
+         * Field10: "Toppings"        e.g "Pearls, Pudding,"
+         * Field11: "Special Instructions1" 
+         * Field12: "Special Instructions2"
+         */
         public void TestPrint() {
             try {
-                foreach (DiscoveredPrinterDriver printer in UsbDiscoverer.GetZebraDriverPrinters()) {
-                    Console.WriteLine(printer);
 
-                    /*
-                    try {
-                        Connection conn = printer.GetConnection();
-                        Example1(conn);
-                        //Example2(conn);
-                        //Example3(conn);
-                    }catch (ConnectionException e) {
-                        Console.WriteLine(e.ToString());
-                    }
-                    */
+                //Finds all the USB connected Zebra printer drivers
+                List<DiscoveredPrinterDriver> discoveredPrinterDrivers = UsbDiscoverer.GetZebraDriverPrinters();
+                if (discoveredPrinterDrivers == null) {
+                    Console.WriteLine("Error: No USB printers detected");
+                    return;
                 }
 
-                foreach (DiscoveredUsbPrinter usbPrinter in UsbDiscoverer.GetZebraUsbPrinters(new ZebraPrinterFilter())) {
-                    Console.WriteLine(usbPrinter);
+                //Gets the instance to the Zebra Printer driver
+                DiscoveredPrinterDriver printerDriver = discoveredPrinterDrivers[0];
+                Console.WriteLine(printerDriver);
 
+                //Get the connection to the printer driver
+                Connection printerConn = printerDriver.GetConnection();
 
+                //We open the connection to printer, then get the instance of the printer
+                try {
+                    printerConn.Open();
+
+                    ZebraPrinter printer = ZebraPrinterFactory.GetInstance(printerConn);
+                    
+                    //Printing works, but for some reason, the indexing needs to start at the 10th field
+                    string[] fields = { "", "", "", "", "", "", "", "", "", "99/99", "GrubHub", "Dingus Honk", @"Fresh Mango Smoothie w/ Pearl", "Large", "", "", "50% S", "", "Fig Jelly, Pudding", "testing special instructions1", "testing special instructions2" };
+
+                    printer.PrintStoredFormat(printTemplatePath, fields);
+
+                }catch(ConnectionException e) {
+                    Console.WriteLine(e.ToString());
+                }finally {
+                    printerConn.Close();
                 }
+              
             } catch (ConnectionException e) {
                 Console.WriteLine($"Error discovering local printers: {e.Message}");
             }
 
             Console.WriteLine("Done discovering local printers.");
         }
-
-
-        /// Print a stored format with the given variables. This ZPL will store a format on a printer, for use with example1.
-        /// 
-        /// ^XA
-        /// ^DFE:FORMAT1.ZPL
-        /// ^FS
-        /// ^FT26,243^A0N,56,55^FH\^FN12"First Name"^FS
-        /// ^FT26,296^A0N,56,55^FH\^FN11"Last Name"^FS
-        /// ^FT258,73^A0N,39,38^FH\^FDVisitor^FS
-        /// ^BY2,4^FT403,376^B7N,4,0,2,2,N^FH^FDSerial Number^FS
-        /// ^FO5,17^GB601,379,8^FS
-        /// ^XZ
-        private void Example1(Connection conn) {
-
-
-
-            Connection connection = conn;
-            try {
-                connection.Open();
-                ZebraPrinter printer = ZebraPrinterFactory.GetInstance(connection);
-
-                Dictionary<int, string> vars = new Dictionary<int, string> {
-                { 12, "John" },
-                { 11, "Smith" }
-            };
-
-                printer.PrintStoredFormat("E:FORMAT1.ZPL", vars);
-            } catch (ConnectionException e) {
-                Console.WriteLine(e.ToString());
-            } catch (ZebraPrinterLanguageUnknownException e) {
-                Console.WriteLine(e.ToString());
-            } finally {
-                connection.Close();
-            }
-        }
     }
 }
+ 
+ 
+ 
+ 
+ 
+ 
