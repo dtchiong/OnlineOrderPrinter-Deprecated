@@ -43,7 +43,7 @@ namespace GmailQuickstart {
         static Timer timer;
 
         //If true: tests the app by only handling the email with testMessageId once, then stops, else app runs in full sync mode
-        static bool debugMailMode = false;
+        static bool debugMailMode = true;
 
         static void Main(string[] args) {
 
@@ -74,6 +74,8 @@ namespace GmailQuickstart {
             //If this mode is on, then we're just going to check the testMessageID and exit
             if (debugMailMode) {
                 HandleMessage(testMessageId);
+                PrinterUtility printerUtil = new PrinterUtility();
+                printerUtil.TestPrint();
                 Console.Read();
                 return;
             }
@@ -106,7 +108,7 @@ namespace GmailQuickstart {
 
             List<Message> messageList = ListMessages(service, userId, query, maxResults);
 
-            string historyId = getNewestHistoryId(messageList[0].Id);
+            string historyId = GetNewestHistoryId(messageList[0].Id);
 
             Console.WriteLine("Wrote History ID: " + historyId);
 
@@ -133,7 +135,7 @@ namespace GmailQuickstart {
         }
 
         /* Returns the associated historyId given the messageId */
-        private static string getNewestHistoryId(string newestMessageId) {
+        private static string GetNewestHistoryId(string newestMessageId) {
 
             Message newestMessage = GetMessage(service, userId, newestMessageId);
 
@@ -170,6 +172,10 @@ namespace GmailQuickstart {
             string filePath = null;  //the full path to the file
 
             var emailResponse = GetMessage(service, userId, messageId);
+            if (emailResponse == null) {
+                Console.WriteLine("Message deleted, returning");
+                return;
+            }
 
             var headers = emailResponse.Payload.Headers;
             MessagePartHeader header = headers.FirstOrDefault(item => item.Name == "From");

@@ -26,24 +26,8 @@ C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\b
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\itext.sign.dll
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\itext.styledxmlparser.dll
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\itext.svg.dll
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Microsoft.Win32.Primitives.dll
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\PdfiumViewer.dll
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.AppContext.dll
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.Console.dll
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.Globalization.Calendars.dll
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.IO.Compression.dll
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.IO.Compression.ZipFile.dll
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.IO.FileSystem.dll
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.IO.FileSystem.Primitives.dll
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.Net.Http.dll
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.Net.Sockets.dll
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.Security.Cryptography.Algorithms.dll
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.Security.Cryptography.Encoding.dll
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.Security.Cryptography.Primitives.dll
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.Security.Cryptography.X509Certificates.dll
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.Xml.ReaderWriter.dll
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\BouncyCastle.Crypto.xml
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Common.Logging.pdb
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Common.Logging.xml
@@ -79,3 +63,18 @@ C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\o
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Debug\Order Parser.exe
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Debug\Order Parser.pdb
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Debug\Order Parser.csprojAssemblyReference.cache
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.IO.Compression.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\CsvHelper.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\FluentFTP.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\SdkApi_Core.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\SdkApi_Desktop.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\SdkApi_Desktop_Usb.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\SharpSnmpLib.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.Runtime.WindowsRuntime.dll
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Windows.winmd
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\CsvHelper.xml
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\FluentFTP.xml
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\SdkApi_Core.xml
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\SdkApi_Desktop.xml

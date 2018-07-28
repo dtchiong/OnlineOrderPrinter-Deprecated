@@ -72,16 +72,23 @@ namespace GmailQuickstart {
         /* Parses the information from the lines and saves it to the order */
         public void ParseOrder(List<string> lines, DoorDashOrder order) {
 
-            ParseCustomerName (lines[0], order);
-            ParsePickUpTime   (lines[1], order);
-            ParseOrderNumber  (lines[4], order);
-            ParseContactNumber(lines[8], order);
+            ParseCustomerName(lines[0], order);
+
+            if (lines[3].StartsWith("Tea for you")) {
+                
+                ParsePickUpTime1(lines[1], order);
+                ParseOrderNumber(lines[4], order);
+                ParseContactNumber(lines[8], order);
+            }else {
+                ParsePickUpTime2(lines[6], order);
+                ParseOrderNumber(lines[2], order);
+                ParseContactNumber(lines[6], order);
+            }
 
             Item item = null;
 
             int start = 9;
             for (int i=start; i<lines.Count; i++) {
-
 
                 //If the line starts with "Please Label", we need to parse the label name,
                 //and the item name in the line that immediately follows the 1st line 
@@ -133,12 +140,19 @@ namespace GmailQuickstart {
             Console.WriteLine("Customer Name: " + custName);
         }
 
-        private void ParsePickUpTime(string line, DoorDashOrder order) {
+        private void ParsePickUpTime1(string line, DoorDashOrder order) {
             string pickUpTime = line.Replace("Order scheduled for ", "");
             pickUpTime = pickUpTime.Remove(pickUpTime.Length - 1);
 
             Console.WriteLine("Pickup Time: " + pickUpTime);
 
+        }
+
+        private void ParsePickUpTime2(string line, DoorDashOrder order) {
+            int indOfWordAt = line.IndexOf("at");
+
+            string pickUpTime = line.Substring(indOfWordAt);
+            Console.WriteLine("Pickup Time: " + pickUpTime);
         }
 
         private void ParseOrderNumber(string line, DoorDashOrder order) {

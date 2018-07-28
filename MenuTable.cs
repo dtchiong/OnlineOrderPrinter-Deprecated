@@ -213,17 +213,17 @@ namespace GmailQuickstart {
                 { "Up Size", new Tuple<string, string>( "Large", "Size") },
                 
                 //Ice
-                { "0% Ice"  , new Tuple<string, string>( null, "Ice") },
-                { "30% Ice" , new Tuple<string, string>( null, "Ice") },
-                { "80% Ice" , new Tuple<string, string>( null, "Ice") },
+                { "0% Ice"  , new Tuple<string, string>( "O% I", "Ice") },
+                { "30% Ice" , new Tuple<string, string>( "30% I", "Ice") },
+                { "80% Ice" , new Tuple<string, string>( "80% I", "Ice") },
                 { "100%Ice" , new Tuple<string, string>( "Standard", "Ice") },
                 { "Standard: Between 80% and More Ice", new Tuple<string, string>( "Standard", "Ice") },
                 
                 //Sugar
-                { "0% Sweetness"   , new Tuple<string, string>( null, "Sugar") },
-                { "30% Sweetness"  , new Tuple<string, string>( null, "Sugar") },
-                { "50% Sweetness"  , new Tuple<string, string>( null, "Sugar") },
-                { "80% Sweetness"  , new Tuple<string, string>( null, "Sugar") },
+                { "0% Sweetness"   , new Tuple<string, string>( "0% S", "Sugar") },
+                { "30% Sweetness"  , new Tuple<string, string>( "30% S", "Sugar") },
+                { "50% Sweetness"  , new Tuple<string, string>( "50% S", "Sugar") },
+                { "80% Sweetness"  , new Tuple<string, string>( "80% S", "Sugar") },
                 { "100% Sweetness" , new Tuple<string, string>( "Standard", "Sugar") },
                 
                 //Toppings
