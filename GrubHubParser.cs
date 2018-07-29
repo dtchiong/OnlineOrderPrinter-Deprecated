@@ -16,8 +16,10 @@ namespace GmailQuickstart {
             menu = new GrubHubMenu();
         }
 
-        /* Takes grubhub order as an html file in a string and extracts the the relevant information*/
-        public void ParseOrder(string html, GrubHubOrder order) {
+        /* Extracts the order from an grubhub html file and returns an Order object */
+        public GrubHubOrder ParseOrder(string html) {
+            GrubHubOrder order = new GrubHubOrder();
+
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
 
@@ -64,6 +66,7 @@ namespace GmailQuickstart {
 
                 order.ItemList.Add(item);
             }
+            return order;
         }
 
         public static void ParseOrderNumber(HtmlNode node, Order order) {

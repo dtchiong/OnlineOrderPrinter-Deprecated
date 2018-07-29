@@ -69,8 +69,10 @@ namespace GmailQuickstart {
             return lines;
         }
 
-        /* Parses the information from the lines and saves it to the order */
-        public void ParseOrder(List<string> lines, DoorDashOrder order) {
+        /* Parses the information from the lines and returns the information in a Order object */
+        public DoorDashOrder ParseOrder(List<string> lines) {
+
+            DoorDashOrder order = new DoorDashOrder();
 
             ParseCustomerName(lines[0], order);
 
@@ -129,6 +131,7 @@ namespace GmailQuickstart {
 
             }
 
+            return order;
         }
 
         private void ParseCustomerName(string line, DoorDashOrder order) {

@@ -42,8 +42,11 @@ namespace GmailQuickstart {
 
         static Timer timer;
 
+        static Queue<Order> orderQ = new Queue<Order>(); // the queue of parsed orders
+        static PrinterUtility printerUtil = new PrinterUtility();
+
         //If true: tests the app by only handling the email with testMessageId once, then stops, else app runs in full sync mode
-        static bool debugMailMode = true;
+        private static bool debugMailMode = false;
 
         static void Main(string[] args) {
 
@@ -73,9 +76,8 @@ namespace GmailQuickstart {
 
             //If this mode is on, then we're just going to check the testMessageID and exit
             if (debugMailMode) {
-                HandleMessage(testMessageId);
-                PrinterUtility printerUtil = new PrinterUtility();
-                printerUtil.TestPrint();
+                HandleMessage(testMessageId);  
+                //printerUtil.TestPrint();
                 Console.Read();
                 return;
             }
@@ -89,6 +91,7 @@ namespace GmailQuickstart {
             } else {
 
                 PartialSyncAppToEmail();
+                
             }
 
             const int dueTime = 5000;
@@ -118,7 +121,10 @@ namespace GmailQuickstart {
             
         }
 
-        /* Partial sync uses the saved historyId to only retrieve emails past that id */
+        /* Partial sync uses the saved historyId to only retrieve emails newer than the id,
+         * parses any order emails and inserts them to the Order queue. If there are any
+         * orders in the order queue, they are dequeued into the Print queue to be printed
+         */
         private static void PartialSyncAppToEmail() {
 
             string historyIdAsString = File.ReadAllText(historyIDPath);
@@ -129,6 +135,11 @@ namespace GmailQuickstart {
 
             if (messageIdList != null) {
                 HandleMessages(messageIdList);
+
+                if (orderQ.Count > 0) {
+                    printerUtil.AddToPrintQueue(orderQ);
+                    printerUtil.PrintOrders();
+                }
             } else {
                 Console.WriteLine("Email up to date: No new messages");
             }
@@ -230,21 +241,20 @@ namespace GmailQuickstart {
             Console.WriteLine("----------------------");
 
             if (isGrubHubOrder) {
-                GrubHubOrder order = new GrubHubOrder();
+                
                 GrubHubParser grubHubParser = new GrubHubParser();
-
                 string decodedBody = Encoding.UTF8.GetString(data);
-                grubHubParser.ParseOrder(decodedBody, order);
-
+                GrubHubOrder order = grubHubParser.ParseOrder(decodedBody);
+                 
                 order.PrintOrder();
+
+                orderQ.Enqueue(order);
             } else {
-                DoorDashOrder order = new DoorDashOrder();
                 DoorDashParser doorDashParser = new DoorDashParser();
+                //List<string> lines = doorDashParser.ExtractTextFromPDF(filePath, messageId);
+                //DoorDashOrder order = doorDashParser.ParseOrder(lines);
 
-                List<string> lines = doorDashParser.ExtractTextFromPDF(filePath, messageId);
-                doorDashParser.ParseOrder(lines, order);
-
-                order.PrintOrder();
+                //order.PrintOrder();
             }
         }
 
