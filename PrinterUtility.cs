@@ -50,8 +50,10 @@ namespace GmailQuickstart {
                 try {
                     printerConn.Open();
 
-                    ZebraPrinter printer = ZebraPrinterFactory.GetInstance(printerConn);
+                    ZebraPrinter printer = ZebraPrinterFactory.GetInstance(PrinterLanguage.ZPL, printerConn);
                     
+                    printer.
+
                     //Printing works, but for some reason, the indexing needs to start at the 10th field
                     string[] fields = { "", "", "", "", "", "", "", "", "", "99/99", "GrubHub", "Dingus Honk", @"Fresh Mango Smoothie w/ Pearl", "Large", "", "", "50% S", "", "Fig Jelly, Pudding", "testing special instructions1", "testing special instructions2" };
 
@@ -68,6 +70,71 @@ namespace GmailQuickstart {
             }
 
             Console.WriteLine("Done discovering local printers.");
+        }
+
+        /* Sets the page description langauge to ZPL */
+        private bool setPrintLangauge(Connection conn) {
+            string pageDescriptionLanguage = "zpl";
+
+            //Set the print langaugein the printer
+            SGD.SET("device.languages", pageDescriptionLanguage, conn);
+
+            //Get the print language in the printer to verify the printe was able to switch
+            string s = SGD.GET("device.languages", conn);
+            if (!s.Contains(pageDescriptionLanguage)) {
+                Console.WriteLine("Error: " + pageDescriptionLanguage + " not found- Not a ZPL Printer");
+                return false;
+            }
+
+            return true;
+        }
+
+        /* Returns true if the printer is ready to print, else false */
+        private bool checkPrinterStatus(Connection conn) {
+            ZebraPrinter printer = ZebraPrinterFactory.GetLinkOsPrinter(conn);
+            if (printer == null) {
+                printer = ZebraPrinterFactory.GetInstance(PrinterLanguage.ZPL, conn);
+            }
+
+            PrinterStatus printerStatus = printer.GetCurrentStatus();
+            if (printerStatus.isReadyToPrint) {
+                Console.WriteLine("Printer Status: Ready to Print");
+                return true;
+            }else if (printerStatus.isPaused) {
+                Console.WriteLine("Printer Status: Cannot printe - printer is paused");
+            }else if (printerStatus.isHeadOpen) {
+                Console.WriteLine("Printer Status: Cannot print - head is open");
+            }else if (printerStatus.isPaperOut) {
+                Console.WriteLine("Printer Status: Cannot print - paper is out");
+            }
+            return false;
+        }
+
+        private bool postPrintCheckPrinterStatus(Connection conn) {
+            ZebraPrinter printer = ZebraPrinterFactory.getLinkOsPrinter(conn, PrinterLanguage.ZPL);
+            if (null == printer) {
+                printer = ZebraPrinterFactory.getInstance(PrinterLanguage.ZPL, conn);
+            }
+            PrinterStatus printerStatus = printer.getCurrentStatus();
+
+            // loop while printing until print is complete or there is an error
+            while ((printerStatus.numberOfFormatsInReceiveBuffer > 0) && (printerStatus.isReadyToPrint)) {
+                Thread.sleep(500);
+                printerStatus = printer.getCurrentStatus();
+            }
+            if (printerStatus.isReadyToPrint) {
+                System.out.println("Ready To Print");
+                return true;
+            } else if (printerStatus.isPaused) {
+                System.out.println("Cannot Print because the printer is paused.");
+            } else if (printerStatus.isHeadOpen) {
+                System.out.println("Cannot Print because the printer head is open.");
+            } else if (printerStatus.isPaperOut) {
+                System.out.println("Cannot Print because the paper is out.");
+            } else {
+                System.out.println("Cannot Print.");
+            }
+            return false;
         }
     }
 }
