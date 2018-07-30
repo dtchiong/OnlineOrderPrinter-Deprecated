@@ -14,9 +14,10 @@ namespace GmailQuickstart {
         const int ArrayFieldOffset = 9; //the number of elements in the array before the 1st field of the template is represented
         const int TemplateFieldCount = 12; //the numnber of fields in the template
 
-        public Connection printerConn = null;
+        public static Connection printerConn = null;
 
         public Queue<Order> printQ = new Queue<Order>();
+        public List<OrderContainer> orderList = new List<OrderContainer>();
 
         /* Constrcutor - intializes the printer connection and sets language to ZPL */
         public PrinterUtility() {
@@ -33,7 +34,7 @@ namespace GmailQuickstart {
         }
 
         /* Returns the connection to the zebra printer after finding it through the Usb Discoverer */
-        public Connection FindConnection() {
+        public static Connection FindConnection() {
             Console.WriteLine("START: FindConnection()");
             //Finds all the USB connected Zebra printer drivers
             List<DiscoveredPrinterDriver> discoveredPrinterDrivers = UsbDiscoverer.GetZebraDriverPrinters();
@@ -51,10 +52,14 @@ namespace GmailQuickstart {
             return printerDriver.GetConnection();
         }
 
-        public void AddToPrintQueue(Queue<Order> orderQ) {
+        /* Takes the queue of parsed Orders, converts each other to an OrderContainer and then adds it to the list */
+        public void AddToOrderList(Queue<Order> orderQ) {
             while(orderQ.Count > 0) {
-                Order order = orderQ.Dequeue();
-                printQ.Enqueue(order);
+                OrderContainer orderContainer = new OrderContainer(orderQ.Dequeue());
+                orderList.Add(orderContainer);
+
+                //Add to DataGridView
+                Form1.AddToOrderListSrc(orderContainer);
             }
         }
 
@@ -81,7 +86,9 @@ namespace GmailQuickstart {
          *   11 |   48    |"Special Instructions1"  
          *   12 |   48    |"Special Instructions2" 
          */
-        public void PrintOrder(string[][] items) {
+        public static bool PrintOrder(string[][] items) {
+
+            bool printStatus = true;
             Console.WriteLine("START: PrintOrder()");
             try {
                 
@@ -104,15 +111,17 @@ namespace GmailQuickstart {
                 }catch(ConnectionException e) {
                     Console.WriteLine("PrinterOrder()-103- something messed up");
                     Console.WriteLine(e.ToString());
+                    printStatus = false;
                 }finally {
                     printerConn.Close();
                 }
               
             } catch (ConnectionException e) {
                 Console.WriteLine($"Error discovering local printers: {e.Message}");
+                printStatus = false;
             }
 
-            Console.WriteLine("Done discovering local printers.");
+            return printStatus;
         }
 
         /* Returns a 2 dimensional array, where each value of the array is another 
@@ -120,7 +129,7 @@ namespace GmailQuickstart {
          * The length of this 2-dim array is the number of items in the given order.
          * Used for supplying fields to fill PrintStoredFormat's template
          */
-        private string[][] OrderToArray(Order order) {
+        public static string[][] OrderToArray(Order order) {
 
             int itemArrSize = ArrayFieldOffset + TemplateFieldCount;
             string[][] orderArr = new string[order.TotalItemCount][];
@@ -140,7 +149,7 @@ namespace GmailQuickstart {
         /* Fills the array with the fields of the item. The offset is required 
          * because that's where the values start when read by the PrintStoredFormat()
          */
-        private void FillItemArray(string[] fields, Order order, Item item) {
+        private static void FillItemArray(string[] fields, Order order, Item item) {
             const int instructionsCharLim = 48;
             //Fill values within the offeset with empty strings since they aren't going to be used
             for (int i = 0; i < ArrayFieldOffset; i++) {

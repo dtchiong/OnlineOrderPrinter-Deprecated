@@ -1,8 +1,10 @@
 ﻿using Google.Apis.Auth.OAuth2;
 using Google.Apis.Gmail.v1;
 using Google.Apis.Gmail.v1.Data;
+using MessageG = Google.Apis.Gmail.v1.Data.Message;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
+using static Google.Apis.Gmail.v1.UsersResource.HistoryResource.ListRequest;
 
 using System;
 using System.Collections.Generic;
@@ -10,12 +12,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using static Google.Apis.Gmail.v1.UsersResource.HistoryResource.ListRequest;
+using TimerT = System.Threading.Timer;
+using System.Windows.Forms;
+//using Order_Parser;
+using System.Diagnostics;
 
 namespace GmailQuickstart {
 
     class Program {
-        
+
         // If modifying these scopes, delete your previously saved credentials
         // at ~/.credentials/gmail-dotnet-quickstart.json
         static string[] Scopes = { GmailService.Scope.GmailReadonly };
@@ -40,7 +45,7 @@ namespace GmailQuickstart {
         static string testMessageId = "164aebfdb8b7a59a";
         static string userId = "t4milpitasonline@gmail.com";
 
-        static Timer timer;
+        static TimerT timer;
 
         static Queue<Order> orderQ = new Queue<Order>(); // the queue of parsed orders
         static PrinterUtility printerUtil = new PrinterUtility();
@@ -48,8 +53,16 @@ namespace GmailQuickstart {
         //If true: tests the app by only handling the email with testMessageId once, then stops, else app runs in full sync mode
         private static bool debugMailMode = false;
 
+        /*App starts here */
+        [STAThreadAttribute()]
         static void Main(string[] args) {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
+        }
 
+        /* Called by Form1's load event to start processing code*/
+        public static void InitApp() {
             UserCredential credential;
 
             //Initialize credentials
@@ -76,7 +89,7 @@ namespace GmailQuickstart {
 
             //If this mode is on, then we're just going to check the testMessageID and exit
             if (debugMailMode) {
-                HandleMessage(testMessageId);  
+                HandleMessage(testMessageId);
                 //printerUtil.TestPrint();
                 Console.Read();
                 return;
@@ -91,12 +104,12 @@ namespace GmailQuickstart {
             } else {
 
                 PartialSyncAppToEmail();
-                
+
             }
 
             const int dueTime = 5000;
             const int period = 4000; //in miliseconds
-            timer = new Timer(CheckEmail, "4Head", dueTime, period);
+            timer = new TimerT(CheckEmail, "4Head", dueTime, period);
 
             Console.Read();
         }
@@ -109,7 +122,7 @@ namespace GmailQuickstart {
             const int maxResults = 30;
             const string query = "";
 
-            List<Message> messageList = ListMessages(service, userId, query, maxResults);
+            List<MessageG> messageList = ListMessages(service, userId, query, maxResults);
 
             string historyId = GetNewestHistoryId(messageList[0].Id);
 
@@ -137,8 +150,8 @@ namespace GmailQuickstart {
                 HandleMessages(messageIdList);
 
                 if (orderQ.Count > 0) {
-                    printerUtil.AddToPrintQueue(orderQ);
-                    printerUtil.PrintOrders();
+                    printerUtil.AddToOrderList(orderQ);
+                    //printerUtil.PrintOrders();
                 }
             } else {
                 Console.WriteLine("Email up to date: No new messages");
@@ -148,7 +161,7 @@ namespace GmailQuickstart {
         /* Returns the associated historyId given the messageId */
         private static string GetNewestHistoryId(string newestMessageId) {
 
-            Message newestMessage = GetMessage(service, userId, newestMessageId);
+            MessageG newestMessage = GetMessage(service, userId, newestMessageId);
 
             ulong historyId = (ulong)newestMessage.HistoryId;
 
@@ -238,7 +251,7 @@ namespace GmailQuickstart {
             } else {
                 Console.WriteLine("File already exists: " + fileName);
             }
-            Console.WriteLine("----------------------");
+            Debug.WriteLine("----------------------");
 
             if (isGrubHubOrder) {
                 
@@ -278,7 +291,7 @@ namespace GmailQuickstart {
         }
 
         /* Retrieves the email with messageId, of the given user with userId */
-        public static Message GetMessage(GmailService service, String userId, String messageId) {
+        public static MessageG GetMessage(GmailService service, String userId, String messageId) {
             try {
                 return service.Users.Messages.Get(userId, messageId).Execute();
             } catch (Exception e) {
@@ -289,8 +302,8 @@ namespace GmailQuickstart {
         }
 
         /*Retrieves a list of messages given the userId, query, and max results to be returned */
-        public static List<Message> ListMessages(GmailService service, String userId, String query, int maxResults) {
-            List<Message> result = new List<Message>();
+        public static List<MessageG> ListMessages(GmailService service, String userId, String query, int maxResults) {
+            List<MessageG> result = new List<MessageG>();
             UsersResource.MessagesResource.ListRequest request = service.Users.Messages.List(userId);
             request.MaxResults = maxResults;
             //request.Q = query; //sets Query
