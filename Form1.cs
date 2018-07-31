@@ -14,9 +14,12 @@ namespace GmailQuickstart {
 
         public static BindingSource orderListBindingSrc = new BindingSource();
         public static BindingSource orderInfoBindingSrc = new BindingSource();
+        public List<OrderContainer> orderList = new List<OrderContainer>();
 
         public Form1() {
             InitializeComponent();
+
+
             dataGridView1.DataSource = orderListBindingSrc;
 
             dataGridView1.AutoGenerateColumns = false; //Prevents columns from auto populating with OrderContainer fields
@@ -55,6 +58,15 @@ namespace GmailQuickstart {
                 }else {
                     orderCon.PrintStatus = "Error";
                 }
+            }
+        }
+
+        /* Takes the queue of parsed Orders, encases each order in a OrderContainer and then adds it to the list */
+        public void AddAllOrdersToList(Queue<Order> orderQ) {
+            while(orderQ.Count > 0) {
+                OrderContainer orderCon = new OrderContainer(orderQ.Dequeue());
+                orderListBindingSrc.Add(orderCon); //Add the OrderContainer to the binding source
+                orderList.Add(orderCon);           //Add the OrderContainer to the OrderList for tracking unprinted orders
             }
         }
 

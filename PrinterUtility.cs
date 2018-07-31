@@ -18,7 +18,7 @@ namespace GmailQuickstart {
         public static Connection printerConn = null;
 
         public Queue<Order> printQ = new Queue<Order>();
-        public List<OrderContainer> orderList = new List<OrderContainer>();
+     
 
         /* Constrcutor - intializes the printer connection and sets language to ZPL */
         public PrinterUtility() {
@@ -53,19 +53,10 @@ namespace GmailQuickstart {
             return printerDriver.GetConnection();
         }
 
-        /* Takes the queue of parsed Orders, encases each order in a OrderContainer and then adds it to the list */
-        public void AddToOrderList(Queue<Order> orderQ) {
-            while(orderQ.Count > 0) {
-                OrderContainer orderContainer = new OrderContainer(orderQ.Dequeue());
-                orderList.Add(orderContainer);
 
-                //Add to DataGridView
-                
-                UpdateOrderListSrc(orderContainer);
-            }
-        }
 
-        /* Adds an OrderContainer to the databinding list */
+        /*
+        // Adds an OrderContainer to the databinding list 
         private void UpdateOrderListSrc(OrderContainer orderCon) {
             if (Program.form1.InvokeRequired) {
                 Program.form1.Invoke((MethodInvoker)delegate { Form1.orderListBindingSrc.Add(orderCon); });
@@ -73,13 +64,7 @@ namespace GmailQuickstart {
                 Form1.orderListBindingSrc.Add(orderCon);
             }
         }
-
-        public void PrintOrders() {
-            while(printQ.Count > 0) {
-                string[][] items = OrderToArray(printQ.Dequeue());
-                PrintOrder(items);
-            }
-        }
+        */
 
         /*        "E:T4FORM3.ZPL" Item Template  
          * --------------------------------------------       

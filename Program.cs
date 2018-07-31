@@ -154,13 +154,31 @@ namespace GmailQuickstart {
                 HandleMessages(messageIdList);
 
                 if (orderQ.Count > 0) {
-                    printerUtil.AddToOrderList(orderQ);
-                    //printerUtil.PrintOrders();
+                    UpdateOrderList();
                 }
             } else {
                 Console.WriteLine("Email up to date: No new messages");
             }
         }
+
+        private static void UpdateOrderList() {
+            if (form1.InvokeRequired) {
+                form1.Invoke((MethodInvoker) delegate { form1.AddAllOrdersToList(orderQ); });
+            }else {
+                form1.AddAllOrdersToList(orderQ);
+            }
+        }
+
+        /*
+// Adds an OrderContainer to the databinding list 
+private void UpdateOrderListSrc(OrderContainer orderCon) {
+    if (Program.form1.InvokeRequired) {
+        Program.form1.Invoke((MethodInvoker)delegate { Form1.orderListBindingSrc.Add(orderCon); });
+    } else {
+        Form1.orderListBindingSrc.Add(orderCon);
+    }
+}
+*/
 
         /* Returns the associated historyId given the messageId */
         private static string GetNewestHistoryId(string newestMessageId) {
