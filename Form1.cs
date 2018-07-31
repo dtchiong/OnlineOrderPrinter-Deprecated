@@ -33,11 +33,6 @@ namespace GmailQuickstart {
             return col;
         }
 
-        /* Adds an OrderContainer to the databinding list */
-        public static void AddToOrderListSrc(OrderContainer orderContainer) {
-            orderListBindingSrc.Add(orderContainer);
-        }
-
         private void SplitContainer1_Panel2_Paint(object sender, PaintEventArgs e) {
 
         }

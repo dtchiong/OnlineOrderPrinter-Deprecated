@@ -5,6 +5,7 @@ using Zebra.Sdk.Printer;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace GmailQuickstart {
 
@@ -52,14 +53,24 @@ namespace GmailQuickstart {
             return printerDriver.GetConnection();
         }
 
-        /* Takes the queue of parsed Orders, converts each other to an OrderContainer and then adds it to the list */
+        /* Takes the queue of parsed Orders, encases each order in a OrderContainer and then adds it to the list */
         public void AddToOrderList(Queue<Order> orderQ) {
             while(orderQ.Count > 0) {
                 OrderContainer orderContainer = new OrderContainer(orderQ.Dequeue());
                 orderList.Add(orderContainer);
 
                 //Add to DataGridView
-                Form1.AddToOrderListSrc(orderContainer);
+                
+                UpdateOrderListSrc(orderContainer);
+            }
+        }
+
+        /* Adds an OrderContainer to the databinding list */
+        private void UpdateOrderListSrc(OrderContainer orderCon) {
+            if (Program.form1.InvokeRequired) {
+                Program.form1.Invoke((MethodInvoker)delegate { Form1.orderListBindingSrc.Add(orderCon); });
+            } else {
+                Form1.orderListBindingSrc.Add(orderCon);
             }
         }
 

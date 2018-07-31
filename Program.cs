@@ -53,12 +53,15 @@ namespace GmailQuickstart {
         //If true: tests the app by only handling the email with testMessageId once, then stops, else app runs in full sync mode
         private static bool debugMailMode = false;
 
+        public static Form1 form1;
+
         /*App starts here */
         [STAThreadAttribute()]
         static void Main(string[] args) {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            form1 = new Form1();
+            Application.Run(form1);
         }
 
         /* Called by Form1's load event to start processing code*/
