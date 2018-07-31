@@ -23,6 +23,7 @@ namespace GmailQuickstart {
             dataGridView1.Columns.Add(NewTextBoxCol("Service", "Service"));
             dataGridView1.Columns.Add(NewTextBoxCol("Name", "Name"));
             dataGridView1.Columns.Add(NewTextBoxCol("ItemCount", "Item Count"));
+            dataGridView1.Columns.Add(NewTextBoxCol("PrintStatus", "Print Status"));
         }
 
         /* Returns a new DataGridViewColumn given the databinding propertyname, and the header name */
@@ -46,6 +47,8 @@ namespace GmailQuickstart {
             
             if (selectedRows.Count > 0) {
                 OrderContainer orderCon = (OrderContainer)selectedRows[0].DataBoundItem;
+                if (orderCon == null) return; //incase there are no orders
+
                 bool printed = PrinterUtility.PrintOrder(orderCon.orderArray);
                 if (printed) {
                     orderCon.PrintStatus = "Printed";
@@ -66,7 +69,7 @@ namespace GmailQuickstart {
 
         public Order order;
         public string[][] orderArray;
-        public string PrintStatus { get; set; }
+        
         public int PrintCount { get; set; }
 
         /* Constructor */
@@ -97,6 +100,9 @@ namespace GmailQuickstart {
             get { return null; }
         }
 
+        public string PrintStatus {
+            get; set;
+        }
 
     }
 }
