@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,7 @@ namespace GmailQuickstart {
             dataGridView1.Columns.Add(NewTextBoxCol("Name", "Name"));
             dataGridView1.Columns.Add(NewTextBoxCol("ItemCount", "Item Count"));
             dataGridView1.Columns.Add(NewTextBoxCol("PrintStatus", "Print Status"));
+            dataGridView1.Columns.Add(NewTextBoxCol("TimeReceived", "Time Received"));
         }
 
         /* Returns a new DataGridViewColumn given the databinding propertyname, and the header name */
@@ -87,8 +89,6 @@ namespace GmailQuickstart {
 
         public Order order;
         public string[][] orderArray;
-        
-
 
         /* Constructor */
         public OrderContainer(Order _order) {
@@ -110,8 +110,19 @@ namespace GmailQuickstart {
             get { return order.TotalItemCount.ToString(); }
         }
 
+        /* Returns the time if the order is from today, else it returns the date */
         public string TimeReceived {
-            get { return null; }
+            get {     
+                string dateNow = DateTime.Now.Date.ToString("d");
+                string dateReceived = order.TimeReceived.ToString("d");
+                string dateTime = order.TimeReceived.ToString(@"hh\:mm tt");
+
+                bool orderIsFromToday = dateNow == dateReceived;
+
+                if (orderIsFromToday) 
+                    return dateTime;
+                return dateReceived;    
+            }
         }
 
         public string PickUpTime {
