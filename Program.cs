@@ -48,7 +48,6 @@ namespace GmailQuickstart {
 
         static TimerT timer;
 
-        static Queue<Order> orderQ = new Queue<Order>(); // the queue of parsed orders
         static PrinterUtility printerUtil = new PrinterUtility();
 
         //If true: tests the app by only handling the email with testMessageId once, then stops, else app runs in full sync mode
@@ -150,21 +149,19 @@ namespace GmailQuickstart {
 
             if (messageIdList != null) {
                 HandleMessages(messageIdList);
-
-                if (orderQ.Count > 0) {
-                    UpdateOrderList();
-                }
             } else {
                 Console.WriteLine("Email up to date: No new messages");
             }
         }
 
-        /* Passes the list update to be done on the UI thread if this method is called from a child thread */
-        private static void UpdateOrderList() {
+        /* Updates the UI list with the new order. Passes this task to be executed
+         * on the UI thread if called from a child thread
+         */
+        private static void UpdateOrderList(Order order) {
             if (form1.InvokeRequired) {
-                form1.Invoke((MethodInvoker) delegate { form1.AddAllOrdersToList(orderQ); });
+                form1.Invoke( (MethodInvoker)delegate { form1.AddOrderToList(order); } );
             }else {
-                form1.AddAllOrdersToList(orderQ);
+                form1.AddOrderToList(order);
             }
         }
 
@@ -187,7 +184,10 @@ namespace GmailQuickstart {
         private static void HandleMessages(List<string> messageIdList) {
             foreach (string messageId in messageIdList) {
                 Console.WriteLine("***************************** START MESSAGE **********************************");
-                HandleMessage(messageId);
+                Order order = HandleMessage(messageId);
+                if (order != null) {
+                    UpdateOrderList(order);
+                }
                 Console.WriteLine("***************************** END MESSAGE ************************************");
             }
         }
@@ -195,7 +195,7 @@ namespace GmailQuickstart {
         /* Checks if the email needs to be parsed for Door Dash or GrubHub,
          * and saves the order to file for reference
          */
-        private static void HandleMessage(string messageId) {
+        private static Order HandleMessage(string messageId) {
 
             Console.WriteLine("Handling message: " + messageId);
 
@@ -208,7 +208,7 @@ namespace GmailQuickstart {
             var emailResponse = GetMessage(service, userId, messageId);
             if (emailResponse == null) {
                 Console.WriteLine("Message deleted, returning");
-                return;
+                return null;
             }
 
             var headers = emailResponse.Payload.Headers;
@@ -251,7 +251,7 @@ namespace GmailQuickstart {
                 }
             }else {
                 Console.WriteLine("Not an order, returning");
-                return;
+                return null;
             }          
 
             byte[] data = FromBase64ForUrlString(base64Input);
@@ -274,7 +274,8 @@ namespace GmailQuickstart {
                  
                 order.PrintOrder();
 
-                orderQ.Enqueue(order);
+                //orderQ.Enqueue(order);
+                return order;
             } else {
                 DoorDashParser doorDashParser = new DoorDashParser();
                 //List<string> lines = doorDashParser.ExtractTextFromPDF(filePath, messageId);
@@ -282,6 +283,7 @@ namespace GmailQuickstart {
 
                 //order.PrintOrder();
             }
+            return null;
         }
 
         /* Converts the time "Received" header from the email response to a DateTime object */

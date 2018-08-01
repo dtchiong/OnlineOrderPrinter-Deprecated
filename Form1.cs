@@ -70,6 +70,12 @@ namespace GmailQuickstart {
             }
         }
 
+        public void AddOrderToList(Order order) {
+            OrderContainer orderCon = new OrderContainer(order);
+            orderListBindingSrc.Add(orderCon);
+            orderList.Add(orderCon);
+        }
+
         /* The Form's load event calls the InitApp() to start checking and processing emails */
         private void Form1_Load(object sender, EventArgs e) {
             Program.InitApp();

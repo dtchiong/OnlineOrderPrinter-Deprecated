@@ -19,7 +19,6 @@ namespace GmailQuickstart {
 
         public Queue<Order> printQ = new Queue<Order>();
      
-
         /* Constrcutor - intializes the printer connection and sets language to ZPL */
         public PrinterUtility() {
             Console.WriteLine("In Constructor");

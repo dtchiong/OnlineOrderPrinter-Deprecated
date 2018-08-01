@@ -72,7 +72,6 @@ namespace GmailQuickstart {
 
                 order.ItemList.Add(item);
             }
-            Debug.WriteLine(order.TimeReceived.ToString());
             return order;
         }
 

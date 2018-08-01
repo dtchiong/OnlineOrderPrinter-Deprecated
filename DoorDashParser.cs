@@ -70,9 +70,10 @@ namespace GmailQuickstart {
         }
 
         /* Parses the information from the lines and returns the information in a Order object */
-        public DoorDashOrder ParseOrder(List<string> lines) {
+        public DoorDashOrder ParseOrder(List<string> lines, DateTime timeReceived) {
 
             DoorDashOrder order = new DoorDashOrder();
+            order.TimeReceived = timeReceived;
 
             ParseCustomerName(lines[0], order);
 
