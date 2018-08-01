@@ -91,10 +91,9 @@ namespace GmailQuickstart {
                 ApplicationName = ApplicationName,
             });
 
-            //If this mode is on, then we're just going to check the testMessageID and exit
+            //If this mode is on, then we're just going to handle the testMessageID
             if (debugMailMode) {
                 HandleMessage(testMessageId);
-                //printerUtil.TestPrint();
                 Console.Read();
                 return;
             }
@@ -111,6 +110,7 @@ namespace GmailQuickstart {
 
             }
 
+            //The timer continously checks the email for new messages
             const int dueTime = 5000;
             const int period = 4000; //in miliseconds
             timer = new TimerT(CheckEmail, "4Head", dueTime, period);
@@ -123,10 +123,10 @@ namespace GmailQuickstart {
          */
         private static void FullSyncAppToEmail() {
 
-            const int maxResults = 30;
-            const string query = "";
+            const int MaxResults = 30;
+            const string Query = "";
 
-            List<MessageG> messageList = ListMessages(service, userId, query, maxResults);
+            List<MessageG> messageList = ListMessages(service, userId, Query, MaxResults);
 
             string historyId = GetNewestHistoryId(messageList[0].Id);
 
@@ -134,8 +134,6 @@ namespace GmailQuickstart {
 
             //Save the historyId to file
             UpdateHistoryId(historyId);
-
-            
         }
 
         /* Partial sync uses the saved historyId to only retrieve emails newer than the id,
@@ -161,6 +159,7 @@ namespace GmailQuickstart {
             }
         }
 
+        /* Passes the list update to be done on the UI thread if this method is called from a child thread */
         private static void UpdateOrderList() {
             if (form1.InvokeRequired) {
                 form1.Invoke((MethodInvoker) delegate { form1.AddAllOrdersToList(orderQ); });
@@ -168,17 +167,6 @@ namespace GmailQuickstart {
                 form1.AddAllOrdersToList(orderQ);
             }
         }
-
-        /*
-// Adds an OrderContainer to the databinding list 
-private void UpdateOrderListSrc(OrderContainer orderCon) {
-    if (Program.form1.InvokeRequired) {
-        Program.form1.Invoke((MethodInvoker)delegate { Form1.orderListBindingSrc.Add(orderCon); });
-    } else {
-        Form1.orderListBindingSrc.Add(orderCon);
-    }
-}
-*/
 
         /* Returns the associated historyId given the messageId */
         private static string GetNewestHistoryId(string newestMessageId) {
@@ -224,11 +212,14 @@ private void UpdateOrderListSrc(OrderContainer orderCon) {
             }
 
             var headers = emailResponse.Payload.Headers;
-            MessagePartHeader header = headers.FirstOrDefault(item => item.Name == "From");
-            string senderAddress = header.Value;
+            MessagePartHeader dateHeader = headers.FirstOrDefault(item => item.Name == "Received");
+            MessagePartHeader fromHeader = headers.FirstOrDefault(item => item.Name == "From");
+            
+            DateTime dateTime = ParseDateTime(dateHeader.Value);
+            string senderAddress = fromHeader.Value;
             
             //Check if the email is from GrubHub
-            if (header.Value == "orders@eat.grubhub.com") {
+            if (fromHeader.Value == "orders@eat.grubhub.com") {
 
                 Console.WriteLine("Email Type: GrubHub");
                 isGrubHubOrder = true;
@@ -242,7 +233,7 @@ private void UpdateOrderListSrc(OrderContainer orderCon) {
                     Console.WriteLine(e.Message);
                 }
             //Otherwise check if the email is from DoorDash
-            } else if (header.Value == @"DoorDash <orders@doordash.com>") {
+            } else if (fromHeader.Value == @"DoorDash <orders@doordash.com>") {
 
                 Console.WriteLine("Email Type: DoorDash");
                 try {
@@ -279,7 +270,7 @@ private void UpdateOrderListSrc(OrderContainer orderCon) {
                 
                 GrubHubParser grubHubParser = new GrubHubParser();
                 string decodedBody = Encoding.UTF8.GetString(data);
-                GrubHubOrder order = grubHubParser.ParseOrder(decodedBody);
+                GrubHubOrder order = grubHubParser.ParseOrder(decodedBody, dateTime);
                  
                 order.PrintOrder();
 
@@ -291,6 +282,44 @@ private void UpdateOrderListSrc(OrderContainer orderCon) {
 
                 //order.PrintOrder();
             }
+        }
+
+        /* Converts the time "Received" header from the email response to a DateTime object */
+        private static DateTime ParseDateTime(string line) {
+            string timeText = line.Split(';')[1].Trim(); // gets time from format [words];[white space][time]
+
+            string[] words = timeText.Split(' ');
+
+            int year  = Int32.Parse(words[3]);
+            int month = GetMonthNum(words[2]);
+            int day   = Int32.Parse(words[1]);
+
+            string[] time = words[4].Split(':');
+
+            int hour = Int32.Parse(time[0]);
+            int min  = Int32.Parse(time[1]);
+            int sec  = Int32.Parse(time[2]);
+
+            return new DateTime(year, month, day, hour, min, sec);
+        }
+
+        /* Gets the numerical representation of the string month */
+        private static int GetMonthNum(string month) {
+            switch (month) {
+                case "Jan": return 1;
+                case "Feb": return 2;
+                case "Mar": return 3;
+                case "Apr": return 4;
+                case "May": return 5;
+                case "Jun": return 6;
+                case "Jul": return 7;
+                case "Aug": return 8;
+                case "Sep": return 9;
+                case "Oct": return 10;
+                case "Nov": return 11;
+                case "Dec": return 12;
+            }
+            return -1;
         }
 
         /* The callback function of the timer that checks if there are new emails to handle

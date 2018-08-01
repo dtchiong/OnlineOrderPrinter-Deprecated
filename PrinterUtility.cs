@@ -53,19 +53,6 @@ namespace GmailQuickstart {
             return printerDriver.GetConnection();
         }
 
-
-
-        /*
-        // Adds an OrderContainer to the databinding list 
-        private void UpdateOrderListSrc(OrderContainer orderCon) {
-            if (Program.form1.InvokeRequired) {
-                Program.form1.Invoke((MethodInvoker)delegate { Form1.orderListBindingSrc.Add(orderCon); });
-            } else {
-                Form1.orderListBindingSrc.Add(orderCon);
-            }
-        }
-        */
-
         /*        "E:T4FORM3.ZPL" Item Template  
          * --------------------------------------------       
          * Count|CharLimit|FieldName           Example

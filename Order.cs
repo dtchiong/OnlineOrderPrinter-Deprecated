@@ -16,19 +16,21 @@ namespace GmailQuickstart {
         public string CustomerName   { get; set; }
         public string ContactNumber  { get; set; }
         public string DeliverAddress { get; set; }
-        
-        public int TotalItemCount { get; set; }
+        public DateTime TimeReceived { get; set; }
+
+        public int TotalItemCount    { get; set; }
         public List<Item> ItemList;
 
         //Constructor
         public Order() {
-            this.Service        = null;
-            this.OrderNumber    = null;
-            this.CustomerName   = null;
-            this.ContactNumber  = null;
-            this.DeliverAddress = null;
-            this.TotalItemCount = 0;
-            this.ItemList       = new List<Item>();
+            Service = null;
+            OrderNumber    = null;
+            CustomerName   = null;
+            ContactNumber  = null;
+            DeliverAddress = null;
+            TimeReceived   = default(DateTime);
+            TotalItemCount = 0;
+            ItemList       = new List<Item>(); 
         }
         
         public void PrintField(string field, string data, int padAmount) {

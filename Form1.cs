@@ -19,7 +19,6 @@ namespace GmailQuickstart {
         public Form1() {
             InitializeComponent();
 
-
             dataGridView1.DataSource = orderListBindingSrc;
 
             dataGridView1.AutoGenerateColumns = false; //Prevents columns from auto populating with OrderContainer fields
@@ -45,6 +44,7 @@ namespace GmailQuickstart {
 
         }
 
+        /* Gets the order that is currently selected, if any, and then prints it, and sets the Print Status */
         private void print_Click(object sender, EventArgs e) {
             DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
             
@@ -82,7 +82,7 @@ namespace GmailQuickstart {
         public Order order;
         public string[][] orderArray;
         
-        public int PrintCount { get; set; }
+
 
         /* Constructor */
         public OrderContainer(Order _order) {
@@ -112,9 +112,8 @@ namespace GmailQuickstart {
             get { return null; }
         }
 
-        public string PrintStatus {
-            get; set;
-        }
+        public string PrintStatus { get; set; }
 
+        public int PrintCount { get; set; }
     }
 }

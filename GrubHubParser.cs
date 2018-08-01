@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -17,8 +18,10 @@ namespace GmailQuickstart {
         }
 
         /* Extracts the order from an grubhub html file and returns an Order object */
-        public GrubHubOrder ParseOrder(string html) {
+        public GrubHubOrder ParseOrder(string html, DateTime dateTime) {
             GrubHubOrder order = new GrubHubOrder();
+
+            order.TimeReceived = dateTime;
 
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
@@ -69,6 +72,7 @@ namespace GmailQuickstart {
 
                 order.ItemList.Add(item);
             }
+            Debug.WriteLine(order.TimeReceived.ToString());
             return order;
         }
 
