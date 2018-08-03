@@ -25,15 +25,15 @@ namespace GmailQuickstart {
             dataGridView1.AutoGenerateColumns = false;
             orderListBindingSrc.DataSource = OrderList;
             dataGridView1.DataSource = orderListBindingSrc;
-            orderListBindingSrc.Sort = "TimeReceivedTicks DESC";
+            orderListBindingSrc.Sort = "TimeReceivedTicks DESC"; //set to sort DESC on the Ticks property
 
             dataGridView1.Columns.Add(NewTextBoxCol("Service", "Service"));
             dataGridView1.Columns.Add(NewTextBoxCol("Name", "Name"));
             dataGridView1.Columns.Add(NewTextBoxCol("ItemCount", "Item Count"));
             dataGridView1.Columns.Add(NewTextBoxCol("PrintStatus", "Print Status"));
             dataGridView1.Columns.Add(NewTextBoxCol("TimeReceived", "Time Received"));
-            dataGridView1.Columns.Add(NewTextBoxCol("TimeReceivedTicks", "Ticks"));
-            //dataGridView1.Columns["Ticks"].Visible = false;
+            dataGridView1.Columns.Add(NewTextBoxCol("TimeReceivedTicks", "TimeReceivedTicks"));
+            dataGridView1.Columns["TimeReceivedTicks"].Visible = false;
         }
 
         /* Returns a new DataGridViewColumn given the databinding propertyname, and the header name */
@@ -55,7 +55,8 @@ namespace GmailQuickstart {
         /* Gets the order that is currently selected, if any, and then prints it, and sets the Print Status */
         private void print_Click(object sender, EventArgs e) {
             DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
-            /*
+            
+            
             if (selectedRows.Count > 0) {
                 OrderContainer orderCon = (OrderContainer)selectedRows[0].DataBoundItem;
                 if (orderCon == null) return; //incase there are no orders
@@ -66,11 +67,10 @@ namespace GmailQuickstart {
                 }else {
                     orderCon.PrintStatus = "Error";
                 }
+                //To force the form to update the print status value. 
+                //dataGridView1.Refresh() maybe useful if using a "Print All" button
+                orderListBindingSrc.ResetCurrentItem();
             }
-            */
-            Console.WriteLine("BEFORE SORTING: "+ dataGridView1.SortOrder);
-            dataGridView1.Sort(dataGridView1.Columns["Ticks"], ListSortDirection.Descending);
-            Console.WriteLine("AFTER SORTING: " + dataGridView1.SortOrder);
         }
 
         /* Encapsulates an order with an OrderContainer, then add it to the order list */
@@ -87,15 +87,17 @@ namespace GmailQuickstart {
 
         /* Sort new rows by the TimeReceieved field of the Orders */
         private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
-            //dataGridView1.Sort(dataGridView1.Columns["Ticks"], ListSortDirection.Descending);
-            //Console.WriteLine("Sorted: "+orderListBindingSrc.IsSorted);
-            //orderListBindingSrc.Sort = "TimeReceivedTicks DESC";
             OrderContainer orderCon = new OrderContainer(new Order());
             PropertyDescriptor pd = TypeDescriptor.GetProperties(orderCon)["TimeReceivedTicks"];
-            //orderListBindingSrc.Sort = "TimeReceivedTicks DESC";
-            dataGridView1.Sort(dataGridView1.Columns["Ticks"], ListSortDirection.Ascending);
+            dataGridView1.Sort(dataGridView1.Columns["TimeReceivedTicks"], ListSortDirection.Descending);
             Console.WriteLine("Sorted: " + dataGridView1.SortOrder);
-            //Console.WriteLine(sender);
+        }
+
+        private void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e) {
+            if (dataGridView1.IsCurrentCellDirty) {
+                dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+            Console.WriteLine("CELL DIRTY");
         }
     }
 
@@ -111,7 +113,7 @@ namespace GmailQuickstart {
             order = _order;
             orderArray = PrinterUtility.OrderToArray(order);
             PrintStatus = "Not Printed"; //maybe use Enum for print status later?
-            //PrintCount = 0;
+            PrintCount = 0;
         }
 
         public string Service {
@@ -141,9 +143,9 @@ namespace GmailQuickstart {
             }
         }
 
-        //public string PickUpTime {
-        //    get { return null; }
-        //}
+        public string PickUpTime {
+            get { return null; }
+        }
 
         public long TimeReceivedTicks {
             get { return order.TimeReceived.Ticks; }
@@ -151,6 +153,6 @@ namespace GmailQuickstart {
 
         public string PrintStatus { get; set; }
 
-        //public int PrintCount { get; set; }
+        public int PrintCount { get; set; }
     }
 }

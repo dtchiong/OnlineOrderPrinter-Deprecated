@@ -6,128 +6,65 @@ using System.Linq.Expressions;
 
 namespace GmailQuickstart {
 
+    /* From https://www.codeproject.com/Articles/31418/Implementing-a-Sortable-BindingList-Very-Very-Quic */
+
     public class MySortableBindingList<T> : BindingList<T> {
+        private bool _isSorted;
+        private ListSortDirection _sortDirection;
+        private PropertyDescriptor _sortProperty;
+        private readonly PropertyDescriptorCollection _propertyDescriptors =
+                         TypeDescriptor.GetProperties(typeof(T));
 
-        // reference to the list provided at the time of instantiation
-        List<T> originalList;
-        ListSortDirection sortDirection;
-        PropertyDescriptor sortProperty;
 
-        // function that refereshes the contents
-        // of the base classes collection of elements
-        Action<MySortableBindingList<T>, List<T>>
-                       populateBaseList = (a, b) => a.ResetItems(b);
+        public MySortableBindingList(IEnumerable<T> enumerable) : base(enumerable.ToList()) { }
 
-        // a cache of functions that perform the sorting
-        // for a given type, property, and sort direction
-        static Dictionary<string, Func<List<T>, IEnumerable<T>>>
-           cachedOrderByExpressions = new Dictionary<string, Func<List<T>,
-                                                     IEnumerable<T>>>();
+        public MySortableBindingList() { }
 
-        public MySortableBindingList() {
-            originalList = new List<T>();
-        }
 
-        public MySortableBindingList(IEnumerable<T> enumerable) {
-            originalList = enumerable.ToList();
-            populateBaseList(this, originalList);
-        }
+        protected override bool SupportsSortingCore { get { return true; } }
 
-        public MySortableBindingList(List<T> list) {
-            originalList = list;
-            populateBaseList(this, originalList);
-        }
+        protected override bool IsSortedCore { get { return _isSorted; } }
+
+        protected override ListSortDirection SortDirectionCore { get { return _sortDirection; } }
+
+        protected override PropertyDescriptor SortPropertyCore { get { return _sortProperty; } }
 
         protected override void ApplySortCore(PropertyDescriptor prop,
-                                ListSortDirection direction) {
-            /*
-             Look for an appropriate sort method in the cache if not found .
-             Call CreateOrderByMethod to create one. 
-             Apply it to the original list.
-             Notify any bound controls that the sort has been applied.
-             */
+                                              ListSortDirection direction) {
+            _isSorted = true;
+            _sortDirection = direction;
+            _sortProperty = prop;
 
-            sortProperty = prop;
+            Func<T, object> predicate = n => n.GetType().GetProperty(prop.Name)
+                                                        .GetValue(n, null);
 
-            var orderByMethodName = sortDirection ==
-                ListSortDirection.Ascending ? "OrderBy" : "OrderByDescending";
-            var cacheKey = typeof(T).GUID + prop.Name + orderByMethodName;
-
-            if (!cachedOrderByExpressions.ContainsKey(cacheKey)) {
-                CreateOrderByMethod(prop, orderByMethodName, cacheKey);
-            }
-
-            ResetItems(cachedOrderByExpressions[cacheKey](originalList).ToList());
-            ResetBindings();
-            sortDirection = sortDirection == ListSortDirection.Ascending ?
-                            ListSortDirection.Descending : ListSortDirection.Ascending;
-        }
-
-
-        private void CreateOrderByMethod(PropertyDescriptor prop,
-                     string orderByMethodName, string cacheKey) {
-
-            /*
-             Create a generic method implementation for IEnumerable<T>.
-             Cache it.
-            */
-
-            var sourceParameter = Expression.Parameter(typeof(List<T>), "source");
-            var lambdaParameter = Expression.Parameter(typeof(T), "lambdaParameter");
-            var accesedMember = typeof(T).GetProperty(prop.Name);
-            var propertySelectorLambda =
-                Expression.Lambda(Expression.MakeMemberAccess(lambdaParameter,
-                                  accesedMember), lambdaParameter);
-            var orderByMethod = typeof(Enumerable).GetMethods()
-                                          .Where(a => a.Name == orderByMethodName &&
-                                                       a.GetParameters().Length == 2)
-                                          .Single()
-                                          .MakeGenericMethod(typeof(T), prop.PropertyType);
-
-            var orderByExpression = Expression.Lambda<Func<List<T>, IEnumerable<T>>>(
-                                        Expression.Call(orderByMethod,
-                                                new Expression[] { sourceParameter,
-                                                               propertySelectorLambda }),
-                                                sourceParameter);
-
-            cachedOrderByExpressions.Add(cacheKey, orderByExpression.Compile());
+            ResetItems(_sortDirection == ListSortDirection.Ascending
+                           ? Items.AsParallel().OrderBy(predicate)
+                           : Items.AsParallel().OrderByDescending(predicate));
         }
 
         protected override void RemoveSortCore() {
-            ResetItems(originalList);
+            _isSorted = false;
+            _sortDirection = base.SortDirectionCore;
+            _sortProperty = base.SortPropertyCore;
+
+            ResetBindings();
         }
 
-        private void ResetItems(List<T> items) {
+        private void ResetItems(IEnumerable<T> items) {
+            RaiseListChangedEvents = false;
+            var tempList = items.ToList();
+            ClearItems();
 
-            base.ClearItems();
+            foreach (var item in tempList) Add(item);
 
-            for (int i = 0; i < items.Count; i++) {
-                base.InsertItem(i, items[i]);
-            }
+            RaiseListChangedEvents = true;
+            ResetBindings();
         }
 
-        protected override bool SupportsSortingCore {
-            get {
-                // indeed we do
-                return true;
-            }
-        }
-
-        protected override ListSortDirection SortDirectionCore {
-            get {
-                return sortDirection;
-            }
-        }
-
-        protected override PropertyDescriptor SortPropertyCore {
-            get {
-                return sortProperty;
-            }
-        }
-
-        protected override void OnListChanged(ListChangedEventArgs e) {
-            originalList = base.Items.ToList();
-            base.OnListChanged(e);
+        public MySortableBindingList<T> Load(IEnumerable<T> enumeration) {
+            ResetItems(enumeration);
+            return this;
         }
     }
 }
