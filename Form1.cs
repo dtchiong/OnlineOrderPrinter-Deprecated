@@ -9,25 +9,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace GmailQuickstart {
     public partial class Form1 : Form {
 
         public static BindingSource orderListBindingSrc = new BindingSource();
         public static BindingSource orderInfoBindingSrc = new BindingSource();
-        public List<OrderContainer> orderList = new List<OrderContainer>();
+
+        public static MySortableBindingList<OrderContainer> orderList = new MySortableBindingList<OrderContainer>();
 
         public Form1() {
             InitializeComponent();
-
+            //Prevents columns from auto populating with OrderContainer fields. 
+            //Need to set before setting datasource, or else columns get duplicated for some reason.
+            dataGridView1.AutoGenerateColumns = false; 
+            orderListBindingSrc.DataSource = orderList;
             dataGridView1.DataSource = orderListBindingSrc;
 
-            dataGridView1.AutoGenerateColumns = false; //Prevents columns from auto populating with OrderContainer fields
             dataGridView1.Columns.Add(NewTextBoxCol("Service", "Service"));
             dataGridView1.Columns.Add(NewTextBoxCol("Name", "Name"));
             dataGridView1.Columns.Add(NewTextBoxCol("ItemCount", "Item Count"));
             dataGridView1.Columns.Add(NewTextBoxCol("PrintStatus", "Print Status"));
             dataGridView1.Columns.Add(NewTextBoxCol("TimeReceived", "Time Received"));
+            dataGridView1.Columns.Add(NewTextBoxCol("TimeReceivedTicks", "Ticks"));
+            dataGridView1.Columns["Ticks"].Visible = false;
         }
 
         /* Returns a new DataGridViewColumn given the databinding propertyname, and the header name */
@@ -63,28 +67,26 @@ namespace GmailQuickstart {
             }
         }
 
-        /* Takes the queue of parsed Orders, encases each order in a OrderContainer and then adds it to the list */
-        public void AddAllOrdersToList(Queue<Order> orderQ) {
-            while(orderQ.Count > 0) {
-                OrderContainer orderCon = new OrderContainer(orderQ.Dequeue());
-                orderListBindingSrc.Add(orderCon); //Add the OrderContainer to the binding source
-                orderList.Add(orderCon);           //Add the OrderContainer to the OrderList for tracking unprinted orders
-            }
-        }
-
+        /* Encapsulates an order with an OrderContainer, then add it to the order list */
         public void AddOrderToList(Order order) {
             OrderContainer orderCon = new OrderContainer(order);
-            orderListBindingSrc.Add(orderCon);
-            orderList.Add(orderCon);
+            orderList.Add(orderCon);           //Add the OrderContainer to the OrderList for tracking unprinted orders
+            
         }
 
         /* The Form's load event calls the InitApp() to start checking and processing emails */
         private void Form1_Load(object sender, EventArgs e) {
             Program.InitApp();
         }
+
+        /* Sort new rows by the TimeReceieved field of the Orders */
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
+            dataGridView1.Sort(dataGridView1.Columns["Ticks"], ListSortDirection.Descending);
+        }
     }
 
     /* The object that will be data-bound to the orderGridView */
+    [DataObject]
     public class OrderContainer {
 
         public Order order;
@@ -95,7 +97,7 @@ namespace GmailQuickstart {
             order = _order;
             orderArray = PrinterUtility.OrderToArray(order);
             PrintStatus = "Not Printed"; //maybe use Enum for print status later?
-            PrintCount = 0;
+            //PrintCount = 0;
         }
 
         public string Service {
@@ -125,12 +127,16 @@ namespace GmailQuickstart {
             }
         }
 
-        public string PickUpTime {
-            get { return null; }
+        //public string PickUpTime {
+        //    get { return null; }
+        //}
+
+        public long TimeReceivedTicks {
+            get { return order.TimeReceived.Ticks; }
         }
 
         public string PrintStatus { get; set; }
 
-        public int PrintCount { get; set; }
+        //public int PrintCount { get; set; }
     }
 }
