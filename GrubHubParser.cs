@@ -18,9 +18,10 @@ namespace GmailQuickstart {
         }
 
         /* Extracts the order from an grubhub html file and returns an Order object */
-        public GrubHubOrder ParseOrder(string html, DateTime dateTime) {
-            GrubHubOrder order = new GrubHubOrder();
+        public Order ParseOrder(string html, DateTime dateTime) {
+            Order order = new Order();
 
+            order.Service = "GrubHub";
             order.TimeReceived = dateTime;
 
             var htmlDoc = new HtmlDocument();
@@ -50,6 +51,8 @@ namespace GmailQuickstart {
             //We need to know whether it's DELIVERY or PICKUP because there's a difference in the html structure
             if (deliveryMethodNode.InnerHtml.Trim() == "DELIVERY") {
                 nonItemCount = 6;
+            }else {
+                order.DeliveryMethod = "Pickup";
             }
 
             ParsePickupName(pickupByNameNode, order);

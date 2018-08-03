@@ -270,11 +270,9 @@ namespace GmailQuickstart {
                 
                 GrubHubParser grubHubParser = new GrubHubParser();
                 string decodedBody = Encoding.UTF8.GetString(data);
-                GrubHubOrder order = grubHubParser.ParseOrder(decodedBody, dateTime);
+                Order order = grubHubParser.ParseOrder(decodedBody, dateTime);
                  
                 order.PrintOrder();
-
-                //orderQ.Enqueue(order);
                 return order;
             } else {
                 DoorDashParser doorDashParser = new DoorDashParser();

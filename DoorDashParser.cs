@@ -70,9 +70,10 @@ namespace GmailQuickstart {
         }
 
         /* Parses the information from the lines and returns the information in a Order object */
-        public DoorDashOrder ParseOrder(List<string> lines, DateTime timeReceived) {
+        public Order ParseOrder(List<string> lines, DateTime timeReceived) {
 
-            DoorDashOrder order = new DoorDashOrder();
+            Order order = new Order();
+            order.Service = "DoorDash";
             order.TimeReceived = timeReceived;
 
             ParseCustomerName(lines[0], order);
@@ -135,7 +136,7 @@ namespace GmailQuickstart {
             return order;
         }
 
-        private void ParseCustomerName(string line, DoorDashOrder order) {
+        private void ParseCustomerName(string line, Order order) {
             int indOfWordPage = line.IndexOf("Page");
             int lenOfWordCust = "Customer: ".Length;
             int custNameLen = indOfWordPage - lenOfWordCust;
@@ -144,7 +145,7 @@ namespace GmailQuickstart {
             Console.WriteLine("Customer Name: " + custName);
         }
 
-        private void ParsePickUpTime1(string line, DoorDashOrder order) {
+        private void ParsePickUpTime1(string line, Order order) {
             string pickUpTime = line.Replace("Order scheduled for ", "");
             pickUpTime = pickUpTime.Remove(pickUpTime.Length - 1);
 
@@ -152,20 +153,20 @@ namespace GmailQuickstart {
 
         }
 
-        private void ParsePickUpTime2(string line, DoorDashOrder order) {
+        private void ParsePickUpTime2(string line, Order order) {
             int indOfWordAt = line.IndexOf("at");
 
             string pickUpTime = line.Substring(indOfWordAt);
             Console.WriteLine("Pickup Time: " + pickUpTime);
         }
 
-        private void ParseOrderNumber(string line, DoorDashOrder order) {
+        private void ParseOrderNumber(string line, Order order) {
             string orderNumber = line.Replace("Delivery #", "");
 
             Console.WriteLine("Order Number: " + orderNumber);
         }
 
-        private void ParseContactNumber(string line, DoorDashOrder order) {
+        private void ParseContactNumber(string line, Order order) {
             int indOfWordAt = line.IndexOf(" at");
 
             string contactNumber = line.Remove(indOfWordAt);
