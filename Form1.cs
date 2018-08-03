@@ -29,9 +29,11 @@ namespace GmailQuickstart {
 
             dataGridView1.Columns.Add(NewTextBoxCol("Service", "Service"));
             dataGridView1.Columns.Add(NewTextBoxCol("Name", "Name"));
-            dataGridView1.Columns.Add(NewTextBoxCol("ItemCount", "Item Count"));
-            dataGridView1.Columns.Add(NewTextBoxCol("PrintStatus", "Print Status"));
+            dataGridView1.Columns.Add(NewTextBoxCol("ItemCount", "Item Count")); 
             dataGridView1.Columns.Add(NewTextBoxCol("TimeReceived", "Time Received"));
+            dataGridView1.Columns.Add(NewTextBoxCol("PickUpTime", "Pick-Up Time"));
+            dataGridView1.Columns.Add(NewTextBoxCol("PrintStatus", "Print Status"));
+
             dataGridView1.Columns.Add(NewTextBoxCol("TimeReceivedTicks", "TimeReceivedTicks"));
             dataGridView1.Columns["TimeReceivedTicks"].Visible = false;
         }
@@ -92,13 +94,6 @@ namespace GmailQuickstart {
             dataGridView1.Sort(dataGridView1.Columns["TimeReceivedTicks"], ListSortDirection.Descending);
             Console.WriteLine("Sorted: " + dataGridView1.SortOrder);
         }
-
-        private void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e) {
-            if (dataGridView1.IsCurrentCellDirty) {
-                dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
-            }
-            Console.WriteLine("CELL DIRTY");
-        }
     }
 
     /* The object that will be data-bound to the orderGridView */
@@ -132,19 +127,29 @@ namespace GmailQuickstart {
         public string TimeReceived {
             get {     
                 string dateNow = DateTime.Now.Date.ToString("d");
-                string dateReceived = order.TimeReceived.ToString("d");
-                string dateTime = order.TimeReceived.ToString(@"hh\:mm tt");
+                string receivedDate = order.TimeReceived.ToString("d");
+                string receivedTime = order.TimeReceived.ToString(@"hh\:mm tt");
 
-                bool orderIsFromToday = dateNow == dateReceived;
+                bool orderIsFromToday = dateNow == receivedDate;
 
                 if (orderIsFromToday) 
-                    return dateTime;
-                return dateReceived;    
+                    return receivedTime;
+                return receivedDate;    
             }
         }
 
         public string PickUpTime {
-            get { return null; }
+            get {
+                string dateNow = DateTime.Now.Date.ToString("d");
+                string pickUpDate = order.PickUpTime.ToString("d");
+                string pickUpTime = order.PickUpTime.ToString(@"hh\:mm tt");
+
+                bool orderIsFromToday = dateNow == pickUpDate;
+
+                if (orderIsFromToday)
+                    return pickUpTime;
+                return pickUpDate;
+            }
         }
 
         public long TimeReceivedTicks {

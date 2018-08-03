@@ -17,6 +17,7 @@ namespace GmailQuickstart {
         public string ContactNumber  { get; set; }
         public string DeliverAddress { get; set; }
         public DateTime TimeReceived { get; set; }
+        public DateTime PickUpTime   { get; set; }
 
         public int TotalItemCount    { get; set; }
         public List<Item> ItemList;
@@ -38,8 +39,7 @@ namespace GmailQuickstart {
                 Console.WriteLine(field.PadRight(padAmount) + ": " + data);
             } else {
                 Console.WriteLine(field.PadRight(padAmount) + ": null");
-            }
-            
+            }          
         }
 
         public void PrintField(string field, int data, int padAmount) {

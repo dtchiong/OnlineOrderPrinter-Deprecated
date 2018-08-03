@@ -26,18 +26,22 @@ namespace GmailQuickstart {
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
 
-            var metaInfoNodes = htmlDoc.DocumentNode.SelectNodes("//body/table/tbody/tr/td/table/tbody/tr/td/table[3]/tbody/tr/th[2]/table/tbody/tr/th/div/div[2]/div/div");
+            var metaInfoNodes      = htmlDoc.DocumentNode.SelectNodes("//body/table/tbody/tr/td/table/tbody/tr/td/table[3]/tbody/tr/th[2]/table/tbody/tr/th/div/div[2]/div/div");
             var deliveryMethodNode = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[3]/tbody/tr/th/table/tbody/tr/th/div/div[2]/div/span/span");
+            var pickupTimeNode     = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[3]/tbody/tr/th/table/tbody/tr/th/div/div[2]/div[2]/span");
 
             //If this is null, then there's an extra <table> "SCHEDULED ORDER: PREVIEW" before the pickup/delivery <table>
             if (metaInfoNodes == null) {
                 metaInfoNodes = htmlDoc.DocumentNode.SelectNodes("//body/table/tbody/tr/td/table/tbody/tr/td/table[4]/tbody/tr/th[2]/table/tbody/tr/th/div/div/div/div");
                 deliveryMethodNode = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[4]/tbody/tr/th/table/tbody/tr/th/div/div/div/span/span");
+                pickupTimeNode     = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[4]/tbody/tr/th/table/tbody/tr/th/div/div/div[2]/span");
+
             }
             var pickupByNameNode = metaInfoNodes.ElementAt(1);
 
             var orderNumberNode = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[2]/tbody/tr/th/table/tbody/tr/th/div/div[4]/span[2]");
             ParseOrderNumber(orderNumberNode, order);
+            ParsePickUpTime(pickupTimeNode, order);
 
             int metaDivCount = metaInfoNodes.Count; //the # of <div> elems 
             int nonItemCount = 5; //the last 5 <tr>'s of the <tbody> is meta information
@@ -77,6 +81,15 @@ namespace GmailQuickstart {
 
         public static void ParseOrderNumber(HtmlNode node, Order order) {
             order.OrderNumber = node.InnerHtml;
+        }
+
+        public static void ParsePickUpTime(HtmlNode node, Order order) {
+            try {
+                order.PickUpTime = DateTime.Parse(node.InnerHtml);
+                Debug.WriteLine(order.PickUpTime.ToString());
+            }catch(Exception e) {
+                Debug.WriteLine("ParsePickUpTime: " + e.ToString());
+            }
         }
 
         public static void ParsePickupName(HtmlNode node, Order order) {
