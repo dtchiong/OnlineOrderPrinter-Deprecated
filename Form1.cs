@@ -15,15 +15,17 @@ namespace GmailQuickstart {
         public static BindingSource orderListBindingSrc = new BindingSource();
         public static BindingSource orderInfoBindingSrc = new BindingSource();
 
-        public static MySortableBindingList<OrderContainer> orderList = new MySortableBindingList<OrderContainer>();
+        public static MySortableBindingList<OrderContainer> OrderList = new MySortableBindingList<OrderContainer>();
 
         public Form1() {
             InitializeComponent();
+            
             //Prevents columns from auto populating with OrderContainer fields. 
             //Need to set before setting datasource, or else columns get duplicated for some reason.
-            dataGridView1.AutoGenerateColumns = false; 
-            orderListBindingSrc.DataSource = orderList;
+            dataGridView1.AutoGenerateColumns = false;
+            orderListBindingSrc.DataSource = OrderList;
             dataGridView1.DataSource = orderListBindingSrc;
+            orderListBindingSrc.Sort = "TimeReceivedTicks DESC";
 
             dataGridView1.Columns.Add(NewTextBoxCol("Service", "Service"));
             dataGridView1.Columns.Add(NewTextBoxCol("Name", "Name"));
@@ -31,7 +33,7 @@ namespace GmailQuickstart {
             dataGridView1.Columns.Add(NewTextBoxCol("PrintStatus", "Print Status"));
             dataGridView1.Columns.Add(NewTextBoxCol("TimeReceived", "Time Received"));
             dataGridView1.Columns.Add(NewTextBoxCol("TimeReceivedTicks", "Ticks"));
-            dataGridView1.Columns["Ticks"].Visible = false;
+            //dataGridView1.Columns["Ticks"].Visible = false;
         }
 
         /* Returns a new DataGridViewColumn given the databinding propertyname, and the header name */
@@ -53,7 +55,7 @@ namespace GmailQuickstart {
         /* Gets the order that is currently selected, if any, and then prints it, and sets the Print Status */
         private void print_Click(object sender, EventArgs e) {
             DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
-            
+            /*
             if (selectedRows.Count > 0) {
                 OrderContainer orderCon = (OrderContainer)selectedRows[0].DataBoundItem;
                 if (orderCon == null) return; //incase there are no orders
@@ -65,12 +67,16 @@ namespace GmailQuickstart {
                     orderCon.PrintStatus = "Error";
                 }
             }
+            */
+            Console.WriteLine("BEFORE SORTING: "+ dataGridView1.SortOrder);
+            dataGridView1.Sort(dataGridView1.Columns["Ticks"], ListSortDirection.Descending);
+            Console.WriteLine("AFTER SORTING: " + dataGridView1.SortOrder);
         }
 
         /* Encapsulates an order with an OrderContainer, then add it to the order list */
         public void AddOrderToList(Order order) {
             OrderContainer orderCon = new OrderContainer(order);
-            orderList.Add(orderCon);           //Add the OrderContainer to the OrderList for tracking unprinted orders
+            OrderList.Add(orderCon);           //Add the OrderContainer to the OrderList for tracking unprinted orders
             
         }
 
@@ -81,7 +87,15 @@ namespace GmailQuickstart {
 
         /* Sort new rows by the TimeReceieved field of the Orders */
         private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
-            dataGridView1.Sort(dataGridView1.Columns["Ticks"], ListSortDirection.Descending);
+            //dataGridView1.Sort(dataGridView1.Columns["Ticks"], ListSortDirection.Descending);
+            //Console.WriteLine("Sorted: "+orderListBindingSrc.IsSorted);
+            //orderListBindingSrc.Sort = "TimeReceivedTicks DESC";
+            OrderContainer orderCon = new OrderContainer(new Order());
+            PropertyDescriptor pd = TypeDescriptor.GetProperties(orderCon)["TimeReceivedTicks"];
+            //orderListBindingSrc.Sort = "TimeReceivedTicks DESC";
+            dataGridView1.Sort(dataGridView1.Columns["Ticks"], ListSortDirection.Ascending);
+            Console.WriteLine("Sorted: " + dataGridView1.SortOrder);
+            //Console.WriteLine(sender);
         }
     }
 
