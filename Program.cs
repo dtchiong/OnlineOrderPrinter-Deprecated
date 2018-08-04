@@ -305,7 +305,7 @@ namespace GmailQuickstart {
         }
 
         /* Gets the numerical representation of the string month */
-        private static int GetMonthNum(string month) {
+        public static int GetMonthNum(string month) {
             switch (month) {
                 case "Jan": return 1;
                 case "Feb": return 2;

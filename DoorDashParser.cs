@@ -79,13 +79,22 @@ namespace GmailQuickstart {
 
             ParseCustomerName(lines[0], order);
 
-            if (lines[3].StartsWith("Tea for you")) {
-                
-                ParsePickUpTime1(lines[1], order);
+            int start = 9;
+
+            //Uncommon case
+            if (lines[3].StartsWith("Tea for you")) {        
+                ParsePickUpTime(lines[1], order);
                 ParseOrderNumber(lines[4], order);
                 ParseContactNumber(lines[8], order);
+            //Rare case - not sure if still used
+            }else if (lines[1].StartsWith("Tea for you")) {
+                //Need to parse Pickup time 
+                ParseOrderNumber(lines[2], order);
+                ParseContactNumber(lines[6], order);
+                start = 7;
+            //Common case
             }else {
-                ParsePickUpTime2(lines[6], order);
+                ParsePickUpTime(lines[6], order);
                 ParseOrderNumber(lines[2], order);
                 ParseContactNumber(lines[6], order);
             }
@@ -93,7 +102,7 @@ namespace GmailQuickstart {
             Item item = null;
             string labelName = null;
 
-            int start = 9;
+
             for (int i=start; i<lines.Count; i++) {
 
                 //Once we encounter this line, we add the last item, break, and return the order
@@ -111,13 +120,10 @@ namespace GmailQuickstart {
                     continue;
                 }
 
-                //If the line starts with "1x" for example, then we need to parse the item
+                //If the line starts with "1x" for example, then we need to parse the itemName and quantity
                 Regex regex = new Regex(@"\d+x.", RegexOptions.ECMAScript); // the option makes it match only english chars
                 if (regex.IsMatch(lines[i])) {
 
-                    Console.WriteLine("Matched: " + lines[i]);
-
-                    //Console.WriteLine("starts with Please label: " + lines[i]);
                     //Since we've detected a new item, we need to add the old item before initializing a new one
                     if (item != null) order.ItemList.Add(item);
 
@@ -129,12 +135,12 @@ namespace GmailQuickstart {
                     }
 
                     ParseItemName(lines[i], item);
+                    ParseQuantity(lines[i], item);
                     continue;
                 }
 
                 //If the line starts with '-', then this is a Addon or Special Instruction
                 if (lines[i].StartsWith("-")) {
-                    //Console.WriteLine("Starts with -: " + lines[i]);
                     if (lines[i].StartsWith("-Special")) {
                         ParseSpecialInstructions(lines[i + 1], item);
                         i++;
@@ -146,6 +152,11 @@ namespace GmailQuickstart {
                 
                 Debug.WriteLine("Unmatched: " + lines[i]);
             }
+
+            //Set these once we know how many items are in the order
+            SetItemCounts(order.ItemList);
+            order.TotalItemCount = order.ItemList.Count;
+
             return order;
         }
 
@@ -185,10 +196,9 @@ namespace GmailQuickstart {
             for (int i=startInd; i<words.Length; i++) {
 
                 //Stop creating the addon string if we've reached the price
-                if ( !words[i].StartsWith("(") ) {
-                    topping = topping + words[i] + ' ';
-                    break;
-                }
+                if (words[i].StartsWith("(")) break;
+
+                topping = topping + words[i] + ' ';
             }
             topping = topping.Trim(); //get rid of extra space character at the end
             
@@ -233,19 +243,39 @@ namespace GmailQuickstart {
             order.CustomerName = custName;
         }
 
-        private void ParsePickUpTime1(string line, Order order) {
-            string pickUpTime = line.Replace("Order scheduled for ", "");
-            pickUpTime = pickUpTime.Remove(pickUpTime.Length - 1);
+        /* Parses the pickup time from line:
+         * Sample Format 1: "Today (Fri Aug 3), at 3:24 PM!" 
+         * sample Format 2: "Friday Aug 3, at 7:47 PM!"
+         */
+        private void ParsePickUpTime(string line, Order order) {
+            try {
+                char[] delim = { ' ', ':' };
+                string[] tokens = line.Split(delim);
 
-            Console.WriteLine("Pickup Time: " + pickUpTime);
+                int startInd = 4;
+                if (line.Contains("(")) {
+                    startInd = 5;
+                }
 
-        }
+                int year = DateTime.Now.Year;
+                int month = Program.GetMonthNum(tokens[startInd]);
+                int day = Int32.Parse(tokens[startInd + 1].Replace(",", "").Replace(")", "")); //replaces ',' and ')'
+                int hour = Int32.Parse(tokens[startInd + 3]);
+                int min = Int32.Parse(tokens[startInd + 4]);
 
-        private void ParsePickUpTime2(string line, Order order) {
-            int indOfWordAt = line.IndexOf("at");
+                //Convert hours to military
+                if (tokens[startInd + 5] == "PM!") {
+                    if (hour != 12)
+                        hour += 12;
+                }
+                hour %= 24;
 
-            string pickUpTime = line.Substring(indOfWordAt);
-            Console.WriteLine("Pickup Time: " + pickUpTime);          
+                DateTime pickUpDate = new DateTime(year, month, day, hour, min, 0);
+                Debug.WriteLine("Parsed DateTime: " + pickUpDate.ToString());
+                order.PickUpTime = pickUpDate;
+            } catch(Exception e) {
+                Debug.WriteLine("ParsePickUpTime: " + e.ToString());
+            }
         }
 
         private void ParseOrderNumber(string line, Order order) {
@@ -284,6 +314,23 @@ namespace GmailQuickstart {
             itemName = itemName.Remove(parenInd).Trim();
 
             item.ItemName = itemName;
+        }
+
+        /* Parses quantity from line in form:
+         * "{int}x {Item Name} (in {Category}) ${Sub Price} ${Total}"
+         */
+        private void ParseQuantity(string line, Item item) {
+            Regex regex = new Regex(@"\d+x", RegexOptions.ECMAScript);
+            Match match = regex.Match(line);
+            string quantity = match.Value.Replace("x", "");
+            item.Quantity = Int32.Parse(quantity);
+        }
+
+        /* Sets the itemCount for each item in itemList */
+        private void SetItemCounts(List<Item> itemList) {
+            for (int i=0; i<itemList.Count; i++) {
+                itemList[i].ItemCount = (i + 1) + "/" + itemList.Count;
+            }
         }
 
         /* Saves the extracted pdf line by line to a file if it doesn't exist */

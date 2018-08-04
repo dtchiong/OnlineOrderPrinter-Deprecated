@@ -32,6 +32,7 @@ namespace GmailQuickstart {
             DeliverAddress = null;
             DeliveryMethod = "Delivery";
             TimeReceived   = default(DateTime);
+            PickUpTime     = default(DateTime);
             TotalItemCount = 0;
             ItemList       = new List<Item>(); 
         }
@@ -80,6 +81,7 @@ namespace GmailQuickstart {
                     }
                 }
                 PrintField("Instructions", item.SpecialInstructions, Twelve);
+                if (item.LabelName != null) PrintField("Label Name", item.LabelName, Twelve);
                 PrintField("Price", item.Price, Twelve);
 
                 Console.WriteLine();
@@ -119,7 +121,7 @@ namespace GmailQuickstart {
         public Item() {
             ItemType = null;
             ItemName = null;
-            Quantity = 1;
+            Quantity = -1;
             Size        = "Regular";
             Temperature = "Cold";
             SugarLevel  = "Standard";
