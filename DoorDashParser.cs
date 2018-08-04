@@ -7,6 +7,7 @@ using iText.Kernel.Pdf;
 using iText.License;
 using System.Text.RegularExpressions;
 using System.Text;
+using System.Diagnostics;
 
 namespace GmailQuickstart {
 
@@ -94,16 +95,21 @@ namespace GmailQuickstart {
             int start = 9;
             for (int i=start; i<lines.Count; i++) {
 
+                //Once we encounter this line, we break and return the order
+                if (lines[i] == "~ End of Order ~") {
+                    break;
+                }
+
                 //If the line starts with "Please Label", we need to parse the label name,
                 //and the item name in the line that immediately follows the 1st line 
                 if (lines[i].StartsWith("Please label")) {
 
-                    Console.WriteLine("starts with Please label: " + lines[i]);
+                    //Console.WriteLine("starts with Please label: " + lines[i]);
 
                     item = new Item();
                     
                     ParseLabelName(lines[i], item);
-                    ParseItem(lines[i + 1], item);
+                    ParseItemName(lines[i + 1], item);
 
                     order.ItemList.Add(item);
                     i++;
@@ -118,31 +124,109 @@ namespace GmailQuickstart {
 
                     item = new Item();
 
-                    ParseItem(lines[i], item);
+                    ParseItemName(lines[i], item);
                     continue;
                 }
 
-                //If the line starts with '-', then this is a Topping or Special Instruction
+                //If the line starts with '-', then this is a Addon or Special Instruction
                 if (lines[i].StartsWith("-")) {
-                    Console.WriteLine("Starts with -: " + lines[i]);
+                    //Console.WriteLine("Starts with -: " + lines[i]);
+                    if (lines[i].StartsWith("-Special")) {
+                        ParseSpecialInstructions(lines[i + 1], item);
+                        i++;
+                    }else {
+                        ParseAddOn(lines[i], item);
+                    }
                     continue;
                 }
                 
-
                 Console.WriteLine("Unmatched: " + lines[i]);
-
             }
-
             return order;
         }
 
+        private void ParseSpecialInstructions(string line, Item item) {
+            item.SpecialInstructions = line;
+        }
+
+        private void ParseAddOn(string line, Item item) {
+            string[] words = line.Split(' ');
+
+            switch (words[0]) {
+                case "Topping":
+                    ParseToppings(words, item);
+                    break;
+                case "Size":
+                    ParseSize(words, item);
+                    break;
+                case "Sugar":
+                    ParseSugar(words, item);
+                    break;
+                case "Ice":
+                    ParseIce(words, item);
+                    break;
+                default:
+                    Debug.WriteLine("Unidentified addon starter word: " + words[0]);
+                    break;
+            }
+        }
+
+        /* Parses the topping from string[] in form:
+         * "Topping", "Additions", {Topping}, {Additional Price}
+         * Change to use string builder
+         */
+        private void ParseToppings(string[] words, Item item) {
+            string topping = "";
+            int startInd = 2; //Skip "Toppings" and "Additions
+            for (int i=startInd; i<words.Length; i++) {
+
+                //Stop creating the addon string if we've reached the price
+                if ( !words[i].StartsWith("(") ) {
+                    topping = topping + words[i] + ' ';
+                    break;
+                }
+            }
+            topping = topping.Trim(); //get rid of extra space character at the end
+            
+            if (item.AddOnList == null) {
+                item.AddOnList = new List<string>();
+            }
+
+            item.AddOnList.Add(topping);
+        }
+
+        /* Parses the size from string[] in form:
+         * "Size", "Choice", {Size}
+         */
+        private void ParseSize(string[] words, Item item) {
+            item.Size = words[2];
+        }
+
+        /* Parses the sugar level from string[] in form:
+         * "Sugar", "Level", "Choice", ({Num} '%')
+         */
+        private void ParseSugar(string[] words, Item item) {
+            item.IceLevel = words[3];
+        }
+
+        /* Parses the ice level from string[] in form:
+         * "Ice", "Level", "Choice", ({Num} '%')
+         */
+        private void ParseIce(string[] words, Item item) {
+            item.IceLevel = words[3];
+        }
+
+        /* Parses Customer Name from line in format: 
+         * "Customer: {Name} Page {int} of {int}"
+         */
         private void ParseCustomerName(string line, Order order) {
             int indOfWordPage = line.IndexOf("Page");
             int lenOfWordCust = "Customer: ".Length;
             int custNameLen = indOfWordPage - lenOfWordCust;
 
             string custName = line.Substring(lenOfWordCust, custNameLen);
-            Console.WriteLine("Customer Name: " + custName);
+            //Console.WriteLine("Customer Name: " + custName);
+            order.CustomerName = custName;
         }
 
         private void ParsePickUpTime1(string line, Order order) {
@@ -157,28 +241,45 @@ namespace GmailQuickstart {
             int indOfWordAt = line.IndexOf("at");
 
             string pickUpTime = line.Substring(indOfWordAt);
-            Console.WriteLine("Pickup Time: " + pickUpTime);
+            Console.WriteLine("Pickup Time: " + pickUpTime);          
         }
 
         private void ParseOrderNumber(string line, Order order) {
             string orderNumber = line.Replace("Delivery #", "");
 
-            Console.WriteLine("Order Number: " + orderNumber);
+            //Console.WriteLine("Order Number: " + orderNumber);
+            order.OrderNumber = orderNumber;
         }
 
+        /* Parses Contact Number from line in form:
+         * "{Contact Number} at {time} {AM|PM}"
+         */
         private void ParseContactNumber(string line, Order order) {
             int indOfWordAt = line.IndexOf(" at");
 
             string contactNumber = line.Remove(indOfWordAt);
-            Console.WriteLine("Contact Number: " + contactNumber);
+            //Console.WriteLine("Contact Number: " + contactNumber);
+            order.ContactNumber = contactNumber;
         }
 
+        /* Parse label name from line in form:
+         * "Please label: {name} ({int} item)" 
+         */
         private void ParseLabelName(string line, Item item) {
-
+            string[] words = line.Split(' ');
+            item.LabelName = words[2];
         }
 
-        private void ParseItem(string line, Item item) {
+        /* Parses item name from line in form:
+         * "{int}x {Item Name} (in {Category}) ${Sub Price} ${Total}"
+         */
+        private void ParseItemName(string line, Item item) {
+            Regex regex = new Regex(@"\d+x", RegexOptions.ECMAScript); 
+            string itemName = regex.Replace(line, "", 1);
+            int parenInd = itemName.IndexOf('(');
+            itemName = itemName.Remove(parenInd).Trim();
 
+            item.ItemName = itemName;
         }
 
         /* Saves the extracted pdf line by line to a file if it doesn't exist */
