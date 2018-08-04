@@ -10,17 +10,17 @@ namespace GmailQuickstart {
         public const int Sixteen = 16; //used to format printing with padding
         public const int Twelve  = 12;
 
-        public string Service        { get; set; } //Grubhub,DoorDash, or UberEats
+        public string Service        { get; set; } //Grubhub or DoorDash
         public string OrderNumber    { get; set; }
 
         public string CustomerName   { get; set; }
         public string ContactNumber  { get; set; }
         public string DeliverAddress { get; set; }
-        public string DeliveryMethod { get; set; } // "Delivery" or "Pickup" if grubhub
+        public string DeliveryMethod { get; set; } //"Delivery" or "Pickup" 
         public DateTime TimeReceived { get; set; }
         public DateTime PickUpTime   { get; set; }
 
-        public int TotalItemCount    { get; set; }
+        public int OrderSize         { get; set; } //The number of items in the order - including quantity
         public List<Item> ItemList;
 
         //Constructor
@@ -33,7 +33,7 @@ namespace GmailQuickstart {
             DeliveryMethod = "Delivery";
             TimeReceived   = default(DateTime);
             PickUpTime     = default(DateTime);
-            TotalItemCount = 0;
+            OrderSize = 0;
             ItemList       = new List<Item>(); 
         }
 
@@ -51,7 +51,7 @@ namespace GmailQuickstart {
             if (this.DeliveryMethod == "Delivery")
                 PrintField("Delivery Address", this.DeliverAddress, Sixteen);
 
-            PrintField("Total Item Count", this.TotalItemCount, Sixteen);
+            PrintField("Total Item Count", this.OrderSize, Sixteen);
 
             Console.WriteLine("-----------------------");
 

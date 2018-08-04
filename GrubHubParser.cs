@@ -59,10 +59,10 @@ namespace GmailQuickstart {
             ParseContactNumber(metaInfoNodes.ElementAt(metaDivCount - 1), order);
            
             var orderContentNodes = htmlDoc.DocumentNode.SelectNodes("//tbody[@class='orderSummary__body']/tr");
-            order.TotalItemCount = orderContentNodes.Count - nonItemCount;
+            int uniqueItemCount = orderContentNodes.Count - nonItemCount;
 
-            //Loops for the total item count of the order
-            for (int i = 0; i < order.TotalItemCount; i++) {
+            //Loops through the number of unique items in the order
+            for (int i = 0; i < uniqueItemCount; i++) {
 
                 var tdNodes = orderContentNodes[i].Elements("td");
 
@@ -75,10 +75,12 @@ namespace GmailQuickstart {
                 ParseItem(tdNodes.ElementAt(1), item);
                 ParsePrice(tdNodes.ElementAt(2), item);
 
-                SetItemCount(i + 1, order.TotalItemCount, item);
+                SetItemCount(i + 1, uniqueItemCount, item);
 
                 order.ItemList.Add(item);
             }
+
+            DoorDashParser.SetOrderSize(order); //Need to move function 
             return order;
         }
 

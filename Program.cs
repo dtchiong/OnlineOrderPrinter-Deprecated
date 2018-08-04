@@ -267,20 +267,22 @@ namespace GmailQuickstart {
             Debug.WriteLine("----------------------");
 
             if (isGrubHubOrder) {
-                /*
+                
                 GrubHubParser grubHubParser = new GrubHubParser();
                 string decodedBody = Encoding.UTF8.GetString(data);
                 Order order = grubHubParser.ParseOrder(decodedBody, dateTime);
                  
                 order.PrintOrder();
                 return order;
-                */
+                
             } else {
+                /*
                 DoorDashParser doorDashParser = new DoorDashParser();
                 List<string> lines = doorDashParser.ExtractTextFromPDF(filePath, messageId);
                 Order order = doorDashParser.ParseOrder(lines, dateTime);
 
                 order.PrintOrder();
+                */
             }
             return null;
         }

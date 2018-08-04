@@ -155,7 +155,7 @@ namespace GmailQuickstart {
 
             //Set these once we know how many items are in the order
             SetItemCounts(order.ItemList);
-            order.TotalItemCount = order.ItemList.Count;
+            SetOrderSize(order);
 
             return order;
         }
@@ -271,7 +271,7 @@ namespace GmailQuickstart {
                 hour %= 24;
 
                 DateTime pickUpDate = new DateTime(year, month, day, hour, min, 0);
-                Debug.WriteLine("Parsed DateTime: " + pickUpDate.ToString());
+                //Debug.WriteLine("Parsed DateTime: " + pickUpDate.ToString());
                 order.PickUpTime = pickUpDate;
             } catch(Exception e) {
                 Debug.WriteLine("ParsePickUpTime: " + e.ToString());
@@ -326,11 +326,20 @@ namespace GmailQuickstart {
             item.Quantity = Int32.Parse(quantity);
         }
 
-        /* Sets the itemCount for each item in itemList */
+        /* Sets the itemCount for each item in itemList - does not account for quantity */
         private void SetItemCounts(List<Item> itemList) {
             for (int i=0; i<itemList.Count; i++) {
                 itemList[i].ItemCount = (i + 1) + "/" + itemList.Count;
             }
+        }
+
+        /* Sets the Order size that accounts for quantity of items */
+        public static void SetOrderSize(Order order) {
+            int orderSize = 0;
+            foreach (Item item in order.ItemList) {
+                orderSize += item.Quantity;
+            }
+            order.OrderSize = orderSize;
         }
 
         /* Saves the extracted pdf line by line to a file if it doesn't exist */

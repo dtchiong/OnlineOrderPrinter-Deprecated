@@ -89,8 +89,8 @@ namespace GmailQuickstart {
 
         /* Sort new rows by the TimeReceieved field of the Orders */
         private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
-            OrderContainer orderCon = new OrderContainer(new Order());
-            PropertyDescriptor pd = TypeDescriptor.GetProperties(orderCon)["TimeReceivedTicks"];
+            //OrderContainer orderCon = new OrderContainer(new Order());
+            //PropertyDescriptor pd = TypeDescriptor.GetProperties(orderCon)["TimeReceivedTicks"];
             dataGridView1.Sort(dataGridView1.Columns["TimeReceivedTicks"], ListSortDirection.Descending);
             Console.WriteLine("Sorted: " + dataGridView1.SortOrder);
         }
@@ -120,7 +120,7 @@ namespace GmailQuickstart {
         }
 
         public string ItemCount {
-            get { return order.TotalItemCount.ToString(); }
+            get { return order.OrderSize.ToString(); }
         }
 
         /* Returns the time if the order is from today, else it returns the date */

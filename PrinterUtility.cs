@@ -114,7 +114,7 @@ namespace GmailQuickstart {
         public static string[][] OrderToArray(Order order) {
 
             int itemArrSize = ArrayFieldOffset + TemplateFieldCount;
-            string[][] orderArr = new string[order.TotalItemCount][];
+            string[][] orderArr = new string[order.OrderSize][];
 
             List<Item> itemsList = order.ItemList;
             for (int i=0; i< orderArr.Length; i++) {
