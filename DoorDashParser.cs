@@ -62,7 +62,7 @@ namespace GmailQuickstart {
 
                     lines.Add(line);
 
-                    Console.WriteLine(("LINE " + lineCount.ToString().PadLeft(3) + "  " + line));
+                    //Console.WriteLine(("LINE " + lineCount.ToString().PadLeft(3) + "  " + line));
                 }
             }
             PrintToFile(lines, messageId);
@@ -91,28 +91,23 @@ namespace GmailQuickstart {
             }
 
             Item item = null;
+            string labelName = null;
 
             int start = 9;
             for (int i=start; i<lines.Count; i++) {
 
-                //Once we encounter this line, we break and return the order
+                //Once we encounter this line, we add the last item, break, and return the order
                 if (lines[i] == "~ End of Order ~") {
+                    //Items are only inserted to the order's itemlist if we detect a new item
+                    //So at the end of the order add the last item
+                    if (item != null) order.ItemList.Add(item);
                     break;
                 }
 
-                //If the line starts with "Please Label", we need to parse the label name,
-                //and the item name in the line that immediately follows the 1st line 
-                if (lines[i].StartsWith("Please label")) {
-
-                    //Console.WriteLine("starts with Please label: " + lines[i]);
-
-                    item = new Item();
+                //If the line starts with "Please Label", we set the labelName for use in future items
+                if (lines[i].StartsWith("Please label")) {  
                     
-                    ParseLabelName(lines[i], item);
-                    ParseItemName(lines[i + 1], item);
-
-                    order.ItemList.Add(item);
-                    i++;
+                    labelName = ParseLabelName(lines[i]);
                     continue;
                 }
 
@@ -122,7 +117,16 @@ namespace GmailQuickstart {
 
                     Console.WriteLine("Matched: " + lines[i]);
 
+                    //Console.WriteLine("starts with Please label: " + lines[i]);
+                    //Since we've detected a new item, we need to add the old item before initializing a new one
+                    if (item != null) order.ItemList.Add(item);
+
                     item = new Item();
+
+                    //Set the label name if it exists
+                    if (labelName != null) {
+                        item.LabelName = labelName;
+                    }
 
                     ParseItemName(lines[i], item);
                     continue;
@@ -140,7 +144,7 @@ namespace GmailQuickstart {
                     continue;
                 }
                 
-                Console.WriteLine("Unmatched: " + lines[i]);
+                Debug.WriteLine("Unmatched: " + lines[i]);
             }
             return order;
         }
@@ -153,16 +157,16 @@ namespace GmailQuickstart {
             string[] words = line.Split(' ');
 
             switch (words[0]) {
-                case "Topping":
+                case "-Topping":
                     ParseToppings(words, item);
                     break;
-                case "Size":
+                case "-Size":
                     ParseSize(words, item);
                     break;
-                case "Sugar":
+                case "-Sugar":
                     ParseSugar(words, item);
                     break;
-                case "Ice":
+                case "-Ice":
                     ParseIce(words, item);
                     break;
                 default:
@@ -262,12 +266,12 @@ namespace GmailQuickstart {
             order.ContactNumber = contactNumber;
         }
 
-        /* Parse label name from line in form:
+        /* Returns the label name from line in form:
          * "Please label: {name} ({int} item)" 
          */
-        private void ParseLabelName(string line, Item item) {
+        private string ParseLabelName(string line) {
             string[] words = line.Split(' ');
-            item.LabelName = words[2];
+            return words[2];
         }
 
         /* Parses item name from line in form:
