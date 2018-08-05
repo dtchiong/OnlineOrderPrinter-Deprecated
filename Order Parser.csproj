@@ -8,7 +8,7 @@
     <ProjectGuid>{275A5FF2-CE94-4502-AA29-6D39E0BD7C94}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Order_Parser</RootNamespace>
-    <AssemblyName>Order Parser</AssemblyName>
+    <AssemblyName>Online Order Printer</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

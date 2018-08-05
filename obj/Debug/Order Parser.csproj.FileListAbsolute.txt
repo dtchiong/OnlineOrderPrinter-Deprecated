@@ -1,9 +1,6 @@
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\x64\pdfium.dll
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\x86\pdfium.dll
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\client_secret.json
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Order Parser.exe.config
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Order Parser.exe
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Order Parser.pdb
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\BouncyCastle.Crypto.dll
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Common.Logging.Core.dll
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Common.Logging.dll
@@ -60,8 +57,6 @@ C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\b
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\nl\PdfiumViewer.resources.dll
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Debug\Order Parser.csproj.CoreCompileInputs.cache
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Debug\Order Parser.csproj.CopyComplete
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Debug\Order Parser.exe
-C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Debug\Order Parser.pdb
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Debug\Order Parser.csprojAssemblyReference.cache
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\System.IO.Compression.dll
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\CsvHelper.dll
@@ -80,3 +75,8 @@ C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\b
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\SdkApi_Desktop.xml
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Debug\Order Parser.csproj.GenerateResource.cache
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Debug\GmailQuickstart.Form1.resources
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Online Order Printer.exe.config
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Online Order Printer.exe
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\bin\Debug\Online Order Printer.pdb
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Debug\Online Order Printer.exe
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Debug\Online Order Printer.pdb

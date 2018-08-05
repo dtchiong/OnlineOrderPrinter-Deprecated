@@ -93,6 +93,22 @@ namespace GmailQuickstart {
             //PropertyDescriptor pd = TypeDescriptor.GetProperties(orderCon)["TimeReceivedTicks"];
             dataGridView1.Sort(dataGridView1.Columns["TimeReceivedTicks"], ListSortDirection.Descending);
         }
+
+        private void splitContainer3_Panel2_Paint(object sender, PaintEventArgs e) {
+
+        }
+
+        private void splitContainer3_Panel1_Paint(object sender, PaintEventArgs e) {
+
+        }
+
+        private void splitContainer2_Panel1_Paint(object sender, PaintEventArgs e) {
+
+        }
+
+        private void splitContainer3_Panel2_Paint_1(object sender, PaintEventArgs e) {
+
+        }
     }
 
     /* The object that will be data-bound to the orderGridView */

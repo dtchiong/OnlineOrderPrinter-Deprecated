@@ -54,19 +54,20 @@ namespace GmailQuickstart {
 
         /*        "E:T4FORM3.ZPL" Item Template  
          * --------------------------------------------       
-         * Count|CharLimit|FieldName           Example
+         * Index|CharLimit|FieldName           Example
          *   1  |    8    |"Item Count"      |"100/100"
          *   2  |   10    |"Service"         |"GrubHub"
-         *   3  |   20    |"Customer Name"   |  
-         *   4  |   40    |"Item Name"       | 
-         *   5  |    5    |"Size"            |"Large"
-         *   6  |    3    |"Temperature"     |"Hot"
-         *   7  |    6    |"Ice Level"       |"80% I"
-         *   8  |    6    |"Sugar Level"     |"50% S"
-         *   9  |   14    |"Milk Subsitution"|"Whole Milk Sub"
-         *   10 |   40    |"Toppings"         "Pearls, Pudding,"
-         *   11 |   48    |"Special Instructions1"  
-         *   12 |   48    |"Special Instructions2" 
+         *   3  |   20    |"Customer Name"   |
+         *   4  |   15    |"Label Name"      |
+         *   5  |   40    |"Item Name"       | 
+         *   6  |    5    |"Size"            |"Large"
+         *   7  |    3    |"Temperature"     |"Hot"
+         *   8  |    6    |"Ice Level"       |"80% I"
+         *   9  |    6    |"Sugar Level"     |"50% S"
+         *   10  |   14    |"Milk Subsitution"|"Whole Milk Sub"
+         *   11 |   40    |"Toppings"         "Pearls, Pudding,"
+         *   12 |   48    |"Special Instructions1"  
+         *   13 |   48    |"Special Instructions2" 
          */
         public static bool PrintOrder(string[][] items) {
 
@@ -160,8 +161,8 @@ namespace GmailQuickstart {
             fields[ArrayFieldOffset + 4] = item.ItemName;
             fields[ArrayFieldOffset + 5] = (item.Size == "Large") ? "Large" : "";
             fields[ArrayFieldOffset + 6] = (item.Temperature == "Hot") ? "Hot" : "";
-            fields[ArrayFieldOffset + 7] = (item.IceLevel != "Standard") ? item.IceLevel + " I": "";
-            fields[ArrayFieldOffset + 8] = (item.SugarLevel != "Standard") ? item.SugarLevel + " S" : "";
+            fields[ArrayFieldOffset + 7] = (item.IceLevel != "Standard") ? item.IceLevel : "";
+            fields[ArrayFieldOffset + 8] = (item.SugarLevel != "Standard") ? item.SugarLevel : "";
             fields[ArrayFieldOffset + 9] = (item.MilkSubsitution != null) ? item.MilkSubsitution : "";
 
             string addOns = "";
