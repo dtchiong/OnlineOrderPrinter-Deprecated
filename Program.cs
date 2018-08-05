@@ -34,6 +34,9 @@ namespace GmailQuickstart {
         static string GrubHubStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\GrubHub Orders";
         static string DoorDashStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\DoorDash Orders";
 
+        static string AppWorkingDir = AppDomain.CurrentDomain.BaseDirectory;
+        static string DateToday = DateTime.Now.ToString("MMM-d-yyyy");
+
         /* Example order ids to test from
         * GrubHub:
         * 16496c1551e4bdb6 - delivery
@@ -96,6 +99,9 @@ namespace GmailQuickstart {
                 Console.Read();
                 return;
             }
+
+            Debug.WriteLine("APP DOMAIN: "+ AppDomain.CurrentDomain.BaseDirectory);
+            Debug.WriteLine("Today's Date: " + DateToday);
 
             //We check if we need to perform a full sync or a partial sync
             //If the file doesn't exist, this is the first time running the app, so execute full sync

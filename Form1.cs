@@ -109,6 +109,10 @@ namespace GmailQuickstart {
         private void splitContainer3_Panel2_Paint_1(object sender, PaintEventArgs e) {
 
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e) {
+
+        }
     }
 
     /* The object that will be data-bound to the orderGridView */
