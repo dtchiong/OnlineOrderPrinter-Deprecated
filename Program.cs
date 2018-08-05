@@ -14,7 +14,6 @@ using System.Text;
 using System.Threading;
 using TimerT = System.Threading.Timer;
 using System.Windows.Forms;
-//using Order_Parser;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -29,13 +28,20 @@ namespace GmailQuickstart {
 
         static GmailService service;
 
-        static string historyIDPath = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\historyID\historyID.txt";
+        private static string DateToday = DateTime.Now.ToString("MMM-d-yyyy");
+        public static string AppWorkingDir = AppDomain.CurrentDomain.BaseDirectory;
+        private static string GrubHubDir = Path.Combine(AppWorkingDir, "GrubHub-Orders", DateToday);
+        private static string DoorDashDir = Path.Combine(AppWorkingDir, "DoorDash-Orders", DateToday);
 
-        static string GrubHubStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\GrubHub Orders";
-        static string DoorDashStorageDir = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\DoorDash Orders";
+        private static string HistoryIdDir = Path.Combine(AppWorkingDir, "HistoryId");
+        private static string HistoryIdPath = Path.Combine(HistoryIdDir, "historyID.txt");
 
-        static string AppWorkingDir = AppDomain.CurrentDomain.BaseDirectory;
-        static string DateToday = DateTime.Now.ToString("MMM-d-yyyy");
+        public static string iTextLicenseDir = Path.Combine(AppWorkingDir, "License", "iText");
+        public static string iTextLicensePath = Path.Combine(iTextLicenseDir, "itextkeylicense.xml");
+
+        public static string DoorDashDebugDir = Path.Combine(DoorDashDir, "Debug-Files", DateToday);
+
+        public static string ErrorLogDir = Path.Combine(AppWorkingDir, "Error-Logs");
 
         /* Example order ids to test from
         * GrubHub:
@@ -100,12 +106,21 @@ namespace GmailQuickstart {
                 return;
             }
 
-            Debug.WriteLine("APP DOMAIN: "+ AppDomain.CurrentDomain.BaseDirectory);
-            Debug.WriteLine("Today's Date: " + DateToday);
+            //Create the directories to store orders
+            try {
+                Directory.CreateDirectory(GrubHubDir);
+                Directory.CreateDirectory(DoorDashDir);
+                Directory.CreateDirectory(HistoryIdDir);
+                Directory.CreateDirectory(iTextLicenseDir);
+                Directory.CreateDirectory(DoorDashDebugDir);
+                Directory.CreateDirectory(ErrorLogDir);
+            } catch (Exception e) {
+                Debug.WriteLine(e.ToString());
+            }
 
             //We check if we need to perform a full sync or a partial sync
             //If the file doesn't exist, this is the first time running the app, so execute full sync
-            if (!File.Exists(historyIDPath)) {
+            if (!File.Exists(HistoryIdPath)) {
 
                 FullSyncAppToEmail();
 
@@ -128,7 +143,7 @@ namespace GmailQuickstart {
          */
         private static void FullSyncAppToEmail() {
 
-            const int MaxResults = 30;
+            const int MaxResults = 20;
             const string Query = "";
 
             List<MessageG> messageList = ListMessages(service, userId, Query, MaxResults);
@@ -142,12 +157,11 @@ namespace GmailQuickstart {
         }
 
         /* Partial sync uses the saved historyId to only retrieve emails newer than the id,
-         * parses any order emails and inserts them to the Order queue. If there are any
-         * orders in the order queue, they are dequeued into the Print queue to be printed
+         * parses any order emails, and then adds that order to the UI.
          */
         private static void PartialSyncAppToEmail() {
 
-            string historyIdAsString = File.ReadAllText(historyIDPath);
+            string historyIdAsString = File.ReadAllText(HistoryIdPath);
             ulong historyId = Convert.ToUInt64(historyIdAsString, 10);
             Console.WriteLine("Read History ID: " + historyIdAsString);
 
@@ -183,7 +197,7 @@ namespace GmailQuickstart {
 
         /* Saves the newly fetched historyId to file for future partial syncs */
         private static void UpdateHistoryId(string historyId) {
-            File.WriteAllText(historyIDPath, historyId);
+            File.WriteAllText(HistoryIdPath, historyId);
         }
 
         /* Calls HandleMessage() for each messageId in the list */
@@ -234,7 +248,7 @@ namespace GmailQuickstart {
 
                     base64Input = body;
                     fileName = messageId + ".html";
-                    storageDir = GrubHubStorageDir;
+                    storageDir = GrubHubDir;
                 } catch (Exception e) {
                     Console.WriteLine(e.Message);
                 }
@@ -251,7 +265,7 @@ namespace GmailQuickstart {
 
                     base64Input = attachPart.Data;
                     fileName = messageId + ".pdf";
-                    storageDir = DoorDashStorageDir;
+                    storageDir = DoorDashDir;
                 }catch(Exception e) {
                     Console.WriteLine(e.Message);
                 }
@@ -345,7 +359,6 @@ namespace GmailQuickstart {
             } catch (Exception e) {
                 Console.WriteLine("An error occured: " + e.Message);
             }
-
             return null;
         }
 
@@ -356,7 +369,6 @@ namespace GmailQuickstart {
             } catch (Exception e) {
                 Console.WriteLine("An error occurred: " + e.Message);
             }
-
             return null;
         }
 
@@ -375,7 +387,6 @@ namespace GmailQuickstart {
             } catch (Exception e) {
                 Console.WriteLine("An error occured: " + e.Message);
             }
-
             return result;
         }
 

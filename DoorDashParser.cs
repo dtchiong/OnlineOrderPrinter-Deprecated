@@ -13,9 +13,6 @@ namespace GmailQuickstart {
 
     public class DoorDashParser {
 
-        const string PathToItextKeyLicense = @"C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\itextKeyLicense\itextkeylicense.xml";
-        const string PathToDebugFolder = @"C:\Users\Derek\Desktop\T4 Projects\Online Order Printer\DoorDash Orders\debug-files";
-
         public static DoorDashMenu menu;
 
         //Constructor
@@ -23,7 +20,7 @@ namespace GmailQuickstart {
             
             //Load the itext license
             try {
-                LicenseKey.LoadLicenseFile(PathToItextKeyLicense);
+                LicenseKey.LoadLicenseFile(Program.iTextLicensePath);
             } catch (LicenseKeyException e) {
                 Console.WriteLine(e);
             }
@@ -356,7 +353,7 @@ namespace GmailQuickstart {
         private void PrintToFile(List<string> lines, string messageId) {
 
             string fileName = messageId + ".txt";
-            string path = Path.Combine(PathToDebugFolder, fileName);
+            string path = Path.Combine(Program.DoorDashDebugDir, fileName);
 
             if (File.Exists(path)) {
                 return;

@@ -11,7 +11,7 @@ namespace GmailQuickstart {
 
     public class PrinterUtility {
 
-        const string PrintTemplatePath = "R:T4FORM4.ZPL";
+        const string PrintTemplatePath = "E:T4FORM4.ZPL"; //E dir is the internal flash
         const int ArrayFieldOffset = 9; //the number of elements in the array before the 1st field of the template is represented
         const int TemplateFieldCount = 13; //the numnber of fields in the template
 
@@ -52,7 +52,7 @@ namespace GmailQuickstart {
             return printerDriver.GetConnection();
         }
 
-        /*        "E:T4FORM3.ZPL" Item Template  
+        /*        "E:T4FORM4.ZPL" Item Template  
          * --------------------------------------------       
          * Index|CharLimit|FieldName           Example
          *   1  |    8    |"Item Count"      |"100/100"
@@ -64,8 +64,8 @@ namespace GmailQuickstart {
          *   7  |    3    |"Temperature"     |"Hot"
          *   8  |    6    |"Ice Level"       |"80% I"
          *   9  |    6    |"Sugar Level"     |"50% S"
-         *   10  |   14    |"Milk Subsitution"|"Whole Milk Sub"
-         *   11 |   40    |"Toppings"         "Pearls, Pudding,"
+         *   10 |   14    |"Milk Subsitution"|"Whole Milk Sub"
+         *   11 |   40    |"Toppings"        |"Pearls, Pudding,"
          *   12 |   48    |"Special Instructions1"  
          *   13 |   48    |"Special Instructions2" 
          */
@@ -154,9 +154,9 @@ namespace GmailQuickstart {
             }
 
             //Construct actual values for the indices corresponding to fields
-            fields[ArrayFieldOffset]     = ""; //the item count will be set 
+            fields[ArrayFieldOffset]     = ""; //the item count will be set outside of this func
             fields[ArrayFieldOffset + 1] = order.Service;
-            fields[ArrayFieldOffset + 2] = order.CustomerName;
+            fields[ArrayFieldOffset + 2] = (order.CustomerName.Length > 20) ? order.CustomerName.Substring(0, 20) : order.CustomerName;
             fields[ArrayFieldOffset + 3] = (item.LabelName != null) ? item.LabelName : "";
             fields[ArrayFieldOffset + 4] = item.ItemName;
             fields[ArrayFieldOffset + 5] = (item.Size == "Large") ? "Large" : "";
