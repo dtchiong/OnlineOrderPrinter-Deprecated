@@ -221,7 +221,8 @@ namespace GmailQuickstart {
          * "Sugar", "Level", "Choice", ({Num} '%')
          */
         private void ParseSugar(string[] words, Item item) {
-            item.IceLevel = words[3];
+            item.SugarLevel = words[3];
+            Debug.WriteLine(item.SugarLevel);
         }
 
         /* Parses the ice level from string[] in form:
@@ -229,6 +230,7 @@ namespace GmailQuickstart {
          */
         private void ParseIce(string[] words, Item item) {
             item.IceLevel = words[3];
+            Debug.WriteLine(item.IceLevel);
         }
 
         /* Parses Customer Name from line in format: 

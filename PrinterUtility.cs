@@ -11,9 +11,9 @@ namespace GmailQuickstart {
 
     public class PrinterUtility {
 
-        const string PrintTemplatePath = "E:T4FORM3.ZPL";
+        const string PrintTemplatePath = "R:T4FORM4.ZPL";
         const int ArrayFieldOffset = 9; //the number of elements in the array before the 1st field of the template is represented
-        const int TemplateFieldCount = 12; //the numnber of fields in the template
+        const int TemplateFieldCount = 13; //the numnber of fields in the template
 
         public static Connection printerConn = null;
 
@@ -86,7 +86,8 @@ namespace GmailQuickstart {
                     ZebraPrinter printer = ZebraPrinterFactory.GetInstance(PrinterLanguage.ZPL, printerConn);
                     
                     Console.WriteLine("PrinterOrder() - got printer instance");
-                    for (int i=0; i<items.Length; i++) {
+
+                    for (int i=items.Length-1; i > -1; i--) {
                         printer.PrintStoredFormat(PrintTemplatePath, items[i]);
                     }
 
@@ -116,17 +117,16 @@ namespace GmailQuickstart {
             int itemArrSize = ArrayFieldOffset + TemplateFieldCount;
             string[][] orderArr = new string[order.OrderSize][];
 
-            List<Item> itemsList = order.ItemList;
             int count = 0; //used to set the count in the printed label
-            for (int i=0; i< order.UniqueItemCount; i++) { //loop for only unique items in the order
 
-                Item item = itemsList[i]; //the item used to fill the array
+            //loop for only unique items in the order
+            foreach (Item item in order.ItemList) { 
 
-                //Fill the array fields of the current item
-                string[] itemArr = FillItemArray(order, item, itemArrSize, count); //the array representing 1 item
+                //Create the string array that represents the current item. Item count isn't set yet
+                string[] itemArr = FillItemArray(order, item, itemArrSize, count);
                 
                 //Then make enough duplicates to account for item.Quantity, set the item count, and add it to the orderArr
-                for (int j=0; j<item.Quantity; j++) {
+                for (int i=0; i<item.Quantity; i++) {
 
                     string[] tmp = new string[itemArrSize];
                     itemArr.CopyTo(tmp, 0);
@@ -156,12 +156,13 @@ namespace GmailQuickstart {
             fields[ArrayFieldOffset]     = ""; //the item count will be set 
             fields[ArrayFieldOffset + 1] = order.Service;
             fields[ArrayFieldOffset + 2] = order.CustomerName;
-            fields[ArrayFieldOffset + 3] = item.ItemName;
-            fields[ArrayFieldOffset + 4] = (item.Size == "Large") ? "Large" : "";
-            fields[ArrayFieldOffset + 5] = (item.Temperature == "Hot") ? "Hot" : "";
-            fields[ArrayFieldOffset + 6] = (item.IceLevel != "Standard") ? item.IceLevel : "";
-            fields[ArrayFieldOffset + 7] = (item.SugarLevel != "Standard") ? item.SugarLevel : "";
-            fields[ArrayFieldOffset + 8] = (item.MilkSubsitution != null) ? item.MilkSubsitution : "";
+            fields[ArrayFieldOffset + 3] = (item.LabelName != null) ? item.LabelName : "";
+            fields[ArrayFieldOffset + 4] = item.ItemName;
+            fields[ArrayFieldOffset + 5] = (item.Size == "Large") ? "Large" : "";
+            fields[ArrayFieldOffset + 6] = (item.Temperature == "Hot") ? "Hot" : "";
+            fields[ArrayFieldOffset + 7] = (item.IceLevel != "Standard") ? item.IceLevel + " I": "";
+            fields[ArrayFieldOffset + 8] = (item.SugarLevel != "Standard") ? item.SugarLevel + " S" : "";
+            fields[ArrayFieldOffset + 9] = (item.MilkSubsitution != null) ? item.MilkSubsitution : "";
 
             string addOns = "";
             if (item.AddOnList != null) {
@@ -169,16 +170,20 @@ namespace GmailQuickstart {
                     addOns = addOns + addOn + ", ";
                 }
             }
-            fields[ArrayFieldOffset + 9] = addOns;
+            fields[ArrayFieldOffset + 10] = addOns;
 
-            fields[ArrayFieldOffset + 10] = "";
             fields[ArrayFieldOffset + 11] = "";
+            fields[ArrayFieldOffset + 12] = "";
 
             string instruction = item.SpecialInstructions;
-            if (instruction != null && instruction.Length > instructionsCharLim) {
-                fields[ArrayFieldOffset + 10] = instruction.Substring(0, instructionsCharLim);
-                fields[ArrayFieldOffset + 11] = instruction.Substring(instructionsCharLim);
-            }
+            if (instruction != null) {
+                if (instruction.Length > instructionsCharLim) {
+                    fields[ArrayFieldOffset + 11] = instruction.Substring(0, instructionsCharLim);
+                    fields[ArrayFieldOffset + 12] = instruction.Substring(instructionsCharLim);
+                }else {
+                    fields[ArrayFieldOffset + 11] = instruction;
+                }
+            } 
 
             return fields;
         }

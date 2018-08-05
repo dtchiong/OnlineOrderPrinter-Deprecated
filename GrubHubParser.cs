@@ -241,6 +241,8 @@ namespace GmailQuickstart {
 
         public static void ParseSpecialInstruction(HtmlNode node, Item item) {
             string instructions = node.InnerHtml.Replace("Instructions: ", "");
+            instructions.Trim();
+            instructions = "\"" + instructions + "\"";
             item.SpecialInstructions = instructions;
         }
 
