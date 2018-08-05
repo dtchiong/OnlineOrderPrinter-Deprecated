@@ -19,22 +19,24 @@ namespace GmailQuickstart {
         public string DeliveryMethod { get; set; } //"Delivery" or "Pickup" 
         public DateTime TimeReceived { get; set; }
         public DateTime PickUpTime   { get; set; }
-
         public int OrderSize         { get; set; } //The number of items in the order - including quantity
+        public int UniqueItemCount   { get; set; } //The number of unique items in the order -excluding quantity
+
         public List<Item> ItemList;
 
         //Constructor
         public Order() {
-            Service = null;
-            OrderNumber    = null;
-            CustomerName   = null;
-            ContactNumber  = null;
-            DeliverAddress = null;
-            DeliveryMethod = "Delivery";
-            TimeReceived   = default(DateTime);
-            PickUpTime     = default(DateTime);
-            OrderSize = 0;
-            ItemList       = new List<Item>(); 
+            Service         = null;
+            OrderNumber     = null;
+            CustomerName    = null;
+            ContactNumber   = null;
+            DeliverAddress  = null;
+            DeliveryMethod  = "Delivery";
+            TimeReceived    = default(DateTime);
+            PickUpTime      = default(DateTime);
+            OrderSize       = -1;
+            UniqueItemCount = -1;
+            ItemList        = new List<Item>(); 
         }
 
         //Prints all information of the order

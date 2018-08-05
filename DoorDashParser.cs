@@ -156,6 +156,7 @@ namespace GmailQuickstart {
             //Set these once we know how many items are in the order
             SetItemCounts(order.ItemList);
             SetOrderSize(order);
+            SetUniqueItemCount(order);
 
             return order;
         }
@@ -257,11 +258,11 @@ namespace GmailQuickstart {
                     startInd = 5;
                 }
 
-                int year = DateTime.Now.Year;
+                int year  = DateTime.Now.Year;
                 int month = Program.GetMonthNum(tokens[startInd]);
-                int day = Int32.Parse(tokens[startInd + 1].Replace(",", "").Replace(")", "")); //replaces ',' and ')'
-                int hour = Int32.Parse(tokens[startInd + 3]);
-                int min = Int32.Parse(tokens[startInd + 4]);
+                int day   = Int32.Parse(tokens[startInd + 1].Replace(",", "").Replace(")", "")); //replaces ',' and ')'
+                int hour  = Int32.Parse(tokens[startInd + 3]);
+                int min   = Int32.Parse(tokens[startInd + 4]);
 
                 //Convert hours to military
                 if (tokens[startInd + 5] == "PM!") {
@@ -333,13 +334,20 @@ namespace GmailQuickstart {
             }
         }
 
-        /* Sets the Order size that accounts for quantity of items */
+        /* Sets the Order size that accounts for quantity of duplicated items */
         public static void SetOrderSize(Order order) {
             int orderSize = 0;
             foreach (Item item in order.ItemList) {
                 orderSize += item.Quantity;
             }
             order.OrderSize = orderSize;
+        }
+
+        /* Set the Unique Item Count of the order */
+        public static void SetUniqueItemCount(Order order) {
+            foreach (Item item in order.ItemList) {
+                order.UniqueItemCount++;
+            }
         }
 
         /* Saves the extracted pdf line by line to a file if it doesn't exist */

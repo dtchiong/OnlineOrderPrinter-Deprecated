@@ -59,10 +59,10 @@ namespace GmailQuickstart {
             ParseContactNumber(metaInfoNodes.ElementAt(metaDivCount - 1), order);
            
             var orderContentNodes = htmlDoc.DocumentNode.SelectNodes("//tbody[@class='orderSummary__body']/tr");
-            int uniqueItemCount = orderContentNodes.Count - nonItemCount;
+            order.UniqueItemCount = orderContentNodes.Count - nonItemCount;
 
             //Loops through the number of unique items in the order
-            for (int i = 0; i < uniqueItemCount; i++) {
+            for (int i = 0; i < order.UniqueItemCount; i++) {
 
                 var tdNodes = orderContentNodes[i].Elements("td");
 
@@ -75,7 +75,7 @@ namespace GmailQuickstart {
                 ParseItem(tdNodes.ElementAt(1), item);
                 ParsePrice(tdNodes.ElementAt(2), item);
 
-                SetItemCount(i + 1, uniqueItemCount, item);
+                SetItemCount(i + 1, order.UniqueItemCount, item);
 
                 order.ItemList.Add(item);
             }
@@ -91,7 +91,7 @@ namespace GmailQuickstart {
         public static void ParsePickUpTime(HtmlNode node, Order order) {
             try {
                 order.PickUpTime = DateTime.Parse(node.InnerHtml);
-                Debug.WriteLine(order.PickUpTime.ToString());
+                //Debug.WriteLine(order.PickUpTime.ToString());
             }catch(Exception e) {
                 Debug.WriteLine("ParsePickUpTime: " + e.ToString());
             }

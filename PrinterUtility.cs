@@ -117,13 +117,24 @@ namespace GmailQuickstart {
             string[][] orderArr = new string[order.OrderSize][];
 
             List<Item> itemsList = order.ItemList;
-            for (int i=0; i< orderArr.Length; i++) {
+            int count = 0; //used to set the count in the printed label
+            for (int i=0; i< order.UniqueItemCount; i++) { //loop for only unique items in the order
 
-                //Initialize array for each item
-                orderArr[i] = new string[itemArrSize]; //the array representing 1 item
-                Item item   = itemsList[i];            //the item used to fill the array
+                Item item = itemsList[i]; //the item used to fill the array
 
-                FillItemArray(orderArr[i], order, item);
+                //Fill the array fields of the current item
+                string[] itemArr = FillItemArray(order, item, itemArrSize, count); //the array representing 1 item
+                
+                //Then make enough duplicates to account for item.Quantity, set the item count, and add it to the orderArr
+                for (int j=0; j<item.Quantity; j++) {
+
+                    string[] tmp = new string[itemArrSize];
+                    itemArr.CopyTo(tmp, 0);
+                    tmp[ArrayFieldOffset] = (count + 1) + "/" + order.OrderSize;
+
+                    orderArr[count] = tmp;
+                    count++;
+                }
             }
             return orderArr;
         }
@@ -131,7 +142,10 @@ namespace GmailQuickstart {
         /* Fills the array with the fields of the item. The offset is required 
          * because that's where the values start when read by the PrintStoredFormat()
          */
-        private static void FillItemArray(string[] fields, Order order, Item item) {
+        private static string[] FillItemArray(Order order, Item item, int length, int count) {
+
+            string[] fields = new string[length];
+
             const int instructionsCharLim = 48;
             //Fill values within the offeset with empty strings since they aren't going to be used
             for (int i = 0; i < ArrayFieldOffset; i++) {
@@ -139,7 +153,7 @@ namespace GmailQuickstart {
             }
 
             //Construct actual values for the indices corresponding to fields
-            fields[ArrayFieldOffset    ] = item.ItemCount;
+            fields[ArrayFieldOffset]     = ""; //the item count will be set 
             fields[ArrayFieldOffset + 1] = order.Service;
             fields[ArrayFieldOffset + 2] = order.CustomerName;
             fields[ArrayFieldOffset + 3] = item.ItemName;
@@ -165,6 +179,8 @@ namespace GmailQuickstart {
                 fields[ArrayFieldOffset + 10] = instruction.Substring(0, instructionsCharLim);
                 fields[ArrayFieldOffset + 11] = instruction.Substring(instructionsCharLim);
             }
+
+            return fields;
         }
 
         /* Sets the page description langauge to ZPL */

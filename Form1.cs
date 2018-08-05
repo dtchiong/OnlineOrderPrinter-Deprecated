@@ -92,7 +92,6 @@ namespace GmailQuickstart {
             //OrderContainer orderCon = new OrderContainer(new Order());
             //PropertyDescriptor pd = TypeDescriptor.GetProperties(orderCon)["TimeReceivedTicks"];
             dataGridView1.Sort(dataGridView1.Columns["TimeReceivedTicks"], ListSortDirection.Descending);
-            Console.WriteLine("Sorted: " + dataGridView1.SortOrder);
         }
     }
 
