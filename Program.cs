@@ -276,15 +276,14 @@ namespace GmailQuickstart {
                 return order;
                 
             } else {
-                /*
+                
                 DoorDashParser doorDashParser = new DoorDashParser();
                 List<string> lines = doorDashParser.ExtractTextFromPDF(filePath, messageId);
                 Order order = doorDashParser.ParseOrder(lines, dateTime);
 
                 order.PrintOrder();
-                */
+                return order;
             }
-            return null;
         }
 
         /* Converts the time "Received" header from the email response to a DateTime object */

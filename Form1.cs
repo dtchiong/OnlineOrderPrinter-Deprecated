@@ -29,7 +29,7 @@ namespace GmailQuickstart {
 
             dataGridView1.Columns.Add(NewTextBoxCol("Service", "Service"));
             dataGridView1.Columns.Add(NewTextBoxCol("Name", "Name"));
-            dataGridView1.Columns.Add(NewTextBoxCol("ItemCount", "Item Count")); 
+            dataGridView1.Columns.Add(NewTextBoxCol("ItemCount", "Order Size")); 
             dataGridView1.Columns.Add(NewTextBoxCol("TimeReceived", "Time Received"));
             dataGridView1.Columns.Add(NewTextBoxCol("PickUpTime", "Pick-Up Time"));
             dataGridView1.Columns.Add(NewTextBoxCol("PrintStatus", "Print Status"));

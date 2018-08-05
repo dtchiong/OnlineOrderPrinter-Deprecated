@@ -34,8 +34,8 @@ namespace GmailQuickstart {
             DeliveryMethod  = "Delivery";
             TimeReceived    = default(DateTime);
             PickUpTime      = default(DateTime);
-            OrderSize       = -1;
-            UniqueItemCount = -1;
+            OrderSize       = 0;
+            UniqueItemCount = 0;
             ItemList        = new List<Item>(); 
         }
 
