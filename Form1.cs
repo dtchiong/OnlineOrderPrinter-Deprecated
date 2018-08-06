@@ -120,6 +120,10 @@ namespace GmailQuickstart {
             }
             */
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
     }
 
     /* The object that will be data-bound to the orderGridView */
