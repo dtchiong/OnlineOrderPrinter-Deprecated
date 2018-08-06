@@ -158,8 +158,9 @@ namespace GmailQuickstart {
             return order;
         }
 
+        /* Gets the special instructions, removing unprintable quotes */
         private void ParseSpecialInstructions(string line, Item item) {
-            item.SpecialInstructions = line;
+            item.SpecialInstructions = line.Replace('“', '\"').Replace('”', '\"');
         }
 
         private void ParseAddOn(string line, Item item) {
@@ -211,7 +212,7 @@ namespace GmailQuickstart {
          * "Size", "Choice", {Size}
          */
         private void ParseSize(string[] words, Item item) {
-            item.Size = words[2];
+            item.Size = words[2].Trim();
         }
 
         /* Parses the sugar level from string[] in form:

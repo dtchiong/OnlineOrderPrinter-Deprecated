@@ -159,7 +159,7 @@ namespace GmailQuickstart {
             fields[ArrayFieldOffset + 2] = (order.CustomerName.Length > 20) ? order.CustomerName.Substring(0, 20) : order.CustomerName;
             fields[ArrayFieldOffset + 3] = (item.LabelName != null) ? item.LabelName : "";
             fields[ArrayFieldOffset + 4] = item.ItemName;
-            fields[ArrayFieldOffset + 5] = (item.Size == "Large") ? "Large" : "";
+            fields[ArrayFieldOffset + 5] = (item.Size != "Regular") ? item.Size : "";
             fields[ArrayFieldOffset + 6] = (item.Temperature == "Hot") ? "Hot" : "";
             fields[ArrayFieldOffset + 7] = (item.IceLevel != "Standard") ? item.IceLevel : "";
             fields[ArrayFieldOffset + 8] = (item.SugarLevel != "Standard") ? item.SugarLevel : "";

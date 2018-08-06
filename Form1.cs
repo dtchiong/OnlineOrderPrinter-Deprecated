@@ -95,23 +95,30 @@ namespace GmailQuickstart {
         }
 
         private void splitContainer3_Panel2_Paint(object sender, PaintEventArgs e) {
-
         }
 
         private void splitContainer3_Panel1_Paint(object sender, PaintEventArgs e) {
-
         }
 
         private void splitContainer2_Panel1_Paint(object sender, PaintEventArgs e) {
-
         }
 
         private void splitContainer3_Panel2_Paint_1(object sender, PaintEventArgs e) {
-
         }
 
         private void groupBox1_Enter(object sender, EventArgs e) {
+        }
 
+        /* Changes the backcolor when the is visited. Doesn't follow the row yet and only highlights
+         * the row's location, so it's not sort proof
+         */
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e) {
+            /*
+            DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
+            if (selectedRows.Count > 0) {
+                selectedRows[0].DefaultCellStyle.BackColor = Color.BlanchedAlmond;
+            }
+            */
         }
     }
 
