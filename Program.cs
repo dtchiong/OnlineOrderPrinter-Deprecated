@@ -28,6 +28,8 @@ namespace GmailQuickstart {
 
         static GmailService service;
 
+        public static bool DebugBuild = true;
+
         private static string DateToday = DateTime.Now.ToString("MMM-d-yyyy");
         public static string AppWorkingDir = AppDomain.CurrentDomain.BaseDirectory;
         private static string GrubHubDir = Path.Combine(AppWorkingDir, "GrubHub-Orders", DateToday);

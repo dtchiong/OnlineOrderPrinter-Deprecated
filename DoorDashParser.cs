@@ -62,7 +62,7 @@ namespace GmailQuickstart {
                     //Console.WriteLine(("LINE " + lineCount.ToString().PadLeft(3) + "  " + line));
                 }
             }
-            PrintToFile(lines, messageId);
+            if (Program.DebugBuild) PrintToFile(lines, messageId);
 
             return lines;
         }
@@ -219,7 +219,7 @@ namespace GmailQuickstart {
          */
         private void ParseSugar(string[] words, Item item) {
             item.SugarLevel = (words[3] == "Standard") ? words[3] : words[3] + " S"; 
-            Debug.WriteLine(item.SugarLevel);
+            //Debug.WriteLine(item.SugarLevel);
         }
 
         /* Parses the ice level from string[] in form:
@@ -227,7 +227,7 @@ namespace GmailQuickstart {
          */
         private void ParseIce(string[] words, Item item) {
             item.IceLevel = (words[3] == "Standard") ? words[3] : words[3] + " I";
-            Debug.WriteLine(item.IceLevel);
+            //Debug.WriteLine(item.IceLevel);
         }
 
         /* Parses Customer Name from line in format: 
@@ -268,7 +268,6 @@ namespace GmailQuickstart {
                     if (hour != 12)
                         hour += 12;
                 }
-                hour %= 24;
 
                 DateTime pickUpDate = new DateTime(year, month, day, hour, min, 0);
                 //Debug.WriteLine("Parsed DateTime: " + pickUpDate.ToString());
@@ -281,7 +280,6 @@ namespace GmailQuickstart {
         private void ParseOrderNumber(string line, Order order) {
             string orderNumber = line.Replace("Delivery #", "");
 
-            //Console.WriteLine("Order Number: " + orderNumber);
             order.OrderNumber = orderNumber;
         }
 
