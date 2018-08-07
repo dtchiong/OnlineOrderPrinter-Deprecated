@@ -137,6 +137,7 @@ namespace GmailQuickstart {
                 }
 
                 //If the line starts with '-', then this is a Addon or Special Instruction
+                //Handle special instructions here because i needs to be incremented after
                 if (lines[i].StartsWith("-")) {
                     if (lines[i].StartsWith("-Special")) {
                         ParseSpecialInstructions(lines[i + 1], item);
@@ -182,8 +183,15 @@ namespace GmailQuickstart {
                 case "-Style":
                     ParseStyle(words, item);
                     break;
+                case "-Flavor":
+                    if (words[1] == "Choice") {
+                        ParseFlavorChoice(words, item);
+                    }else if (words[1] == "Addition") {
+                        ParseFlavorAddition(words, item);
+                    }
+                    break;
                 default:
-                    Debug.WriteLine("Unidentified addon starter word: " + words[0]);
+                    Debug.WriteLine("Unidentified addon starter word: " + "-" + words[0] + "-");
                     break;
             }
         }
@@ -242,17 +250,56 @@ namespace GmailQuickstart {
             } else if (words.Length == 4) { //to acount for old DD format - remove later
                 item.IceLevel = (words[3] == "Standard") ? words[3] : words[3] + " I";
 
+            }else if (words.Length == 5) {
+                item.IceLevel = words[2] + " I";   //new DD format - only 0% ice has 5 words
             }
             //Debug.WriteLine(item.IceLevel);
         }
 
         /* Parses the style choice from string[] in form
-         * "Style", "Choice", {Cold|Hot}
+         * "Style", "Choice", {Cold|Hot|Garlic|Honey}
          */
         private void ParseStyle(string[] words, Item item) {
-            if (words[2] == "Hot") {
-                item.Temperature = "Hot";
+
+            switch(words[2]) {
+                case "Hot":
+                    item.Temperature = "Hot";
+                    break;
+                case "Cold":
+                    //This handles the case that Hot drinks that select "Cold", do not print "Cold"
+                    //because default options such as "Cold" are not printed
+                    bool needToAddTemp = ( item.ItemName.Contains("Ginger") || item.ItemName.Contains("Hot") );
+                    if (needToAddTemp) {
+                        item.ItemName = item.ItemName + " (Cold)";
+                    }
+                    break;
+                case "Garlic":
+                    item.ItemName = "Garlic " + item.ItemName;
+                    break;
+                case "Honey":
+                    item.ItemName = "Honey " + item.ItemName;
+                    break;
+                default:
+                    Debug.WriteLine("Unidentified Style Choice: " + "-"+ words[2] + "-");
+                    break;
             }
+        }
+
+        /* Parses the tea flavor choice from string[] in form:
+         * "Flavor", "Choice", {Tea}
+         * Used for flavored teas that choose tea base
+         */
+        private void ParseFlavorChoice(string[] words, Item item) {
+            item.ItemName = item.ItemName.Replace("Tea", "");
+            item.ItemName = item.ItemName + words[2] + " Tea";
+        }
+
+        /* Parses the the flavor addition from string[] in form:
+         * "Flavor", "Addition", {Flavor}
+         * Used for flavored Eggpuffs that choose flavor
+         */
+        private void ParseFlavorAddition(string[] words, Item item) {
+            item.ItemName = item.ItemName + " -" + words[2];
         }
 
         /* Parses Customer Name from line in format: 
