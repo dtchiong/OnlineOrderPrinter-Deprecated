@@ -167,7 +167,7 @@ namespace GmailQuickstart {
             string[] words = line.Split(' ');
 
             switch (words[0]) {
-                case "-Topping":
+                case "-Additional":
                     ParseToppings(words, item);
                     break;
                 case "-Size":
@@ -179,6 +179,9 @@ namespace GmailQuickstart {
                 case "-Ice":
                     ParseIce(words, item);
                     break;
+                case "-Style":
+                    ParseStyle(words, item);
+                    break;
                 default:
                     Debug.WriteLine("Unidentified addon starter word: " + words[0]);
                     break;
@@ -186,12 +189,12 @@ namespace GmailQuickstart {
         }
 
         /* Parses the topping from string[] in form:
-         * "Topping", "Additions", {Topping}, {Additional Price}
+         * "Additional", "Toppings", {Topping}, {Additional Price}
          * Change to use string builder
          */
         private void ParseToppings(string[] words, Item item) {
             string topping = "";
-            int startInd = 2; //Skip "Toppings" and "Additions
+            int startInd = 2; //Skips "Additional" and "Toppings"
             for (int i=startInd; i<words.Length; i++) {
 
                 //Stop creating the addon string if we've reached the price
@@ -216,19 +219,40 @@ namespace GmailQuickstart {
         }
 
         /* Parses the sugar level from string[] in form:
-         * "Sugar", "Level", "Choice", ({Num} '%')
+         * "Sugar", "Level", ({Num} '%')
          */
         private void ParseSugar(string[] words, Item item) {
-            item.SugarLevel = (words[3] == "Standard") ? words[3] : words[3] + " S"; 
+            if (words.Length == 3) {
+                item.SugarLevel = (words[2] == "Standard") ? words[2] : words[2] + " S";
+
+            } else if (words.Length == 4) { //to account for old DD format - remove later
+                item.SugarLevel = (words[3] == "Standard") ? words[3] : words[3] + " S";
+
+            }
             //Debug.WriteLine(item.SugarLevel);
         }
 
         /* Parses the ice level from string[] in form:
-         * "Ice", "Level", "Choice", ({Num} '%')
+         * "Ice", "Level", ({Num} '%')
          */
         private void ParseIce(string[] words, Item item) {
-            item.IceLevel = (words[3] == "Standard") ? words[3] : words[3] + " I";
+            if (words.Length == 3) {
+                item.IceLevel = (words[2] == "Standard") ? words[2] : words[2] + " I";
+
+            } else if (words.Length == 4) { //to acount for old DD format - remove later
+                item.IceLevel = (words[3] == "Standard") ? words[3] : words[3] + " I";
+
+            }
             //Debug.WriteLine(item.IceLevel);
+        }
+
+        /* Parses the style choice from string[] in form
+         * "Style", "Choice", {Cold|Hot}
+         */
+        private void ParseStyle(string[] words, Item item) {
+            if (words[2] == "Hot") {
+                item.Temperature = "Hot";
+            }
         }
 
         /* Parses Customer Name from line in format: 
