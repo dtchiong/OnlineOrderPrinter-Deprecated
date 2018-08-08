@@ -295,6 +295,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\GmailQuickstart.Item.datasource" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">

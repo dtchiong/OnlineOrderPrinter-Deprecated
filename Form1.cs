@@ -19,7 +19,10 @@ namespace GmailQuickstart {
 
         public Form1() {
             InitializeComponent();
-            
+
+            Text = "Derek's Online Order Printer v1.1.0";
+
+            //Initialize dgv columns and properties
             //Prevents columns from auto populating with OrderContainer fields. 
             //Need to set before setting datasource, or else columns get duplicated for some reason.
             dataGridView1.AutoGenerateColumns = false;
@@ -46,14 +49,6 @@ namespace GmailQuickstart {
             return col;
         }
 
-        private void SplitContainer1_Panel2_Paint(object sender, PaintEventArgs e) {
-
-        }
-
-        private void SplitContainer1_Panel1_Paint(object sender, PaintEventArgs e) {
-
-        }
-
         /* Gets the order that is currently selected, if any, and then prints it, and sets the Print Status */
         private void print_Click(object sender, EventArgs e) {
             DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
@@ -78,8 +73,17 @@ namespace GmailQuickstart {
         /* Encapsulates an order with an OrderContainer, then add it to the order list */
         public void AddOrderToList(Order order) {
             OrderContainer orderCon = new OrderContainer(order);
-            OrderList.Add(orderCon);           //Add the OrderContainer to the OrderList for tracking unprinted orders
-            
+            OrderList.Add(orderCon); //Add the OrderContainer to the OrderList for tracking unprinted orders
+
+            //Update the Item List in the GUI to match the selected row
+            UpdateItemListDgv();
+        }
+
+        /* Updates the Item List in the UI to match the currently selected row */
+        private void UpdateItemListDgv() {
+            DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
+            OrderContainer selectedRow = (OrderContainer)selectedRows[0].DataBoundItem;
+            dataGridView2.DataSource = selectedRow.order.ItemList;
         }
 
         /* The Form's load event calls the InitApp() to start checking and processing emails */
@@ -94,36 +98,25 @@ namespace GmailQuickstart {
             dataGridView1.Sort(dataGridView1.Columns["TimeReceivedTicks"], ListSortDirection.Descending);
         }
 
-        private void splitContainer3_Panel2_Paint(object sender, PaintEventArgs e) {
-        }
-
-        private void splitContainer3_Panel1_Paint(object sender, PaintEventArgs e) {
-        }
-
-        private void splitContainer2_Panel1_Paint(object sender, PaintEventArgs e) {
-        }
-
-        private void splitContainer3_Panel2_Paint_1(object sender, PaintEventArgs e) {
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e) {
-        }
-
         /* Changes the backcolor when the is visited. Doesn't follow the row yet and only highlights
          * the row's location, so it's not sort proof
          */
         private void dataGridView1_SelectionChanged(object sender, EventArgs e) {
-            /*
+            
             DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
             if (selectedRows.Count > 0) {
-                selectedRows[0].DefaultCellStyle.BackColor = Color.BlanchedAlmond;
+                //selectedRows[0].DefaultCellStyle.BackColor = Color.BlanchedAlmond;
+                UpdateItemListDgv();
             }
-            */
-        }
+            
 
+            
+        }
+        
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Exit();
         }
+
     }
 
     /* The object that will be data-bound to the orderGridView */
