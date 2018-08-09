@@ -289,9 +289,8 @@ namespace GmailQuickstart {
          * "Flavor", "Choice", {Tea}
          * Used for flavored teas that choose tea base
          */
-        private void ParseFlavorChoice(string[] words, Item item) {
-            item.ItemName = item.ItemName.Replace("Tea", "");
-            item.ItemName = item.ItemName + words[2] + " Tea";
+        private void ParseFlavorChoice(string[] words, Item item) {        
+            item.ItemName = item.ItemName.Replace("Tea", (words[2] + " Tea"));
         }
 
         /* Parses the the flavor addition from string[] in form:
@@ -300,6 +299,8 @@ namespace GmailQuickstart {
          */
         private void ParseFlavorAddition(string[] words, Item item) {
             item.ItemName = item.ItemName + " -" + words[2];
+            item.ItemName = words[2] + " " + item.ItemName.Replace("(Flavored)", "");
+            item.ItemName = item.ItemName.Trim();
         }
 
         /* Parses Customer Name from line in format: 

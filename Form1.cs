@@ -76,14 +76,33 @@ namespace GmailQuickstart {
             OrderList.Add(orderCon); //Add the OrderContainer to the OrderList for tracking unprinted orders
 
             //Update the Item List in the GUI to match the selected row
-            UpdateItemListDgv();
+            UpdateOrderUI();
+        }
+
+        /* Updates the UI to match the order in the selected row by
+         * updating the Order Details and Item List
+         */
+        private void UpdateOrderUI() {
+            DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
+            OrderContainer selectedRow = (OrderContainer)selectedRows[0].DataBoundItem;
+
+            UpdateItemListUI(selectedRow);
+            UpdateOrderDetailsUI(selectedRow);
         }
 
         /* Updates the Item List in the UI to match the currently selected row */
-        private void UpdateItemListDgv() {
-            DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
-            OrderContainer selectedRow = (OrderContainer)selectedRows[0].DataBoundItem;
-            dataGridView2.DataSource = selectedRow.order.ItemList;
+        private void UpdateItemListUI(OrderContainer orderCon) {
+            dataGridView2.DataSource = orderCon.order.ItemList;
+        }
+        
+        /* Updates the fields of Order Details */
+        private void UpdateOrderDetailsUI(OrderContainer orderCon) {
+            Order order = orderCon.order;
+
+            nameTextBox.Text = order.CustomerName;
+            contactNumTextBox.Text = order.ContactNumber;
+            orderNumTextBox.Text = order.OrderNumber;
+            orderSizeTextBox.Text = order.OrderSize.ToString();
         }
 
         /* The Form's load event calls the InitApp() to start checking and processing emails */
@@ -106,7 +125,7 @@ namespace GmailQuickstart {
             DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
             if (selectedRows.Count > 0) {
                 //selectedRows[0].DefaultCellStyle.BackColor = Color.BlanchedAlmond;
-                UpdateItemListDgv();
+                UpdateOrderUI();
             }
             
 
