@@ -117,6 +117,9 @@ namespace GmailQuickstart {
             Application.Exit();
         }
 
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
     }
 
     /* The object that will be data-bound to the orderGridView */
