@@ -18,11 +18,12 @@ namespace GmailQuickstart {
         }
 
         /* Extracts the order from an grubhub html file and returns an Order object */
-        public Order ParseOrder(string html, DateTime dateTime) {
+        public Order ParseOrder(string html, DateTime dateTime, string messageId) {
             Order order = new Order();
 
             order.Service = "GrubHub";
             order.TimeReceived = dateTime;
+            order.MessageId = messageId;
 
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
@@ -80,7 +81,8 @@ namespace GmailQuickstart {
                 order.ItemList.Add(item);
             }
 
-            DoorDashParser.SetOrderSize(order); //Need to move function 
+            DoorDashParser.SetDrinkAndSnackCount(order);
+            DoorDashParser.SetOrderSize(order); //Need to move function to be general
             return order;
         }
 

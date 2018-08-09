@@ -68,11 +68,12 @@ namespace GmailQuickstart {
         }
 
         /* Parses the information from the lines and returns the information in a Order object */
-        public Order ParseOrder(List<string> lines, DateTime timeReceived) {
+        public Order ParseOrder(List<string> lines, DateTime timeReceived, string messageId) {
 
             Order order = new Order();
             order.Service = "DoorDash";
             order.TimeReceived = timeReceived;
+            order.MessageId = messageId;
 
             ParseCustomerName(lines[0], order);
 
@@ -401,6 +402,17 @@ namespace GmailQuickstart {
         private void SetItemCounts(List<Item> itemList) {
             for (int i=0; i<itemList.Count; i++) {
                 itemList[i].ItemCount = (i + 1) + "/" + itemList.Count;
+            }
+        }
+
+        /* Sets the drink and snack count of the order */
+        public static void SetDrinkAndSnackCount(Order order) {
+            foreach (Item item in order.ItemList) {
+                if (item.ItemType == "Drink") {
+                    order.NumOfDrinks+= item.Quantity;
+                }else if (item.ItemType == "Snack") {
+                    order.NumOfSnacks+= item.Quantity;
+                }
             }
         }
 

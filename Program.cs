@@ -292,7 +292,7 @@ namespace GmailQuickstart {
                 
                 GrubHubParser grubHubParser = new GrubHubParser();
                 string decodedBody = Encoding.UTF8.GetString(data);
-                Order order = grubHubParser.ParseOrder(decodedBody, dateTime);
+                Order order = grubHubParser.ParseOrder(decodedBody, dateTime, messageId);
                  
                 order.PrintOrder();
                 return order;
@@ -301,7 +301,7 @@ namespace GmailQuickstart {
                 
                 DoorDashParser doorDashParser = new DoorDashParser();
                 List<string> lines = doorDashParser.ExtractTextFromPDF(filePath, messageId);
-                Order order = doorDashParser.ParseOrder(lines, dateTime);
+                Order order = doorDashParser.ParseOrder(lines, dateTime, messageId);
 
                 order.PrintOrder();
                 return order;

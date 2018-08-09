@@ -102,7 +102,17 @@ namespace GmailQuickstart {
             nameTextBox.Text = order.CustomerName;
             contactNumTextBox.Text = order.ContactNumber;
             orderNumTextBox.Text = order.OrderNumber;
+
             orderSizeTextBox.Text = order.OrderSize.ToString();
+            if (order.NumOfDrinks > 0 && order.NumOfSnacks == 0) {
+                orderSizeTextBox.Text += " (all Drinks)";
+            }else if (order.NumOfSnacks > 0 && order.NumOfDrinks == 0) {
+                orderSizeTextBox.Text += " (all Snacks)";
+            }else if (order.NumOfDrinks > 0 && order.NumOfSnacks > 0) {
+                orderSizeTextBox.Text += " (" + order.NumOfDrinks + " Drinks, " + order.NumOfSnacks + " Snacks)";
+            }
+
+            messageIdTextBox.Text = order.MessageId;
         }
 
         /* The Form's load event calls the InitApp() to start checking and processing emails */

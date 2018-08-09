@@ -21,8 +21,12 @@ namespace GmailQuickstart {
         public DateTime PickUpTime   { get; set; }
         public int OrderSize         { get; set; } //The number of items in the order - including quantity
         public int UniqueItemCount   { get; set; } //The number of unique items in the order -excluding quantity
+        public int NumOfDrinks       { get; set; } //The numer of drinks in the order
+        public int NumOfSnacks       { get; set; } //The number of snacks in the order
 
         public List<Item> ItemList;
+
+        public string MessageId      { get; set; } //The messageID in the gmail message
 
         //Constructor
         public Order() {
@@ -36,6 +40,8 @@ namespace GmailQuickstart {
             PickUpTime      = default(DateTime);
             OrderSize       = 0;
             UniqueItemCount = 0;
+            NumOfDrinks     = 0;
+            NumOfSnacks     = 0;
             ItemList        = new List<Item>(); 
         }
 
