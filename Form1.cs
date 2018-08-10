@@ -122,14 +122,20 @@ namespace GmailQuickstart {
             
             textBoxQty.Text = item.Quantity.ToString();
             textBoxItemName.Text = item.ItemName;
+            textBoxInstructions.Text = item.SpecialInstructions;
 
             List<string> adjustmentList = new List<string>();
-            adjustmentList.Add(item.Size);
-            adjustmentList.Add(item.Temperature);
-            adjustmentList.Add(item.IceLevel);
-            adjustmentList.Add(item.SugarLevel);
-            adjustmentList.Add(item.MilkSubsitution);
-
+            if (item.ItemType == "Drink") {
+                adjustmentList.Add(item.Size);
+                adjustmentList.Add(item.Temperature);
+                adjustmentList.Add( (item.IceLevel == "Standard")? item.IceLevel + " I": item.IceLevel );
+                adjustmentList.Add( (item.SugarLevel == "Standard") ? item.SugarLevel + " S" : item.SugarLevel );
+                adjustmentList.Add(item.MilkSubsitution);
+            }else { //This is snack
+                if (item.Size != "Regular") { //Handle the case where Oolong Tea eggs have size
+                    adjustmentList.Add(item.Size);
+                }
+            }
             listBoxAdjustments.DataSource = adjustmentList;
             listBoxToppings.DataSource = item.AddOnList;  
         }

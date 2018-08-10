@@ -17,12 +17,14 @@ namespace GmailQuickstart {
 
         //Constructor
         public DoorDashParser() {
-            
+
+            menu = new DoorDashMenu();
+
             //Load the itext license
             try {
                 LicenseKey.LoadLicenseFile(Program.iTextLicensePath);
             } catch (LicenseKeyException e) {
-                Console.WriteLine(e);
+                Debug.WriteLine(e);
             }
         }
 
@@ -299,7 +301,6 @@ namespace GmailQuickstart {
          * Used for flavored Eggpuffs that choose flavor
          */
         private void ParseFlavorAddition(string[] words, Item item) {
-            //item.ItemName = item.ItemName + " -" + words[2];
             item.ItemName = words[2] + " " + item.ItemName.Replace("(Flavored)", "");
             item.ItemName = item.ItemName.Trim();
         }
@@ -378,6 +379,7 @@ namespace GmailQuickstart {
 
         /* Parses item name from line in form:
          * "{int}x {Item Name} (in {Category}) ${Sub Price} ${Total}"
+         * Also sets the item type using the menu table.
          */
         private void ParseItemName(string line, Item item) {
             Regex regex = new Regex(@"\d+x", RegexOptions.ECMAScript); 
@@ -386,6 +388,11 @@ namespace GmailQuickstart {
             itemName = itemName.Remove(parenInd).Trim();
 
             item.ItemName = itemName;
+            //Set item type
+            string itemType = menu.GetItemType(itemName);
+            if (itemType != null) {
+                item.ItemType = itemType;
+            }
         }
 
         /* Parses quantity from line in form:
