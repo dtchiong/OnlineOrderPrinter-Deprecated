@@ -20,7 +20,7 @@ namespace GmailQuickstart {
         public Form1() {
             InitializeComponent();
 
-            Text = "Derek's Online Order Printer v1.1.0";
+            Text = "Derek's Online Order Printer v1.2.0";
 
             //Initialize dgv columns and properties
             //Prevents columns from auto populating with OrderContainer fields. 
@@ -49,10 +49,16 @@ namespace GmailQuickstart {
             return col;
         }
 
-        /* Gets the order that is currently selected, if any, and then prints it, and sets the Print Status */
+        /* Gets the order that is currently selected, if any, and then prints it, and sets the Print Status 
+         * To protect from spam, we disable the button on click, and then only enable the button after the 
+         * print status is set. Maybe use a timer that starts afer print status is set.
+         */
         private void print_Click(object sender, EventArgs e) {
+            button1.Enabled = false;
+            button1.BackColor = SystemColors.ControlDarkDark;
+
             DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
-                 
+            
             if (selectedRows.Count > 0) {
                 OrderContainer orderCon = (OrderContainer)selectedRows[0].DataBoundItem;
                 if (orderCon == null) return; //incase there are no orders
@@ -67,6 +73,9 @@ namespace GmailQuickstart {
                 //dataGridView1.Refresh() maybe useful if using a "Print All" button
                 orderListBindingSrc.ResetCurrentItem();
             }
+
+            button1.Enabled = true;
+            button1.BackColor = SystemColors.Control;
         }
 
         /* Encapsulates an order with an OrderContainer, then add it to the order list */
