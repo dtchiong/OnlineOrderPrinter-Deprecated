@@ -258,11 +258,141 @@ namespace GmailQuickstart {
     }
 
     public class DoorDashMenu : Menu {
-        
+
         //Constructor
         public DoorDashMenu() {
-        }
+            MenuTable = new Dictionary<string, Tuple<string, string>>() {
 
+                //Milk Tea
+                { "Pearl Milk Tea"             , new Tuple<string, string>( null, "Drink")  },
+                { "Earl Grey Milk Tea with 3Q" , new Tuple<string, string>( null, "Drink")},
+                { "Jasmine Green Milk Tea"     , new Tuple<string, string>( null, "Drink") },
+                { "Roasted Oolong Milk Tea"    , new Tuple<string, string>( null, "Drink") },
+                { "Panda Milk Tea"             , new Tuple<string, string>( null, "Drink") },
+                { "Classical Rose Milk Tea"    , new Tuple<string, string>( null, "Drink") },
+                { "Winter Melon Milk Tea"      , new Tuple<string, string>( null, "Drink") },
+                { "Red Bean Milk Tea"          , new Tuple<string, string>( null, "Drink") },
+                { "Thai Milk Tea"              , new Tuple<string, string>( null, "Drink") },
+                { "Fresh Taro Milk Tea"        , new Tuple<string, string>( null, "Drink") },
+                { "Taro Pearl Milk Tea"        , new Tuple<string, string>( null, "Drink") },
+                { "Okinawa Milk Tea"           , new Tuple<string, string>( null, "Drink") },
+                { "Potted Milk Tea"            , new Tuple<string, string>( null, "Drink") },
+                { "Caramel Milk Tea"           , new Tuple<string, string>( null, "Drink") },
+                { "Brown Sugar Iced Milk with Grass Jelly", new Tuple<string, string>(null, "Drink") },
+                { "Coffee Milk Tea"            , new Tuple<string, string>( null, "Drink") },
+                { "Caramel Coffee Milk Tea"    , new Tuple<string, string>( null, "Drink") },
+                { "Mulberry Milk Tea"          , new Tuple<string, string>( null, "Drink") },
+                { "Matcha Latte"               , new Tuple<string, string>( null, "Drink") },
+                { "Peppermint Milk Tea"        , new Tuple<string, string>( null, "Drink") },
+                { "Royal Fresh Milk Tea"       , new Tuple<string, string>( null, "Drink") },
+                { "French Pudding Milk Tea"    , new Tuple<string, string>( null, "Drink") },
+                /*
+                { "Almond Red Bean Milk Tea", new Tuple<string, string>( null, "Drink")},
+                { "Green Tea with Mango Ice Cream", new Tuple<string, string>( null, "Drink") },                
+                { "Honey Dew Milk Tea"      , new Tuple<string, string>( null, "Drink") },
+                */
+
+                //Cream Beverages
+                { "Earl Grey Tea with Topped Cream"    , new Tuple<string, string>( null, "Drink") },
+                { "Green Tea with Topped Cream"        , new Tuple<string, string>( null, "Drink") },
+                { "Oolong Tea with Topped Cream"       , new Tuple<string, string>( null, "Drink") },
+                { "Jadeite Tea with Topped Cream"      , new Tuple<string, string>( null, "Drink") },
+                { "Winter Melon Tea with Topped Cream" , new Tuple<string, string>( null, "Drink") },
+                { "Mango Royal Tea with Topped Cream"  , new Tuple<string, string>( null, "Drink") },
+                { "Watermelon Juice with Topped Cream" , new Tuple<string, string>( null, "Drink") },
+
+                //Golden Reputation
+                { "Honey Peach Tea"                   , new Tuple<string, string>( null, "Drink") },
+                { "Elegant Peach Royal Tea with Aloe" , new Tuple<string, string>( null, "Drink") },
+                { "Passion Fruit Tea"                 , new Tuple<string, string>( null, "Drink") },
+                { "Grapefruit Tea"                    , new Tuple<string, string>( null, "Drink") },
+                { "Mango Tea with Ai Yu"              , new Tuple<string, string>( null, "Drink") },
+                { "Elegant Rose Royal Tea with Aloe"  , new Tuple<string, string>( null, "Drink") },
+                { "Mulberry Fruit Tea"                , new Tuple<string, string>( null, "Drink") },
+                { "Pineapple Royal Tea"               , new Tuple<string, string>( null, "Drink") },
+                { "Jadeite Royal Tea"                 , new Tuple<string, string>( null, "Drink") },
+
+                //Special Flavor
+                { "Earl Grey Tea"              , new Tuple<string, string>( null, "Drink") },
+                { "Jasmine Green Tea"          , new Tuple<string, string>( null, "Drink") },
+                { "Roasted Oolong Tea"         , new Tuple<string, string>( null, "Drink") },
+                { "Lychee Tea"                 , new Tuple<string, string>( null, "Drink") },
+                { "Apple Tea"                  , new Tuple<string, string>( null, "Drink") },
+                { "Honey Green Tea with Ai Yu" , new Tuple<string, string>( null, "Drink") },
+                { "Yogurt Green Tea"           , new Tuple<string, string>( null, "Drink") },
+                { "Strawberry Green Tea"       , new Tuple<string, string>( null, "Drink") }, //not in menu yet
+
+                //Smoothies
+                { "Fresh Mango Smoothie with Ai Yu"         , new Tuple<string, string>( null, "Drink") },
+                { "Mango Smoothie with Pearl"               , new Tuple<string, string>( null, "Drink") },
+                { "Fresh Taro Milkshake with Pearl"         , new Tuple<string, string>( null, "Drink") },
+                { "Matcha Green Tea Smoothie with Red Bean" , new Tuple<string,  string>(null, "Drink") },
+                { "Honey Peach Smoothie"                    , new Tuple<string, string>( null, "Drink") },
+                { "Lychee Smoothie with Aloe"               , new Tuple<string, string>( null, "Drink") },
+                { "Apple Smoothie with Aloe"                , new Tuple<string, string>( null, "Drink") },
+                { "Passion Fruit Smoothie with Ai Yu"       , new Tuple<string, string>( null, "Drink") },
+                { "Passion Fruit Milkshake with Ai Yu"      , new Tuple<string, string>( null, "Drink") },
+                { "Strawberry Smoothie"                     , new Tuple<string, string>( null, "Drink") },
+                { "Strawberry Milkshake"                    , new Tuple<string, string>( null, "Drink") },
+                { "Strawberry Lemon Smoothie with Ai Yu"    , new Tuple<string, string>( null, "Drink") },
+                { "Pineapple Smoothie with Ai Yu"           , new Tuple<string, string>( null, "Drink") },
+                { "Avocado Milkshake with Pearl"            , new Tuple<string, string>( null, "Drink") },
+                { "Red Bean Milkshake"                      , new Tuple<string, string>( null, "Drink") },
+                { "Chocolate Smoothie"                      , new Tuple<string, string>( null, "Drink") },
+                { "Coconut Smoothie with Red Bean"          , new Tuple<string, string>( null, "Drink") },
+                /*
+                { "Mulberry Smoothie w/Aiyu"       , new Tuple<string, string>( "Mulberry Smoothie w/ Aiyu", "Drink") },
+                { "Lemon Smoothie with Aloe"       , new Tuple<string, string>( null, "Drink") },
+                */
+
+                //Fresh Fruit Series
+                { "Fresh Lime Green Tea with Aloe"        , new Tuple<string, string>( null, "Drink") },
+                { "Fresh Lemon Bomb Green Tea with Aloe"  , new Tuple<string, string>( null, "Drink") },
+                { "Fresh Watermelon Juice"                , new Tuple<string, string>( null, "Drink") },
+                { "Honey Lemon Green Tea with Basil Seed" , new Tuple<string, string>( null, "Drink") },
+                
+                //Taiwan Classic
+                { "Hot Grass Jelly"                    , new Tuple<string, string>( null, "Drink") },
+                { "Honey Grass Jelly"                  , new Tuple<string, string>( null, "Drink") },
+                { "Kumquat Lemon with Basil Seed"      , new Tuple<string, string>( null, "Drink") },
+                { "Winter Melon Lemon with Basil Seed" , new Tuple<string, string>( null, "Drink") },
+                { "Winter Melon Tea"                   , new Tuple<string, string>( null, "Drink") },
+                { "Ginger Milk Tea"                    , new Tuple<string, string>( null, "Drink") },
+                { "Longan Red Date Tea"                , new Tuple<string, string>( null, "Drink") },
+                { "Honey Aloe"                         , new Tuple<string, string>( null, "Drink") },
+                { "Ginger Tea"                         , new Tuple<string, string>( null, "Drink") }, //not in menu yet
+                
+                //Snacks
+                { "Basil Popcorn Chicken"    , new Tuple<string, string>( null, "Snack") },
+                { "Curry Chicken Karaage"    , new Tuple<string, string>( null, "Snack") },
+                { "Fried Calamari"           , new Tuple<string, string>( null, "Snack") },
+                { "Tempura Calamari"         , new Tuple<string, string>( null, "Snack") },
+                { "Chicken Wing"             , new Tuple<string, string>( null, "Snack") },
+                { "Salt & Pepper Fried Tofu" , new Tuple<string, string>( null, "Snack") },
+                { "Five Spice Tofu"          , new Tuple<string, string>( null, "Snack") },
+                { "Curry Fish Balls (9)"     , new Tuple<string, string>( null, "Snack") },
+                { "Takoyaki (6)"             , new Tuple<string, string>( null, "Snack") },
+                { "Fried Cheese Sticks"      , new Tuple<string, string>( null, "Snack") },
+                { "Fried Lobster Balls (8)"  , new Tuple<string, string>( null, "Snack") },
+                { "French Fries"             , new Tuple<string, string>( null, "Snack") },
+                { "Sweet Potato Fries"       , new Tuple<string, string>( null, "Snack") },
+                { "Volcano Fries"            , new Tuple<string, string>( null, "Snack") },
+                { "Curly Fries"              , new Tuple<string, string>( null, "Snack") },
+                { "Fried Flour Bun"          , new Tuple<string, string>( null, "Snack") },
+                { "Oolong Tea Eggs"          , new Tuple<string, string>( null, "Snack") },
+                { "Egg Puff (Original)"      , new Tuple<string, string>( null, "Snack") },
+                { "Egg Puff (Flavored)"      , new Tuple<string, string>( null, "Snack") },
+  
+                //Rice Dish
+                { "Minced Beef with House Sauce Over Rice" , new Tuple<string, string>( null, "Snack") },
+                { "Curry Chicken Karaage Over Rice"        , new Tuple<string, string>( null, "Snack") },
+                { "Basil Popcorn Chicken Over Rice"        , new Tuple<string, string>( null, "Snack") },
+                { "Taiwanese Minced Pork Over Rice"        , new Tuple<string, string>( null, "Snack") },
+                { "Japanese Style Eel Over Rice"           , new Tuple<string, string>( null, "Snack") },
+                { "Curry Fish Balls Over Rice"             , new Tuple<string, string>( null, "Snack") },
+            };
+
+        }
     }
 
     public class UberEatsMenu : Menu {
