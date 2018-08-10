@@ -216,7 +216,8 @@ namespace GmailQuickstart {
                 { "80% Ice" , new Tuple<string, string>( "80% I", "Ice") },
                 { "100%Ice" , new Tuple<string, string>( "Standard", "Ice") },
                 { "Standard: Between 80% and More Ice", new Tuple<string, string>( "Standard", "Ice") },
-                
+                { "More: The Greatest Amount of Ice"  , new Tuple<string, string>( "More"    , "Ice") },
+
                 //Sugar
                 { "0% Sweetness"   , new Tuple<string, string>( "0% S", "Sugar") },
                 { "30% Sweetness"  , new Tuple<string, string>( "30% S", "Sugar") },

@@ -137,8 +137,8 @@ namespace GmailQuickstart {
             if (item.ItemType == "Drink") {
                 adjustmentList.Add(item.Size);
                 adjustmentList.Add(item.Temperature);
-                adjustmentList.Add( (item.IceLevel == "Standard")? item.IceLevel + " I": item.IceLevel );
-                adjustmentList.Add( (item.SugarLevel == "Standard") ? item.SugarLevel + " S" : item.SugarLevel );
+                adjustmentList.Add( (item.IceLevel.Contains('%')? item.IceLevel : item.IceLevel + " I") );
+                adjustmentList.Add( (item.SugarLevel.Contains('%')? item.SugarLevel  : item.SugarLevel + " S") );
                 adjustmentList.Add(item.MilkSubsitution);
             }else { //This is snack
                 if (item.Size != "Regular") { //Handle the case where Oolong Tea eggs have size
@@ -149,8 +149,11 @@ namespace GmailQuickstart {
             listBoxToppings.DataSource = item.AddOnList;  
         }
 
-        /* The Form's load event calls the InitApp() to start checking and processing emails */
-        private void Form1_Load(object sender, EventArgs e) {
+        private void Form1_Load(object sender, EventArgs e) {         
+        }
+
+        /* Only start checking and parsing emails when the form is shown */
+        private void Form1_Shown(object sender, EventArgs e) {
             Program.InitApp();
         }
 
@@ -188,6 +191,8 @@ namespace GmailQuickstart {
         private void listView1_SelectedIndexChanged(object sender, EventArgs e) {
 
         }
+
+
     }
 
     /* The object that will be data-bound to the orderGridView */
