@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,7 +21,7 @@ namespace GmailQuickstart {
         public Form1() {
             InitializeComponent();
 
-            Text = "Derek's Online Order Printer v1.2.0";
+            Text = "Derek's Online Order Printer v1.3.0";
 
             //Initialize dgv columns and properties
             //Prevents columns from auto populating with OrderContainer fields. 
@@ -83,8 +84,14 @@ namespace GmailQuickstart {
             OrderContainer orderCon = new OrderContainer(order);
             OrderList.Add(orderCon); //Add the OrderContainer to the OrderList for tracking unprinted orders
 
-            //Update the Item List in the GUI to match the selected row
+            //Update the Item List in the GUI to match the selected row 
             UpdateOrderUI();
+            PlayNotificationSound(); //play the nofication sound
+        }
+
+        private void PlayNotificationSound() {
+            SoundPlayer notificationSound = new SoundPlayer(Program.NotificationSoundPath);
+            notificationSound.Play();
         }
 
         /* Updates the UI to match the order in the selected row by

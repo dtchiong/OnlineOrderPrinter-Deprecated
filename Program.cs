@@ -45,6 +45,8 @@ namespace GmailQuickstart {
 
         public static string ErrorLogDir = Path.Combine(AppWorkingDir, "Error-Logs");
 
+        public static string NotificationSoundPath = Path.Combine(AppWorkingDir, "Sounds", "notification.wav");
+
         /* Example order ids to test from
         * GrubHub:
         * 16496c1551e4bdb6 - delivery
