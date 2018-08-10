@@ -80,3 +80,4 @@ C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\o
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Release\Order Parser.csproj.CopyComplete
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Release\Online Order Printer.exe
 C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Release\Online Order Printer.pdb
+C:\Users\Derek\Documents\dev\MICROSOFT_VISUAL_STUDIO\Order Parser\Order Parser\obj\Release\Order_Parser.Properties.Resources.resources

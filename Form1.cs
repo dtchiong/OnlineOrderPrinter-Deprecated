@@ -52,8 +52,7 @@ namespace GmailQuickstart {
         /* Gets the order that is currently selected, if any, and then prints it, and sets the Print Status */
         private void print_Click(object sender, EventArgs e) {
             DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
-            
-            
+                 
             if (selectedRows.Count > 0) {
                 OrderContainer orderCon = (OrderContainer)selectedRows[0].DataBoundItem;
                 if (orderCon == null) return; //incase there are no orders
@@ -88,6 +87,7 @@ namespace GmailQuickstart {
 
             UpdateItemListUI(selectedRow);
             UpdateOrderDetailsUI(selectedRow);
+            UpdateItemDetailsUI();
         }
 
         /* Updates the Item List in the UI to match the currently selected row */
@@ -115,6 +115,25 @@ namespace GmailQuickstart {
             messageIdTextBox.Text = order.MessageId;
         }
 
+        /* Updates the Item List UI to match the currently selected item in the Item List UI*/
+        private void UpdateItemDetailsUI() {
+            DataGridViewSelectedRowCollection selectedRows = dataGridView2.SelectedRows;
+            Item item = (Item)selectedRows[0].DataBoundItem;
+            
+            textBoxQty.Text = item.Quantity.ToString();
+            textBoxItemName.Text = item.ItemName;
+
+            List<string> adjustmentList = new List<string>();
+            adjustmentList.Add(item.Size);
+            adjustmentList.Add(item.Temperature);
+            adjustmentList.Add(item.IceLevel);
+            adjustmentList.Add(item.SugarLevel);
+            adjustmentList.Add(item.MilkSubsitution);
+
+            listBoxAdjustments.DataSource = adjustmentList;
+            listBoxToppings.DataSource = item.AddOnList;  
+        }
+
         /* The Form's load event calls the InitApp() to start checking and processing emails */
         private void Form1_Load(object sender, EventArgs e) {
             Program.InitApp();
@@ -137,11 +156,16 @@ namespace GmailQuickstart {
                 //selectedRows[0].DefaultCellStyle.BackColor = Color.BlanchedAlmond;
                 UpdateOrderUI();
             }
-            
-
-            
         }
-        
+
+        /* Updates the item details to match the currently selected item if the row changes */
+        private void dataGridView2_SelectionChanged(object sender, EventArgs e) {
+            DataGridViewSelectedRowCollection selectedRows = dataGridView2.SelectedRows;
+            if (selectedRows.Count > 0) {
+                UpdateItemDetailsUI();
+            }
+        }
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Exit();
         }

@@ -299,7 +299,7 @@ namespace GmailQuickstart {
          * Used for flavored Eggpuffs that choose flavor
          */
         private void ParseFlavorAddition(string[] words, Item item) {
-            item.ItemName = item.ItemName + " -" + words[2];
+            //item.ItemName = item.ItemName + " -" + words[2];
             item.ItemName = words[2] + " " + item.ItemName.Replace("(Flavored)", "");
             item.ItemName = item.ItemName.Trim();
         }
