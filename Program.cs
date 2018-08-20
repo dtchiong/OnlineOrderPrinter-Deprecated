@@ -28,7 +28,7 @@ namespace GmailQuickstart {
 
         static GmailService service;
 
-        public static bool DebugBuild = true;
+        public static bool DebugBuild = false;
 
         private static string DateToday = DateTime.Now.ToString("MMM-d-yyyy");
         public static string AppWorkingDir = AppDomain.CurrentDomain.BaseDirectory;
@@ -166,7 +166,7 @@ namespace GmailQuickstart {
         private static void PartialSyncAppToEmail() {
 
             string historyIdAsString = File.ReadAllText(HistoryIdPath);
-            ulong historyId = Convert.ToUInt64(historyIdAsString, 10);
+            ulong historyId = Convert.ToUInt64(historyIdAsString, 10); //bug
             Console.WriteLine("Read History ID: " + historyIdAsString);
 
             List<string> messageIdList = ListHistory(service, userId, historyId);

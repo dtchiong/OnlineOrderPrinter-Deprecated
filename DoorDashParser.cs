@@ -89,7 +89,7 @@ public List<string> ExtractTextFromPDF(string pathToPdf, string messageId) {
 
                     lines.Add(line);
 
-                    //Console.WriteLine(("LINE " + lineCount.ToString().PadLeft(3) + "  " + line));
+                    Console.WriteLine(("LINE " + lineCount.ToString().PadLeft(3) + "  " + line));
                 }
             }
             if (Program.DebugBuild) PrintToFile(lines, messageId);
@@ -186,6 +186,7 @@ public List<string> ExtractTextFromPDF(string pathToPdf, string messageId) {
             SetItemCounts(order.ItemList);
             SetOrderSize(order);
             SetUniqueItemCount(order);
+            SetDrinkAndSnackCount(order);
 
             return order;
         }
