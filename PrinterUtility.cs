@@ -16,8 +16,6 @@ namespace GmailQuickstart {
         const int TemplateFieldCount = 13; //the numnber of fields in the template
 
         public static Connection printerConn = null;
-
-        public Queue<Order> printQ = new Queue<Order>();
      
         /* Constrcutor - intializes the printer connection and sets language to ZPL */
         public PrinterUtility() {

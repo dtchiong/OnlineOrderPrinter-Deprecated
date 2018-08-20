@@ -28,10 +28,10 @@ namespace GmailQuickstart {
 
         static GmailService service;
 
-        public static bool DebugBuild = false;
+        public static bool DebugBuild = true;
 
         private static string DateToday = DateTime.Now.ToString("MMM-d-yyyy");
-        public static string AppWorkingDir = AppDomain.CurrentDomain.BaseDirectory;
+        public  static string AppWorkingDir = AppDomain.CurrentDomain.BaseDirectory;
         private static string GrubHubDir = Path.Combine(AppWorkingDir, "GrubHub-Orders", DateToday);
         private static string DoorDashDir = Path.Combine(AppWorkingDir, "DoorDash-Orders", DateToday);
 
@@ -51,19 +51,17 @@ namespace GmailQuickstart {
         * GrubHub:
         * 16496c1551e4bdb6 - delivery
         * 16494e24be61d2ca - pickup - 
-        * 164a0be8486f56d7
+        * 165444f0374f0592 - adjusted order
         * DoorDash:
         * 164b501111cebfe1
         * 164aebfdb8b7a59a
         */
-        static string testMessageId = "164aebfdb8b7a59a";
+        static string testMessageId = "165444f0374f0592";
         static string userId = "t4milpitasonline@gmail.com";
 
         static TimerT timer;
 
-        static PrinterUtility printerUtil = new PrinterUtility();
-
-        //If true: tests the app by only handling the email with testMessageId once, then stops, else app runs in full sync mode
+        //If true: tests the app by only handling the email with testMessageId once, then stops, else app runs in sync mode
         private static bool debugMailMode = false;
 
         public static Form1 form1;
@@ -105,7 +103,10 @@ namespace GmailQuickstart {
 
             //If this mode is on, then we're just going to handle the testMessageID
             if (debugMailMode) {
-                HandleMessage(testMessageId);
+                Order order = HandleMessage(testMessageId);
+                if (order != null) {
+                    UpdateOrderList(order);
+                }
                 Console.Read();
                 return;
             }

@@ -28,18 +28,55 @@ namespace GmailQuickstart {
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
 
-            var metaInfoNodes      = htmlDoc.DocumentNode.SelectNodes("//body/table/tbody/tr/td/table/tbody/tr/td/table[3]/tbody/tr/th[2]/table/tbody/tr/th/div/div[2]/div/div");
-            var deliveryMethodNode = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[3]/tbody/tr/th/table/tbody/tr/th/div/div[2]/div/span/span");
-            var pickupTimeNode     = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[3]/tbody/tr/th/table/tbody/tr/th/div/div[2]/div[2]/span");
+            //We begin setting the possible locations of the relevant information, and then choose which one depending on the format on the html doc
+            string metaInfoLoc1     = "//body/table/tbody/tr/td/table/tbody/tr/td/table[3]/tbody/tr/th[2]/table/tbody/tr/th/div/div[2]/div/div";
+            string metaInfoLoc2     = "//body/table/tbody/tr/td/table/tbody/tr/td/table[4]/tbody/tr/th[2]/table/tbody/tr/th/div/div/div/div";
+            string metaInfoLoc3     = "//body/table/tbody/tr/td/table/tbody/tr/td/table[5]/tbody/tr/th[2]/table/tbody/tr/th/div/div/div/div";
 
-            //If this is null, then there's an extra <table> "SCHEDULED ORDER: PREVIEW" before the pickup/delivery <table>
-            if (metaInfoNodes == null) {
-                metaInfoNodes = htmlDoc.DocumentNode.SelectNodes("//body/table/tbody/tr/td/table/tbody/tr/td/table[4]/tbody/tr/th[2]/table/tbody/tr/th/div/div/div/div");
-                deliveryMethodNode = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[4]/tbody/tr/th/table/tbody/tr/th/div/div/div/span/span");
-                pickupTimeNode     = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[4]/tbody/tr/th/table/tbody/tr/th/div/div/div[2]/span");
+            string metaInfoBaseLoc1 = "//body/table/tbody/tr/td/table/tbody/tr/td/table[3]";
+            string metaInfoBaseLoc2 = "//body/table/tbody/tr/td/table/tbody/tr/td/table[4]";
+            string metaInfoBaseLoc3 = "//body/table/tbody/tr/td/table/tbody/tr/td/table[5]";
 
+            string delivMethodLoc1  = @"/tbody/tr/th/table/tbody/tr/th/div/div[2]/div/span/span";
+            string delivMethodLoc2  = @"/tbody/tr/th/table/tbody/tr/th/div/div/div/span/span";
+            string delivMethodLoc3  = @"/tbody/tr/th/table/tbody/tr/th/div/div/div/span/span";
+
+            string pickUpTimeLoc1   = @"/tbody/tr/th/table/tbody/tr/th/div/div[2]/div[2]/span";
+            string pickUpTimeLoc2   = @"/tbody/tr/th/table/tbody/tr/th/div/div/div[2]/span";
+            string pickUpTimeLoc3   = @"/tbody/tr/th/table/tbody/tr/th/div/div/div[2]/span";
+
+            HtmlNodeCollection metaInfoNodes      = null;
+            HtmlNode           deliveryMethodNode = null;
+            HtmlNode           pickupTimeNode     = null;
+            
+            //If this is not null, the order is in standard format
+            if (htmlDoc.DocumentNode.SelectNodes(metaInfoLoc1) != null) {
+                Debug.WriteLine("Using Standard format");
+                metaInfoNodes      = htmlDoc.DocumentNode.SelectNodes(metaInfoLoc1);
+                deliveryMethodNode = htmlDoc.DocumentNode.SelectSingleNode(metaInfoBaseLoc1 + delivMethodLoc1);
+                pickupTimeNode     = htmlDoc.DocumentNode.SelectSingleNode(metaInfoBaseLoc1 + pickUpTimeLoc1);
             }
-            var pickupByNameNode = metaInfoNodes.ElementAt(1);
+            //Otherwise the previous loc is null and there's an extra <table> "SCHEDULED ORDER" before the pickup/delivery <table> 
+            //so we use location 2
+            else if (htmlDoc.DocumentNode.SelectNodes(metaInfoLoc2) != null) {
+                Debug.WriteLine("Using Scheduled Order format");
+                metaInfoNodes = htmlDoc.DocumentNode.SelectNodes(metaInfoLoc2);
+                deliveryMethodNode = htmlDoc.DocumentNode.SelectSingleNode(metaInfoBaseLoc2 + delivMethodLoc2);
+                pickupTimeNode = htmlDoc.DocumentNode.SelectSingleNode(metaInfoBaseLoc2 + pickUpTimeLoc2);
+            }
+            //Otherwise the previous loc is null and there's also an extra <table> "ORDER ADJUSTMENT" before the relevant <table>
+            //so we use location 3
+            else if (htmlDoc.DocumentNode.SelectNodes(metaInfoLoc3) != null) {
+                Debug.WriteLine("Using Adjusted Order format");
+                metaInfoNodes = htmlDoc.DocumentNode.SelectNodes(metaInfoLoc3);
+                deliveryMethodNode = htmlDoc.DocumentNode.SelectSingleNode(metaInfoBaseLoc3 + delivMethodLoc3);
+                pickupTimeNode = htmlDoc.DocumentNode.SelectSingleNode(metaInfoBaseLoc3 + pickUpTimeLoc3);
+            }
+            //If location 3 is still null, then the format is not recognized
+            else {
+                Debug.WriteLine("Cannot parse order - format not recognized");
+                return null;
+            }
 
             var orderNumberNode = htmlDoc.DocumentNode.SelectSingleNode("//body/table/tbody/tr/td/table/tbody/tr/td/table[2]/tbody/tr/th/table/tbody/tr/th/div/div[4]/span[2]");
             ParseOrderNumber(orderNumberNode, order);
@@ -56,6 +93,7 @@ namespace GmailQuickstart {
                 order.DeliveryMethod = "Pickup";
             }
 
+            var pickupByNameNode = metaInfoNodes.ElementAt(1);
             ParsePickupName(pickupByNameNode, order);
             ParseContactNumber(metaInfoNodes.ElementAt(metaDivCount - 1), order);
            
@@ -233,7 +271,8 @@ namespace GmailQuickstart {
                     break;
                 case "Tea":
                     //Console.WriteLine("Identified Tea Type: " + name);
-                    item.ItemName = item.ItemName.Replace("Tea", name);
+                    item.ItemName = Regex.Replace(item.ItemName, @"\s+", " "); //replaces multiple spaces with a single one
+                    item.ItemName = item.ItemName.Trim().Replace("Tea", name);
                     break;
                 default:
                     Console.WriteLine("Unidentified add on type: " + name);
