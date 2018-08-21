@@ -57,7 +57,7 @@ namespace GmailQuickstart {
         * 164b501111cebfe1
         * 164aebfdb8b7a59a
         */
-        static string testMessageId = "16559c67627cb70b";
+        static string testMessageId = "165444f0374f0592";
         static string userId = "t4milpitasonline@gmail.com";
 
         static TimerT timer;

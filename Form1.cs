@@ -24,7 +24,7 @@ namespace GmailQuickstart {
         public Form1() {
             InitializeComponent();
 
-            Text = "Derek's Online Order Printer v1.3.1";
+            Text = "Derek's OnlineOrderPrinter v1.4.1";
 
             //Initialize dgv columns and properties
             //Prevents columns from auto populating with OrderContainer fields. 
@@ -68,12 +68,11 @@ namespace GmailQuickstart {
                 OrderContainer orderCon = (OrderContainer)selectedRows[0].DataBoundItem;
                 if (orderCon == null) return; //incase there are no orders
 
-                bool printed = PrinterUtility.PrintOrder(orderCon.orderArray);
+                bool printed = PrinterUtility.PrintOrder(orderCon);
                 if (printed) {
                     orderCon.PrintStatus = "Printed";
-                }else {
-                    orderCon.PrintStatus = "Error";
-                }
+                }//else error messages are handled in the print utility
+
                 //To force the form to update the print status value. 
                 //dataGridView1.Refresh() maybe useful if using a "Print All" button
                 orderListBindingSrc.ResetCurrentItem();
@@ -123,12 +122,15 @@ namespace GmailQuickstart {
         /* Given the orderNum, set the associated orders' status to Cancelled */
         public void SetOrderToCancelled(string orderNum) {
             List<OrderContainer> orderConList;
+            bool cancelledOrder = false;
             if (OrderTableByOrdNum.TryGetValue(orderNum, out orderConList)) {
                 foreach (var orderCon in orderConList) {
+                    cancelledOrder = true;
                     orderCon.Status = "Cancelled";
                 }
             }
-            PlaySound(Program.CancelledOrderSoundPath);
+            //this prevents from playing sound if no orders in the list were actually cancelled
+            if (cancelledOrder) PlaySound(Program.CancelledOrderSoundPath); 
         }
 
         //Plays the sound given the path of it

@@ -68,7 +68,9 @@ namespace GmailQuickstart {
          *   12 |   48    |"Special Instructions1"  
          *   13 |   48    |"Special Instructions2" 
          */
-        public static bool PrintOrder(string[][] items) {
+        public static bool PrintOrder(OrderContainer orderCon) {
+
+            string[][] items = orderCon.orderArray;
 
             bool printStatus = true;
             Debug.WriteLine("START: PrintOrder()");
@@ -77,30 +79,54 @@ namespace GmailQuickstart {
                 if (printerConn == null) {
                     //Get the connection to the printer driver
                     printerConn = FindConnection();
+                    if (printerConn == null) {
+                        orderCon.PrintStatus = "Error: Printer not detected";
+                        Debug.WriteLine("Error: Printer not detected");
+                        return false;
+                    }       
                 }
 
-                //We open the connection to printer, then get the instance of the printer
+                //We try to open the connection
                 try {
-                    Debug.WriteLine("PrinterOrder() - before opening connection");
                     printerConn.Open();
-                    ZebraPrinter printer = ZebraPrinterFactory.GetInstance(PrinterLanguage.ZPL, printerConn);
-                    
+                } catch (Exception e) {
+                    Debug.WriteLine("Error: Cannot open connection" + e.Message);
+                    orderCon.PrintStatus = "Error: Cannot open connection";
+                    return false;
+                }
+
+                //The connection is open, so we get the instance of the printer and try to print
+                try {
+                    ZebraPrinter printer = ZebraPrinterFactory.GetInstance(PrinterLanguage.ZPL, printerConn);            
                     Debug.WriteLine("PrinterOrder() - got printer instance");
 
                     for (int i=items.Length-1; i > -1; i--) {
                         printer.PrintStoredFormat(PrintTemplatePath, items[i]);
                     }
 
-                }catch(ConnectionException e) {
-                    Debug.WriteLine("PrinterOrder()-103- something messed up");
-                    Debug.WriteLine(e.ToString());
-                    printStatus = false;
+                }catch(Exception e) {
+                    Debug.WriteLine("Error: " + e.Message);
+                    try {
+                        //We check the status of the printer to see why it failed, which takes a long time without a Usbstatus channel
+                        //which is while we only check if printing fails
+                        string status = CheckPrinterStatus(printerConn);
+                        if (status != "true") {
+                            Debug.WriteLine(status);
+                            orderCon.PrintStatus = status;
+                            return false;
+                        }
+                    }catch(Exception e2) {
+                        Debug.WriteLine("Error: " + e2.Message);
+                        orderCon.PrintStatus = "Error: Connection error";
+                        return false;
+                    }
                 }finally {
                     printerConn.Close();
                 }
               
             } catch (ConnectionException e) {
                 Debug.WriteLine($"Error discovering local printers: {e.Message}");
+                orderCon.PrintStatus = "Error: Can't discover local printers";
                 printStatus = false;
             }
 
@@ -209,7 +235,7 @@ namespace GmailQuickstart {
         /* Returns true if the printer is ready to print, else false 
          * Called before printing 
          */
-        private bool CheckPrinterStatus(Connection conn) {
+        private static string CheckPrinterStatus(Connection conn) {
             ZebraPrinter printer = ZebraPrinterFactory.GetLinkOsPrinter(conn);
             if (printer == null) {
                 printer = ZebraPrinterFactory.GetInstance(PrinterLanguage.ZPL, conn);
@@ -217,16 +243,15 @@ namespace GmailQuickstart {
 
             PrinterStatus printerStatus = printer.GetCurrentStatus();
             if (printerStatus.isReadyToPrint) {
-                Debug.WriteLine("Printer Status: Ready to Print");
-                return true;
+                return "true";
             }else if (printerStatus.isPaused) {
-                Debug.WriteLine("Printer Status: Cannot printer - printer is paused");
+                return "Error: Printer is paused";
             }else if (printerStatus.isHeadOpen) {
-                Debug.WriteLine("Printer Status: Cannot print - head is open");
+                return "Error: Printer head is open";
             }else if (printerStatus.isPaperOut) {
-                Debug.WriteLine("Printer Status: Cannot print - paper is out");
+                return "Error: Paper is out";
             }
-            return false;
+            return "Error";
         }
 
         /* Called during and after printing to check printer status */
