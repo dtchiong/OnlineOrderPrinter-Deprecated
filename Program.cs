@@ -29,8 +29,6 @@ namespace GmailQuickstart {
 
         static GmailService service;
 
-        public static bool DebugBuild = false;
-
         private static string DateToday = DateTime.Now.ToString("MMM-d-yyyy");
         public  static string AppWorkingDir = AppDomain.CurrentDomain.BaseDirectory;
         private static string GrubHubDir = Path.Combine(AppWorkingDir, "GrubHub-Orders", DateToday);
@@ -63,6 +61,8 @@ namespace GmailQuickstart {
 
         static TimerT timer;
 
+        public static bool DebugBuild = false;
+        public static bool DebugPrint = false;
         //If true: tests the app by only handling the email with testMessageId once, then stops, else app runs in sync mode
         private static bool debugMailMode = false;
 
@@ -94,7 +94,7 @@ namespace GmailQuickstart {
                     "user",
                     CancellationToken.None,
                     new FileDataStore(credPath, true)).Result;
-                Console.WriteLine("Credential file saved to: " + credPath);
+                Debug.WriteLine("Credential file saved to: " + credPath);
             }
 
             // Create Gmail API service.
@@ -159,7 +159,7 @@ namespace GmailQuickstart {
 
             string historyId = GetNewestHistoryId(messageList[0].Id);
 
-            Console.WriteLine("Wrote History ID: " + historyId);
+            Debug.WriteLine("Wrote History ID: " + historyId);
 
             //Save the historyId to file
             UpdateHistoryId(historyId);
@@ -172,14 +172,14 @@ namespace GmailQuickstart {
 
             string historyIdAsString = File.ReadAllText(HistoryIdPath);
             ulong historyId = Convert.ToUInt64(historyIdAsString, 10); //bug
-            Console.WriteLine("Read History ID: " + historyIdAsString);
+            Debug.WriteLine("Read History ID: " + historyIdAsString);
 
             List<string> messageIdList = ListHistory(service, userId, historyId);
 
             if (messageIdList != null) {
                 HandleMessages(messageIdList);
             } else {
-                Console.WriteLine("Email up to date: No new messages");
+                Debug.WriteLine("Email up to date: No new messages");
             }
         }
 
@@ -212,7 +212,7 @@ namespace GmailQuickstart {
         /* Calls HandleMessage() for each messageId in the list */
         private static void HandleMessages(List<string> messageIdList) {
             foreach (string messageId in messageIdList) {
-                Console.WriteLine("***************************** START MESSAGE **********************************");
+                Debug.WriteLine("***************************** START MESSAGE **********************************");
                 Order order = HandleMessage(messageId);
 
                 //We check if the messageId is part of a thread of other messages,
@@ -222,7 +222,7 @@ namespace GmailQuickstart {
                 if (order != null) {
                     UpdateOrderList(order, isAdjustedOrder);
                 }
-                Console.WriteLine("***************************** END MESSAGE ************************************");
+                Debug.WriteLine("***************************** END MESSAGE ************************************");
             }
         }
 
@@ -231,7 +231,7 @@ namespace GmailQuickstart {
          */
         private static Order HandleMessage(string messageId) {
 
-            Console.WriteLine("Handling message: " + messageId);
+            Debug.WriteLine("Handling message: " + messageId);
 
             bool isGrubHubOrder = false;
             string base64Input = null;  //the input to be converted to base64url encoding format
@@ -241,7 +241,7 @@ namespace GmailQuickstart {
 
             var emailResponse = GetMessage(service, userId, messageId);
             if (emailResponse == null) {
-                Console.WriteLine("Message deleted, returning");
+                Debug.WriteLine("Message deleted, returning");
                 return null;
             }
 
@@ -255,7 +255,7 @@ namespace GmailQuickstart {
             //Check if the email is from GrubHub
             if (fromHeader.Value == "orders@eat.grubhub.com") {
 
-                Console.WriteLine("Email Type: GrubHub");
+                Debug.WriteLine("Email Type: GrubHub");
                 isGrubHubOrder = true;
                 try {
                     var body = emailResponse.Payload.Body.Data;
@@ -264,12 +264,12 @@ namespace GmailQuickstart {
                     fileName = messageId + ".html";
                     storageDir = GrubHubDir;
                 } catch (Exception e) {
-                    Console.WriteLine(e.Message);
+                    Debug.WriteLine(e.Message);
                 }
             //Otherwise check if the email is from DoorDash
             } else if (fromHeader.Value == @"DoorDash <orders@doordash.com>") {
 
-                Console.WriteLine("Email Type: DoorDash");
+                Debug.WriteLine("Email Type: DoorDash");
                 try {
                     
                     var attachId = emailResponse.Payload.Parts[1].Body.AttachmentId;
@@ -281,7 +281,7 @@ namespace GmailQuickstart {
                     fileName = messageId + ".pdf";
                     storageDir = DoorDashDir;
                 }catch(Exception e) {
-                    Console.WriteLine(e.Message);
+                    Debug.WriteLine(e.Message);
                 }
             //The email is refers to a cancelled GrubHub order, so set the associated OrderCons' status to cancelled
             }else if (fromHeader.Value == "helpme@eat.grubhub.com") {
@@ -297,7 +297,7 @@ namespace GmailQuickstart {
                 return null;
             //The email is irrelevant
             }else {
-                Console.WriteLine("Not an order, returning");
+                Debug.WriteLine("Not an order, returning");
                 return null;
             }          
 
@@ -306,10 +306,10 @@ namespace GmailQuickstart {
 
             //Saves the order to file if it doesn't exist
             if (!File.Exists(filePath)) {
-                Console.WriteLine("Writing new file: " + fileName);
+                Debug.WriteLine("Writing new file: " + fileName);
                 File.WriteAllBytes(filePath, data);
             } else {
-                Console.WriteLine("File already exists: " + fileName);
+                Debug.WriteLine("File already exists: " + fileName);
             }
             Debug.WriteLine("----------------------");
 
@@ -319,7 +319,7 @@ namespace GmailQuickstart {
                 string decodedBody = Encoding.UTF8.GetString(data);
                 Order order = grubHubParser.ParseOrder(decodedBody, dateTime, messageId);
                  
-                order.PrintOrder();
+                if (DebugPrint) order.PrintOrder();
                 return order;
                 
             } else {
@@ -328,7 +328,7 @@ namespace GmailQuickstart {
                 List<string> lines = doorDashParser.ExtractTextFromPDF(filePath, messageId);
                 Order order = doorDashParser.ParseOrder(lines, dateTime, messageId);
 
-                order.PrintOrder();
+                if (DebugPrint) order.PrintOrder();
                 return order;
             }
         }
@@ -375,7 +375,7 @@ namespace GmailQuickstart {
          * by calling the PartialSync()
          */
         private static void CheckEmail(object state) {
-            //Console.WriteLine(state);
+            //Debug.WriteLine(state);
             PartialSyncAppToEmail();
         }
 
@@ -384,7 +384,7 @@ namespace GmailQuickstart {
             try {
                 return service.Users.Messages.Attachments.Get(userId, messageId, attachmentId).Execute();
             } catch (Exception e) {
-                Console.WriteLine("An error occured: " + e.Message);
+                Debug.WriteLine("An error occured: " + e.Message);
             }
             return null;
         }
@@ -394,7 +394,7 @@ namespace GmailQuickstart {
             try {
                 return service.Users.Messages.Get(userId, messageId).Execute();
             } catch (Exception e) {
-                Console.WriteLine("An error occurred: " + e.Message);
+                Debug.WriteLine("An error occurred: " + e.Message);
             }
             return null;
         }
@@ -412,7 +412,7 @@ namespace GmailQuickstart {
                 result.AddRange(response.Messages);
 
             } catch (Exception e) {
-                Console.WriteLine("An error occured: " + e.Message);
+                Debug.WriteLine("An error occured: " + e.Message);
             }
             return result;
         }
@@ -448,7 +448,7 @@ namespace GmailQuickstart {
                     request.PageToken = response.NextPageToken;
 
                 } catch (Exception e) {
-                    Console.WriteLine("An error occurred: " + e.Message);
+                    Debug.WriteLine("An error occurred: " + e.Message);
                 }
             } while (!String.IsNullOrEmpty(request.PageToken));
 

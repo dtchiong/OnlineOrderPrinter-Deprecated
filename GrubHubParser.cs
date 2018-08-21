@@ -51,7 +51,7 @@ namespace GmailQuickstart {
             
             //If this is not null, the order is in standard format
             if (htmlDoc.DocumentNode.SelectNodes(metaInfoLoc1) != null) {
-                Debug.WriteLine("Using Standard format");
+                //Debug.WriteLine("Using Standard format");
                 metaInfoNodes      = htmlDoc.DocumentNode.SelectNodes(metaInfoLoc1);
                 deliveryMethodNode = htmlDoc.DocumentNode.SelectSingleNode(metaInfoBaseLoc1 + delivMethodLoc1);
                 pickupTimeNode     = htmlDoc.DocumentNode.SelectSingleNode(metaInfoBaseLoc1 + pickUpTimeLoc1);
@@ -59,7 +59,7 @@ namespace GmailQuickstart {
             //Otherwise the previous loc is null and there's an extra <table> "SCHEDULED ORDER" before the pickup/delivery <table> 
             //so we use location 2
             else if (htmlDoc.DocumentNode.SelectNodes(metaInfoLoc2) != null) {
-                Debug.WriteLine("Using Scheduled Order format");
+                //Debug.WriteLine("Using Scheduled Order format");
                 metaInfoNodes = htmlDoc.DocumentNode.SelectNodes(metaInfoLoc2);
                 deliveryMethodNode = htmlDoc.DocumentNode.SelectSingleNode(metaInfoBaseLoc2 + delivMethodLoc2);
                 pickupTimeNode = htmlDoc.DocumentNode.SelectSingleNode(metaInfoBaseLoc2 + pickUpTimeLoc2);
@@ -67,14 +67,14 @@ namespace GmailQuickstart {
             //Otherwise the previous loc is null and there's also an extra <table> "ORDER ADJUSTMENT" before the relevant <table>
             //so we use location 3
             else if (htmlDoc.DocumentNode.SelectNodes(metaInfoLoc3) != null) {
-                Debug.WriteLine("Using Adjusted Order format");
+                //Debug.WriteLine("Using Adjusted Order format");
                 metaInfoNodes = htmlDoc.DocumentNode.SelectNodes(metaInfoLoc3);
                 deliveryMethodNode = htmlDoc.DocumentNode.SelectSingleNode(metaInfoBaseLoc3 + delivMethodLoc3);
                 pickupTimeNode = htmlDoc.DocumentNode.SelectSingleNode(metaInfoBaseLoc3 + pickUpTimeLoc3);
             }
             //If location 3 is still null, then the format is not recognized
             else {
-                Debug.WriteLine("Cannot parse order - format not recognized");
+                //Debug.WriteLine("Cannot parse order - format not recognized");
                 return null;
             }
 
@@ -128,7 +128,6 @@ namespace GmailQuickstart {
              
             string tmp = node.InnerHtml; // #64020523 — 4398339
             tmp = Regex.Replace(tmp, @"[#\s]*", ""); //removes all whitespace and '#' chars
-            //tmp = tmp.Replace((char)0x2013, '-');
             tmp = tmp.Replace((char)0x2014, '-');
             order.OrderNumber = tmp;
         }
@@ -240,7 +239,7 @@ namespace GmailQuickstart {
                         ParseAddOnTypeAndName(addOnType, addOnName, item);
                     } else {
                         item.AddOnList.Add(addOnName);
-                        Console.WriteLine("Unidentified add on type: " + addOnName);
+                        Debug.WriteLine("Unidentified add on type: " + addOnName);
                     }
                 }
             }
@@ -254,7 +253,7 @@ namespace GmailQuickstart {
                 name = correctedAddOnName;
             }
 
-            //Console.WriteLine("Got addOn type: " + type);
+            //Debug.WriteLine("Got addOn type: " + type);
             switch (type) {
                 case "Temperature":
                     item.Temperature = name;
@@ -275,12 +274,12 @@ namespace GmailQuickstart {
                     item.MilkSubsitution = name;
                     break;
                 case "Tea":
-                    //Console.WriteLine("Identified Tea Type: " + name);
+                    //Debug.WriteLine("Identified Tea Type: " + name);
                     item.ItemName = Regex.Replace(item.ItemName, @"\s+", " "); //replaces multiple spaces with a single one
                     item.ItemName = item.ItemName.Trim().Replace("Tea", name);
                     break;
                 default:
-                    Console.WriteLine("Unidentified add on type: " + name);
+                    Debug.WriteLine("Unidentified add on type: " + name);
                     break;
             }
         }
@@ -300,9 +299,9 @@ namespace GmailQuickstart {
         //Node printing function for debugging
         public static void PrintNode(string title, HtmlNode node) {
             if (node != null)
-                Console.WriteLine(title + ": " + node.InnerHtml);
+                Debug.WriteLine(title + ": " + node.InnerHtml);
             else
-                Console.WriteLine(title + ": NULL");
+                Debug.WriteLine(title + ": NULL");
         }
 
     }

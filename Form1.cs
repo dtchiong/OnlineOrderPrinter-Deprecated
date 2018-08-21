@@ -104,10 +104,8 @@ namespace GmailQuickstart {
         public void InsertToOrderNumTable(OrderContainer orderCon) {
             List<OrderContainer> orderConList;
             if (OrderTableByOrdNum.TryGetValue(orderCon.order.OrderNumber, out orderConList)) {
-                Debug.WriteLine("Found order in OrderNumTable");
                 orderConList.Add(orderCon);
             } else {
-                Debug.WriteLine("Making new entry in OrderNumTable");
                 orderConList = new List<OrderContainer>();
                 orderConList.Add(orderCon);
                 OrderTableByOrdNum.Add(orderCon.order.OrderNumber, orderConList); //Insert the entry into the table for tracking grubhub cancelled orders
@@ -128,7 +126,6 @@ namespace GmailQuickstart {
             if (OrderTableByOrdNum.TryGetValue(orderNum, out orderConList)) {
                 foreach (var orderCon in orderConList) {
                     orderCon.Status = "Cancelled";
-                    Debug.WriteLine("set Status to cancelled");
                 }
             }
         }

@@ -89,7 +89,7 @@ public List<string> ExtractTextFromPDF(string pathToPdf, string messageId) {
 
                     lines.Add(line);
 
-                    Console.WriteLine(("LINE " + lineCount.ToString().PadLeft(3) + "  " + line));
+                    if (Program.DebugPrint) Debug.WriteLine(("LINE " + lineCount.ToString().PadLeft(3) + "  " + line));
                 }
             }
             if (Program.DebugBuild) PrintToFile(lines, messageId);
@@ -343,7 +343,7 @@ public List<string> ExtractTextFromPDF(string pathToPdf, string messageId) {
             int custNameLen = indOfWordPage - lenOfWordCust;
 
             string custName = line.Substring(lenOfWordCust, custNameLen);
-            //Console.WriteLine("Customer Name: " + custName);
+            //Debug.WriteLine("Customer Name: " + custName);
             order.CustomerName = custName;
         }
 
@@ -394,7 +394,7 @@ public List<string> ExtractTextFromPDF(string pathToPdf, string messageId) {
             int indOfWordAt = line.IndexOf(" at");
 
             string contactNumber = line.Remove(indOfWordAt);
-            //Console.WriteLine("Contact Number: " + contactNumber);
+            //Debug.WriteLine("Contact Number: " + contactNumber);
             order.ContactNumber = contactNumber;
         }
 
