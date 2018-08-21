@@ -14,9 +14,10 @@ namespace GmailQuickstart {
     public partial class Form1 : Form {
 
         public static BindingSource orderListBindingSrc = new BindingSource();
-        public static BindingSource orderInfoBindingSrc = new BindingSource();
-
         public static MySortableBindingList<OrderContainer> OrderList = new MySortableBindingList<OrderContainer>();
+
+        //the dictionary of orders where the key is the messageId, used to track order status
+        public static Dictionary<string, OrderContainer> OrderTable = new Dictionary<string, OrderContainer>();
 
         public Form1() {
             InitializeComponent();
@@ -31,6 +32,7 @@ namespace GmailQuickstart {
             dataGridView1.DataSource = orderListBindingSrc;
             orderListBindingSrc.Sort = "TimeReceivedTicks DESC"; //set to sort DESC on the Ticks property
 
+            dataGridView1.Columns.Add(NewTextBoxCol("Status", "Status"));
             dataGridView1.Columns.Add(NewTextBoxCol("Service", "Service"));
             dataGridView1.Columns.Add(NewTextBoxCol("Name", "Name"));
             dataGridView1.Columns.Add(NewTextBoxCol("ItemCount", "Order Size")); 
@@ -83,6 +85,7 @@ namespace GmailQuickstart {
         public void AddOrderToList(Order order) {
             OrderContainer orderCon = new OrderContainer(order);
             OrderList.Add(orderCon); //Add the OrderContainer to the OrderList for tracking unprinted orders
+            OrderTable.Add(order.MessageId, orderCon); //Insert the entry into the table for easily updating order status
 
             //Update the Item List in the GUI to match the selected row 
             UpdateOrderUI();
@@ -196,10 +199,7 @@ namespace GmailQuickstart {
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e) {
-
         }
-
-
     }
 
     /* The object that will be data-bound to the orderGridView */
@@ -213,9 +213,12 @@ namespace GmailQuickstart {
         public OrderContainer(Order _order) {
             order = _order;
             orderArray = PrinterUtility.OrderToArray(order);
+            Status = "Active";
             PrintStatus = "Not Printed"; //maybe use Enum for print status later?
             PrintCount = 0;
         }
+
+        public string Status { get; set; }
 
         public string Service {
             get { return order.Service; }
