@@ -45,6 +45,7 @@ namespace GmailQuickstart {
         public static string ErrorLogDir = Path.Combine(AppWorkingDir, "Error-Logs");
 
         public static string NotificationSoundPath = Path.Combine(AppWorkingDir, "Sounds", "notification.wav");
+        public static string CancelledOrderSoundPath = Path.Combine(AppWorkingDir, "Sounds", "cancelled-order.wav");
 
         /* Example order ids to test from
         * GrubHub:

@@ -94,7 +94,7 @@ namespace GmailQuickstart {
 
             //Update the Item List in the GUI to match the selected row 
             UpdateOrderUI();
-            PlayNotificationSound(); //play the nofication sound
+            PlaySound(Program.NotificationSoundPath); //play the nofication sound
         }
 
         /* If the orderCon's orderNum already exists in the table, we add the orderCon to the list, else
@@ -128,11 +128,13 @@ namespace GmailQuickstart {
                     orderCon.Status = "Cancelled";
                 }
             }
+            PlaySound(Program.CancelledOrderSoundPath);
         }
 
-        private void PlayNotificationSound() {
-            SoundPlayer notificationSound = new SoundPlayer(Program.NotificationSoundPath);
-            notificationSound.Play();
+        //Plays the sound given the path of it
+        private void PlaySound(string soundPath) {
+            SoundPlayer sound = new SoundPlayer(soundPath);
+            sound.Play();
         }
 
         /* Updates the UI to match the order in the selected row by
