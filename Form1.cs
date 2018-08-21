@@ -17,7 +17,9 @@ namespace GmailQuickstart {
         public static MySortableBindingList<OrderContainer> OrderList = new MySortableBindingList<OrderContainer>();
 
         //the dictionary of orders where the key is the messageId, used to track order status
-        public static Dictionary<string, OrderContainer> OrderTable = new Dictionary<string, OrderContainer>();
+        public static Dictionary<string, OrderContainer> OrderTableByMsgId = new Dictionary<string, OrderContainer>();
+        //the dictionary of orders where the key is the orderNum, used to track grubhub cancelled orders
+        public static Dictionary<string, List<OrderContainer>> OrderTableByOrdNum = new Dictionary<string, List<OrderContainer>>();
 
         public Form1() {
             InitializeComponent();
@@ -37,8 +39,8 @@ namespace GmailQuickstart {
             dataGridView1.Columns.Add(NewTextBoxCol("ItemCount", "Order Size")); 
             dataGridView1.Columns.Add(NewTextBoxCol("TimeReceived", "Time Received"));
             dataGridView1.Columns.Add(NewTextBoxCol("PickUpTime", "Pick-Up Time"));
-            dataGridView1.Columns.Add(NewTextBoxCol("PrintStatus", "Print Status"));
             dataGridView1.Columns.Add(NewTextBoxCol("Status", "Status"));
+            dataGridView1.Columns.Add(NewTextBoxCol("PrintStatus", "Print Status"));
 
             dataGridView1.Columns.Add(NewTextBoxCol("TimeReceivedTicks", "TimeReceivedTicks"));
             dataGridView1.Columns["TimeReceivedTicks"].Visible = false;
@@ -86,18 +88,48 @@ namespace GmailQuickstart {
             OrderContainer orderCon = new OrderContainer(order);
             if (isAdjustedOrder) orderCon.Status = "Active(Adjusted)";
 
-            OrderList.Add(orderCon); //Add the OrderContainer to the OrderList for tracking unprinted orders
-            OrderTable.Add(order.MessageId, orderCon); //Insert the entry into the table for easily updating order status
+            OrderList.Add(orderCon); //Add the OrderContainer to the OrderList to update the UI list
+            OrderTableByMsgId.Add(order.MessageId, orderCon); //Insert the entry into the table for easily updating order status
+            if (order.Service == "GrubHub") InsertToOrderNumTable(orderCon); //We insert the entry into the table with orderNum as the key
 
             //Update the Item List in the GUI to match the selected row 
             UpdateOrderUI();
             PlayNotificationSound(); //play the nofication sound
         }
 
+        /* If the orderCon's orderNum already exists in the table, we add the orderCon to the list, else
+         * we insert a new entry with the new orderCon inserted into the entry's list
+         * 
+         */
+        public void InsertToOrderNumTable(OrderContainer orderCon) {
+            List<OrderContainer> orderConList;
+            if (OrderTableByOrdNum.TryGetValue(orderCon.order.OrderNumber, out orderConList)) {
+                Debug.WriteLine("Found order in OrderNumTable");
+                orderConList.Add(orderCon);
+            } else {
+                Debug.WriteLine("Making new entry in OrderNumTable");
+                orderConList = new List<OrderContainer>();
+                orderConList.Add(orderCon);
+                OrderTableByOrdNum.Add(orderCon.order.OrderNumber, orderConList); //Insert the entry into the table for tracking grubhub cancelled orders
+            }
+        }
+
+        /* Given the messageId, change the associated order's status to Ignore */
         public void ChangeStatusToAdjusted(string messageId) {
             OrderContainer orderCon;
-            if (OrderTable.TryGetValue(messageId, out orderCon)) {
+            if (OrderTableByMsgId.TryGetValue(messageId, out orderCon)) {
                 orderCon.Status = "Ignore(See adjusted)";
+            }
+        }
+
+        /* Given the orderNum, set the associated orders' status to Cancelled */
+        public void SetOrderToCancelled(string orderNum) {
+            List<OrderContainer> orderConList;
+            if (OrderTableByOrdNum.TryGetValue(orderNum, out orderConList)) {
+                foreach (var orderCon in orderConList) {
+                    orderCon.Status = "Cancelled";
+                    Debug.WriteLine("set Status to cancelled");
+                }
             }
         }
 

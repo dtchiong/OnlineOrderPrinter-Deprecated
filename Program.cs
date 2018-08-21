@@ -29,7 +29,7 @@ namespace GmailQuickstart {
 
         static GmailService service;
 
-        public static bool DebugBuild = true;
+        public static bool DebugBuild = false;
 
         private static string DateToday = DateTime.Now.ToString("MMM-d-yyyy");
         public  static string AppWorkingDir = AppDomain.CurrentDomain.BaseDirectory;
@@ -53,11 +53,12 @@ namespace GmailQuickstart {
         * 16496c1551e4bdb6 - delivery
         * 16494e24be61d2ca - pickup - 
         * 165444f0374f0592 - adjusted order
+        * 16559c67627cb70b - cancelled order
         * DoorDash:
         * 164b501111cebfe1
         * 164aebfdb8b7a59a
         */
-        static string testMessageId = "165444f0374f0592";
+        static string testMessageId = "16559c67627cb70b";
         static string userId = "t4milpitasonline@gmail.com";
 
         static TimerT timer;
@@ -282,6 +283,19 @@ namespace GmailQuickstart {
                 }catch(Exception e) {
                     Console.WriteLine(e.Message);
                 }
+            //The email is refers to a cancelled GrubHub order, so set the associated OrderCons' status to cancelled
+            }else if (fromHeader.Value == "helpme@eat.grubhub.com") {
+                Debug.WriteLine("From helpme@eat.grubhub.com");
+                MessagePartHeader subjectHeader = headers.FirstOrDefault(item => item.Name == "Subject");
+                string orderNum = subjectHeader.Value.Split(' ')[1]; //gets orderNum from ("Order" {orderNum} "Cancelled")
+                Debug.WriteLine("OrderNum: " + orderNum);
+                if (form1.InvokeRequired) {
+                    form1.Invoke((MethodInvoker)delegate { form1.SetOrderToCancelled(orderNum); });
+                } else {
+                    form1.SetOrderToCancelled(orderNum);
+                }
+                return null;
+            //The email is irrelevant
             }else {
                 Console.WriteLine("Not an order, returning");
                 return null;

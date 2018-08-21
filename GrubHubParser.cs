@@ -125,7 +125,12 @@ namespace GmailQuickstart {
         }
 
         public static void ParseOrderNumber(HtmlNode node, Order order) {
-            order.OrderNumber = node.InnerHtml;
+             
+            string tmp = node.InnerHtml; // #64020523 — 4398339
+            tmp = Regex.Replace(tmp, @"[#\s]*", ""); //removes all whitespace and '#' chars
+            //tmp = tmp.Replace((char)0x2013, '-');
+            tmp = tmp.Replace((char)0x2014, '-');
+            order.OrderNumber = tmp;
         }
 
         public static void ParsePickUpTime(HtmlNode node, Order order) {
