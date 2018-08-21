@@ -22,7 +22,7 @@ namespace GmailQuickstart {
         public Form1() {
             InitializeComponent();
 
-            Text = "Derek's Online Order Printer v1.3.0";
+            Text = "Derek's Online Order Printer v1.3.1";
 
             //Initialize dgv columns and properties
             //Prevents columns from auto populating with OrderContainer fields. 
@@ -32,13 +32,13 @@ namespace GmailQuickstart {
             dataGridView1.DataSource = orderListBindingSrc;
             orderListBindingSrc.Sort = "TimeReceivedTicks DESC"; //set to sort DESC on the Ticks property
 
-            dataGridView1.Columns.Add(NewTextBoxCol("Status", "Status"));
             dataGridView1.Columns.Add(NewTextBoxCol("Service", "Service"));
             dataGridView1.Columns.Add(NewTextBoxCol("Name", "Name"));
             dataGridView1.Columns.Add(NewTextBoxCol("ItemCount", "Order Size")); 
             dataGridView1.Columns.Add(NewTextBoxCol("TimeReceived", "Time Received"));
             dataGridView1.Columns.Add(NewTextBoxCol("PickUpTime", "Pick-Up Time"));
             dataGridView1.Columns.Add(NewTextBoxCol("PrintStatus", "Print Status"));
+            dataGridView1.Columns.Add(NewTextBoxCol("Status", "Status"));
 
             dataGridView1.Columns.Add(NewTextBoxCol("TimeReceivedTicks", "TimeReceivedTicks"));
             dataGridView1.Columns["TimeReceivedTicks"].Visible = false;
@@ -82,14 +82,23 @@ namespace GmailQuickstart {
         }
 
         /* Encapsulates an order with an OrderContainer, then add it to the order list */
-        public void AddOrderToList(Order order) {
+        public void AddOrderToList(Order order, bool isAdjustedOrder) {
             OrderContainer orderCon = new OrderContainer(order);
+            if (isAdjustedOrder) orderCon.Status = "Active(Adjusted)";
+
             OrderList.Add(orderCon); //Add the OrderContainer to the OrderList for tracking unprinted orders
             OrderTable.Add(order.MessageId, orderCon); //Insert the entry into the table for easily updating order status
 
             //Update the Item List in the GUI to match the selected row 
             UpdateOrderUI();
             PlayNotificationSound(); //play the nofication sound
+        }
+
+        public void ChangeStatusToAdjusted(string messageId) {
+            OrderContainer orderCon;
+            if (OrderTable.TryGetValue(messageId, out orderCon)) {
+                orderCon.Status = "Ignore(See adjusted)";
+            }
         }
 
         private void PlayNotificationSound() {

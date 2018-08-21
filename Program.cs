@@ -5,6 +5,7 @@ using MessageG = Google.Apis.Gmail.v1.Data.Message;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using static Google.Apis.Gmail.v1.UsersResource.HistoryResource.ListRequest;
+using MessageThread = Google.Apis.Gmail.v1.Data.Thread;
 
 using System;
 using System.Collections.Generic;
@@ -104,8 +105,10 @@ namespace GmailQuickstart {
             //If this mode is on, then we're just going to handle the testMessageID
             if (debugMailMode) {
                 Order order = HandleMessage(testMessageId);
+                bool isAdjustedOrder = ThreadHasAdjustedOrders(testMessageId);
+
                 if (order != null) {
-                    UpdateOrderList(order);
+                    UpdateOrderList(order, isAdjustedOrder);
                 }
                 Console.Read();
                 return;
@@ -182,11 +185,11 @@ namespace GmailQuickstart {
         /* Updates the UI list with the new order. Passes this task to be executed
          * on the UI thread if called from a child thread
          */
-        private static void UpdateOrderList(Order order) {
+        private static void UpdateOrderList(Order order, bool isAdjustedOrder) {
             if (form1.InvokeRequired) {
-                form1.Invoke( (MethodInvoker)delegate { form1.AddOrderToList(order); } );
+                form1.Invoke( (MethodInvoker)delegate { form1.AddOrderToList(order, isAdjustedOrder); } );
             }else {
-                form1.AddOrderToList(order);
+                form1.AddOrderToList(order, isAdjustedOrder);
             }
         }
 
@@ -210,8 +213,13 @@ namespace GmailQuickstart {
             foreach (string messageId in messageIdList) {
                 Console.WriteLine("***************************** START MESSAGE **********************************");
                 Order order = HandleMessage(messageId);
+
+                //We check if the messageId is part of a thread of other messages,
+                //and if so, the current message is an adjusted order
+                bool isAdjustedOrder = ThreadHasAdjustedOrders(messageId);
+
                 if (order != null) {
-                    UpdateOrderList(order);
+                    UpdateOrderList(order, isAdjustedOrder);
                 }
                 Console.WriteLine("***************************** END MESSAGE ************************************");
             }
@@ -431,6 +439,46 @@ namespace GmailQuickstart {
             } while (!String.IsNullOrEmpty(request.PageToken));
 
             return messageIdList;
+        }
+
+        /* Returns the thread associated with the given messageId */
+        public static MessageThread GetThread(GmailService service, string userId, string messageId) {
+
+            MessageG message = GetMessage(service, userId, messageId);
+            string threadId = message.ThreadId;
+
+            try {
+                return service.Users.Threads.Get(userId, threadId).Execute();
+            }catch (Exception e) {
+                Debug.WriteLine(e.Message);
+            }
+            return null;
+        }
+
+        /* Returns true and changes the respective orders' status if the thread has more than 1 message,
+         * meaning there is an adjusted order
+         */
+        public static bool ThreadHasAdjustedOrders(string messageId) {
+
+            MessageThread thread = GetThread(service, userId, messageId);
+
+            if (thread != null) {
+                if (thread.Messages.Count > 1) {
+                    for (int i = 0; i < thread.Messages.Count - 1; i++) {
+                        MessageG message = thread.Messages[i];
+                        if (form1.InvokeRequired) {
+                            form1.Invoke((MethodInvoker)delegate { form1.ChangeStatusToAdjusted(message.Id); });
+                        } else {
+                            form1.ChangeStatusToAdjusted(message.Id);
+                        }
+                    }
+                    return true;
+                }
+            }else {
+                Debug.WriteLine("Error: thread is null");
+            }
+
+            return false;
         }
 
         /* Converting from RFC 4648 base64 to base64url encoding
