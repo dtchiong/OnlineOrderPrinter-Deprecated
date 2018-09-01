@@ -97,27 +97,61 @@ namespace GmailQuickstart {
             ParsePickupName(pickupByNameNode, order);
             ParseContactNumber(metaInfoNodes.ElementAt(metaDivCount - 1), order);
            
-            var orderContentNodes = htmlDoc.DocumentNode.SelectNodes("//tbody[@class='orderSummary__body']/tr");
-            order.UniqueItemCount = orderContentNodes.Count - nonItemCount;
+            var orderContentNodes = htmlDoc.DocumentNode.SelectNodes("//td[@class='orderSummary__data']");
+            //order.UniqueItemCount = orderContentNodes.Count - nonItemCount;
 
-            //Loops through the number of unique items in the order
-            for (int i = 0; i < order.UniqueItemCount; i++) {
+            //Loops through all the td nodes with class = "orderSummary__data"
+            //Parses itemName from td's with inner structure <div>
+            //Parses   addOns from td's with inner structure <div> <ul>
+            //Does nothing for td's with no css child nodes
+            //Stops parsing when hitting the td with inner node <span>, or when there are no more tdNodes to scan
 
-                var tdNodes = orderContentNodes[i].Elements("td");
+            bool parsedItemName = false;
+            Item item = null;
+            for (int i = 0; i < orderContentNodes.Count; i++) {
 
-                Item item = new Item();
+                var tdNode = orderContentNodes[i];
+                
+                string spanNodePath = tdNode.XPath + "/span";
+                var spanNode = tdNode.SelectSingleNode( spanNodePath );
 
-                //If ParseQuantity fails, then we've hit the meta information, so it's time to break
-                if (!ParseQuantity(tdNodes.ElementAt(0), item)) {
+                if (spanNode != null) {
+                    //Debug.WriteLine("Hit td with <span> - breaking");
                     break;
                 }
-                ParseItem(tdNodes.ElementAt(1), item);
-                ParsePrice(tdNodes.ElementAt(2), item);
 
-                SetItemCount(i + 1, order.UniqueItemCount, item);
+                var divNode = tdNode.Element("div");
 
-                order.ItemList.Add(item);
+                if (divNode == null) {
+                    //Debug.WriteLine("No childs nodes - no addons");
+                    continue;
+                }
+
+                if (divNode.Element("ul") != null) {
+                    //Debug.WriteLine("contains addOns");
+                    ParseAddOns(divNode.Element("ul"), item);
+                }else {
+                    //Since Special Instructions and ItemNames have the same html strucuture, 
+                    //we need manually check the innerHTML to decide which it is
+                    if (divNode.InnerHtml.Trim().StartsWith("Instructions")) {
+                        ParseSpecialInstruction(divNode, item);
+                        Debug.WriteLine("Has special instructions");
+                    }else {
+                        //Debug.WriteLine("is an itemName");
+                        if (item != null) {
+                            order.ItemList.Add(item); //add the previous item if it's not null, then handle the new item
+                        }
+                        item = new Item();
+                        ParseItemName(divNode, item);
+                        ParseQuantity(tdNode, item);
+                        ParseItemType(divNode, item);
+                    }
+
+                }
+                //SetItemCount(i + 1, order.UniqueItemCount, item);
+
             }
+            order.ItemList.Add(item); //add the last item since it won't be added without a next item
 
             DoorDashParser.SetDrinkAndSnackCount(order);
             DoorDashParser.SetOrderSize(order); //Need to move function to be general
@@ -163,9 +197,9 @@ namespace GmailQuickstart {
         }
 
         /* We get the name of the item, then correct it through the menu dictionary */
-        public static void ParseName(HtmlNode node, Item item) {
+        public static void ParseItemName(HtmlNode node, Item item) {
 
-            string name = node.InnerHtml;
+            string name = node.InnerHtml.Trim();
             item.ItemName = name;
 
             string correctedName = menu.GetCorrectedItemName(name);
@@ -175,8 +209,9 @@ namespace GmailQuickstart {
         }
 
         /* Looks up the item in the menu dictionary to set the item type */
-        public static void ParseType(HtmlNode node, Item item) {
-            string name = node.InnerHtml;
+        //Obsolete
+        public static void ParseItemType(HtmlNode node, Item item) {
+            string name = node.InnerHtml.Trim();
             string type = menu.GetItemType(name);
 
             item.ItemType = type;
@@ -184,8 +219,11 @@ namespace GmailQuickstart {
 
         /* Returns true if the quantity is parsed from the node */
         public static bool ParseQuantity(HtmlNode node, Item item) {
+            var parentNode = node.ParentNode;
+            var quantityNode = parentNode.Element("td").Element("div");
+
             try {
-                item.Quantity = Int32.Parse(node.Element("div").InnerHtml);
+                item.Quantity = Int32.Parse(quantityNode.InnerHtml);
                 return true;
             } catch(Exception e) {
                 return false;
@@ -193,13 +231,14 @@ namespace GmailQuickstart {
         }
 
         /* Parse the item name, type, and addons */
+        /* Obsolete 
         public static void ParseItem(HtmlNode node, Item item) {
             var divNodes = node.Elements("div");
             var divNodeCount = divNodes.Count();
             var nameNode = divNodes.ElementAt(0);
 
-            ParseName(nameNode, item);
-            ParseType(nameNode, item);
+            ParseItemName(nameNode, item);
+            ParseItemType(nameNode, item);
 
             //If there's 2 div nodes, then the 2nd is either addons or special instructions
             if (divNodeCount == 2) {
@@ -219,6 +258,7 @@ namespace GmailQuickstart {
             }
 
         }
+        */
 
         public static void SetItemCount(int itemIndex, int totalItems, Item item) {
             item.ItemCount = itemIndex + "/" + totalItems;
@@ -285,9 +325,12 @@ namespace GmailQuickstart {
         }
 
         public static void ParseSpecialInstruction(HtmlNode node, Item item) {
-            string instructions = node.InnerHtml.Replace("Instructions: ", "");
-            instructions.Trim();
+
+            string instructions = node.InnerHtml.Replace("Instructions: ", "");      
+            instructions = Regex.Replace(instructions, @"\t|\n|\r", "");
+            instructions = instructions.Trim();
             instructions = "\"" + instructions + "\"";
+
             item.SpecialInstructions = instructions;
         }
 

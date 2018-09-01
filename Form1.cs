@@ -123,6 +123,9 @@ namespace GmailQuickstart {
             OrderContainer orderCon;
             if (OrderTableByMsgId.TryGetValue(messageId, out orderCon)) {
                 orderCon.Status = "Ignore(See adjusted)";
+                //refresh the view so that the status in the UI is updated, 
+                //would be more efficient if I had the current binded object to reset, instead of the entire view
+                dataGridView1.Refresh(); 
             }
         }
 
@@ -134,6 +137,7 @@ namespace GmailQuickstart {
                 foreach (var orderCon in orderConList) {
                     cancelledOrder = true;
                     orderCon.Status = "Cancelled";
+                    dataGridView1.Refresh();
                 }
             }
             //this prevents from playing sound if no orders in the list were actually cancelled

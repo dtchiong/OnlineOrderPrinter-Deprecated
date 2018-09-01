@@ -57,12 +57,12 @@ namespace GmailQuickstart {
         * 164b501111cebfe1
         * 164aebfdb8b7a59a
         */
-        static string testMessageId = "16591bdecd07d701";
+        static string testMessageId = "165933b6acc18651";
         static string userId = "t4milpitasonline@gmail.com";
 
         static TimerT timer;
 
-        public static bool DebugBuild = true;  //turns on saving DoorDash extracted pdf lines to file
+        public static bool DebugBuild = false;  //turns on saving DoorDash extracted pdf lines to file
         public static bool DebugPrint = false; //turns on debug statements
         private static bool debugMailMode = false; //if true, only parses the email with testMessageId, and doesn't poll for new emails
 
@@ -103,18 +103,6 @@ namespace GmailQuickstart {
                 ApplicationName = ApplicationName,
             });
 
-            //If this mode is on, then we're just going to handle the testMessageID
-            if (debugMailMode) {
-                Order order = HandleMessage(testMessageId);
-                bool isAdjustedOrder = ThreadHasAdjustedOrders(testMessageId);
-
-                if (order != null) {
-                    UpdateOrderList(order, isAdjustedOrder);
-                }
-                Console.Read();
-                return;
-            }
-
             //Create the directories to store orders
             try {
                 Directory.CreateDirectory(GrubHubDir);
@@ -125,6 +113,18 @@ namespace GmailQuickstart {
                 Directory.CreateDirectory(ErrorLogDir);
             } catch (Exception e) {
                 Debug.WriteLine(e.ToString());
+            }
+
+            //If this mode is on, then we're just going to handle the testMessageID
+            if (debugMailMode) {
+                Order order = HandleMessage(testMessageId);
+                bool isAdjustedOrder = ThreadHasAdjustedOrders(testMessageId);
+
+                if (order != null) {
+                    UpdateOrderList(order, isAdjustedOrder);
+                }
+                Console.Read();
+                return;
             }
 
             //We check if we need to perform a full sync or a partial sync
