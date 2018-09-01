@@ -4,7 +4,7 @@ An app that allows easy viewing and printing of online orders
 ![Sample screenshot](https://i.imgur.com/zNV0P70.png)
 
 ### About
-This application provides T4 Milpitas an integrated interface to see all online orders from different services such as GrubHub and DoorDash, and allows these orders to be easily printed to labels with a click of a button. Therefore, not only does this app eliminate the possibility of human errors from workers having to maintain brain overhead from constantly switching between reading the order in the email that can span multiple pages, and entering the order in the POS machine, but also, this app significantly improves the efficiency of the store by allowing workers to immediately begin preparing the order.
+This application streamlines the process of preparing online orders at T4 Milpitas by enabling workers to view orders from different services such as DoorDash and GrubHub, in a single interface, and allows these orders to be easily printed to labels with a click of a button. Therefore, not only does this solution eliminate the possibility of human errors from workers having to maintain brain overhead from constantly switching between reading the order in the email that can span multiple pages, and entering the order in the POS machine, but also, this app significantly improves the efficiency of the store by allowing workers to immediately begin preparing the order.
 
 ### Functionality
 * See new orders appear at the top of the list with basic information such as name and pickup-time
