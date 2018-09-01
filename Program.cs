@@ -57,15 +57,14 @@ namespace GmailQuickstart {
         * 164b501111cebfe1
         * 164aebfdb8b7a59a
         */
-        static string testMessageId = "165444f0374f0592";
+        static string testMessageId = "16591bdecd07d701";
         static string userId = "t4milpitasonline@gmail.com";
 
         static TimerT timer;
 
-        public static bool DebugBuild = false;
-        public static bool DebugPrint = false;
-        //If true: tests the app by only handling the email with testMessageId once, then stops, else app runs in sync mode
-        private static bool debugMailMode = false;
+        public static bool DebugBuild = true;  //turns on saving DoorDash extracted pdf lines to file
+        public static bool DebugPrint = false; //turns on debug statements
+        private static bool debugMailMode = false; //if true, only parses the email with testMessageId, and doesn't poll for new emails
 
         public static Form1 form1;
 

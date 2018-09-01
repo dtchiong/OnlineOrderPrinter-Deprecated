@@ -24,7 +24,7 @@ namespace GmailQuickstart {
         public Form1() {
             InitializeComponent();
 
-            Text = "Derek's OnlineOrderPrinter v1.4.1";
+            Text = "Derek's OnlineOrderPrinter v1.4.2";
 
             //Initialize dgv columns and properties
             //Prevents columns from auto populating with OrderContainer fields. 
@@ -88,7 +88,14 @@ namespace GmailQuickstart {
             if (isAdjustedOrder) orderCon.Status = "Active(Adjusted)";
 
             OrderList.Add(orderCon); //Add the OrderContainer to the OrderList to update the UI list
-            OrderTableByMsgId.Add(order.MessageId, orderCon); //Insert the entry into the table for easily updating order status
+            
+            //there seems to be a bug where an existing messageId tries to be inserted again 
+            try {
+                OrderTableByMsgId.Add(order.MessageId, orderCon); //Insert the entry into the table for easily updating order status
+            } catch (Exception e) {
+                Debug.WriteLine(order.MessageId + " already inserted in OrderTable");
+            }
+
             if (order.Service == "GrubHub") InsertToOrderNumTable(orderCon); //We insert the entry into the table with orderNum as the key
 
             //Update the Item List in the GUI to match the selected row 

@@ -48,16 +48,18 @@ namespace GmailQuickstart {
 
             menu = new DoorDashMenu();
 
-            //Load the itext license
+            /*
+            //Load the itext license (license is expired)
             try {
                 LicenseKey.LoadLicenseFile(Program.iTextLicensePath);
             } catch (LicenseKeyException e) {
                 Debug.WriteLine(e);
             }
+            */
         }
 
         /* Extracts the text from the pdf and returns it as a List of strings */
-public List<string> ExtractTextFromPDF(string pathToPdf, string messageId) {
+        public List<string> ExtractTextFromPDF(string pathToPdf, string messageId) {
 
             PdfReader reader = new PdfReader(pathToPdf);
             PdfDocument doc = new PdfDocument(reader);
@@ -105,33 +107,17 @@ public List<string> ExtractTextFromPDF(string pathToPdf, string messageId) {
             order.TimeReceived = timeReceived;
             order.MessageId = messageId;
 
-            ParseCustomerName(lines[0], order);
-
-            int start = 9;
-
-            //Uncommon case
-            if (lines[3].StartsWith("Tea for you")) {        
-                ParsePickUpTime(lines[1], order);
-                ParseOrderNumber(lines[4], order);
-                ParseContactNumber(lines[8], order);
-            //Rare case - not sure if still used
-            }else if (lines[1].StartsWith("Tea for you")) {
-                //Need to parse Pickup time 
-                ParseOrderNumber(lines[2], order);
-                ParseContactNumber(lines[6], order);
-                start = 7;
-            //Common case
-            }else {
-                ParsePickUpTime(lines[6], order);
-                ParseOrderNumber(lines[2], order);
-                ParseContactNumber(lines[6], order);
-            }
+            ParseOrderNumber(lines[0], order);
+            ParseCustomerName(lines[2], order);
+            ParsePickUpTime(lines[2], lines[3], order);
+            ParseContactNumber(lines[3], order);
+            
+            int startOfOrderIndex = 5;
 
             Item item = null;
             string labelName = null;
 
-
-            for (int i=start; i<lines.Count; i++) {
+            for (int i=startOfOrderIndex; i<lines.Count; i++) {
 
                 //Once we encounter this line, we add the last item, break, and return the order
                 if (lines[i] == "~ End of Order ~") {
@@ -335,40 +321,50 @@ public List<string> ExtractTextFromPDF(string pathToPdf, string messageId) {
         }
 
         /* Parses Customer Name from line in format: 
-         * "Customer: {Name} Page {int} of {int}"
+         * "{FullName} {Date} PREPAID"
          */
         private void ParseCustomerName(string line, Order order) {
-            int indOfWordPage = line.IndexOf("Page");
-            int lenOfWordCust = "Customer: ".Length;
-            int custNameLen = indOfWordPage - lenOfWordCust;
+            string[] words = line.Split(' ');
 
-            string custName = line.Substring(lenOfWordCust, custNameLen);
+            StringBuilder sb = new StringBuilder();
+            sb.Append(words[0]);
+            sb.Append(' ');
+            sb.Append(words[1]);
+            string custName = sb.ToString();
             //Debug.WriteLine("Customer Name: " + custName);
             order.CustomerName = custName;
         }
 
         /* Parses the pickup time from line:
-         * Sample Format 1: "Today (Fri Aug 3), at 3:24 PM!" 
-         * sample Format 2: "Friday Aug 3, at 7:47 PM!"
+         * Samples:
+         * line1: "Billy Bob Thursday Aug 30 PREPAID"
+         * line1; "Billy Bob Today (Thu Aug 30) PREPAID"
+         * line2: "(415) 994-4429 at 10:05 PM"
          */
-        private void ParsePickUpTime(string line, Order order) {
+        private void ParsePickUpTime(string line1, string line2, Order order) {
             try {
                 char[] delim = { ' ', ':' };
-                string[] tokens = line.Split(delim);
 
-                int startInd = 4;
-                if (line.Contains("(")) {
-                    startInd = 5;
-                }
+                string[] dateWords = line1.Split(delim);
+                string[] timeWords = line2.Split(delim);
+
+                int dayIndex = dateWords.Length - 2; //we start from the end because we don't know the how many words are in the name
+                int monIndex = dateWords.Length - 3;
+
+                dateWords[dayIndex] = dateWords[dayIndex].Replace(")", ""); //replace the ')' if it exists
+
+                bool isPM      = timeWords[timeWords.Length - 1] == "PM";
+                int  minIndex  = timeWords.Length - 2;
+                int  hourIndex = timeWords.Length - 3;
 
                 int year  = DateTime.Now.Year;
-                int month = Program.GetMonthNum(tokens[startInd]);
-                int day   = Int32.Parse(tokens[startInd + 1].Replace(",", "").Replace(")", "")); //replaces ',' and ')'
-                int hour  = Int32.Parse(tokens[startInd + 3]);
-                int min   = Int32.Parse(tokens[startInd + 4]);
+                int month = Program.GetMonthNum(dateWords[monIndex]);
+                int day   = Int32.Parse(dateWords[dayIndex]);
+                int hour  = Int32.Parse(timeWords[hourIndex]);
+                int min   = Int32.Parse(timeWords[minIndex]);
 
                 //Convert hours to military
-                if (tokens[startInd + 5] == "PM!") {
+                if (isPM) {
                     if (hour != 12)
                         hour += 12;
                 }
@@ -381,21 +377,30 @@ public List<string> ExtractTextFromPDF(string pathToPdf, string messageId) {
             }
         }
 
+        /* Parses the Order Number from line in form:
+         * "Order Number: {Order Number}"
+         */
         private void ParseOrderNumber(string line, Order order) {
-            string orderNumber = line.Replace("Delivery #", "");
+            string orderNumber = line.Split(' ')[2];
 
             order.OrderNumber = orderNumber;
         }
 
         /* Parses Contact Number from line in form:
-         * "{Contact Number} at {time} {AM|PM}"
+         * Sample: "(415) 994-4429 at 10:05 PM"
          */
         private void ParseContactNumber(string line, Order order) {
-            int indOfWordAt = line.IndexOf(" at");
 
-            string contactNumber = line.Remove(indOfWordAt);
-            //Debug.WriteLine("Contact Number: " + contactNumber);
-            order.ContactNumber = contactNumber;
+            try {
+                int indOfWordAt = line.IndexOf(" at");
+
+                string contactNumber = line.Substring(0, indOfWordAt).Trim();
+                //Debug.WriteLine("Contact Number: " + contactNumber);
+                order.ContactNumber = contactNumber;
+            } catch (Exception e) {
+                order.ContactNumber = "0000000000";
+            }
+
         }
 
         /* Returns the label name from line in form:

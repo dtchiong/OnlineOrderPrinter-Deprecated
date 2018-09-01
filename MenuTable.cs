@@ -312,6 +312,7 @@ namespace GmailQuickstart {
                 { "Mulberry Fruit Tea"                , new Tuple<string, string>( null, "Drink") },
                 { "Pineapple Royal Tea"               , new Tuple<string, string>( null, "Drink") },
                 { "Jadeite Royal Tea"                 , new Tuple<string, string>( null, "Drink") },
+                { "Guava Green Tea"                   , new Tuple<string, string>( null, "Drink") },
 
                 //Special Flavor
                 { "Earl Grey Tea"              , new Tuple<string, string>( null, "Drink") },
