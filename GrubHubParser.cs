@@ -135,7 +135,6 @@ namespace GmailQuickstart {
                     //we need manually check the innerHTML to decide which it is
                     if (divNode.InnerHtml.Trim().StartsWith("Instructions")) {
                         ParseSpecialInstruction(divNode, item);
-                        Debug.WriteLine("Has special instructions");
                     }else {
                         //Debug.WriteLine("is an itemName");
                         if (item != null) {

@@ -134,6 +134,7 @@ namespace GmailQuickstart {
                 { "Mulberry Fruit Tea"     , new Tuple<string, string>( null, "Drink") },
                 { "Apple Black Tea"        , new Tuple<string, string>( null, "Drink") },
                 { "Strawberry Green Tea"   , new Tuple<string, string>( null, "Drink") },
+                { "Guava Green Tea"        , new Tuple<string, string>( null, "Drink") },
                 
                 //Smoothies
                 { "Mango Smoothie W/Pearl"         , new Tuple<string, string>( "Mango Smoothie w/ Pearl", "Drink") },

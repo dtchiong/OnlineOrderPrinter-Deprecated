@@ -24,7 +24,7 @@ namespace GmailQuickstart {
         public Form1() {
             InitializeComponent();
 
-            Text = "Derek's OnlineOrderPrinter v1.4.2";
+            Text = "Derek's OnlineOrderPrinter v1.4.3";
 
             //Initialize dgv columns and properties
             //Prevents columns from auto populating with OrderContainer fields. 
