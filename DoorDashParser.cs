@@ -109,7 +109,7 @@ namespace GmailQuickstart {
 
             ParseOrderNumber(lines[0], order);
             ParseCustomerName(lines[2], order);
-            ParsePickUpTime(lines[2], lines[3], order);
+            ParsePickUpTime(lines[2], order);
             ParseContactNumber(lines[3], order);
             
             int startOfOrderIndex = 5;
@@ -337,33 +337,22 @@ namespace GmailQuickstart {
 
         /* Parses the pickup time from line:
          * Samples:
-         * line1: "Billy Bob Thursday Aug 30 PREPAID"
-         * line1; "Billy Bob Today (Thu Aug 30) PREPAID"
-         * line2: "(415) 994-4429 at 10:05 PM"
+         * Rita Crum 2 items Wed Sep 12 at 5:26 PM
          */
-        private void ParsePickUpTime(string line1, string line2, Order order) {
+        private void ParsePickUpTime(string line, Order order) {
             try {
                 char[] delim = { ' ', ':' };
 
-                string[] dateWords = line1.Split(delim);
-                string[] timeWords = line2.Split(delim);
-
-                int dayIndex = dateWords.Length - 2; //we start from the end because we don't know the how many words are in the name
-                int monIndex = dateWords.Length - 3;
-
-                dateWords[dayIndex] = dateWords[dayIndex].Replace(")", ""); //replace the ')' if it exists
-
-                bool isPM      = timeWords[timeWords.Length - 1] == "PM";
-                int  minIndex  = timeWords.Length - 2;
-                int  hourIndex = timeWords.Length - 3;
-
+                string[] words = line.Split(delim);
+               
                 int year  = DateTime.Now.Year;
-                int month = Program.GetMonthNum(dateWords[monIndex]);
-                int day   = Int32.Parse(dateWords[dayIndex]);
-                int hour  = Int32.Parse(timeWords[hourIndex]);
-                int min   = Int32.Parse(timeWords[minIndex]);
+                int month = Program.GetMonthNum( words[words.Length - 6]);
+                int day   = Int32.Parse(         words[words.Length - 5]);
+                int hour  = Int32.Parse(         words[words.Length - 3]);
+                int min   = Int32.Parse(         words[words.Length - 2]);
 
                 //Convert hours to military
+                bool isPM = words[words.Length - 1] == "PM";
                 if (isPM) {
                     if (hour != 12)
                         hour += 12;
@@ -372,6 +361,7 @@ namespace GmailQuickstart {
                 DateTime pickUpDate = new DateTime(year, month, day, hour, min, 0);
                 //Debug.WriteLine("Parsed DateTime: " + pickUpDate.ToString());
                 order.PickUpTime = pickUpDate;
+                
             } catch(Exception e) {
                 Debug.WriteLine("ParsePickUpTime: " + e.ToString());
             }
@@ -392,13 +382,11 @@ namespace GmailQuickstart {
         private void ParseContactNumber(string line, Order order) {
 
             try {
-                int indOfWordAt = line.IndexOf(" at");
-
-                string contactNumber = line.Substring(0, indOfWordAt).Trim();
+                string contactNumber = Regex.Replace(line, @"\s+", " ");
                 //Debug.WriteLine("Contact Number: " + contactNumber);
                 order.ContactNumber = contactNumber;
             } catch (Exception e) {
-                order.ContactNumber = "0000000000";
+                order.ContactNumber = "Error";
             }
 
         }

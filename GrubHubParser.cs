@@ -229,36 +229,6 @@ namespace GmailQuickstart {
             } 
         }
 
-        /* Parse the item name, type, and addons */
-        /* Obsolete 
-        public static void ParseItem(HtmlNode node, Item item) {
-            var divNodes = node.Elements("div");
-            var divNodeCount = divNodes.Count();
-            var nameNode = divNodes.ElementAt(0);
-
-            ParseItemName(nameNode, item);
-            ParseItemType(nameNode, item);
-
-            //If there's 2 div nodes, then the 2nd is either addons or special instructions
-            if (divNodeCount == 2) {
-
-                //If there's add-ons, then they're enclosed in a <ul>
-                var addOnNode = divNodes.ElementAt(1).Element("ul");
-
-                //Parse the add-on node if it exists, otherwise parse the special instructions instead
-                if (addOnNode != null) {
-                    ParseAddOns(addOnNode, item);
-                } else {
-                    ParseSpecialInstruction(divNodes.ElementAt(1), item);
-                }
-            } else if (divNodeCount == 4) { //There's both addons and special instructions
-                ParseAddOns(divNodes.ElementAt(1).Element("ul"), item);
-                ParseSpecialInstruction(divNodes.ElementAt(3), item);
-            }
-
-        }
-        */
-
         public static void SetItemCount(int itemIndex, int totalItems, Item item) {
             item.ItemCount = itemIndex + "/" + totalItems;
         }

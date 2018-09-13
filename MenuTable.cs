@@ -359,6 +359,7 @@ namespace GmailQuickstart {
                 { "Hot Grass Jelly"                    , new Tuple<string, string>( null, "Drink") },
                 { "Honey Grass Jelly"                  , new Tuple<string, string>( null, "Drink") },
                 { "Kumquat Lemon with Basil Seed"      , new Tuple<string, string>( null, "Drink") },
+                { "Kumquat Lemon"                      , new Tuple<string, string>( null, "Drink") },
                 { "Winter Melon Lemon with Basil Seed" , new Tuple<string, string>( null, "Drink") },
                 { "Winter Melon Tea"                   , new Tuple<string, string>( null, "Drink") },
                 { "Ginger Milk Tea"                    , new Tuple<string, string>( null, "Drink") },
