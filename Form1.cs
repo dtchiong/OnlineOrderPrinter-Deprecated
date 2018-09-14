@@ -24,8 +24,6 @@ namespace GmailQuickstart {
         public Form1() {
             InitializeComponent();
 
-            Text = "Derek's OnlineOrderPrinter v1.4.3";
-
             //Initialize dgv columns and properties
             //Prevents columns from auto populating with OrderContainer fields. 
             //Need to set before setting datasource, or else columns get duplicated for some reason.
@@ -34,16 +32,16 @@ namespace GmailQuickstart {
             dataGridView1.DataSource = orderListBindingSrc;
             orderListBindingSrc.Sort = "TimeReceivedTicks DESC"; //set to sort DESC on the Ticks property
 
-            dataGridView1.Columns.Add(NewTextBoxCol("Service", "Service"));
-            dataGridView1.Columns.Add(NewTextBoxCol("Name", "Name"));
-            dataGridView1.Columns.Add(NewTextBoxCol("ItemCount", "Order Size")); 
-            dataGridView1.Columns.Add(NewTextBoxCol("TimeReceived", "Time Received"));
-            dataGridView1.Columns.Add(NewTextBoxCol("PickUpTime", "Pick-Up Time"));
-            dataGridView1.Columns.Add(NewTextBoxCol("Status", "Status"));
-            dataGridView1.Columns.Add(NewTextBoxCol("PrintStatus", "Print Status"));
+            dataGridView1.Columns.Add(NewTextBoxCol("Service", "SERVICE"));
+            dataGridView1.Columns.Add(NewTextBoxCol("Name", "NAME"));
+            dataGridView1.Columns.Add(NewTextBoxCol("ItemCount", "ORDER SIZE")); 
+            dataGridView1.Columns.Add(NewTextBoxCol("TimeReceived", "TIMED RECEIVED"));
+            dataGridView1.Columns.Add(NewTextBoxCol("PickUpTime", "PICK-UP TIME"));
+            dataGridView1.Columns.Add(NewTextBoxCol("Status", "ORDER STATUS"));
+            dataGridView1.Columns.Add(NewTextBoxCol("PrintStatus", "PRINT STATUS"));
 
-            dataGridView1.Columns.Add(NewTextBoxCol("TimeReceivedTicks", "TimeReceivedTicks"));
-            dataGridView1.Columns["TimeReceivedTicks"].Visible = false;
+            dataGridView1.Columns.Add(NewTextBoxCol("TimeReceivedTicks", "TIMERECEIVEDTICKS"));
+            dataGridView1.Columns["TIMERECEIVEDTICKS"].Visible = false;
         }
 
         /* Returns a new DataGridViewColumn given the databinding propertyname, and the header name */
@@ -252,6 +250,10 @@ namespace GmailQuickstart {
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e) {
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+
         }
     }
 

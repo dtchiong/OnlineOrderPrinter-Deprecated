@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 namespace GmailQuickstart {
     
-    /* Base class for orders */
-    //Need to refactor order to a single class, seperation based on service is not required
+    /* Stores all meta information about an order including the customer information and order items */
     public class Order {
 
         public const int Sixteen = 16; //used to format printing with padding

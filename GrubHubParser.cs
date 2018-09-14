@@ -105,7 +105,6 @@ namespace GmailQuickstart {
             //Parses   addOns from td's with inner structure <div> <ul>
             //Does nothing for td's with no css child nodes
             //Stops parsing when hitting the td with inner node <span>, or when there are no more tdNodes to scan
-
             bool parsedItemName = false;
             Item item = null;
             for (int i = 0; i < orderContentNodes.Count; i++) {
