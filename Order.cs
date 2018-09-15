@@ -122,7 +122,7 @@ namespace GmailQuickstart {
         public string Price           { get; set; }
         public string LabelName       { get; set; } // (doordash) specific name for who the drink is for
 
-        public List<string> AddOnList;
+        public List<string> AddOnList { get; set; }
 
         //Constructor
         public Item() {

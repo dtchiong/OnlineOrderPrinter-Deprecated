@@ -187,27 +187,37 @@ namespace GmailQuickstart {
 
         /* Updates the Item List UI to match the currently selected item in the Item List UI*/
         private void UpdateItemDetailsUI() {
+
+            //Get the currectly selected row's item
             DataGridViewSelectedRowCollection selectedRows = dataGridView2.SelectedRows;
             Item item = (Item)selectedRows[0].DataBoundItem;
             
             textBoxQty.Text = item.Quantity.ToString();
             textBoxItemName.Text = item.ItemName;
             textBoxInstructions.Text = item.SpecialInstructions;
-
-            List<string> adjustmentList = new List<string>();
+            
+            List<StringValue> adjustmentList = new List<StringValue>();
             if (item.ItemType == "Drink") {
-                adjustmentList.Add(item.Size);
-                adjustmentList.Add(item.Temperature);
-                adjustmentList.Add( (item.IceLevel.Contains('%')? item.IceLevel : item.IceLevel + " I") );
-                adjustmentList.Add( (item.SugarLevel.Contains('%')? item.SugarLevel  : item.SugarLevel + " S") );
-                adjustmentList.Add(item.MilkSubsitution);
+                adjustmentList.Add( new StringValue(item.Size) );
+                adjustmentList.Add( new StringValue(item.Temperature) );
+                adjustmentList.Add( new StringValue(item.IceLevel.Contains('%')? item.IceLevel : item.IceLevel + " I") );
+                adjustmentList.Add( new StringValue(item.SugarLevel.Contains('%')? item.SugarLevel  : item.SugarLevel + " S") );
+                if (item.MilkSubsitution != null) adjustmentList.Add( new StringValue(item.MilkSubsitution) );
             }else { //This is snack
                 if (item.Size != "Regular") { //Handle the case where Oolong Tea eggs have size
-                    adjustmentList.Add(item.Size);
+                    adjustmentList.Add( new StringValue(item.Size) );
                 }
             }
-            listBoxAdjustments.DataSource = adjustmentList;
-            listBoxToppings.DataSource = item.AddOnList;  
+
+            List<StringValue> addOnList = new List<StringValue>();
+            if (item.AddOnList != null) {
+                foreach (string s in item.AddOnList) {
+                    addOnList.Add(new StringValue(s));
+                }
+            }
+
+            dataGridViewAdjustments.DataSource = adjustmentList;
+            dataGridViewToppings.DataSource = addOnList;
         }
 
         private void Form1_Load(object sender, EventArgs e) {         
@@ -336,5 +346,15 @@ namespace GmailQuickstart {
         public string PrintStatus { get; set; }
 
         public int PrintCount { get; set; }
+    }
+
+    //A work around for binding a List<string> to a dataGridView.
+    //dataGridView looks for properties of containing objects, so we have to wrap string in a class
+    public class StringValue {
+        public StringValue(string s) {
+            Value = s;
+        }
+
+        public string Value { get; set; }
     }
 }

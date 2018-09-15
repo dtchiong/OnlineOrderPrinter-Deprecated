@@ -302,6 +302,7 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\GmailQuickstart.Item.datasource" />
     <None Include="Properties\DataSources\GmailQuickstart.OrderContainer.datasource" />
+    <None Include="Properties\DataSources\GmailQuickstart.StringValue.datasource" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">

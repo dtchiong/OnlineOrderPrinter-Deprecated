@@ -53,7 +53,7 @@ namespace GmailQuickstart {
 
         /*        "E:T4FORM4.ZPL" Item Template  
          * --------------------------------------------       
-         * Index|CharLimit|FieldName           Example
+         * Index|CharLimit|FieldName         | Example
          *   1  |    8    |"Item Count"      |"100/100"
          *   2  |   10    |"Service"         |"GrubHub"
          *   3  |   20    |"Customer Name"   |
@@ -107,8 +107,8 @@ namespace GmailQuickstart {
                 }catch(Exception e) {
                     Debug.WriteLine("Error: " + e.Message);
                     try {
-                        //We check the status of the printer to see why it failed, which takes a long time without a Usbstatus channel
-                        //which is while we only check if printing fails
+                        //We check the status of the printer to see why it failed, which takes a long time without a UsbStatus channel
+                        //which is why we only check if printing fails
                         string status = CheckPrinterStatus(printerConn);
                         if (status != "true") {
                             Debug.WriteLine(status);
@@ -254,7 +254,7 @@ namespace GmailQuickstart {
             return "Error";
         }
 
-        /* Called during and after printing to check printer status */
+        /* Should be called during and after printing to check printer status */
         private bool PostPrintCheckPrinterStatus(Connection conn) {
             ZebraPrinter printer = ZebraPrinterFactory.GetLinkOsPrinter(conn, PrinterLanguage.ZPL);
             if (printer == null) {

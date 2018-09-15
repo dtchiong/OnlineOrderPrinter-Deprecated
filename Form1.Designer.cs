@@ -25,17 +25,20 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanelItemDetailsBot = new System.Windows.Forms.TableLayoutPanel();
+            this.dataGridViewToppings = new System.Windows.Forms.DataGridView();
+            this.textBoxInstructions = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanelItemDetailsTop = new System.Windows.Forms.TableLayoutPanel();
             this.textBoxQty = new System.Windows.Forms.TextBox();
             this.textBoxItemName = new System.Windows.Forms.TextBox();
-            this.listBoxAdjustments = new System.Windows.Forms.ListBox();
-            this.listBoxToppings = new System.Windows.Forms.ListBox();
-            this.textBoxInstructions = new System.Windows.Forms.TextBox();
+            this.dataGridViewAdjustments = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanelOrderDetails = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,28 +52,37 @@
             this.messageIdTextBox = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tabControlAppTabs = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanelInfo = new System.Windows.Forms.TableLayoutPanel();
-            this.tabAbout = new System.Windows.Forms.TabPage();
-            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.labelOrderDetails = new System.Windows.Forms.Label();
             this.labelItemList = new System.Windows.Forms.Label();
             this.labelItemDetails = new System.Windows.Forms.Label();
-            this.tableLayoutPanelItemDetailsTop = new System.Windows.Forms.TableLayoutPanel();
+            this.tabAbout = new System.Windows.Forms.TabPage();
             this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.valueDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stringValueBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.valueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tableLayoutPanelItemDetailsBot.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewToppings)).BeginInit();
+            this.tableLayoutPanelItemDetailsTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdjustments)).BeginInit();
             this.tableLayoutPanelOrderDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
+            this.splitContainer4.Panel2.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -81,11 +93,9 @@
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.tableLayoutPanelInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
-            this.splitContainer4.Panel2.SuspendLayout();
-            this.splitContainer4.SuspendLayout();
-            this.tableLayoutPanelItemDetailsTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stringValueBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList1
@@ -133,14 +143,14 @@
             this.itemNameDataGridViewTextBoxColumn});
             this.tableLayoutPanelInfo.SetColumnSpan(this.dataGridView2, 4);
             this.dataGridView2.DataSource = this.itemBindingSource;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(88)))), ((int)(((byte)(97)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(88)))), ((int)(((byte)(97)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView2.EnableHeadersVisualStyles = false;
             this.dataGridView2.Location = new System.Drawing.Point(288, 23);
@@ -163,10 +173,10 @@
             this.tableLayoutPanelInfo.SetColumnSpan(this.tableLayoutPanelItemDetailsBot, 9);
             this.tableLayoutPanelItemDetailsBot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelItemDetailsBot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelItemDetailsBot.Controls.Add(this.dataGridViewToppings, 1, 1);
             this.tableLayoutPanelItemDetailsBot.Controls.Add(this.textBoxInstructions, 0, 3);
             this.tableLayoutPanelItemDetailsBot.Controls.Add(this.tableLayoutPanelItemDetailsTop, 0, 0);
-            this.tableLayoutPanelItemDetailsBot.Controls.Add(this.listBoxAdjustments, 0, 1);
-            this.tableLayoutPanelItemDetailsBot.Controls.Add(this.listBoxToppings, 1, 1);
+            this.tableLayoutPanelItemDetailsBot.Controls.Add(this.dataGridViewAdjustments, 0, 1);
             this.tableLayoutPanelItemDetailsBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelItemDetailsBot.Location = new System.Drawing.Point(452, 23);
             this.tableLayoutPanelItemDetailsBot.Margin = new System.Windows.Forms.Padding(0);
@@ -179,6 +189,78 @@
             this.tableLayoutPanelItemDetailsBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelItemDetailsBot.Size = new System.Drawing.Size(378, 124);
             this.tableLayoutPanelItemDetailsBot.TabIndex = 0;
+            // 
+            // dataGridViewToppings
+            // 
+            this.dataGridViewToppings.AllowUserToAddRows = false;
+            this.dataGridViewToppings.AllowUserToDeleteRows = false;
+            this.dataGridViewToppings.AllowUserToResizeColumns = false;
+            this.dataGridViewToppings.AllowUserToResizeRows = false;
+            this.dataGridViewToppings.AutoGenerateColumns = false;
+            this.dataGridViewToppings.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewToppings.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridViewToppings.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewToppings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewToppings.ColumnHeadersVisible = false;
+            this.dataGridViewToppings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.valueDataGridViewTextBoxColumn1});
+            this.dataGridViewToppings.DataSource = this.stringValueBindingSource;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(88)))), ((int)(((byte)(97)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewToppings.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewToppings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewToppings.EnableHeadersVisualStyles = false;
+            this.dataGridViewToppings.Location = new System.Drawing.Point(189, 31);
+            this.dataGridViewToppings.Margin = new System.Windows.Forms.Padding(0);
+            this.dataGridViewToppings.MultiSelect = false;
+            this.dataGridViewToppings.Name = "dataGridViewToppings";
+            this.dataGridViewToppings.ReadOnly = true;
+            this.dataGridViewToppings.RowHeadersVisible = false;
+            this.tableLayoutPanelItemDetailsBot.SetRowSpan(this.dataGridViewToppings, 2);
+            this.dataGridViewToppings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewToppings.Size = new System.Drawing.Size(188, 59);
+            this.dataGridViewToppings.TabIndex = 6;
+            // 
+            // textBoxInstructions
+            // 
+            this.textBoxInstructions.BackColor = System.Drawing.Color.White;
+            this.textBoxInstructions.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tableLayoutPanelItemDetailsBot.SetColumnSpan(this.textBoxInstructions, 2);
+            this.textBoxInstructions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxInstructions.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxInstructions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
+            this.textBoxInstructions.Location = new System.Drawing.Point(1, 91);
+            this.textBoxInstructions.Margin = new System.Windows.Forms.Padding(0);
+            this.textBoxInstructions.Multiline = true;
+            this.textBoxInstructions.Name = "textBoxInstructions";
+            this.textBoxInstructions.ReadOnly = true;
+            this.textBoxInstructions.Size = new System.Drawing.Size(376, 32);
+            this.textBoxInstructions.TabIndex = 4;
+            // 
+            // tableLayoutPanelItemDetailsTop
+            // 
+            this.tableLayoutPanelItemDetailsTop.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanelItemDetailsTop.ColumnCount = 4;
+            this.tableLayoutPanelItemDetailsBot.SetColumnSpan(this.tableLayoutPanelItemDetailsTop, 2);
+            this.tableLayoutPanelItemDetailsTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanelItemDetailsTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanelItemDetailsTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanelItemDetailsTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanelItemDetailsTop.Controls.Add(this.textBoxQty, 0, 0);
+            this.tableLayoutPanelItemDetailsTop.Controls.Add(this.textBoxItemName, 1, 0);
+            this.tableLayoutPanelItemDetailsTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelItemDetailsTop.Location = new System.Drawing.Point(1, 1);
+            this.tableLayoutPanelItemDetailsTop.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanelItemDetailsTop.Name = "tableLayoutPanelItemDetailsTop";
+            this.tableLayoutPanelItemDetailsTop.RowCount = 1;
+            this.tableLayoutPanelItemDetailsTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelItemDetailsTop.Size = new System.Drawing.Size(376, 29);
+            this.tableLayoutPanelItemDetailsTop.TabIndex = 0;
             // 
             // textBoxQty
             // 
@@ -209,51 +291,41 @@
             this.textBoxItemName.Size = new System.Drawing.Size(275, 27);
             this.textBoxItemName.TabIndex = 1;
             // 
-            // listBoxAdjustments
+            // dataGridViewAdjustments
             // 
-            this.listBoxAdjustments.BackColor = System.Drawing.Color.White;
-            this.listBoxAdjustments.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listBoxAdjustments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxAdjustments.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBoxAdjustments.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
-            this.listBoxAdjustments.FormattingEnabled = true;
-            this.listBoxAdjustments.Location = new System.Drawing.Point(1, 31);
-            this.listBoxAdjustments.Margin = new System.Windows.Forms.Padding(0);
-            this.listBoxAdjustments.Name = "listBoxAdjustments";
-            this.tableLayoutPanelItemDetailsBot.SetRowSpan(this.listBoxAdjustments, 2);
-            this.listBoxAdjustments.Size = new System.Drawing.Size(187, 59);
-            this.listBoxAdjustments.TabIndex = 2;
-            // 
-            // listBoxToppings
-            // 
-            this.listBoxToppings.BackColor = System.Drawing.Color.White;
-            this.listBoxToppings.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listBoxToppings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxToppings.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBoxToppings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
-            this.listBoxToppings.FormattingEnabled = true;
-            this.listBoxToppings.Location = new System.Drawing.Point(189, 31);
-            this.listBoxToppings.Margin = new System.Windows.Forms.Padding(0);
-            this.listBoxToppings.Name = "listBoxToppings";
-            this.tableLayoutPanelItemDetailsBot.SetRowSpan(this.listBoxToppings, 2);
-            this.listBoxToppings.Size = new System.Drawing.Size(188, 59);
-            this.listBoxToppings.TabIndex = 3;
-            // 
-            // textBoxInstructions
-            // 
-            this.textBoxInstructions.BackColor = System.Drawing.Color.White;
-            this.textBoxInstructions.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tableLayoutPanelItemDetailsBot.SetColumnSpan(this.textBoxInstructions, 2);
-            this.textBoxInstructions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxInstructions.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxInstructions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
-            this.textBoxInstructions.Location = new System.Drawing.Point(1, 91);
-            this.textBoxInstructions.Margin = new System.Windows.Forms.Padding(0);
-            this.textBoxInstructions.Multiline = true;
-            this.textBoxInstructions.Name = "textBoxInstructions";
-            this.textBoxInstructions.ReadOnly = true;
-            this.textBoxInstructions.Size = new System.Drawing.Size(376, 32);
-            this.textBoxInstructions.TabIndex = 4;
+            this.dataGridViewAdjustments.AllowUserToAddRows = false;
+            this.dataGridViewAdjustments.AllowUserToDeleteRows = false;
+            this.dataGridViewAdjustments.AllowUserToResizeColumns = false;
+            this.dataGridViewAdjustments.AllowUserToResizeRows = false;
+            this.dataGridViewAdjustments.AutoGenerateColumns = false;
+            this.dataGridViewAdjustments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewAdjustments.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridViewAdjustments.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewAdjustments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewAdjustments.ColumnHeadersVisible = false;
+            this.dataGridViewAdjustments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.valueDataGridViewTextBoxColumn});
+            this.dataGridViewAdjustments.DataSource = this.stringValueBindingSource;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(88)))), ((int)(((byte)(97)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewAdjustments.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewAdjustments.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewAdjustments.EnableHeadersVisualStyles = false;
+            this.dataGridViewAdjustments.Location = new System.Drawing.Point(1, 31);
+            this.dataGridViewAdjustments.Margin = new System.Windows.Forms.Padding(0);
+            this.dataGridViewAdjustments.MultiSelect = false;
+            this.dataGridViewAdjustments.Name = "dataGridViewAdjustments";
+            this.dataGridViewAdjustments.ReadOnly = true;
+            this.dataGridViewAdjustments.RowHeadersVisible = false;
+            this.tableLayoutPanelItemDetailsBot.SetRowSpan(this.dataGridViewAdjustments, 2);
+            this.dataGridViewAdjustments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewAdjustments.Size = new System.Drawing.Size(187, 59);
+            this.dataGridViewAdjustments.TabIndex = 7;
             // 
             // tableLayoutPanelOrderDetails
             // 
@@ -315,7 +387,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "CONTACT #";
+            this.label2.Text = "CONTACT NO.";
             // 
             // label3
             // 
@@ -328,7 +400,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 13);
             this.label3.TabIndex = 2;
-            this.label3.Text = "ORDER #";
+            this.label3.Text = "ORDER NO.";
             // 
             // label4
             // 
@@ -430,14 +502,14 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveBorder;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
@@ -474,6 +546,22 @@
             this.splitContainer1.Size = new System.Drawing.Size(999, 626);
             this.splitContainer1.SplitterDistance = 150;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.IsSplitterFixed = true;
+            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer4.Name = "splitContainer4";
+            this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.button1);
+            this.splitContainer4.Panel2.Padding = new System.Windows.Forms.Padding(15);
+            this.splitContainer4.Size = new System.Drawing.Size(150, 626);
+            this.splitContainer4.SplitterDistance = 465;
+            this.splitContainer4.TabIndex = 0;
             // 
             // splitContainer2
             // 
@@ -578,32 +666,6 @@
             this.tableLayoutPanelInfo.Size = new System.Drawing.Size(831, 148);
             this.tableLayoutPanelInfo.TabIndex = 0;
             // 
-            // tabAbout
-            // 
-            this.tabAbout.Location = new System.Drawing.Point(4, 5);
-            this.tabAbout.Name = "tabAbout";
-            this.tabAbout.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAbout.Size = new System.Drawing.Size(837, 588);
-            this.tabAbout.TabIndex = 1;
-            this.tabAbout.Text = "About";
-            this.tabAbout.UseVisualStyleBackColor = true;
-            // 
-            // splitContainer4
-            // 
-            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer4.IsSplitterFixed = true;
-            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer4.Name = "splitContainer4";
-            this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer4.Panel2
-            // 
-            this.splitContainer4.Panel2.Controls.Add(this.button1);
-            this.splitContainer4.Panel2.Padding = new System.Windows.Forms.Padding(15);
-            this.splitContainer4.Size = new System.Drawing.Size(150, 626);
-            this.splitContainer4.SplitterDistance = 465;
-            this.splitContainer4.TabIndex = 0;
-            // 
             // labelOrderDetails
             // 
             this.labelOrderDetails.AutoSize = true;
@@ -655,25 +717,15 @@
             this.labelItemDetails.Text = "ITEM DETAILS";
             this.labelItemDetails.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tableLayoutPanelItemDetailsTop
+            // tabAbout
             // 
-            this.tableLayoutPanelItemDetailsTop.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanelItemDetailsTop.ColumnCount = 4;
-            this.tableLayoutPanelItemDetailsBot.SetColumnSpan(this.tableLayoutPanelItemDetailsTop, 2);
-            this.tableLayoutPanelItemDetailsTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanelItemDetailsTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanelItemDetailsTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanelItemDetailsTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanelItemDetailsTop.Controls.Add(this.textBoxQty, 0, 0);
-            this.tableLayoutPanelItemDetailsTop.Controls.Add(this.textBoxItemName, 1, 0);
-            this.tableLayoutPanelItemDetailsTop.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelItemDetailsTop.Location = new System.Drawing.Point(1, 1);
-            this.tableLayoutPanelItemDetailsTop.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanelItemDetailsTop.Name = "tableLayoutPanelItemDetailsTop";
-            this.tableLayoutPanelItemDetailsTop.RowCount = 1;
-            this.tableLayoutPanelItemDetailsTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelItemDetailsTop.Size = new System.Drawing.Size(376, 29);
-            this.tableLayoutPanelItemDetailsTop.TabIndex = 0;
+            this.tabAbout.Location = new System.Drawing.Point(4, 5);
+            this.tabAbout.Name = "tabAbout";
+            this.tabAbout.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAbout.Size = new System.Drawing.Size(837, 588);
+            this.tabAbout.TabIndex = 1;
+            this.tabAbout.Text = "About";
+            this.tabAbout.UseVisualStyleBackColor = true;
             // 
             // quantityDataGridViewTextBoxColumn
             // 
@@ -695,6 +747,28 @@
             // 
             this.itemBindingSource.DataSource = typeof(GmailQuickstart.Item);
             // 
+            // valueDataGridViewTextBoxColumn1
+            // 
+            this.valueDataGridViewTextBoxColumn1.DataPropertyName = "Value";
+            this.valueDataGridViewTextBoxColumn1.HeaderText = "Value";
+            this.valueDataGridViewTextBoxColumn1.Name = "valueDataGridViewTextBoxColumn1";
+            this.valueDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // stringValueBindingSource
+            // 
+            this.stringValueBindingSource.DataSource = typeof(GmailQuickstart.StringValue);
+            // 
+            // valueDataGridViewTextBoxColumn
+            // 
+            this.valueDataGridViewTextBoxColumn.DataPropertyName = "Value";
+            this.valueDataGridViewTextBoxColumn.HeaderText = "Value";
+            this.valueDataGridViewTextBoxColumn.Name = "valueDataGridViewTextBoxColumn";
+            this.valueDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // itemBindingSource1
+            // 
+            this.itemBindingSource1.DataSource = typeof(GmailQuickstart.Item);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -709,6 +783,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tableLayoutPanelItemDetailsBot.ResumeLayout(false);
             this.tableLayoutPanelItemDetailsBot.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewToppings)).EndInit();
+            this.tableLayoutPanelItemDetailsTop.ResumeLayout(false);
+            this.tableLayoutPanelItemDetailsTop.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdjustments)).EndInit();
             this.tableLayoutPanelOrderDetails.ResumeLayout(false);
             this.tableLayoutPanelOrderDetails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -716,6 +794,9 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
+            this.splitContainer4.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
@@ -727,12 +808,9 @@
             this.splitContainer3.ResumeLayout(false);
             this.tableLayoutPanelInfo.ResumeLayout(false);
             this.tableLayoutPanelInfo.PerformLayout();
-            this.splitContainer4.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
-            this.splitContainer4.ResumeLayout(false);
-            this.tableLayoutPanelItemDetailsTop.ResumeLayout(false);
-            this.tableLayoutPanelItemDetailsTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stringValueBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -745,8 +823,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelItemDetailsBot;
         private System.Windows.Forms.TextBox textBoxQty;
         private System.Windows.Forms.TextBox textBoxItemName;
-        private System.Windows.Forms.ListBox listBoxAdjustments;
-        private System.Windows.Forms.ListBox listBoxToppings;
         private System.Windows.Forms.TextBox textBoxInstructions;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelOrderDetails;
         private System.Windows.Forms.Label label1;
@@ -774,5 +850,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelItemDetailsTop;
+        private System.Windows.Forms.DataGridView dataGridViewToppings;
+        private System.Windows.Forms.DataGridView dataGridViewAdjustments;
+        private System.Windows.Forms.BindingSource itemBindingSource1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn valueDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource stringValueBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn valueDataGridViewTextBoxColumn1;
     }
 }
