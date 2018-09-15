@@ -265,6 +265,9 @@ namespace GmailQuickstart {
             Debug.WriteLine("Mousedown splitcontainer");
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+
+        }
     }
 
     /* The object that will be data-bound to the orderGridView */

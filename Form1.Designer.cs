@@ -30,7 +30,7 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.tableLayoutPanelItemDetails = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanelItemDetailsBot = new System.Windows.Forms.TableLayoutPanel();
             this.textBoxQty = new System.Windows.Forms.TextBox();
             this.textBoxItemName = new System.Windows.Forms.TextBox();
             this.listBoxAdjustments = new System.Windows.Forms.ListBox();
@@ -59,11 +59,12 @@
             this.labelOrderDetails = new System.Windows.Forms.Label();
             this.labelItemList = new System.Windows.Forms.Label();
             this.labelItemDetails = new System.Windows.Forms.Label();
+            this.tableLayoutPanelItemDetailsTop = new System.Windows.Forms.TableLayoutPanel();
             this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            this.tableLayoutPanelItemDetails.SuspendLayout();
+            this.tableLayoutPanelItemDetailsBot.SuspendLayout();
             this.tableLayoutPanelOrderDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -83,6 +84,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
+            this.tableLayoutPanelItemDetailsTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -153,82 +155,104 @@
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
-            // tableLayoutPanelItemDetails
+            // tableLayoutPanelItemDetailsBot
             // 
-            this.tableLayoutPanelItemDetails.BackColor = System.Drawing.Color.White;
-            this.tableLayoutPanelItemDetails.ColumnCount = 4;
-            this.tableLayoutPanelInfo.SetColumnSpan(this.tableLayoutPanelItemDetails, 9);
-            this.tableLayoutPanelItemDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanelItemDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanelItemDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanelItemDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanelItemDetails.Controls.Add(this.textBoxQty, 0, 0);
-            this.tableLayoutPanelItemDetails.Controls.Add(this.textBoxItemName, 1, 0);
-            this.tableLayoutPanelItemDetails.Controls.Add(this.listBoxAdjustments, 0, 1);
-            this.tableLayoutPanelItemDetails.Controls.Add(this.listBoxToppings, 2, 1);
-            this.tableLayoutPanelItemDetails.Controls.Add(this.textBoxInstructions, 0, 3);
-            this.tableLayoutPanelItemDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelItemDetails.Location = new System.Drawing.Point(452, 23);
-            this.tableLayoutPanelItemDetails.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanelItemDetails.Name = "tableLayoutPanelItemDetails";
-            this.tableLayoutPanelItemDetails.RowCount = 4;
-            this.tableLayoutPanelItemDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.00062F));
-            this.tableLayoutPanelItemDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.00063F));
-            this.tableLayoutPanelItemDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.00063F));
-            this.tableLayoutPanelItemDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.99813F));
-            this.tableLayoutPanelItemDetails.Size = new System.Drawing.Size(378, 124);
-            this.tableLayoutPanelItemDetails.TabIndex = 0;
+            this.tableLayoutPanelItemDetailsBot.BackColor = System.Drawing.Color.White;
+            this.tableLayoutPanelItemDetailsBot.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanelItemDetailsBot.ColumnCount = 2;
+            this.tableLayoutPanelInfo.SetColumnSpan(this.tableLayoutPanelItemDetailsBot, 9);
+            this.tableLayoutPanelItemDetailsBot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelItemDetailsBot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelItemDetailsBot.Controls.Add(this.textBoxInstructions, 0, 3);
+            this.tableLayoutPanelItemDetailsBot.Controls.Add(this.tableLayoutPanelItemDetailsTop, 0, 0);
+            this.tableLayoutPanelItemDetailsBot.Controls.Add(this.listBoxAdjustments, 0, 1);
+            this.tableLayoutPanelItemDetailsBot.Controls.Add(this.listBoxToppings, 1, 1);
+            this.tableLayoutPanelItemDetailsBot.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelItemDetailsBot.Location = new System.Drawing.Point(452, 23);
+            this.tableLayoutPanelItemDetailsBot.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanelItemDetailsBot.Name = "tableLayoutPanelItemDetailsBot";
+            this.tableLayoutPanelItemDetailsBot.RowCount = 4;
+            this.tableLayoutPanelItemDetailsBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.00062F));
+            this.tableLayoutPanelItemDetailsBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.00063F));
+            this.tableLayoutPanelItemDetailsBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.00063F));
+            this.tableLayoutPanelItemDetailsBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.99813F));
+            this.tableLayoutPanelItemDetailsBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelItemDetailsBot.Size = new System.Drawing.Size(378, 124);
+            this.tableLayoutPanelItemDetailsBot.TabIndex = 0;
             // 
             // textBoxQty
             // 
+            this.textBoxQty.BackColor = System.Drawing.Color.White;
+            this.textBoxQty.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxQty.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxQty.Location = new System.Drawing.Point(3, 3);
+            this.textBoxQty.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxQty.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
+            this.textBoxQty.Location = new System.Drawing.Point(4, 4);
             this.textBoxQty.Name = "textBoxQty";
             this.textBoxQty.ReadOnly = true;
-            this.textBoxQty.Size = new System.Drawing.Size(88, 20);
+            this.textBoxQty.Size = new System.Drawing.Size(86, 15);
             this.textBoxQty.TabIndex = 0;
             // 
             // textBoxItemName
             // 
-            this.tableLayoutPanelItemDetails.SetColumnSpan(this.textBoxItemName, 3);
+            this.textBoxItemName.BackColor = System.Drawing.Color.White;
+            this.textBoxItemName.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tableLayoutPanelItemDetailsTop.SetColumnSpan(this.textBoxItemName, 3);
             this.textBoxItemName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxItemName.Location = new System.Drawing.Point(97, 3);
+            this.textBoxItemName.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxItemName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
+            this.textBoxItemName.Location = new System.Drawing.Point(97, 1);
+            this.textBoxItemName.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.textBoxItemName.Multiline = true;
             this.textBoxItemName.Name = "textBoxItemName";
             this.textBoxItemName.ReadOnly = true;
-            this.textBoxItemName.Size = new System.Drawing.Size(278, 20);
+            this.textBoxItemName.Size = new System.Drawing.Size(275, 27);
             this.textBoxItemName.TabIndex = 1;
             // 
             // listBoxAdjustments
             // 
-            this.tableLayoutPanelItemDetails.SetColumnSpan(this.listBoxAdjustments, 2);
+            this.listBoxAdjustments.BackColor = System.Drawing.Color.White;
+            this.listBoxAdjustments.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listBoxAdjustments.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBoxAdjustments.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxAdjustments.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
             this.listBoxAdjustments.FormattingEnabled = true;
-            this.listBoxAdjustments.Location = new System.Drawing.Point(3, 34);
+            this.listBoxAdjustments.Location = new System.Drawing.Point(1, 31);
+            this.listBoxAdjustments.Margin = new System.Windows.Forms.Padding(0);
             this.listBoxAdjustments.Name = "listBoxAdjustments";
-            this.tableLayoutPanelItemDetails.SetRowSpan(this.listBoxAdjustments, 2);
-            this.listBoxAdjustments.Size = new System.Drawing.Size(182, 56);
+            this.tableLayoutPanelItemDetailsBot.SetRowSpan(this.listBoxAdjustments, 2);
+            this.listBoxAdjustments.Size = new System.Drawing.Size(187, 59);
             this.listBoxAdjustments.TabIndex = 2;
             // 
             // listBoxToppings
             // 
-            this.tableLayoutPanelItemDetails.SetColumnSpan(this.listBoxToppings, 2);
+            this.listBoxToppings.BackColor = System.Drawing.Color.White;
+            this.listBoxToppings.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listBoxToppings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBoxToppings.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxToppings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
             this.listBoxToppings.FormattingEnabled = true;
-            this.listBoxToppings.Location = new System.Drawing.Point(191, 34);
+            this.listBoxToppings.Location = new System.Drawing.Point(189, 31);
+            this.listBoxToppings.Margin = new System.Windows.Forms.Padding(0);
             this.listBoxToppings.Name = "listBoxToppings";
-            this.tableLayoutPanelItemDetails.SetRowSpan(this.listBoxToppings, 2);
-            this.listBoxToppings.Size = new System.Drawing.Size(184, 56);
+            this.tableLayoutPanelItemDetailsBot.SetRowSpan(this.listBoxToppings, 2);
+            this.listBoxToppings.Size = new System.Drawing.Size(188, 59);
             this.listBoxToppings.TabIndex = 3;
             // 
             // textBoxInstructions
             // 
-            this.tableLayoutPanelItemDetails.SetColumnSpan(this.textBoxInstructions, 4);
+            this.textBoxInstructions.BackColor = System.Drawing.Color.White;
+            this.textBoxInstructions.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tableLayoutPanelItemDetailsBot.SetColumnSpan(this.textBoxInstructions, 2);
             this.textBoxInstructions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxInstructions.Location = new System.Drawing.Point(3, 96);
+            this.textBoxInstructions.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxInstructions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
+            this.textBoxInstructions.Location = new System.Drawing.Point(1, 91);
+            this.textBoxInstructions.Margin = new System.Windows.Forms.Padding(0);
             this.textBoxInstructions.Multiline = true;
             this.textBoxInstructions.Name = "textBoxInstructions";
             this.textBoxInstructions.ReadOnly = true;
-            this.textBoxInstructions.Size = new System.Drawing.Size(372, 25);
+            this.textBoxInstructions.Size = new System.Drawing.Size(376, 32);
             this.textBoxInstructions.TabIndex = 4;
             // 
             // tableLayoutPanelOrderDetails
@@ -426,6 +450,7 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(831, 430);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
@@ -538,7 +563,7 @@
             this.tableLayoutPanelInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanelInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanelInfo.Controls.Add(this.dataGridView2, 7, 1);
-            this.tableLayoutPanelInfo.Controls.Add(this.tableLayoutPanelItemDetails, 11, 1);
+            this.tableLayoutPanelInfo.Controls.Add(this.tableLayoutPanelItemDetailsBot, 11, 1);
             this.tableLayoutPanelInfo.Controls.Add(this.tableLayoutPanelOrderDetails, 0, 1);
             this.tableLayoutPanelInfo.Controls.Add(this.labelOrderDetails, 0, 0);
             this.tableLayoutPanelInfo.Controls.Add(this.labelItemList, 7, 0);
@@ -590,6 +615,7 @@
             this.labelOrderDetails.Location = new System.Drawing.Point(1, 1);
             this.labelOrderDetails.Margin = new System.Windows.Forms.Padding(0);
             this.labelOrderDetails.Name = "labelOrderDetails";
+            this.labelOrderDetails.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.labelOrderDetails.Size = new System.Drawing.Size(286, 21);
             this.labelOrderDetails.TabIndex = 1;
             this.labelOrderDetails.Text = "ORDER DETAILS";
@@ -606,6 +632,7 @@
             this.labelItemList.Location = new System.Drawing.Point(288, 1);
             this.labelItemList.Margin = new System.Windows.Forms.Padding(0);
             this.labelItemList.Name = "labelItemList";
+            this.labelItemList.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.labelItemList.Size = new System.Drawing.Size(163, 21);
             this.labelItemList.TabIndex = 2;
             this.labelItemList.Text = "ITEM LIST";
@@ -617,15 +644,36 @@
             this.labelItemDetails.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
             this.tableLayoutPanelInfo.SetColumnSpan(this.labelItemDetails, 9);
             this.labelItemDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelItemDetails.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelItemDetails.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelItemDetails.ForeColor = System.Drawing.Color.White;
             this.labelItemDetails.Location = new System.Drawing.Point(452, 1);
             this.labelItemDetails.Margin = new System.Windows.Forms.Padding(0);
             this.labelItemDetails.Name = "labelItemDetails";
+            this.labelItemDetails.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.labelItemDetails.Size = new System.Drawing.Size(378, 21);
             this.labelItemDetails.TabIndex = 3;
             this.labelItemDetails.Text = "ITEM DETAILS";
             this.labelItemDetails.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tableLayoutPanelItemDetailsTop
+            // 
+            this.tableLayoutPanelItemDetailsTop.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanelItemDetailsTop.ColumnCount = 4;
+            this.tableLayoutPanelItemDetailsBot.SetColumnSpan(this.tableLayoutPanelItemDetailsTop, 2);
+            this.tableLayoutPanelItemDetailsTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanelItemDetailsTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanelItemDetailsTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanelItemDetailsTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanelItemDetailsTop.Controls.Add(this.textBoxQty, 0, 0);
+            this.tableLayoutPanelItemDetailsTop.Controls.Add(this.textBoxItemName, 1, 0);
+            this.tableLayoutPanelItemDetailsTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelItemDetailsTop.Location = new System.Drawing.Point(1, 1);
+            this.tableLayoutPanelItemDetailsTop.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanelItemDetailsTop.Name = "tableLayoutPanelItemDetailsTop";
+            this.tableLayoutPanelItemDetailsTop.RowCount = 1;
+            this.tableLayoutPanelItemDetailsTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelItemDetailsTop.Size = new System.Drawing.Size(376, 29);
+            this.tableLayoutPanelItemDetailsTop.TabIndex = 0;
             // 
             // quantityDataGridViewTextBoxColumn
             // 
@@ -659,8 +707,8 @@
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            this.tableLayoutPanelItemDetails.ResumeLayout(false);
-            this.tableLayoutPanelItemDetails.PerformLayout();
+            this.tableLayoutPanelItemDetailsBot.ResumeLayout(false);
+            this.tableLayoutPanelItemDetailsBot.PerformLayout();
             this.tableLayoutPanelOrderDetails.ResumeLayout(false);
             this.tableLayoutPanelOrderDetails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -682,6 +730,8 @@
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
+            this.tableLayoutPanelItemDetailsTop.ResumeLayout(false);
+            this.tableLayoutPanelItemDetailsTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -692,7 +742,7 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelItemDetails;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelItemDetailsBot;
         private System.Windows.Forms.TextBox textBoxQty;
         private System.Windows.Forms.TextBox textBoxItemName;
         private System.Windows.Forms.ListBox listBoxAdjustments;
@@ -723,5 +773,6 @@
         private System.Windows.Forms.Label labelItemDetails;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelItemDetailsTop;
     }
 }
