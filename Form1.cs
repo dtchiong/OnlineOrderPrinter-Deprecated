@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GmailQuickstart {
+
     public partial class Form1 : Form {
 
         public static BindingSource orderListBindingSrc = new BindingSource();
@@ -103,7 +104,6 @@ namespace GmailQuickstart {
 
         /* If the orderCon's orderNum already exists in the table, we add the orderCon to the list, else
          * we insert a new entry with the new orderCon inserted into the entry's list
-         * 
          */
         public void InsertToOrderNumTable(OrderContainer orderCon) {
             List<OrderContainer> orderConList;
@@ -255,6 +255,16 @@ namespace GmailQuickstart {
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e) {
 
         }
+
+        //Used for moving the window without a title bar
+        private void Form1_MouseDown(object sender, MouseEventArgs e) {
+            Debug.WriteLine("Mousedown");
+        }
+
+        private void splitContainer1_Panel1_MouseDown(object sender, MouseEventArgs e) {
+            Debug.WriteLine("Mousedown splitcontainer");
+        }
+
     }
 
     /* The object that will be data-bound to the orderGridView */
