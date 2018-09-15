@@ -33,13 +33,15 @@ namespace GmailQuickstart {
             dataGridView1.DataSource = orderListBindingSrc;
             orderListBindingSrc.Sort = "TimeReceivedTicks DESC"; //set to sort DESC on the Ticks property
 
-            dataGridView1.Columns.Add(NewTextBoxCol("Service", "SERVICE"));
-            dataGridView1.Columns.Add(NewTextBoxCol("Name", "NAME"));
-            dataGridView1.Columns.Add(NewTextBoxCol("ItemCount", "ORDER SIZE")); 
-            dataGridView1.Columns.Add(NewTextBoxCol("TimeReceived", "TIMED RECEIVED"));
-            dataGridView1.Columns.Add(NewTextBoxCol("PickUpTime", "PICK-UP TIME"));
-            dataGridView1.Columns.Add(NewTextBoxCol("Status", "ORDER STATUS"));
-            dataGridView1.Columns.Add(NewTextBoxCol("PrintStatus", "PRINT STATUS"));
+            dataGridView1.Columns.Add(NewTextBoxCol("Service", "Service"));
+            dataGridView1.Columns.Add(NewTextBoxCol("Name", "Name"));
+            dataGridView1.Columns.Add(NewTextBoxCol("ItemCount", "Order Size")); 
+            dataGridView1.Columns.Add(NewTextBoxCol("TimeReceived", "Time Received"));
+            dataGridView1.Columns.Add(NewTextBoxCol("PickUpTime", "Pick-Up Time"));
+            dataGridView1.Columns.Add(NewTextBoxCol("Status", "Order Status"));
+            dataGridView1.Columns.Add(NewTextBoxCol("PrintStatus", "Print Status"));
+
+            dataGridView1.Columns["Order Size"].FillWeight = 90;
 
             dataGridView1.Columns.Add(NewTextBoxCol("TimeReceivedTicks", "TIMERECEIVEDTICKS"));
             dataGridView1.Columns["TIMERECEIVEDTICKS"].Visible = false;
@@ -253,30 +255,6 @@ namespace GmailQuickstart {
             if (selectedRows.Count > 0) {
                 UpdateItemDetailsUI();
             }
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
-            Application.Exit();
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e) {
-        }
-
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-
-        }
-
-        //Used for moving the window without a title bar
-        private void Form1_MouseDown(object sender, MouseEventArgs e) {
-            Debug.WriteLine("Mousedown");
-        }
-
-        private void splitContainer1_Panel1_MouseDown(object sender, MouseEventArgs e) {
-            Debug.WriteLine("Mousedown splitcontainer");
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-
         }
     }
 
