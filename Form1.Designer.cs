@@ -24,6 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -55,18 +56,31 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanelTabBar = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.splitContainerTabTopBound = new System.Windows.Forms.SplitContainer();
+            this.panelBarTopSeperator = new System.Windows.Forms.Panel();
+            this.splitContainerTabBotBoundary = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.tableLayoutPanelTitleBar = new System.Windows.Forms.TableLayoutPanel();
+            this.label6 = new System.Windows.Forms.Label();
             this.tabControlAppTabs = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.buttonActionsTab = new System.Windows.Forms.Button();
+            this.buttonAnalyticsTab = new System.Windows.Forms.Button();
+            this.buttonAboutTab = new System.Windows.Forms.Button();
+            this.buttonMenusTab = new System.Windows.Forms.Button();
+            this.buttonOrdersTab = new System.Windows.Forms.Button();
+            this.buttonSettingsTab = new System.Windows.Forms.Button();
             this.tableLayoutPanelInfo = new System.Windows.Forms.TableLayoutPanel();
             this.labelOrderDetails = new System.Windows.Forms.Label();
             this.labelItemList = new System.Windows.Forms.Label();
             this.labelItemDetails = new System.Windows.Forms.Label();
             this.tabAbout = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanelTitleBar = new System.Windows.Forms.TableLayoutPanel();
-            this.label6 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -74,7 +88,6 @@
             this.stringValueBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.valueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tableLayoutPanelItemDetailsBot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewToppings)).BeginInit();
@@ -91,10 +104,20 @@
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
             this.tableLayoutPanelTabBar.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerTabTopBound)).BeginInit();
+            this.splitContainerTabTopBound.Panel1.SuspendLayout();
+            this.splitContainerTabTopBound.Panel2.SuspendLayout();
+            this.splitContainerTabTopBound.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerTabBotBoundary)).BeginInit();
+            this.splitContainerTabBotBoundary.Panel1.SuspendLayout();
+            this.splitContainerTabBotBoundary.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.tableLayoutPanelTitleBar.SuspendLayout();
             this.tabControlAppTabs.SuspendLayout();
             this.tabHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
@@ -102,7 +125,7 @@
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.tableLayoutPanelInfo.SuspendLayout();
-            this.tableLayoutPanelTitleBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stringValueBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource1)).BeginInit();
@@ -110,9 +133,9 @@
             // 
             // imageList1
             // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "home-1-white3.png");
             // 
             // button1
             // 
@@ -562,6 +585,7 @@
             // 
             // splitContainer4
             // 
+            this.splitContainer4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));
             this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer4.IsSplitterFixed = true;
             this.splitContainer4.Location = new System.Drawing.Point(0, 0);
@@ -575,6 +599,7 @@
             // 
             // splitContainer4.Panel2
             // 
+            this.splitContainer4.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));
             this.splitContainer4.Panel2.Controls.Add(this.button1);
             this.splitContainer4.Panel2.Padding = new System.Windows.Forms.Padding(15);
             this.splitContainer4.Size = new System.Drawing.Size(150, 626);
@@ -583,10 +608,11 @@
             // 
             // tableLayoutPanelTabBar
             // 
+            this.tableLayoutPanelTabBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));
             this.tableLayoutPanelTabBar.ColumnCount = 1;
             this.tableLayoutPanelTabBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelTabBar.Controls.Add(this.tableLayoutPanel1, 0, 1);
             this.tableLayoutPanelTabBar.Controls.Add(this.tableLayoutPanel2, 0, 0);
+            this.tableLayoutPanelTabBar.Controls.Add(this.splitContainerTabTopBound, 0, 1);
             this.tableLayoutPanelTabBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelTabBar.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelTabBar.Name = "tableLayoutPanelTabBar";
@@ -596,20 +622,118 @@
             this.tableLayoutPanelTabBar.Size = new System.Drawing.Size(150, 465);
             this.tableLayoutPanelTabBar.TabIndex = 0;
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.label7, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label8, 0, 1);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.15789F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.94737F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 36.38322F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(144, 95);
+            this.tableLayoutPanel2.TabIndex = 1;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(3, 59);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(118, 30);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "T4 Milpitas";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(3, 41);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(138, 18);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Store";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // splitContainerTabTopBound
+            // 
+            this.splitContainerTabTopBound.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerTabTopBound.IsSplitterFixed = true;
+            this.splitContainerTabTopBound.Location = new System.Drawing.Point(3, 104);
+            this.splitContainerTabTopBound.Name = "splitContainerTabTopBound";
+            this.splitContainerTabTopBound.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainerTabTopBound.Panel1
+            // 
+            this.splitContainerTabTopBound.Panel1.Controls.Add(this.panelBarTopSeperator);
+            // 
+            // splitContainerTabTopBound.Panel2
+            // 
+            this.splitContainerTabTopBound.Panel2.Controls.Add(this.splitContainerTabBotBoundary);
+            this.splitContainerTabTopBound.Size = new System.Drawing.Size(144, 358);
+            this.splitContainerTabTopBound.SplitterDistance = 25;
+            this.splitContainerTabTopBound.TabIndex = 2;
+            // 
+            // panelBarTopSeperator
+            // 
+            this.panelBarTopSeperator.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.panelBarTopSeperator.CausesValidation = false;
+            this.panelBarTopSeperator.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelBarTopSeperator.Location = new System.Drawing.Point(0, 0);
+            this.panelBarTopSeperator.Margin = new System.Windows.Forms.Padding(0);
+            this.panelBarTopSeperator.MaximumSize = new System.Drawing.Size(0, 3);
+            this.panelBarTopSeperator.Name = "panelBarTopSeperator";
+            this.panelBarTopSeperator.Size = new System.Drawing.Size(0, 3);
+            this.panelBarTopSeperator.TabIndex = 0;
+            this.panelBarTopSeperator.Visible = false;
+            // 
+            // splitContainerTabBotBoundary
+            // 
+            this.splitContainerTabBotBoundary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerTabBotBoundary.IsSplitterFixed = true;
+            this.splitContainerTabBotBoundary.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerTabBotBoundary.Name = "splitContainerTabBotBoundary";
+            this.splitContainerTabBotBoundary.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainerTabBotBoundary.Panel1
+            // 
+            this.splitContainerTabBotBoundary.Panel1.Controls.Add(this.tableLayoutPanel1);
+            this.splitContainerTabBotBoundary.Size = new System.Drawing.Size(144, 329);
+            this.splitContainerTabBotBoundary.SplitterDistance = 296;
+            this.splitContainerTabBotBoundary.TabIndex = 0;
+            // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.07692F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.92308F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.buttonSettingsTab, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.buttonOrdersTab, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.buttonAnalyticsTab, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.buttonAboutTab, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.buttonActionsTab, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.buttonMenusTab, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 104);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(144, 358);
+            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(144, 296);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // splitContainer2
@@ -631,6 +755,37 @@
             this.splitContainer2.Size = new System.Drawing.Size(845, 626);
             this.splitContainer2.SplitterDistance = 45;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // tableLayoutPanelTitleBar
+            // 
+            this.tableLayoutPanelTitleBar.ColumnCount = 2;
+            this.tableLayoutPanelTitleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
+            this.tableLayoutPanelTitleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.42857F));
+            this.tableLayoutPanelTitleBar.Controls.Add(this.label6, 0, 0);
+            this.tableLayoutPanelTitleBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelTitleBar.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanelTitleBar.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanelTitleBar.Name = "tableLayoutPanelTitleBar";
+            this.tableLayoutPanelTitleBar.RowCount = 1;
+            this.tableLayoutPanelTitleBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelTitleBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanelTitleBar.Size = new System.Drawing.Size(845, 45);
+            this.tableLayoutPanelTitleBar.TabIndex = 0;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
+            this.label6.Location = new System.Drawing.Point(0, 0);
+            this.label6.Margin = new System.Windows.Forms.Padding(0);
+            this.label6.Name = "label6";
+            this.label6.Padding = new System.Windows.Forms.Padding(7, 0, 0, 0);
+            this.label6.Size = new System.Drawing.Size(241, 45);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Last Orders";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tabControlAppTabs
             // 
@@ -675,6 +830,115 @@
             this.splitContainer3.Size = new System.Drawing.Size(831, 562);
             this.splitContainer3.SplitterDistance = 414;
             this.splitContainer3.TabIndex = 0;
+            // 
+            // buttonActionsTab
+            // 
+            this.buttonActionsTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonActionsTab.FlatAppearance.BorderSize = 0;
+            this.buttonActionsTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonActionsTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonActionsTab.ForeColor = System.Drawing.Color.White;
+            this.buttonActionsTab.ImageList = this.imageList1;
+            this.buttonActionsTab.Location = new System.Drawing.Point(33, 245);
+            this.buttonActionsTab.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonActionsTab.Name = "buttonActionsTab";
+            this.buttonActionsTab.Size = new System.Drawing.Size(111, 51);
+            this.buttonActionsTab.TabIndex = 5;
+            this.buttonActionsTab.Text = "Actions";
+            this.buttonActionsTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonActionsTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonActionsTab.UseVisualStyleBackColor = true;
+            // 
+            // buttonAnalyticsTab
+            // 
+            this.buttonAnalyticsTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonAnalyticsTab.FlatAppearance.BorderSize = 0;
+            this.buttonAnalyticsTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAnalyticsTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAnalyticsTab.ForeColor = System.Drawing.Color.White;
+            this.buttonAnalyticsTab.ImageList = this.imageList1;
+            this.buttonAnalyticsTab.Location = new System.Drawing.Point(33, 147);
+            this.buttonAnalyticsTab.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonAnalyticsTab.Name = "buttonAnalyticsTab";
+            this.buttonAnalyticsTab.Size = new System.Drawing.Size(111, 49);
+            this.buttonAnalyticsTab.TabIndex = 4;
+            this.buttonAnalyticsTab.Text = "Analytics";
+            this.buttonAnalyticsTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonAnalyticsTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonAnalyticsTab.UseVisualStyleBackColor = true;
+            // 
+            // buttonAboutTab
+            // 
+            this.buttonAboutTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonAboutTab.FlatAppearance.BorderSize = 0;
+            this.buttonAboutTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAboutTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAboutTab.ForeColor = System.Drawing.Color.White;
+            this.buttonAboutTab.ImageList = this.imageList1;
+            this.buttonAboutTab.Location = new System.Drawing.Point(33, 98);
+            this.buttonAboutTab.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonAboutTab.Name = "buttonAboutTab";
+            this.buttonAboutTab.Size = new System.Drawing.Size(111, 49);
+            this.buttonAboutTab.TabIndex = 2;
+            this.buttonAboutTab.Text = "About";
+            this.buttonAboutTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonAboutTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonAboutTab.UseVisualStyleBackColor = true;
+            // 
+            // buttonMenusTab
+            // 
+            this.buttonMenusTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonMenusTab.FlatAppearance.BorderSize = 0;
+            this.buttonMenusTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMenusTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonMenusTab.ForeColor = System.Drawing.Color.White;
+            this.buttonMenusTab.ImageList = this.imageList1;
+            this.buttonMenusTab.Location = new System.Drawing.Point(33, 196);
+            this.buttonMenusTab.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonMenusTab.Name = "buttonMenusTab";
+            this.buttonMenusTab.Size = new System.Drawing.Size(111, 49);
+            this.buttonMenusTab.TabIndex = 3;
+            this.buttonMenusTab.Text = "Menus";
+            this.buttonMenusTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonMenusTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonMenusTab.UseVisualStyleBackColor = true;
+            // 
+            // buttonOrdersTab
+            // 
+            this.buttonOrdersTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonOrdersTab.FlatAppearance.BorderSize = 0;
+            this.buttonOrdersTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonOrdersTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonOrdersTab.ForeColor = System.Drawing.Color.White;
+            this.buttonOrdersTab.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonOrdersTab.ImageIndex = 0;
+            this.buttonOrdersTab.Location = new System.Drawing.Point(33, 0);
+            this.buttonOrdersTab.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonOrdersTab.Name = "buttonOrdersTab";
+            this.buttonOrdersTab.Size = new System.Drawing.Size(111, 49);
+            this.buttonOrdersTab.TabIndex = 0;
+            this.buttonOrdersTab.Text = "Orders";
+            this.buttonOrdersTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonOrdersTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonOrdersTab.UseVisualStyleBackColor = true;
+            // 
+            // buttonSettingsTab
+            // 
+            this.buttonSettingsTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonSettingsTab.FlatAppearance.BorderSize = 0;
+            this.buttonSettingsTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSettingsTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSettingsTab.ForeColor = System.Drawing.Color.White;
+            this.buttonSettingsTab.ImageList = this.imageList1;
+            this.buttonSettingsTab.Location = new System.Drawing.Point(33, 49);
+            this.buttonSettingsTab.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonSettingsTab.Name = "buttonSettingsTab";
+            this.buttonSettingsTab.Size = new System.Drawing.Size(111, 49);
+            this.buttonSettingsTab.TabIndex = 1;
+            this.buttonSettingsTab.Text = "Settings";
+            this.buttonSettingsTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonSettingsTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonSettingsTab.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanelInfo
             // 
@@ -777,36 +1041,17 @@
             this.tabAbout.Text = "About";
             this.tabAbout.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanelTitleBar
+            // pictureBox1
             // 
-            this.tableLayoutPanelTitleBar.ColumnCount = 2;
-            this.tableLayoutPanelTitleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
-            this.tableLayoutPanelTitleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.42857F));
-            this.tableLayoutPanelTitleBar.Controls.Add(this.label6, 0, 0);
-            this.tableLayoutPanelTitleBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelTitleBar.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanelTitleBar.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanelTitleBar.Name = "tableLayoutPanelTitleBar";
-            this.tableLayoutPanelTitleBar.RowCount = 1;
-            this.tableLayoutPanelTitleBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelTitleBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
-            this.tableLayoutPanelTitleBar.Size = new System.Drawing.Size(845, 45);
-            this.tableLayoutPanelTitleBar.TabIndex = 0;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
-            this.label6.Location = new System.Drawing.Point(0, 0);
-            this.label6.Margin = new System.Windows.Forms.Padding(0);
-            this.label6.Name = "label6";
-            this.label6.Padding = new System.Windows.Forms.Padding(7, 0, 0, 0);
-            this.label6.Size = new System.Drawing.Size(241, 45);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Current Orders";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = global::Order_Parser.Properties.Resources.home_1_white3;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 8);
+            this.pictureBox1.MaximumSize = new System.Drawing.Size(32, 32);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(27, 32);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
             // 
             // quantityDataGridViewTextBoxColumn
             // 
@@ -850,19 +1095,6 @@
             // 
             this.itemBindingSource1.DataSource = typeof(GmailQuickstart.Item);
             // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 3;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.15789F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.94737F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 36.38322F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(144, 95);
-            this.tableLayoutPanel2.TabIndex = 1;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -892,10 +1124,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
             this.tableLayoutPanelTabBar.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.splitContainerTabTopBound.Panel1.ResumeLayout(false);
+            this.splitContainerTabTopBound.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerTabTopBound)).EndInit();
+            this.splitContainerTabTopBound.ResumeLayout(false);
+            this.splitContainerTabBotBoundary.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerTabBotBoundary)).EndInit();
+            this.splitContainerTabBotBoundary.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.tableLayoutPanelTitleBar.ResumeLayout(false);
+            this.tableLayoutPanelTitleBar.PerformLayout();
             this.tabControlAppTabs.ResumeLayout(false);
             this.tabHome.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
@@ -904,8 +1148,7 @@
             this.splitContainer3.ResumeLayout(false);
             this.tableLayoutPanelInfo.ResumeLayout(false);
             this.tableLayoutPanelInfo.PerformLayout();
-            this.tableLayoutPanelTitleBar.ResumeLayout(false);
-            this.tableLayoutPanelTitleBar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stringValueBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource1)).EndInit();
@@ -954,10 +1197,22 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn valueDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource stringValueBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn valueDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelTabBar;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelTitleBar;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelTabBar;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.SplitContainer splitContainerTabTopBound;
+        private System.Windows.Forms.SplitContainer splitContainerTabBotBoundary;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button buttonActionsTab;
+        private System.Windows.Forms.Button buttonAnalyticsTab;
+        private System.Windows.Forms.Button buttonMenusTab;
+        private System.Windows.Forms.Button buttonAboutTab;
+        private System.Windows.Forms.Button buttonSettingsTab;
+        private System.Windows.Forms.Button buttonOrdersTab;
+        private System.Windows.Forms.Panel panelBarTopSeperator;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
