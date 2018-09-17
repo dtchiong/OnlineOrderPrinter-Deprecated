@@ -73,7 +73,7 @@
             this.labelOrderDetails = new System.Windows.Forms.Label();
             this.labelItemList = new System.Windows.Forms.Label();
             this.labelItemDetails = new System.Windows.Forms.Label();
-            this.tabAbout = new System.Windows.Forms.TabPage();
+            this.tabUnimplemented = new System.Windows.Forms.TabPage();
             this.buttonOrdersTab = new System.Windows.Forms.Button();
             this.buttonAboutTab = new System.Windows.Forms.Button();
             this.buttonAnalyticsTab = new System.Windows.Forms.Button();
@@ -81,6 +81,7 @@
             this.buttonActionsTab = new System.Windows.Forms.Button();
             this.buttonSettingsTab = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
             this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -125,6 +126,7 @@
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.tableLayoutPanelInfo.SuspendLayout();
+            this.tabUnimplemented.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stringValueBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource1)).BeginInit();
@@ -531,8 +533,8 @@
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.ColumnHeadersHeight = 40;
@@ -791,7 +793,7 @@
             // 
             this.tabControlAppTabs.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             this.tabControlAppTabs.Controls.Add(this.tabHome);
-            this.tabControlAppTabs.Controls.Add(this.tabAbout);
+            this.tabControlAppTabs.Controls.Add(this.tabUnimplemented);
             this.tabControlAppTabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlAppTabs.ItemSize = new System.Drawing.Size(0, 1);
             this.tabControlAppTabs.Location = new System.Drawing.Point(0, 0);
@@ -921,15 +923,16 @@
             this.labelItemDetails.Text = "Item Details";
             this.labelItemDetails.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tabAbout
+            // tabUnimplemented
             // 
-            this.tabAbout.Location = new System.Drawing.Point(4, 5);
-            this.tabAbout.Name = "tabAbout";
-            this.tabAbout.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAbout.Size = new System.Drawing.Size(837, 568);
-            this.tabAbout.TabIndex = 1;
-            this.tabAbout.Text = "About";
-            this.tabAbout.UseVisualStyleBackColor = true;
+            this.tabUnimplemented.Controls.Add(this.label6);
+            this.tabUnimplemented.Location = new System.Drawing.Point(4, 5);
+            this.tabUnimplemented.Name = "tabUnimplemented";
+            this.tabUnimplemented.Padding = new System.Windows.Forms.Padding(3);
+            this.tabUnimplemented.Size = new System.Drawing.Size(837, 568);
+            this.tabUnimplemented.TabIndex = 1;
+            this.tabUnimplemented.Text = "Unimplemented";
+            this.tabUnimplemented.UseVisualStyleBackColor = true;
             // 
             // buttonOrdersTab
             // 
@@ -1112,6 +1115,17 @@
             this.button1.MouseEnter += new System.EventHandler(this.button_MouseEnter);
             this.button1.MouseLeave += new System.EventHandler(this.button_MouseLeave);
             // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 17.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(132, 139);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(386, 31);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Unimplemented. Coming Soon TM";
+            // 
             // quantityDataGridViewTextBoxColumn
             // 
             this.quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
@@ -1207,6 +1221,8 @@
             this.splitContainer3.ResumeLayout(false);
             this.tableLayoutPanelInfo.ResumeLayout(false);
             this.tableLayoutPanelInfo.PerformLayout();
+            this.tabUnimplemented.ResumeLayout(false);
+            this.tabUnimplemented.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stringValueBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource1)).EndInit();
@@ -1240,7 +1256,7 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.TabControl tabControlAppTabs;
         private System.Windows.Forms.TabPage tabHome;
-        private System.Windows.Forms.TabPage tabAbout;
+        private System.Windows.Forms.TabPage tabUnimplemented;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelInfo;
         private System.Windows.Forms.SplitContainer splitContainer4;
@@ -1272,5 +1288,6 @@
         private System.Windows.Forms.Button buttonSettingsTab;
         private System.Windows.Forms.Button buttonOrdersTab;
         private System.Windows.Forms.Panel panelBarTopSeperator;
+        private System.Windows.Forms.Label label6;
     }
 }

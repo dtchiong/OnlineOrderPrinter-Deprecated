@@ -62,7 +62,7 @@ namespace GmailQuickstart {
 
         static TimerT timer;
 
-        public static bool DebugBuild = true;  //turns on saving DoorDash extracted pdf lines to file
+        public static bool DebugBuild = false;  //turns on saving DoorDash extracted pdf lines to file
         public static bool DebugPrint = false; //turns on debug statements
         private static bool debugMailMode = false; //if true, only parses the email with testMessageId, and doesn't poll for new emails
 
@@ -123,28 +123,19 @@ namespace GmailQuickstart {
                 if (order != null) {
                     UpdateOrderList(order, isAdjustedOrder);
                 }
-                Console.Read();
                 return;
             }
 
             //We check if we need to perform a full sync or a partial sync
             //If the file doesn't exist, this is the first time running the app, so execute full sync
             if (!File.Exists(HistoryIdPath)) {
-
                 FullSyncAppToEmail();
-
-            } else {
-
-                PartialSyncAppToEmail();
-
             }
 
-            //The timer continously checks the email for new messages
-            const int dueTime = 5000;
+            //The timer continously runs in the background to check the email for new messages
+            const int dueTime = 1000;
             const int period = 4000; //in miliseconds
-            timer = new TimerT(CheckEmail, "4Head", dueTime, period);
-
-            Console.Read();
+            timer = new TimerT(CheckEmail, "Testing123", dueTime, period);
         }
 
         /* Full sync grabs the latest messages and stores the historyId. 

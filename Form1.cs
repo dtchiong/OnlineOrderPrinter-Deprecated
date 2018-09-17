@@ -27,9 +27,15 @@ namespace GmailQuickstart {
         public Form1() {
             InitializeComponent();
 
-            //Initialize dgv columns and properties
-            //Prevents columns from auto populating with OrderContainer fields. 
-            //Need to set before setting datasource, or else columns get duplicated for some reason.
+            CreateDgvForOrders(); //creating dgv at runtime instead of designer to show example
+            LoadSideBarIcons();
+        }
+
+        /* Initialize dgv columns and properties
+         * Prevents columns from auto populating with OrderContainer fields. Need to set autogenerate 
+         * columns before setting datasource, or else columns get duplicated for some reason.
+         */
+        private void CreateDgvForOrders() {
             dataGridView1.AutoGenerateColumns = false;
             orderListBindingSrc.DataSource = OrderList;
             dataGridView1.DataSource = orderListBindingSrc;
@@ -37,7 +43,7 @@ namespace GmailQuickstart {
 
             dataGridView1.Columns.Add(NewTextBoxCol("Service", "Service"));
             dataGridView1.Columns.Add(NewTextBoxCol("Name", "Name"));
-            dataGridView1.Columns.Add(NewTextBoxCol("ItemCount", "Order Size")); 
+            dataGridView1.Columns.Add(NewTextBoxCol("ItemCount", "Order Size"));
             dataGridView1.Columns.Add(NewTextBoxCol("TimeReceived", "Time Received"));
             dataGridView1.Columns.Add(NewTextBoxCol("PickUpTime", "Pick-Up Time"));
             dataGridView1.Columns.Add(NewTextBoxCol("Status", "Order Status"));
@@ -48,8 +54,6 @@ namespace GmailQuickstart {
 
             dataGridView1.Columns.Add(NewTextBoxCol("TimeReceivedTicks", "TIMERECEIVEDTICKS"));
             dataGridView1.Columns["TIMERECEIVEDTICKS"].Visible = false;
-
-            LoadSideBarIcons();
         }
 
         /* This solves the degrading quality of images in the imagelist over compiles
@@ -318,7 +322,25 @@ namespace GmailQuickstart {
                     button.BackColor = ColorTranslator.FromHtml("#171516");
                     CurrentForm = currentTag;
                     labelTitle.Text = currentTag;
+
+                    switchUserControl(CurrentForm);
                 }
+            }
+        }
+
+        /* Refactor to switch views using userControls later */ 
+        private void switchUserControl(string CurrentForm) {
+            switch(CurrentForm) {
+                case "Last Orders":
+                    tabControlAppTabs.SelectedIndex = 0;
+                    break;
+                case "Analytics":
+                case "Menus":
+                case "Actions":
+                case "Settings":
+                case "About":
+                    tabControlAppTabs.SelectedIndex = 1;
+                    break;
             }
         }
 
