@@ -63,6 +63,36 @@ namespace Order_Parser.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bar_chart_white {
+            get {
+                object obj = ResourceManager.GetObject("bar-chart-white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cutlery_white {
+            get {
+                object obj = ResourceManager.GetObject("cutlery-white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap error_advice_sign {
+            get {
+                object obj = ResourceManager.GetObject("error-advice-sign", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap home_1_white {
             get {
                 object obj = ResourceManager.GetObject("home-1-white", resourceCulture);
@@ -76,6 +106,26 @@ namespace Order_Parser.Properties {
         internal static System.Drawing.Bitmap home_1_white3 {
             get {
                 object obj = ResourceManager.GetObject("home-1-white3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap home_white2 {
+            get {
+                object obj = ResourceManager.GetObject("home-white2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap information {
+            get {
+                object obj = ResourceManager.GetObject("information", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -106,6 +156,16 @@ namespace Order_Parser.Properties {
         internal static System.Drawing.Bitmap printer_white {
             get {
                 object obj = ResourceManager.GetObject("printer-white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap settings_5_white {
+            get {
+                object obj = ResourceManager.GetObject("settings-5-white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

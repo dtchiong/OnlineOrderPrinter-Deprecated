@@ -22,7 +22,7 @@ namespace GmailQuickstart {
         //the dictionary of orders where the key is the orderNum, used to track grubhub cancelled orders
         public static Dictionary<string, List<OrderContainer>> OrderTableByOrdNum = new Dictionary<string, List<OrderContainer>>();
 
-        public static string ActiveForm = "Home";
+        public static string CurrentForm = "Last Orders"; //there's a Form.ActiveForm
 
         public Form1() {
             InitializeComponent();
@@ -43,10 +43,35 @@ namespace GmailQuickstart {
             dataGridView1.Columns.Add(NewTextBoxCol("Status", "Order Status"));
             dataGridView1.Columns.Add(NewTextBoxCol("PrintStatus", "Print Status"));
 
-            dataGridView1.Columns["Order Size"].FillWeight = 90;
+            dataGridView1.Columns["Service"].FillWeight = 80;
+            dataGridView1.Columns["Order Size"].FillWeight = 80;
 
             dataGridView1.Columns.Add(NewTextBoxCol("TimeReceivedTicks", "TIMERECEIVEDTICKS"));
             dataGridView1.Columns["TIMERECEIVEDTICKS"].Visible = false;
+
+            LoadSideBarIcons();
+        }
+
+        /* This solves the degrading quality of images in the imagelist over compiles
+         * by loading all the images from the resources at runtime
+         */
+        private void LoadSideBarIcons() {
+            imageList1.ColorDepth = ColorDepth.Depth32Bit;
+            imageList1.Images.Clear(); //Clears the images in the designer
+
+            Bitmap homeImage = new Bitmap(Order_Parser.Properties.Resources.home_white2);
+            Bitmap AnalyticsImage = new Bitmap(Order_Parser.Properties.Resources.bar_chart_white);
+            Bitmap MenusImage = new Bitmap(Order_Parser.Properties.Resources.cutlery_white);
+            Bitmap ActionsImage = new Bitmap(Order_Parser.Properties.Resources.error_advice_sign);
+            Bitmap SettingsImage = new Bitmap(Order_Parser.Properties.Resources.settings_5_white);
+            Bitmap AboutImage = new Bitmap(Order_Parser.Properties.Resources.information);
+
+            imageList1.Images.Add(homeImage);
+            imageList1.Images.Add(AnalyticsImage);
+            imageList1.Images.Add(MenusImage);
+            imageList1.Images.Add(ActionsImage);
+            imageList1.Images.Add(SettingsImage);
+            imageList1.Images.Add(AboutImage);
         }
 
         /* Returns a new DataGridViewColumn given the databinding propertyname, and the header name */
@@ -260,14 +285,16 @@ namespace GmailQuickstart {
         }
 
         /* Handles the click for each of the side bar buttons. 
-         * We show the usercontrol corresponding to the button pressed, 
+         * Currently switches tabs to show a different control, but later 
+         * we will show the Usercontrol corresponding to the button pressed, 
          * and set the color highlighting appropriately for each button
          */
         private void handleSideBarButtonClick(object sender, EventArgs e) {
 
+            //Gets the current button's tag and returns if it's already the selected page
             string pressedTag = (string)((Button)sender).Tag;
        
-            if (pressedTag == ActiveForm) {
+            if (pressedTag == CurrentForm) {
                 return;
             }
 
@@ -289,9 +316,18 @@ namespace GmailQuickstart {
                     button.BackColor = ColorTranslator.FromHtml("#2A2729");
                 }else {
                     button.BackColor = ColorTranslator.FromHtml("#171516");
-                    ActiveForm = currentTag;
+                    CurrentForm = currentTag;
+                    labelTitle.Text = currentTag;
                 }
             }
+        }
+
+        private void button_MouseEnter(object sender, EventArgs e) {
+            Cursor = Cursors.Hand;
+        }
+
+        private void button_MouseLeave(object sender, EventArgs e) {
+            Cursor = Cursors.Default;
         }
     }
 
@@ -363,8 +399,9 @@ namespace GmailQuickstart {
         public int PrintCount { get; set; }
     }
 
-    //A work around for binding a List<string> to a dataGridView.
-    //dataGridView looks for properties of containing objects, so we have to wrap string in a class
+    /* A work around for binding a List<string> to a dataGridView.
+     * dataGridView looks for properties of containing objects, so we have to wrap string in a class
+     */
     public class StringValue {
         public StringValue(string s) {
             Value = s;
