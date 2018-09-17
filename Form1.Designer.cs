@@ -32,7 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanelItemDetailsBot = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewToppings = new System.Windows.Forms.DataGridView();
@@ -69,6 +69,7 @@
             this.buttonSettingsTab = new System.Windows.Forms.Button();
             this.buttonAboutTab = new System.Windows.Forms.Button();
             this.buttonOrdersTab = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanelTitleBar = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
@@ -133,28 +134,18 @@
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "home-1-white3.png");
+            this.imageList1.Images.SetKeyName(0, "home-white2.png");
             this.imageList1.Images.SetKeyName(1, "settings-5-white.png");
-            this.imageList1.Images.SetKeyName(2, "bar-chart-white.png");
-            this.imageList1.Images.SetKeyName(3, "cutlery-white.png");
-            this.imageList1.Images.SetKeyName(4, "home-white.png");
-            this.imageList1.Images.SetKeyName(5, "error-advice-sign.png");
-            this.imageList1.Images.SetKeyName(6, "information.png");
-            this.imageList1.Images.SetKeyName(7, "home-white2.png");
+            this.imageList1.Images.SetKeyName(2, "information.png");
+            this.imageList1.Images.SetKeyName(3, "error-advice-sign.png");
+            this.imageList1.Images.SetKeyName(4, "bar-chart-white.png");
+            this.imageList1.Images.SetKeyName(5, "cutlery-white.png");
             // 
-            // button1
+            // imageList2
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.Control;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(15, 15);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 127);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "PRINT";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.print_Click);
+            this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
+            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList2.Images.SetKeyName(0, "print-white.png");
             // 
             // dataGridView2
             // 
@@ -606,7 +597,7 @@
             // 
             this.splitContainer4.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));
             this.splitContainer4.Panel2.Controls.Add(this.button1);
-            this.splitContainer4.Panel2.Padding = new System.Windows.Forms.Padding(15);
+            this.splitContainer4.Panel2.Padding = new System.Windows.Forms.Padding(15, 30, 15, 15);
             this.splitContainer4.Size = new System.Drawing.Size(150, 626);
             this.splitContainer4.SplitterDistance = 465;
             this.splitContainer4.TabIndex = 0;
@@ -746,7 +737,7 @@
             this.buttonMenusTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonMenusTab.ForeColor = System.Drawing.Color.White;
             this.buttonMenusTab.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonMenusTab.ImageIndex = 3;
+            this.buttonMenusTab.ImageIndex = 5;
             this.buttonMenusTab.ImageList = this.imageList1;
             this.buttonMenusTab.Location = new System.Drawing.Point(0, 245);
             this.buttonMenusTab.Margin = new System.Windows.Forms.Padding(0);
@@ -754,7 +745,7 @@
             this.buttonMenusTab.Size = new System.Drawing.Size(144, 51);
             this.buttonMenusTab.TabIndex = 3;
             this.buttonMenusTab.Tag = "Menus";
-            this.buttonMenusTab.Text = "Menus";
+            this.buttonMenusTab.Text = "  Menus";
             this.buttonMenusTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonMenusTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonMenusTab.UseVisualStyleBackColor = true;
@@ -768,7 +759,7 @@
             this.buttonAnalyticsTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAnalyticsTab.ForeColor = System.Drawing.Color.White;
             this.buttonAnalyticsTab.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAnalyticsTab.ImageIndex = 2;
+            this.buttonAnalyticsTab.ImageIndex = 4;
             this.buttonAnalyticsTab.ImageList = this.imageList1;
             this.buttonAnalyticsTab.Location = new System.Drawing.Point(0, 196);
             this.buttonAnalyticsTab.Margin = new System.Windows.Forms.Padding(0);
@@ -776,7 +767,7 @@
             this.buttonAnalyticsTab.Size = new System.Drawing.Size(144, 49);
             this.buttonAnalyticsTab.TabIndex = 4;
             this.buttonAnalyticsTab.Tag = "Analytics";
-            this.buttonAnalyticsTab.Text = "Analytics";
+            this.buttonAnalyticsTab.Text = "  Analytics";
             this.buttonAnalyticsTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonAnalyticsTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonAnalyticsTab.UseVisualStyleBackColor = true;
@@ -790,7 +781,7 @@
             this.buttonActionsTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonActionsTab.ForeColor = System.Drawing.Color.White;
             this.buttonActionsTab.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonActionsTab.ImageIndex = 5;
+            this.buttonActionsTab.ImageIndex = 3;
             this.buttonActionsTab.ImageList = this.imageList1;
             this.buttonActionsTab.Location = new System.Drawing.Point(0, 147);
             this.buttonActionsTab.Margin = new System.Windows.Forms.Padding(0);
@@ -798,7 +789,7 @@
             this.buttonActionsTab.Size = new System.Drawing.Size(144, 49);
             this.buttonActionsTab.TabIndex = 5;
             this.buttonActionsTab.Tag = "Actions";
-            this.buttonActionsTab.Text = "Actions";
+            this.buttonActionsTab.Text = "  Actions";
             this.buttonActionsTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonActionsTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonActionsTab.UseVisualStyleBackColor = true;
@@ -821,7 +812,8 @@
             this.buttonSettingsTab.Size = new System.Drawing.Size(144, 49);
             this.buttonSettingsTab.TabIndex = 1;
             this.buttonSettingsTab.Tag = "Settings";
-            this.buttonSettingsTab.Text = "Settings";
+            this.buttonSettingsTab.Text = "  Settings";
+            this.buttonSettingsTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonSettingsTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonSettingsTab.UseVisualStyleBackColor = true;
             this.buttonSettingsTab.Click += new System.EventHandler(this.handleSideBarButtonClick);
@@ -834,7 +826,7 @@
             this.buttonAboutTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAboutTab.ForeColor = System.Drawing.Color.White;
             this.buttonAboutTab.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAboutTab.ImageIndex = 6;
+            this.buttonAboutTab.ImageIndex = 2;
             this.buttonAboutTab.ImageList = this.imageList1;
             this.buttonAboutTab.Location = new System.Drawing.Point(0, 98);
             this.buttonAboutTab.Margin = new System.Windows.Forms.Padding(0);
@@ -842,7 +834,7 @@
             this.buttonAboutTab.Size = new System.Drawing.Size(144, 49);
             this.buttonAboutTab.TabIndex = 2;
             this.buttonAboutTab.Tag = "About";
-            this.buttonAboutTab.Text = "About";
+            this.buttonAboutTab.Text = "  About";
             this.buttonAboutTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonAboutTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonAboutTab.UseVisualStyleBackColor = true;
@@ -851,13 +843,14 @@
             // buttonOrdersTab
             // 
             this.buttonOrdersTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(22)))));
+            this.buttonOrdersTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonOrdersTab.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(22)))));
             this.buttonOrdersTab.FlatAppearance.BorderSize = 0;
             this.buttonOrdersTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOrdersTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonOrdersTab.ForeColor = System.Drawing.Color.White;
             this.buttonOrdersTab.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonOrdersTab.ImageIndex = 7;
+            this.buttonOrdersTab.ImageIndex = 0;
             this.buttonOrdersTab.ImageList = this.imageList1;
             this.buttonOrdersTab.Location = new System.Drawing.Point(0, 0);
             this.buttonOrdersTab.Margin = new System.Windows.Forms.Padding(0);
@@ -865,11 +858,29 @@
             this.buttonOrdersTab.Size = new System.Drawing.Size(144, 49);
             this.buttonOrdersTab.TabIndex = 0;
             this.buttonOrdersTab.Tag = "Home";
-            this.buttonOrdersTab.Text = "Orders";
+            this.buttonOrdersTab.Text = "  Orders";
             this.buttonOrdersTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonOrdersTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonOrdersTab.UseVisualStyleBackColor = true;
             this.buttonOrdersTab.Click += new System.EventHandler(this.handleSideBarButtonClick);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(81)))), ((int)(((byte)(87)))));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ImageIndex = 0;
+            this.button1.ImageList = this.imageList2;
+            this.button1.Location = new System.Drawing.Point(15, 30);
+            this.button1.Margin = new System.Windows.Forms.Padding(0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(120, 112);
+            this.button1.TabIndex = 0;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.print_Click);
             // 
             // splitContainer2
             // 
@@ -1172,6 +1183,7 @@
         #endregion
         private System.Windows.Forms.BindingSource itemBindingSource;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ImageList imageList2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelItemDetailsBot;
