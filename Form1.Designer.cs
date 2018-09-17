@@ -189,7 +189,7 @@
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(163, 120);
+            this.dataGridView2.Size = new System.Drawing.Size(163, 125);
             this.dataGridView2.TabIndex = 0;
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
@@ -215,7 +215,7 @@
             this.tableLayoutPanelItemDetailsBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.00063F));
             this.tableLayoutPanelItemDetailsBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.99813F));
             this.tableLayoutPanelItemDetailsBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelItemDetailsBot.Size = new System.Drawing.Size(378, 120);
+            this.tableLayoutPanelItemDetailsBot.Size = new System.Drawing.Size(378, 125);
             this.tableLayoutPanelItemDetailsBot.TabIndex = 0;
             // 
             // dataGridViewToppings
@@ -243,7 +243,7 @@
             this.dataGridViewToppings.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewToppings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewToppings.EnableHeadersVisualStyles = false;
-            this.dataGridViewToppings.Location = new System.Drawing.Point(189, 30);
+            this.dataGridViewToppings.Location = new System.Drawing.Point(189, 32);
             this.dataGridViewToppings.Margin = new System.Windows.Forms.Padding(0);
             this.dataGridViewToppings.MultiSelect = false;
             this.dataGridViewToppings.Name = "dataGridViewToppings";
@@ -251,7 +251,7 @@
             this.dataGridViewToppings.RowHeadersVisible = false;
             this.tableLayoutPanelItemDetailsBot.SetRowSpan(this.dataGridViewToppings, 2);
             this.dataGridViewToppings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewToppings.Size = new System.Drawing.Size(188, 57);
+            this.dataGridViewToppings.Size = new System.Drawing.Size(188, 61);
             this.dataGridViewToppings.TabIndex = 6;
             // 
             // textBoxInstructions
@@ -262,12 +262,12 @@
             this.textBoxInstructions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxInstructions.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxInstructions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
-            this.textBoxInstructions.Location = new System.Drawing.Point(1, 88);
+            this.textBoxInstructions.Location = new System.Drawing.Point(1, 94);
             this.textBoxInstructions.Margin = new System.Windows.Forms.Padding(0);
             this.textBoxInstructions.Multiline = true;
             this.textBoxInstructions.Name = "textBoxInstructions";
             this.textBoxInstructions.ReadOnly = true;
-            this.textBoxInstructions.Size = new System.Drawing.Size(376, 31);
+            this.textBoxInstructions.Size = new System.Drawing.Size(376, 30);
             this.textBoxInstructions.TabIndex = 4;
             // 
             // tableLayoutPanelItemDetailsTop
@@ -287,7 +287,7 @@
             this.tableLayoutPanelItemDetailsTop.Name = "tableLayoutPanelItemDetailsTop";
             this.tableLayoutPanelItemDetailsTop.RowCount = 1;
             this.tableLayoutPanelItemDetailsTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelItemDetailsTop.Size = new System.Drawing.Size(376, 28);
+            this.tableLayoutPanelItemDetailsTop.Size = new System.Drawing.Size(376, 30);
             this.tableLayoutPanelItemDetailsTop.TabIndex = 0;
             // 
             // textBoxQty
@@ -316,7 +316,7 @@
             this.textBoxItemName.Multiline = true;
             this.textBoxItemName.Name = "textBoxItemName";
             this.textBoxItemName.ReadOnly = true;
-            this.textBoxItemName.Size = new System.Drawing.Size(275, 26);
+            this.textBoxItemName.Size = new System.Drawing.Size(275, 28);
             this.textBoxItemName.TabIndex = 1;
             // 
             // dataGridViewAdjustments
@@ -344,7 +344,7 @@
             this.dataGridViewAdjustments.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewAdjustments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewAdjustments.EnableHeadersVisualStyles = false;
-            this.dataGridViewAdjustments.Location = new System.Drawing.Point(1, 30);
+            this.dataGridViewAdjustments.Location = new System.Drawing.Point(1, 32);
             this.dataGridViewAdjustments.Margin = new System.Windows.Forms.Padding(0);
             this.dataGridViewAdjustments.MultiSelect = false;
             this.dataGridViewAdjustments.Name = "dataGridViewAdjustments";
@@ -352,7 +352,7 @@
             this.dataGridViewAdjustments.RowHeadersVisible = false;
             this.tableLayoutPanelItemDetailsBot.SetRowSpan(this.dataGridViewAdjustments, 2);
             this.dataGridViewAdjustments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewAdjustments.Size = new System.Drawing.Size(187, 57);
+            this.dataGridViewAdjustments.Size = new System.Drawing.Size(187, 61);
             this.dataGridViewAdjustments.TabIndex = 7;
             // 
             // tableLayoutPanelOrderDetails
@@ -383,7 +383,7 @@
             this.tableLayoutPanelOrderDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanelOrderDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanelOrderDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanelOrderDetails.Size = new System.Drawing.Size(286, 120);
+            this.tableLayoutPanelOrderDetails.Size = new System.Drawing.Size(286, 125);
             this.tableLayoutPanelOrderDetails.TabIndex = 0;
             // 
             // messageIdTextBox
@@ -393,7 +393,7 @@
             this.messageIdTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.messageIdTextBox.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.messageIdTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
-            this.messageIdTextBox.Location = new System.Drawing.Point(89, 96);
+            this.messageIdTextBox.Location = new System.Drawing.Point(89, 100);
             this.messageIdTextBox.Name = "messageIdTextBox";
             this.messageIdTextBox.ReadOnly = true;
             this.messageIdTextBox.Size = new System.Drawing.Size(193, 15);
@@ -408,7 +408,7 @@
             this.label1.Location = new System.Drawing.Point(4, 6);
             this.label1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 12);
+            this.label1.Size = new System.Drawing.Size(78, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name";
             // 
@@ -419,7 +419,7 @@
             this.orderSizeTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.orderSizeTextBox.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.orderSizeTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
-            this.orderSizeTextBox.Location = new System.Drawing.Point(89, 73);
+            this.orderSizeTextBox.Location = new System.Drawing.Point(89, 76);
             this.orderSizeTextBox.Name = "orderSizeTextBox";
             this.orderSizeTextBox.ReadOnly = true;
             this.orderSizeTextBox.Size = new System.Drawing.Size(193, 15);
@@ -431,10 +431,10 @@
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
-            this.label2.Location = new System.Drawing.Point(4, 29);
+            this.label2.Location = new System.Drawing.Point(4, 30);
             this.label2.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 12);
+            this.label2.Size = new System.Drawing.Size(78, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Contact No.";
             // 
@@ -445,7 +445,7 @@
             this.orderNumTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.orderNumTextBox.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.orderNumTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
-            this.orderNumTextBox.Location = new System.Drawing.Point(89, 50);
+            this.orderNumTextBox.Location = new System.Drawing.Point(89, 52);
             this.orderNumTextBox.Name = "orderNumTextBox";
             this.orderNumTextBox.ReadOnly = true;
             this.orderNumTextBox.Size = new System.Drawing.Size(193, 15);
@@ -457,10 +457,10 @@
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
-            this.label3.Location = new System.Drawing.Point(4, 52);
+            this.label3.Location = new System.Drawing.Point(4, 54);
             this.label3.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(78, 12);
+            this.label3.Size = new System.Drawing.Size(78, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Order No.";
             // 
@@ -471,7 +471,7 @@
             this.contactNumTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.contactNumTextBox.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.contactNumTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
-            this.contactNumTextBox.Location = new System.Drawing.Point(89, 27);
+            this.contactNumTextBox.Location = new System.Drawing.Point(89, 28);
             this.contactNumTextBox.Name = "contactNumTextBox";
             this.contactNumTextBox.ReadOnly = true;
             this.contactNumTextBox.Size = new System.Drawing.Size(193, 15);
@@ -483,10 +483,10 @@
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
-            this.label4.Location = new System.Drawing.Point(4, 75);
+            this.label4.Location = new System.Drawing.Point(4, 78);
             this.label4.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 12);
+            this.label4.Size = new System.Drawing.Size(78, 13);
             this.label4.TabIndex = 3;
             this.label4.Text = "Order Size";
             // 
@@ -509,10 +509,10 @@
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
-            this.label5.Location = new System.Drawing.Point(4, 98);
+            this.label5.Location = new System.Drawing.Point(4, 102);
             this.label5.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(78, 16);
+            this.label5.Size = new System.Drawing.Size(78, 17);
             this.label5.TabIndex = 4;
             this.label5.Text = "Message Id";
             // 
@@ -526,10 +526,10 @@
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(64)))), ((int)(((byte)(82)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
@@ -554,7 +554,7 @@
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dataGridView1.RowTemplate.Height = 40;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(831, 414);
+            this.dataGridView1.Size = new System.Drawing.Size(831, 409);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
@@ -869,6 +869,7 @@
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(81)))), ((int)(((byte)(87)))));
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ImageIndex = 0;
@@ -974,7 +975,7 @@
             // 
             this.splitContainer3.Panel2.Controls.Add(this.tableLayoutPanelInfo);
             this.splitContainer3.Size = new System.Drawing.Size(831, 562);
-            this.splitContainer3.SplitterDistance = 414;
+            this.splitContainer3.SplitterDistance = 409;
             this.splitContainer3.TabIndex = 0;
             // 
             // tableLayoutPanelInfo
@@ -1014,7 +1015,7 @@
             this.tableLayoutPanelInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanelInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
             this.tableLayoutPanelInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelInfo.Size = new System.Drawing.Size(831, 144);
+            this.tableLayoutPanelInfo.Size = new System.Drawing.Size(831, 149);
             this.tableLayoutPanelInfo.TabIndex = 0;
             // 
             // labelOrderDetails

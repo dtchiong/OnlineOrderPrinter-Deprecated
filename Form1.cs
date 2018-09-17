@@ -63,7 +63,7 @@ namespace GmailQuickstart {
          */
         private void print_Click(object sender, EventArgs e) {
             button1.Enabled = false;
-            button1.BackColor = SystemColors.ControlDarkDark;
+            button1.BackColor = ColorTranslator.FromHtml("#90979B");
 
             DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
             
@@ -82,7 +82,7 @@ namespace GmailQuickstart {
             }
 
             button1.Enabled = true;
-            button1.BackColor = SystemColors.Control;
+            button1.BackColor = ColorTranslator.FromHtml("#4A5157");
         }
 
         /* Encapsulates an order with an OrderContainer, then add it to the order list */
