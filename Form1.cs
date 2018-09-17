@@ -22,6 +22,8 @@ namespace GmailQuickstart {
         //the dictionary of orders where the key is the orderNum, used to track grubhub cancelled orders
         public static Dictionary<string, List<OrderContainer>> OrderTableByOrdNum = new Dictionary<string, List<OrderContainer>>();
 
+        public static string ActiveForm = "Home";
+
         public Form1() {
             InitializeComponent();
 
@@ -254,6 +256,41 @@ namespace GmailQuickstart {
             DataGridViewSelectedRowCollection selectedRows = dataGridView2.SelectedRows;
             if (selectedRows.Count > 0) {
                 UpdateItemDetailsUI();
+            }
+        }
+
+        /* Handles the click for each of the side bar buttons. 
+         * We show the usercontrol corresponding to the button pressed, 
+         * and set the color highlighting appropriately for each button
+         */
+        private void handleSideBarButtonClick(object sender, EventArgs e) {
+
+            string pressedTag = (string)((Button)sender).Tag;
+       
+            if (pressedTag == ActiveForm) {
+                return;
+            }
+
+            List<Button> buttons = new List<Button>() {
+                buttonOrdersTab,
+                buttonSettingsTab,
+                buttonAboutTab,
+                buttonAnalyticsTab,
+                buttonActionsTab,
+                buttonMenusTab
+            };
+
+            //Iterate through the buttons to appropriately set the correct properties
+            foreach (Button button in buttons) {
+
+                String currentTag = (string)button.Tag;
+
+                if (currentTag != pressedTag) {
+                    button.BackColor = ColorTranslator.FromHtml("#2A2729");
+                }else {
+                    button.BackColor = ColorTranslator.FromHtml("#171516");
+                    ActiveForm = currentTag;
+                }
             }
         }
     }

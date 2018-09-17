@@ -62,25 +62,24 @@
             this.splitContainerTabTopBound = new System.Windows.Forms.SplitContainer();
             this.panelBarTopSeperator = new System.Windows.Forms.Panel();
             this.splitContainerTabBotBoundary = new System.Windows.Forms.SplitContainer();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel_SideBar = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonMenusTab = new System.Windows.Forms.Button();
+            this.buttonAnalyticsTab = new System.Windows.Forms.Button();
+            this.buttonActionsTab = new System.Windows.Forms.Button();
+            this.buttonSettingsTab = new System.Windows.Forms.Button();
+            this.buttonAboutTab = new System.Windows.Forms.Button();
+            this.buttonOrdersTab = new System.Windows.Forms.Button();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanelTitleBar = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
             this.tabControlAppTabs = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.buttonActionsTab = new System.Windows.Forms.Button();
-            this.buttonAnalyticsTab = new System.Windows.Forms.Button();
-            this.buttonAboutTab = new System.Windows.Forms.Button();
-            this.buttonMenusTab = new System.Windows.Forms.Button();
-            this.buttonOrdersTab = new System.Windows.Forms.Button();
-            this.buttonSettingsTab = new System.Windows.Forms.Button();
             this.tableLayoutPanelInfo = new System.Windows.Forms.TableLayoutPanel();
             this.labelOrderDetails = new System.Windows.Forms.Label();
             this.labelItemList = new System.Windows.Forms.Label();
             this.labelItemDetails = new System.Windows.Forms.Label();
             this.tabAbout = new System.Windows.Forms.TabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -112,7 +111,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerTabBotBoundary)).BeginInit();
             this.splitContainerTabBotBoundary.Panel1.SuspendLayout();
             this.splitContainerTabBotBoundary.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel_SideBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -125,7 +124,6 @@
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.tableLayoutPanelInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stringValueBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource1)).BeginInit();
@@ -136,6 +134,13 @@
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "home-1-white3.png");
+            this.imageList1.Images.SetKeyName(1, "settings-5-white.png");
+            this.imageList1.Images.SetKeyName(2, "bar-chart-white.png");
+            this.imageList1.Images.SetKeyName(3, "cutlery-white.png");
+            this.imageList1.Images.SetKeyName(4, "home-white.png");
+            this.imageList1.Images.SetKeyName(5, "error-advice-sign.png");
+            this.imageList1.Images.SetKeyName(6, "information.png");
+            this.imageList1.Images.SetKeyName(7, "home-white2.png");
             // 
             // button1
             // 
@@ -704,37 +709,167 @@
             // 
             // splitContainerTabBotBoundary.Panel1
             // 
-            this.splitContainerTabBotBoundary.Panel1.Controls.Add(this.tableLayoutPanel1);
+            this.splitContainerTabBotBoundary.Panel1.Controls.Add(this.tableLayoutPanel_SideBar);
             this.splitContainerTabBotBoundary.Size = new System.Drawing.Size(144, 329);
             this.splitContainerTabBotBoundary.SplitterDistance = 296;
             this.splitContainerTabBotBoundary.TabIndex = 0;
             // 
-            // tableLayoutPanel1
+            // tableLayoutPanel_SideBar
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.07692F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.92308F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.buttonSettingsTab, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.buttonOrdersTab, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.buttonAnalyticsTab, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.buttonAboutTab, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.buttonActionsTab, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.buttonMenusTab, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 6;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(144, 296);
-            this.tableLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel_SideBar.ColumnCount = 1;
+            this.tableLayoutPanel_SideBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel_SideBar.Controls.Add(this.buttonMenusTab, 0, 5);
+            this.tableLayoutPanel_SideBar.Controls.Add(this.buttonAnalyticsTab, 0, 4);
+            this.tableLayoutPanel_SideBar.Controls.Add(this.buttonActionsTab, 0, 3);
+            this.tableLayoutPanel_SideBar.Controls.Add(this.buttonSettingsTab, 0, 1);
+            this.tableLayoutPanel_SideBar.Controls.Add(this.buttonAboutTab, 0, 2);
+            this.tableLayoutPanel_SideBar.Controls.Add(this.buttonOrdersTab, 0, 0);
+            this.tableLayoutPanel_SideBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel_SideBar.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel_SideBar.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel_SideBar.Name = "tableLayoutPanel_SideBar";
+            this.tableLayoutPanel_SideBar.RowCount = 6;
+            this.tableLayoutPanel_SideBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel_SideBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel_SideBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel_SideBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel_SideBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel_SideBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel_SideBar.Size = new System.Drawing.Size(144, 296);
+            this.tableLayoutPanel_SideBar.TabIndex = 0;
+            // 
+            // buttonMenusTab
+            // 
+            this.buttonMenusTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonMenusTab.FlatAppearance.BorderSize = 0;
+            this.buttonMenusTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMenusTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonMenusTab.ForeColor = System.Drawing.Color.White;
+            this.buttonMenusTab.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonMenusTab.ImageIndex = 3;
+            this.buttonMenusTab.ImageList = this.imageList1;
+            this.buttonMenusTab.Location = new System.Drawing.Point(0, 245);
+            this.buttonMenusTab.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonMenusTab.Name = "buttonMenusTab";
+            this.buttonMenusTab.Size = new System.Drawing.Size(144, 51);
+            this.buttonMenusTab.TabIndex = 3;
+            this.buttonMenusTab.Tag = "Menus";
+            this.buttonMenusTab.Text = "Menus";
+            this.buttonMenusTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonMenusTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonMenusTab.UseVisualStyleBackColor = true;
+            this.buttonMenusTab.Click += new System.EventHandler(this.handleSideBarButtonClick);
+            // 
+            // buttonAnalyticsTab
+            // 
+            this.buttonAnalyticsTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonAnalyticsTab.FlatAppearance.BorderSize = 0;
+            this.buttonAnalyticsTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAnalyticsTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAnalyticsTab.ForeColor = System.Drawing.Color.White;
+            this.buttonAnalyticsTab.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonAnalyticsTab.ImageIndex = 2;
+            this.buttonAnalyticsTab.ImageList = this.imageList1;
+            this.buttonAnalyticsTab.Location = new System.Drawing.Point(0, 196);
+            this.buttonAnalyticsTab.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonAnalyticsTab.Name = "buttonAnalyticsTab";
+            this.buttonAnalyticsTab.Size = new System.Drawing.Size(144, 49);
+            this.buttonAnalyticsTab.TabIndex = 4;
+            this.buttonAnalyticsTab.Tag = "Analytics";
+            this.buttonAnalyticsTab.Text = "Analytics";
+            this.buttonAnalyticsTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonAnalyticsTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonAnalyticsTab.UseVisualStyleBackColor = true;
+            this.buttonAnalyticsTab.Click += new System.EventHandler(this.handleSideBarButtonClick);
+            // 
+            // buttonActionsTab
+            // 
+            this.buttonActionsTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonActionsTab.FlatAppearance.BorderSize = 0;
+            this.buttonActionsTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonActionsTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonActionsTab.ForeColor = System.Drawing.Color.White;
+            this.buttonActionsTab.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonActionsTab.ImageIndex = 5;
+            this.buttonActionsTab.ImageList = this.imageList1;
+            this.buttonActionsTab.Location = new System.Drawing.Point(0, 147);
+            this.buttonActionsTab.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonActionsTab.Name = "buttonActionsTab";
+            this.buttonActionsTab.Size = new System.Drawing.Size(144, 49);
+            this.buttonActionsTab.TabIndex = 5;
+            this.buttonActionsTab.Tag = "Actions";
+            this.buttonActionsTab.Text = "Actions";
+            this.buttonActionsTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonActionsTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonActionsTab.UseVisualStyleBackColor = true;
+            this.buttonActionsTab.Click += new System.EventHandler(this.handleSideBarButtonClick);
+            // 
+            // buttonSettingsTab
+            // 
+            this.buttonSettingsTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonSettingsTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonSettingsTab.FlatAppearance.BorderSize = 0;
+            this.buttonSettingsTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSettingsTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSettingsTab.ForeColor = System.Drawing.Color.White;
+            this.buttonSettingsTab.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonSettingsTab.ImageIndex = 1;
+            this.buttonSettingsTab.ImageList = this.imageList1;
+            this.buttonSettingsTab.Location = new System.Drawing.Point(0, 49);
+            this.buttonSettingsTab.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonSettingsTab.Name = "buttonSettingsTab";
+            this.buttonSettingsTab.Size = new System.Drawing.Size(144, 49);
+            this.buttonSettingsTab.TabIndex = 1;
+            this.buttonSettingsTab.Tag = "Settings";
+            this.buttonSettingsTab.Text = "Settings";
+            this.buttonSettingsTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonSettingsTab.UseVisualStyleBackColor = true;
+            this.buttonSettingsTab.Click += new System.EventHandler(this.handleSideBarButtonClick);
+            // 
+            // buttonAboutTab
+            // 
+            this.buttonAboutTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonAboutTab.FlatAppearance.BorderSize = 0;
+            this.buttonAboutTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAboutTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAboutTab.ForeColor = System.Drawing.Color.White;
+            this.buttonAboutTab.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonAboutTab.ImageIndex = 6;
+            this.buttonAboutTab.ImageList = this.imageList1;
+            this.buttonAboutTab.Location = new System.Drawing.Point(0, 98);
+            this.buttonAboutTab.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonAboutTab.Name = "buttonAboutTab";
+            this.buttonAboutTab.Size = new System.Drawing.Size(144, 49);
+            this.buttonAboutTab.TabIndex = 2;
+            this.buttonAboutTab.Tag = "About";
+            this.buttonAboutTab.Text = "About";
+            this.buttonAboutTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonAboutTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonAboutTab.UseVisualStyleBackColor = true;
+            this.buttonAboutTab.Click += new System.EventHandler(this.handleSideBarButtonClick);
+            // 
+            // buttonOrdersTab
+            // 
+            this.buttonOrdersTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(22)))));
+            this.buttonOrdersTab.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(22)))));
+            this.buttonOrdersTab.FlatAppearance.BorderSize = 0;
+            this.buttonOrdersTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonOrdersTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonOrdersTab.ForeColor = System.Drawing.Color.White;
+            this.buttonOrdersTab.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonOrdersTab.ImageIndex = 7;
+            this.buttonOrdersTab.ImageList = this.imageList1;
+            this.buttonOrdersTab.Location = new System.Drawing.Point(0, 0);
+            this.buttonOrdersTab.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonOrdersTab.Name = "buttonOrdersTab";
+            this.buttonOrdersTab.Size = new System.Drawing.Size(144, 49);
+            this.buttonOrdersTab.TabIndex = 0;
+            this.buttonOrdersTab.Tag = "Home";
+            this.buttonOrdersTab.Text = "Orders";
+            this.buttonOrdersTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonOrdersTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonOrdersTab.UseVisualStyleBackColor = true;
+            this.buttonOrdersTab.Click += new System.EventHandler(this.handleSideBarButtonClick);
             // 
             // splitContainer2
             // 
@@ -830,115 +965,6 @@
             this.splitContainer3.Size = new System.Drawing.Size(831, 562);
             this.splitContainer3.SplitterDistance = 414;
             this.splitContainer3.TabIndex = 0;
-            // 
-            // buttonActionsTab
-            // 
-            this.buttonActionsTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonActionsTab.FlatAppearance.BorderSize = 0;
-            this.buttonActionsTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonActionsTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonActionsTab.ForeColor = System.Drawing.Color.White;
-            this.buttonActionsTab.ImageList = this.imageList1;
-            this.buttonActionsTab.Location = new System.Drawing.Point(33, 245);
-            this.buttonActionsTab.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonActionsTab.Name = "buttonActionsTab";
-            this.buttonActionsTab.Size = new System.Drawing.Size(111, 51);
-            this.buttonActionsTab.TabIndex = 5;
-            this.buttonActionsTab.Text = "Actions";
-            this.buttonActionsTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonActionsTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonActionsTab.UseVisualStyleBackColor = true;
-            // 
-            // buttonAnalyticsTab
-            // 
-            this.buttonAnalyticsTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonAnalyticsTab.FlatAppearance.BorderSize = 0;
-            this.buttonAnalyticsTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAnalyticsTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAnalyticsTab.ForeColor = System.Drawing.Color.White;
-            this.buttonAnalyticsTab.ImageList = this.imageList1;
-            this.buttonAnalyticsTab.Location = new System.Drawing.Point(33, 147);
-            this.buttonAnalyticsTab.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonAnalyticsTab.Name = "buttonAnalyticsTab";
-            this.buttonAnalyticsTab.Size = new System.Drawing.Size(111, 49);
-            this.buttonAnalyticsTab.TabIndex = 4;
-            this.buttonAnalyticsTab.Text = "Analytics";
-            this.buttonAnalyticsTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAnalyticsTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonAnalyticsTab.UseVisualStyleBackColor = true;
-            // 
-            // buttonAboutTab
-            // 
-            this.buttonAboutTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonAboutTab.FlatAppearance.BorderSize = 0;
-            this.buttonAboutTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAboutTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAboutTab.ForeColor = System.Drawing.Color.White;
-            this.buttonAboutTab.ImageList = this.imageList1;
-            this.buttonAboutTab.Location = new System.Drawing.Point(33, 98);
-            this.buttonAboutTab.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonAboutTab.Name = "buttonAboutTab";
-            this.buttonAboutTab.Size = new System.Drawing.Size(111, 49);
-            this.buttonAboutTab.TabIndex = 2;
-            this.buttonAboutTab.Text = "About";
-            this.buttonAboutTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAboutTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonAboutTab.UseVisualStyleBackColor = true;
-            // 
-            // buttonMenusTab
-            // 
-            this.buttonMenusTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonMenusTab.FlatAppearance.BorderSize = 0;
-            this.buttonMenusTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonMenusTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonMenusTab.ForeColor = System.Drawing.Color.White;
-            this.buttonMenusTab.ImageList = this.imageList1;
-            this.buttonMenusTab.Location = new System.Drawing.Point(33, 196);
-            this.buttonMenusTab.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonMenusTab.Name = "buttonMenusTab";
-            this.buttonMenusTab.Size = new System.Drawing.Size(111, 49);
-            this.buttonMenusTab.TabIndex = 3;
-            this.buttonMenusTab.Text = "Menus";
-            this.buttonMenusTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonMenusTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonMenusTab.UseVisualStyleBackColor = true;
-            // 
-            // buttonOrdersTab
-            // 
-            this.buttonOrdersTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonOrdersTab.FlatAppearance.BorderSize = 0;
-            this.buttonOrdersTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonOrdersTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonOrdersTab.ForeColor = System.Drawing.Color.White;
-            this.buttonOrdersTab.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonOrdersTab.ImageIndex = 0;
-            this.buttonOrdersTab.Location = new System.Drawing.Point(33, 0);
-            this.buttonOrdersTab.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonOrdersTab.Name = "buttonOrdersTab";
-            this.buttonOrdersTab.Size = new System.Drawing.Size(111, 49);
-            this.buttonOrdersTab.TabIndex = 0;
-            this.buttonOrdersTab.Text = "Orders";
-            this.buttonOrdersTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonOrdersTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonOrdersTab.UseVisualStyleBackColor = true;
-            // 
-            // buttonSettingsTab
-            // 
-            this.buttonSettingsTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonSettingsTab.FlatAppearance.BorderSize = 0;
-            this.buttonSettingsTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSettingsTab.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSettingsTab.ForeColor = System.Drawing.Color.White;
-            this.buttonSettingsTab.ImageList = this.imageList1;
-            this.buttonSettingsTab.Location = new System.Drawing.Point(33, 49);
-            this.buttonSettingsTab.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonSettingsTab.Name = "buttonSettingsTab";
-            this.buttonSettingsTab.Size = new System.Drawing.Size(111, 49);
-            this.buttonSettingsTab.TabIndex = 1;
-            this.buttonSettingsTab.Text = "Settings";
-            this.buttonSettingsTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSettingsTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonSettingsTab.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanelInfo
             // 
@@ -1041,18 +1067,6 @@
             this.tabAbout.Text = "About";
             this.tabAbout.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = global::Order_Parser.Properties.Resources.home_1_white3;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 8);
-            this.pictureBox1.MaximumSize = new System.Drawing.Size(32, 32);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(27, 32);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
-            // 
             // quantityDataGridViewTextBoxColumn
             // 
             this.quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
@@ -1133,7 +1147,7 @@
             this.splitContainerTabBotBoundary.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerTabBotBoundary)).EndInit();
             this.splitContainerTabBotBoundary.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel_SideBar.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
@@ -1148,7 +1162,6 @@
             this.splitContainer3.ResumeLayout(false);
             this.tableLayoutPanelInfo.ResumeLayout(false);
             this.tableLayoutPanelInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stringValueBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource1)).EndInit();
@@ -1205,7 +1218,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.SplitContainer splitContainerTabTopBound;
         private System.Windows.Forms.SplitContainer splitContainerTabBotBoundary;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel_SideBar;
         private System.Windows.Forms.Button buttonActionsTab;
         private System.Windows.Forms.Button buttonAnalyticsTab;
         private System.Windows.Forms.Button buttonMenusTab;
@@ -1213,6 +1226,5 @@
         private System.Windows.Forms.Button buttonSettingsTab;
         private System.Windows.Forms.Button buttonOrdersTab;
         private System.Windows.Forms.Panel panelBarTopSeperator;
-        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
