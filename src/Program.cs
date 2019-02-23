@@ -57,7 +57,7 @@ namespace GmailQuickstart {
         * 164b501111cebfe1
         * 164aebfdb8b7a59a
         */
-        static string testMessageId = "165d0587f345e576";
+        static string testMessageId = "1690900d454f6697";
         static string userId = "t4milpitasonline@gmail.com";
 
         static TimerT timer;
@@ -131,7 +131,7 @@ namespace GmailQuickstart {
             if (!File.Exists(HistoryIdPath)) {
                 FullSyncAppToEmail();
             }
-
+            //PartialSyncAppToEmail();
             //The timer continously runs in the background to check the email for new messages
             const int dueTime = 1000;
             const int period = 4000; //in miliseconds

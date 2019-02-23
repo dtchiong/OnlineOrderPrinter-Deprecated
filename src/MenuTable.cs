@@ -254,8 +254,24 @@ namespace GmailQuickstart {
                 { "Black Tea"  , new Tuple<string, string>(null, "Tea") },
                 { "Green Tea"  , new Tuple<string, string>(null, "Tea") },
                 { "Oolong Tea" , new Tuple<string, string>(null, "Tea") },
-                { "Royal Tea"  , new Tuple<string, string>(null, "Tea") }
-                
+                { "Royal Tea"  , new Tuple<string, string>(null, "Tea") },
+
+                //Rice Addons
+                { "Beef"            , new Tuple<string, string>(null, "Food Addons") },
+                { "Corn"            , new Tuple<string, string>(null, "Food Addons") },
+                { "Extra Sauce"     , new Tuple<string, string>(null, "Food Addons") },
+                { "Extra Vegetable" , new Tuple<string, string>(null, "Food Addons") },
+                { "Green Onion"     , new Tuple<string, string>(null, "Food Addons") },
+                { "Pork"            , new Tuple<string, string>(null, "Food Addons") },
+                { "Semi-Soft Egg( 1 whole egg)", new Tuple<string, string>("Semi-Soft Egg", "Food Addons") },
+
+                //Ramen Addons
+                { "Charshu (1 Pc)" , new Tuple<string, string>(null, "Food Addons") },
+                { "Extra Noodles"  , new Tuple<string, string>(null, "Food Addons") },
+                { "Extra Soup"     , new Tuple<string, string>(null, "Food Addons") },
+                { "Extra Spicy"    , new Tuple<string, string>(null, "Food Addons") },
+                { "Seaweed"        , new Tuple<string, string>(null, "Food Addons") },
+                { "Semi-Soft Egg (1 Whole Egg)", new Tuple<string, string>("Semi-Soft Egg", "Food Addons") },
             };    
         }     
     }

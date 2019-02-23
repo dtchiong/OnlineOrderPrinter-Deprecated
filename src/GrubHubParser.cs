@@ -286,6 +286,9 @@ namespace GmailQuickstart {
                     item.ItemName = Regex.Replace(item.ItemName, @"\s+", " "); //replaces multiple spaces with a single one
                     item.ItemName = item.ItemName.Trim().Replace("Tea", name);
                     break;
+                case "Food Addons":
+                    item.AddOnList.Add(name);
+                    break;
                 default:
                     Debug.WriteLine("Unidentified add on type: " + name);
                     break;

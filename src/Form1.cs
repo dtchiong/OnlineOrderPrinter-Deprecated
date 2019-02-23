@@ -328,7 +328,7 @@ namespace GmailQuickstart {
             }
         }
 
-        /* Refactor to switch views using userControls later */ 
+        /* TODO: Refactor to switch views using userControls later */ 
         private void switchUserControl(string CurrentForm) {
             switch(CurrentForm) {
                 case "Last Orders":

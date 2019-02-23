@@ -42,6 +42,7 @@ namespace GmailQuickstart {
                 return null;
             }
 
+            if (discoveredPrinterDrivers.Count == 0) return null;
             //Gets the instance to the Zebra Printer driver
             DiscoveredPrinterDriver printerDriver = discoveredPrinterDrivers[0];
             Debug.WriteLine(printerDriver);

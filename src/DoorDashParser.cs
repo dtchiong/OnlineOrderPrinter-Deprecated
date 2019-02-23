@@ -208,8 +208,14 @@ namespace GmailQuickstart {
                         ParseFlavorAddition(words, item);
                     }
                     break;
+                case "-Ramen":
+                    ParseRamenAddons(words, item);
+                    break;
+                case "-Rice":
+                    ParseRiceDishAddons(words, item);
+                    break;
                 default:
-                    Debug.WriteLine("Unidentified addon starter word: " + "-" + words[0] + "-");
+                    Debug.WriteLine("Unidentified addon starter word: " + words[0] + "-");
                     break;
             }
         }
@@ -264,12 +270,10 @@ namespace GmailQuickstart {
         private void ParseIce(string[] words, Item item) {
             if (words.Length == 3) {
                 item.IceLevel = (words[2] == "Standard") ? words[2] : words[2] + " I";
-
-            } else if (words.Length == 4) { //to acount for old DD format - remove later
-                item.IceLevel = (words[3] == "Standard") ? words[3] : words[3] + " I";
-
             }else if (words.Length == 5) {
                 item.IceLevel = words[2] + " I";   //new DD format - only 0% ice has 5 words
+            }else if (words[2] == "More" && words[3] == "Ice") {
+                item.IceLevel = "More Ice";
             }
             //Debug.WriteLine(item.IceLevel);
         }
@@ -318,6 +322,34 @@ namespace GmailQuickstart {
         private void ParseFlavorAddition(string[] words, Item item) {
             item.ItemName = words[2] + " " + item.ItemName.Replace("(Flavored)", "");
             item.ItemName = item.ItemName.Trim();
+        }
+
+        /* Parses rice addons from string[] in form:
+         * "Rice", "Dish", "Addons", {Addon} {Price}
+         */
+        private void ParseRiceDishAddons(string[] words, Item item) {
+            int startIdx = 3;
+            string addon = "";
+            for (int i=startIdx; i<words.Length; i++) {
+                if (words[i].StartsWith("(")) break;
+                addon = addon + words[i] + " ";
+            }
+            if (item.AddOnList == null) item.AddOnList = new List<string>();
+            item.AddOnList.Add(addon);
+        }
+
+        /* Parses ramen addons from string[] in form:
+         * "Ramen", "Addons", {Addon} {Price}
+         */
+        private void ParseRamenAddons(string[] words, Item item) {
+            int startIdx = 2;
+            string addon = "";
+            for (int i=startIdx; i<words.Length; i++) {
+                if (words[i].StartsWith("(")) break;
+                addon = addon + words[i] + " ";
+            }
+            if (item.AddOnList == null) item.AddOnList = new List<string>();
+            item.AddOnList.Add(addon);
         }
 
         /* Parses Customer Name from line in format: 
