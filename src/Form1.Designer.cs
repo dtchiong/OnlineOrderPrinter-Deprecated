@@ -71,6 +71,7 @@
             this.tableLayoutPanel_SideBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.tableLayoutPanelTitleBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
@@ -465,6 +466,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(194)))), ((int)(((byte)(194)))));
+            this.splitContainer2.Panel2.Controls.Add(this.userControlOrder1);
             this.splitContainer2.Size = new System.Drawing.Size(845, 626);
             this.splitContainer2.SplitterDistance = 45;
             this.splitContainer2.TabIndex = 0;
@@ -475,8 +477,6 @@
             this.tableLayoutPanelTitleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
             this.tableLayoutPanelTitleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.42857F));
             this.tableLayoutPanelTitleBar.Controls.Add(this.labelTitle, 0, 0);
-            this.tableLayoutPanelTitleBar.Controls.Add(this.userControlOrder1, 1, 0);
-            this.tableLayoutPanelTitleBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelTitleBar.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelTitleBar.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelTitleBar.Name = "tableLayoutPanelTitleBar";
@@ -503,9 +503,10 @@
             // 
             // userControlOrder1
             // 
-            this.userControlOrder1.Location = new System.Drawing.Point(244, 3);
+            this.userControlOrder1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControlOrder1.Location = new System.Drawing.Point(0, 0);
             this.userControlOrder1.Name = "userControlOrder1";
-            this.userControlOrder1.Size = new System.Drawing.Size(92, 39);
+            this.userControlOrder1.Size = new System.Drawing.Size(845, 577);
             this.userControlOrder1.TabIndex = 1;
             // 
             // itemBindingSource
@@ -550,6 +551,7 @@
             this.splitContainerTabBotBoundary.ResumeLayout(false);
             this.tableLayoutPanel_SideBar.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.tableLayoutPanelTitleBar.ResumeLayout(false);
