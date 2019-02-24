@@ -125,7 +125,7 @@ namespace OnlineOrderPrinter {
             try {
                 OrderTableByMsgId.Add(order.MessageId, orderCon); //Insert the entry into the table for easily updating order status
             } catch (Exception e) {
-                Debug.WriteLine(order.MessageId + " already inserted in OrderTable");
+                Debug.WriteLine(order.MessageId + " already inserted in OrderTable. "+e.Message);
             }
 
             if (order.Service == "GrubHub") InsertToOrderNumTable(orderCon); //We insert the entry into the table with orderNum as the key
