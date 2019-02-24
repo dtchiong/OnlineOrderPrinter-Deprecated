@@ -10,38 +10,38 @@ namespace OnlineOrderPrinter {
     [DataObject]
     public class OrderContainer {
 
-        public Order order;
-        public string[][] orderArray;
-
         /* Constructor */
         public OrderContainer(Order _order) {
-            order = _order;
-            orderArray = PrinterUtility.OrderToArray(order);
+            Order = _order;
+            OrderArray = PrinterUtility.OrderToArray(Order);
             Status = "Active";
             PrintStatus = "Not Printed"; //maybe use Enum for print status later?
             PrintCount = 0;
         }
 
+        public Order Order { get; set; }
+        public string[][] OrderArray { get; set; }
+
         public string Status { get; set; }
 
         public string Service {
-            get { return order.Service; }
+            get { return Order.Service; }
         }
 
         public string Name {
-            get { return order.CustomerName; }
+            get { return Order.CustomerName; }
         }
 
         public string ItemCount {
-            get { return order.OrderSize.ToString(); }
+            get { return Order.OrderSize.ToString(); }
         }
 
         /* Returns the time if the order is from today, else it returns the date */
         public string TimeReceived {
             get {
                 string dateNow = DateTime.Now.Date.ToString("d");
-                string receivedDate = order.TimeReceived.ToString("d");
-                string receivedTime = order.TimeReceived.ToString(@"hh\:mm tt");
+                string receivedDate = Order.TimeReceived.ToString("d");
+                string receivedTime = Order.TimeReceived.ToString(@"hh\:mm tt");
 
                 bool orderIsFromToday = dateNow == receivedDate;
 
@@ -54,8 +54,8 @@ namespace OnlineOrderPrinter {
         public string PickUpTime {
             get {
                 string dateNow = DateTime.Now.Date.ToString("d");
-                string pickUpDate = order.PickUpTime.ToString("d");
-                string pickUpTime = order.PickUpTime.ToString(@"hh\:mm tt");
+                string pickUpDate = Order.PickUpTime.ToString("d");
+                string pickUpTime = Order.PickUpTime.ToString(@"hh\:mm tt");
 
                 bool orderIsFromToday = dateNow == pickUpDate;
 
@@ -66,7 +66,7 @@ namespace OnlineOrderPrinter {
         }
 
         public long TimeReceivedTicks {
-            get { return order.TimeReceived.Ticks; }
+            get { return Order.TimeReceived.Ticks; }
         }
 
         public string PrintStatus { get; set; }

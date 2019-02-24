@@ -13,7 +13,7 @@ namespace OnlineOrderPrinter {
 
         /* MenuTable
          * Key - name of item on menu 
-         * Value - {Corrected Name, Type of Item = {Drink|Snack} }
+         * Value - {Corrected Name, Type of Item = {"Drink"|"Snack"} }
          * 
          * AddOnTable
          * Key - name of addon on the menu
@@ -423,13 +423,6 @@ namespace OnlineOrderPrinter {
                 { "Curry Fish Balls Over Rice"             , new Tuple<string, string>( null, "Snack") },
             };
 
-        }
-    }
-
-    public class UberEatsMenu : Menu {
-
-        //Constructor
-        public UberEatsMenu() {
         }
     }
 }

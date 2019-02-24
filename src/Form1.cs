@@ -140,12 +140,12 @@ namespace OnlineOrderPrinter {
          */
         public void InsertToOrderNumTable(OrderContainer orderCon) {
             List<OrderContainer> orderConList;
-            if (OrderTableByOrdNum.TryGetValue(orderCon.order.OrderNumber, out orderConList)) {
+            if (OrderTableByOrdNum.TryGetValue(orderCon.Order.OrderNumber, out orderConList)) {
                 orderConList.Add(orderCon);
             } else {
                 orderConList = new List<OrderContainer>();
                 orderConList.Add(orderCon);
-                OrderTableByOrdNum.Add(orderCon.order.OrderNumber, orderConList); //Insert the entry into the table for tracking grubhub cancelled orders
+                OrderTableByOrdNum.Add(orderCon.Order.OrderNumber, orderConList); //Insert the entry into the table for tracking grubhub cancelled orders
             }
         }
 
@@ -195,12 +195,12 @@ namespace OnlineOrderPrinter {
 
         /* Updates the Item List in the UI to match the currently selected row */
         private void UpdateItemListUI(OrderContainer orderCon) {
-            dataGridView2.DataSource = orderCon.order.ItemList;
+            dataGridView2.DataSource = orderCon.Order.ItemList;
         }
         
         /* Updates the fields of Order Details */
         private void UpdateOrderDetailsUI(OrderContainer orderCon) {
-            Order order = orderCon.order;
+            Order order = orderCon.Order;
 
             nameTextBox.Text = order.CustomerName;
             contactNumTextBox.Text = order.ContactNumber;

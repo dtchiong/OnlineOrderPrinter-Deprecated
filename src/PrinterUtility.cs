@@ -71,7 +71,7 @@ namespace OnlineOrderPrinter {
          */
         public static bool PrintOrder(OrderContainer orderCon) {
 
-            string[][] items = orderCon.orderArray;
+            string[][] items = orderCon.OrderArray;
 
             bool printStatus = true;
             Debug.WriteLine("START: PrintOrder()");

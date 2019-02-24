@@ -410,7 +410,6 @@ namespace OnlineOrderPrinter {
 
         /* Returns the list of messagesId since startHistoryId. Used in partial sync */
         public static List<string> ListHistory(GmailService service, String userId, ulong startHistoryId) {
-
             List<string> messageIdList = null;
 
             UsersResource.HistoryResource.ListRequest request = service.Users.History.List(userId);
@@ -423,10 +422,8 @@ namespace OnlineOrderPrinter {
 
                     //If there's a list of history records, then we need to store the messageId of each new record
                     if (response.History != null) {
-
                         messageIdList = new List<string>();
                         foreach (var historyRecord in response.History) {
-
                             string newMessageId = historyRecord.MessagesAdded[0].Message.Id;
                             messageIdList.Add(newMessageId);
                         }
