@@ -144,12 +144,16 @@ namespace OnlineOrderPrinter {
             Cursor = Cursors.Default;
         }
 
-        /* Called by userControlOrder to change the enabled status of the print button */
+        /* Calles the userControlOrder's method to change 
+         * the enabled status of the print button 
+         */
         public void SetPrintButtonEnabledStatus(bool status) {
             printbutton.Enabled = status;
         }
 
-        /* Called by userControlOrder to change the color of the print button */
+        /* Calls the userControlOrder's method to change
+         * the color of the print button
+         */
         public void SetPrintButtonColor(string hexColor) {
             printbutton.BackColor = ColorTranslator.FromHtml(hexColor);
         }

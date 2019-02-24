@@ -13,7 +13,7 @@ using System.Media;
 namespace OnlineOrderPrinter.src {
 
     public partial class UserControlOrder : UserControl {
-        public string test = "4Head";
+
         public static BindingSource orderListBindingSrc = new BindingSource();
         public static MySortableBindingList<OrderContainer> OrderList = new MySortableBindingList<OrderContainer>();
 
@@ -24,7 +24,6 @@ namespace OnlineOrderPrinter.src {
 
         public UserControlOrder() {
             InitializeComponent();
-            Debug.WriteLine("USER CONTROL");
             CreateDgvForOrders(); //creating dgv at runtime instead of designer to show example
         }
 
@@ -199,6 +198,8 @@ namespace OnlineOrderPrinter.src {
         /* Updates the Item List in the UI to match the currently selected row */
         private void UpdateItemListUI(OrderContainer orderCon) {
             dataGridViewToppings.DataSource = orderCon.Order.ItemList;
+            //dataGridViewItemList.DataSource = orderCon.Order.ItemList;
+
         }
 
         /* Updates the fields of Order Details */
