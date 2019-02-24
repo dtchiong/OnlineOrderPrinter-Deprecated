@@ -34,19 +34,13 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanelItemDetailsBot = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewToppings = new System.Windows.Forms.DataGridView();
-            this.valueDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stringValueBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.textBoxInstructions = new System.Windows.Forms.TextBox();
             this.tableLayoutPanelItemDetailsTop = new System.Windows.Forms.TableLayoutPanel();
             this.textBoxQty = new System.Windows.Forms.TextBox();
             this.textBoxItemName = new System.Windows.Forms.TextBox();
             this.dataGridViewAdjustments = new System.Windows.Forms.DataGridView();
-            this.valueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanelOrderDetails = new System.Windows.Forms.TableLayoutPanel();
             this.messageIdTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -88,12 +82,17 @@
             this.labelItemList = new System.Windows.Forms.Label();
             this.tabUnimplemented = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
+            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.valueDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stringValueBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.valueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.userControlOrder1 = new OnlineOrderPrinter.src.UserControlOrder();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
             this.tableLayoutPanelItemDetailsBot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewToppings)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stringValueBindingSource)).BeginInit();
             this.tableLayoutPanelItemDetailsTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdjustments)).BeginInit();
             this.tableLayoutPanelOrderDetails.SuspendLayout();
@@ -129,6 +128,8 @@
             this.splitContainer3.SuspendLayout();
             this.tableLayoutPanelInfo.SuspendLayout();
             this.tabUnimplemented.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stringValueBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -195,26 +196,6 @@
             this.dataGridView2.TabIndex = 0;
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
-            // quantityDataGridViewTextBoxColumn
-            // 
-            this.quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
-            this.quantityDataGridViewTextBoxColumn.FillWeight = 25F;
-            this.quantityDataGridViewTextBoxColumn.HeaderText = "QTY";
-            this.quantityDataGridViewTextBoxColumn.MaxInputLength = 4;
-            this.quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
-            this.quantityDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // itemNameDataGridViewTextBoxColumn
-            // 
-            this.itemNameDataGridViewTextBoxColumn.DataPropertyName = "ItemName";
-            this.itemNameDataGridViewTextBoxColumn.HeaderText = "NAME";
-            this.itemNameDataGridViewTextBoxColumn.Name = "itemNameDataGridViewTextBoxColumn";
-            this.itemNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // itemBindingSource
-            // 
-            this.itemBindingSource.DataSource = typeof(OnlineOrderPrinter.Item);
-            // 
             // tableLayoutPanelItemDetailsBot
             // 
             this.tableLayoutPanelItemDetailsBot.BackColor = System.Drawing.Color.White;
@@ -275,17 +256,6 @@
             this.dataGridViewToppings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewToppings.Size = new System.Drawing.Size(188, 57);
             this.dataGridViewToppings.TabIndex = 6;
-            // 
-            // valueDataGridViewTextBoxColumn1
-            // 
-            this.valueDataGridViewTextBoxColumn1.DataPropertyName = "Value";
-            this.valueDataGridViewTextBoxColumn1.HeaderText = "Value";
-            this.valueDataGridViewTextBoxColumn1.Name = "valueDataGridViewTextBoxColumn1";
-            this.valueDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // stringValueBindingSource
-            // 
-            this.stringValueBindingSource.DataSource = typeof(OnlineOrderPrinter.StringWrapper);
             // 
             // textBoxInstructions
             // 
@@ -387,13 +357,6 @@
             this.dataGridViewAdjustments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewAdjustments.Size = new System.Drawing.Size(187, 57);
             this.dataGridViewAdjustments.TabIndex = 7;
-            // 
-            // valueDataGridViewTextBoxColumn
-            // 
-            this.valueDataGridViewTextBoxColumn.DataPropertyName = "Value";
-            this.valueDataGridViewTextBoxColumn.HeaderText = "Value";
-            this.valueDataGridViewTextBoxColumn.Name = "valueDataGridViewTextBoxColumn";
-            this.valueDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // tableLayoutPanelOrderDetails
             // 
@@ -731,7 +694,7 @@
             this.panelBarTopSeperator.Margin = new System.Windows.Forms.Padding(0);
             this.panelBarTopSeperator.MaximumSize = new System.Drawing.Size(0, 3);
             this.panelBarTopSeperator.Name = "panelBarTopSeperator";
-            this.panelBarTopSeperator.Size = new System.Drawing.Size(144, 3);
+            this.panelBarTopSeperator.Size = new System.Drawing.Size(0, 3);
             this.panelBarTopSeperator.TabIndex = 0;
             this.panelBarTopSeperator.Visible = false;
             // 
@@ -983,6 +946,7 @@
             this.tableLayoutPanelTitleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
             this.tableLayoutPanelTitleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.42857F));
             this.tableLayoutPanelTitleBar.Controls.Add(this.labelTitle, 0, 0);
+            this.tableLayoutPanelTitleBar.Controls.Add(this.userControlOrder1, 1, 0);
             this.tableLayoutPanelTitleBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelTitleBar.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelTitleBar.Margin = new System.Windows.Forms.Padding(0);
@@ -1164,9 +1128,55 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "Unimplemented. Coming Soon TM";
             // 
+            // quantityDataGridViewTextBoxColumn
+            // 
+            this.quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
+            this.quantityDataGridViewTextBoxColumn.FillWeight = 25F;
+            this.quantityDataGridViewTextBoxColumn.HeaderText = "QTY";
+            this.quantityDataGridViewTextBoxColumn.MaxInputLength = 4;
+            this.quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
+            this.quantityDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // itemNameDataGridViewTextBoxColumn
+            // 
+            this.itemNameDataGridViewTextBoxColumn.DataPropertyName = "ItemName";
+            this.itemNameDataGridViewTextBoxColumn.HeaderText = "NAME";
+            this.itemNameDataGridViewTextBoxColumn.Name = "itemNameDataGridViewTextBoxColumn";
+            this.itemNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // itemBindingSource
+            // 
+            this.itemBindingSource.DataSource = typeof(OnlineOrderPrinter.Item);
+            // 
+            // valueDataGridViewTextBoxColumn1
+            // 
+            this.valueDataGridViewTextBoxColumn1.DataPropertyName = "Value";
+            this.valueDataGridViewTextBoxColumn1.HeaderText = "Value";
+            this.valueDataGridViewTextBoxColumn1.Name = "valueDataGridViewTextBoxColumn1";
+            this.valueDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // stringValueBindingSource
+            // 
+            this.stringValueBindingSource.DataSource = typeof(OnlineOrderPrinter.StringWrapper);
+            // 
+            // valueDataGridViewTextBoxColumn
+            // 
+            this.valueDataGridViewTextBoxColumn.DataPropertyName = "Value";
+            this.valueDataGridViewTextBoxColumn.HeaderText = "Value";
+            this.valueDataGridViewTextBoxColumn.Name = "valueDataGridViewTextBoxColumn";
+            this.valueDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // itemBindingSource1
             // 
             this.itemBindingSource1.DataSource = typeof(OnlineOrderPrinter.Item);
+            // 
+            // userControlOrder1
+            // 
+            this.userControlOrder1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControlOrder1.Location = new System.Drawing.Point(244, 3);
+            this.userControlOrder1.Name = "userControlOrder1";
+            this.userControlOrder1.Size = new System.Drawing.Size(598, 39);
+            this.userControlOrder1.TabIndex = 1;
             // 
             // Form1
             // 
@@ -1179,11 +1189,9 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).EndInit();
             this.tableLayoutPanelItemDetailsBot.ResumeLayout(false);
             this.tableLayoutPanelItemDetailsBot.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewToppings)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stringValueBindingSource)).EndInit();
             this.tableLayoutPanelItemDetailsTop.ResumeLayout(false);
             this.tableLayoutPanelItemDetailsTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdjustments)).EndInit();
@@ -1225,6 +1233,8 @@
             this.tableLayoutPanelInfo.PerformLayout();
             this.tabUnimplemented.ResumeLayout(false);
             this.tabUnimplemented.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stringValueBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource1)).EndInit();
             this.ResumeLayout(false);
 
@@ -1289,5 +1299,6 @@
         private System.Windows.Forms.Button buttonOrdersTab;
         private System.Windows.Forms.Panel panelBarTopSeperator;
         private System.Windows.Forms.Label label6;
+        private src.UserControlOrder userControlOrder1;
     }
 }

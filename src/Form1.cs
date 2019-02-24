@@ -332,6 +332,9 @@ namespace OnlineOrderPrinter {
         private void switchUserControl(string CurrentForm) {
             switch(CurrentForm) {
                 case "Last Orders":
+                    //remove after
+                    userControlOrder1.Show();
+                    //
                     tabControlAppTabs.SelectedIndex = 0;
                     printbutton.Enabled = true;
                     break;
@@ -340,6 +343,7 @@ namespace OnlineOrderPrinter {
                 case "Actions":
                 case "Settings":
                 case "About":
+                    //userControlOrder1.Hide();
                     tabControlAppTabs.SelectedIndex = 1;
                     printbutton.Enabled = false;
                     break;
