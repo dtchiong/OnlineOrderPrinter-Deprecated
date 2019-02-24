@@ -14,9 +14,6 @@ namespace OnlineOrderPrinter {
 
     public partial class Form1 : Form {
 
-        public static BindingSource orderListBindingSrc = new BindingSource();
-        public static MySortableBindingList<OrderContainer> OrderList = new MySortableBindingList<OrderContainer>();
-
         //the dictionary of orders where the key is the messageId, used to track order status
         public static Dictionary<string, OrderContainer> OrderTableByMsgId = new Dictionary<string, OrderContainer>();
         //the dictionary of orders where the key is the orderNum, used to track grubhub cancelled orders
@@ -26,34 +23,7 @@ namespace OnlineOrderPrinter {
 
         public Form1() {
             InitializeComponent();
-
-            CreateDgvForOrders(); //creating dgv at runtime instead of designer to show example
             LoadSideBarIcons();
-        }
-
-        /* Initialize dgv columns and properties
-         * Prevents columns from auto populating with OrderContainer fields. Need to set autogenerate 
-         * columns before setting datasource, or else columns get duplicated for some reason.
-         */
-        private void CreateDgvForOrders() {
-            dataGridView1.AutoGenerateColumns = false;
-            orderListBindingSrc.DataSource = OrderList;
-            dataGridView1.DataSource = orderListBindingSrc;
-            orderListBindingSrc.Sort = "TimeReceivedTicks DESC"; //set to sort DESC on the Ticks property
-
-            dataGridView1.Columns.Add(NewTextBoxCol("Service", "Service"));
-            dataGridView1.Columns.Add(NewTextBoxCol("Name", "Name"));
-            dataGridView1.Columns.Add(NewTextBoxCol("ItemCount", "Order Size"));
-            dataGridView1.Columns.Add(NewTextBoxCol("TimeReceived", "Time Received"));
-            dataGridView1.Columns.Add(NewTextBoxCol("PickUpTime", "Pick-Up Time"));
-            dataGridView1.Columns.Add(NewTextBoxCol("Status", "Order Status"));
-            dataGridView1.Columns.Add(NewTextBoxCol("PrintStatus", "Print Status"));
-
-            dataGridView1.Columns["Service"].FillWeight = 80;
-            dataGridView1.Columns["Order Size"].FillWeight = 80;
-
-            dataGridView1.Columns.Add(NewTextBoxCol("TimeReceivedTicks", "TIMERECEIVEDTICKS"));
-            dataGridView1.Columns["TIMERECEIVEDTICKS"].Visible = false;
         }
 
         /* This solves the degrading quality of images in the imagelist over compiles
@@ -78,40 +48,14 @@ namespace OnlineOrderPrinter {
             imageList1.Images.Add(AboutImage);
         }
 
-        /* Returns a new DataGridViewColumn given the databinding propertyname, and the header name */
-        DataGridViewColumn NewTextBoxCol(string propertyName, string headerName) {
-            DataGridViewColumn col = new DataGridViewTextBoxColumn();
-            col.DataPropertyName = propertyName;
-            col.Name = headerName;
-            return col;
-        }
 
-        /* Gets the order that is currently selected, if any, and then prints it, and sets the Print Status 
-         * To protect from spam, we disable the button on click, and then only enable the button after the 
-         * print status is set. Maybe use a timer that starts afer print status is set.
+
+        /* Calls the userControlOrder's method to handle the printing because
+         * the data required to print is only accessible within the userControl
+         * while the printButton is located in the form rather than the userControl
          */
         private void print_Click(object sender, EventArgs e) {
-            printbutton.Enabled = false;
-            printbutton.BackColor = ColorTranslator.FromHtml("#90979B");
-
-            DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
-            
-            if (selectedRows.Count > 0) {
-                OrderContainer orderCon = (OrderContainer)selectedRows[0].DataBoundItem;
-                if (orderCon == null) return; //incase there are no orders
-
-                bool printed = PrinterUtility.PrintOrder(orderCon);
-                if (printed) {
-                    orderCon.PrintStatus = "Printed";
-                }//else error messages are handled in the print utility
-
-                //To force the form to update the print status value. 
-                //dataGridView1.Refresh() maybe useful if using a "Print All" button
-                orderListBindingSrc.ResetCurrentItem();
-            }
-
-            printbutton.Enabled = true;
-            printbutton.BackColor = ColorTranslator.FromHtml("#4A5157");
+            userControlOrder1.HandlePrintButtonClick();
         }
 
         /* Encapsulates an order with an OrderContainer, then add it to the order list */
@@ -149,6 +93,7 @@ namespace OnlineOrderPrinter {
             }
         }
 
+        //TODO: Refactor to call userControlOrder's method to change status
         /* Given the messageId, change the associated order's status to Ignore */
         public void ChangeStatusToAdjusted(string messageId) {
             OrderContainer orderCon;
@@ -332,11 +277,7 @@ namespace OnlineOrderPrinter {
         private void switchUserControl(string CurrentForm) {
             switch(CurrentForm) {
                 case "Last Orders":
-                    //remove after
-                    Debug.WriteLine(userControlOrder1.test);
                     userControlOrder1.Show();
-                    //
-                    tabControlAppTabs.SelectedIndex = 0;
                     printbutton.Enabled = true;
                     break;
                 case "Analytics":
@@ -344,8 +285,7 @@ namespace OnlineOrderPrinter {
                 case "Actions":
                 case "Settings":
                 case "About":
-                    //userControlOrder1.Hide();
-                    tabControlAppTabs.SelectedIndex = 1;
+                    userControlOrder1.Hide();
                     printbutton.Enabled = false;
                     break;
             }
@@ -357,6 +297,16 @@ namespace OnlineOrderPrinter {
 
         private void button_MouseLeave(object sender, EventArgs e) {
             Cursor = Cursors.Default;
+        }
+
+        /* Called by userControlOrder to change the enabled status of the print button */
+        public void SetPrintButtonEnabledStatus(bool status) {
+            printbutton.Enabled = status;
+        }
+
+        /* Called by userControlOrder to change the color of the print button */
+        public void SetPrintButtonColor(string hexColor) {
+            printbutton.BackColor = ColorTranslator.FromHtml(hexColor);
         }
     }
 
