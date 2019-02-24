@@ -8,7 +8,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Diagnostics;
 
-namespace GmailQuickstart {
+namespace OnlineOrderPrinter {
 
     public class PrinterUtility {
 

@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace GmailQuickstart {
+namespace OnlineOrderPrinter {
 
     public class GrubHubParser {
 

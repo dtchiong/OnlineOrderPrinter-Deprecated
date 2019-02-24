@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace GmailQuickstart {
+namespace OnlineOrderPrinter {
 
     /* The keys stored in these hashtables are the exact string as they appear in the associated menu
      * So these tables serve 2 purposes:

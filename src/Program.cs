@@ -18,7 +18,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace GmailQuickstart {
+namespace OnlineOrderPrinter {
 
     class Program {
 
@@ -57,7 +57,7 @@ namespace GmailQuickstart {
         * 164b501111cebfe1
         * 164aebfdb8b7a59a
         */
-        static string testMessageId = "1690900d454f6697";
+        static string testMessageId = "1691c8b4a6b606d3";
         static string userId = "t4milpitasonline@gmail.com";
 
         static TimerT timer;

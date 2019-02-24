@@ -1,4 +1,4 @@
-﻿namespace GmailQuickstart {
+﻿namespace OnlineOrderPrinter {
     partial class Form1 {
         /// <summary>
         /// Required designer variable.
@@ -75,7 +75,7 @@
             this.buttonMenusTab = new System.Windows.Forms.Button();
             this.buttonActionsTab = new System.Windows.Forms.Button();
             this.buttonSettingsTab = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.printbutton = new System.Windows.Forms.Button();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanelTitleBar = new System.Windows.Forms.TableLayoutPanel();
             this.labelTitle = new System.Windows.Forms.Label();
@@ -213,7 +213,7 @@
             // 
             // itemBindingSource
             // 
-            this.itemBindingSource.DataSource = typeof(GmailQuickstart.Item);
+            this.itemBindingSource.DataSource = typeof(OnlineOrderPrinter.Item);
             // 
             // tableLayoutPanelItemDetailsBot
             // 
@@ -285,7 +285,7 @@
             // 
             // stringValueBindingSource
             // 
-            this.stringValueBindingSource.DataSource = typeof(GmailQuickstart.StringValue);
+            this.stringValueBindingSource.DataSource = typeof(OnlineOrderPrinter.StringWrapper);
             // 
             // textBoxInstructions
             // 
@@ -639,7 +639,7 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));
-            this.splitContainer4.Panel2.Controls.Add(this.button1);
+            this.splitContainer4.Panel2.Controls.Add(this.printbutton);
             this.splitContainer4.Panel2.Padding = new System.Windows.Forms.Padding(15, 30, 15, 15);
             this.splitContainer4.Size = new System.Drawing.Size(150, 626);
             this.splitContainer4.SplitterDistance = 465;
@@ -933,28 +933,28 @@
             this.buttonSettingsTab.MouseEnter += new System.EventHandler(this.button_MouseEnter);
             this.buttonSettingsTab.MouseLeave += new System.EventHandler(this.button_MouseLeave);
             // 
-            // button1
+            // printbutton
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(81)))), ((int)(((byte)(87)))));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ImageIndex = 0;
-            this.button1.ImageList = this.imageList2;
-            this.button1.Location = new System.Drawing.Point(15, 30);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 112);
-            this.button1.TabIndex = 0;
-            this.button1.TabStop = false;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.print_Click);
-            this.button1.MouseEnter += new System.EventHandler(this.button_MouseEnter);
-            this.button1.MouseLeave += new System.EventHandler(this.button_MouseLeave);
+            this.printbutton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(81)))), ((int)(((byte)(87)))));
+            this.printbutton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.printbutton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.printbutton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.printbutton.FlatAppearance.BorderSize = 0;
+            this.printbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.printbutton.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.printbutton.ImageIndex = 0;
+            this.printbutton.ImageList = this.imageList2;
+            this.printbutton.Location = new System.Drawing.Point(15, 30);
+            this.printbutton.Margin = new System.Windows.Forms.Padding(0);
+            this.printbutton.Name = "printbutton";
+            this.printbutton.Size = new System.Drawing.Size(120, 112);
+            this.printbutton.TabIndex = 0;
+            this.printbutton.TabStop = false;
+            this.printbutton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.printbutton.UseVisualStyleBackColor = false;
+            this.printbutton.Click += new System.EventHandler(this.print_Click);
+            this.printbutton.MouseEnter += new System.EventHandler(this.button_MouseEnter);
+            this.printbutton.MouseLeave += new System.EventHandler(this.button_MouseLeave);
             // 
             // splitContainer2
             // 
@@ -1166,7 +1166,7 @@
             // 
             // itemBindingSource1
             // 
-            this.itemBindingSource1.DataSource = typeof(GmailQuickstart.Item);
+            this.itemBindingSource1.DataSource = typeof(OnlineOrderPrinter.Item);
             // 
             // Form1
             // 
@@ -1234,7 +1234,7 @@
         private System.Windows.Forms.BindingSource itemBindingSource;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ImageList imageList2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button printbutton;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelItemDetailsBot;
         private System.Windows.Forms.TextBox textBoxQty;

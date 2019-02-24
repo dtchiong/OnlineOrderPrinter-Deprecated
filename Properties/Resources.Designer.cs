@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Order_Parser.Properties {
+namespace OnlineOrderPrinter.Properties {
     using System;
     
     

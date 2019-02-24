@@ -37,7 +37,7 @@ source code of your own applications. These activities include: offering paid
 services to customers as an ASP, serving PDFs on the fly in a web application, shipping
 iText with a closed source product. */
 
-namespace GmailQuickstart {
+namespace OnlineOrderPrinter {
 
     public class DoorDashParser {
 

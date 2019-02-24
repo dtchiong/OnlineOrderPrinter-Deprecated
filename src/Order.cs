@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GmailQuickstart {
+namespace OnlineOrderPrinter {
     
     /* Stores all meta information about an order including the customer information and order items */
     public class Order {
@@ -23,7 +23,7 @@ namespace GmailQuickstart {
         public int NumOfDrinks       { get; set; } //The numer of drinks in the order
         public int NumOfSnacks       { get; set; } //The number of snacks in the order
 
-        public List<Item> ItemList;
+        public List<Item> ItemList   { get; set; }
 
         public string MessageId      { get; set; } //The messageID in the gmail message
 

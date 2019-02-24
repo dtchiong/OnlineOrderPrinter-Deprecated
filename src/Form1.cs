@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GmailQuickstart {
+namespace OnlineOrderPrinter {
 
     public partial class Form1 : Form {
 
@@ -63,12 +63,12 @@ namespace GmailQuickstart {
             imageList1.ColorDepth = ColorDepth.Depth32Bit;
             imageList1.Images.Clear(); //Clears the images in the designer
 
-            Bitmap homeImage = new Bitmap(Order_Parser.Properties.Resources.home_white2);
-            Bitmap AnalyticsImage = new Bitmap(Order_Parser.Properties.Resources.bar_chart_white);
-            Bitmap MenusImage = new Bitmap(Order_Parser.Properties.Resources.cutlery_white);
-            Bitmap ActionsImage = new Bitmap(Order_Parser.Properties.Resources.error_advice_sign);
-            Bitmap SettingsImage = new Bitmap(Order_Parser.Properties.Resources.settings_5_white);
-            Bitmap AboutImage = new Bitmap(Order_Parser.Properties.Resources.information);
+            Bitmap homeImage = new Bitmap(OnlineOrderPrinter.Properties.Resources.home_white2);
+            Bitmap AnalyticsImage = new Bitmap(OnlineOrderPrinter.Properties.Resources.bar_chart_white);
+            Bitmap MenusImage = new Bitmap(OnlineOrderPrinter.Properties.Resources.cutlery_white);
+            Bitmap ActionsImage = new Bitmap(OnlineOrderPrinter.Properties.Resources.error_advice_sign);
+            Bitmap SettingsImage = new Bitmap(OnlineOrderPrinter.Properties.Resources.settings_5_white);
+            Bitmap AboutImage = new Bitmap(OnlineOrderPrinter.Properties.Resources.information);
 
             imageList1.Images.Add(homeImage);
             imageList1.Images.Add(AnalyticsImage);
@@ -91,8 +91,8 @@ namespace GmailQuickstart {
          * print status is set. Maybe use a timer that starts afer print status is set.
          */
         private void print_Click(object sender, EventArgs e) {
-            button1.Enabled = false;
-            button1.BackColor = ColorTranslator.FromHtml("#90979B");
+            printbutton.Enabled = false;
+            printbutton.BackColor = ColorTranslator.FromHtml("#90979B");
 
             DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
             
@@ -110,8 +110,8 @@ namespace GmailQuickstart {
                 orderListBindingSrc.ResetCurrentItem();
             }
 
-            button1.Enabled = true;
-            button1.BackColor = ColorTranslator.FromHtml("#4A5157");
+            printbutton.Enabled = true;
+            printbutton.BackColor = ColorTranslator.FromHtml("#4A5157");
         }
 
         /* Encapsulates an order with an OrderContainer, then add it to the order list */
@@ -229,23 +229,23 @@ namespace GmailQuickstart {
             textBoxItemName.Text = item.ItemName;
             textBoxInstructions.Text = item.SpecialInstructions;
             
-            List<StringValue> adjustmentList = new List<StringValue>();
+            List<StringWrapper> adjustmentList = new List<StringWrapper>();
             if (item.ItemType == "Drink") {
-                adjustmentList.Add( new StringValue(item.Size) );
-                adjustmentList.Add( new StringValue(item.Temperature) );
-                adjustmentList.Add( new StringValue(item.IceLevel.Contains('%')? item.IceLevel : item.IceLevel + " I") );
-                adjustmentList.Add( new StringValue(item.SugarLevel.Contains('%')? item.SugarLevel  : item.SugarLevel + " S") );
-                if (item.MilkSubsitution != null) adjustmentList.Add( new StringValue(item.MilkSubsitution) );
+                adjustmentList.Add( new StringWrapper(item.Size) );
+                adjustmentList.Add( new StringWrapper(item.Temperature) );
+                adjustmentList.Add( new StringWrapper(item.IceLevel.Contains('%')? item.IceLevel : item.IceLevel + " I") );
+                adjustmentList.Add( new StringWrapper(item.SugarLevel.Contains('%')? item.SugarLevel  : item.SugarLevel + " S") );
+                if (item.MilkSubsitution != null) adjustmentList.Add( new StringWrapper(item.MilkSubsitution) );
             }else { //This is snack
                 if (item.Size != "Regular") { //Handle the case where Oolong Tea eggs have size
-                    adjustmentList.Add( new StringValue(item.Size) );
+                    adjustmentList.Add( new StringWrapper(item.Size) );
                 }
             }
 
-            List<StringValue> addOnList = new List<StringValue>();
+            List<StringWrapper> addOnList = new List<StringWrapper>();
             if (item.AddOnList != null) {
                 foreach (string s in item.AddOnList) {
-                    addOnList.Add(new StringValue(s));
+                    addOnList.Add(new StringWrapper(s));
                 }
             }
 
@@ -333,7 +333,7 @@ namespace GmailQuickstart {
             switch(CurrentForm) {
                 case "Last Orders":
                     tabControlAppTabs.SelectedIndex = 0;
-                    button1.Enabled = true;
+                    printbutton.Enabled = true;
                     break;
                 case "Analytics":
                 case "Menus":
@@ -341,7 +341,7 @@ namespace GmailQuickstart {
                 case "Settings":
                 case "About":
                     tabControlAppTabs.SelectedIndex = 1;
-                    button1.Enabled = false;
+                    printbutton.Enabled = false;
                     break;
             }
         }
@@ -355,82 +355,5 @@ namespace GmailQuickstart {
         }
     }
 
-    /* The object that will be data-bound to the orderGridView */
-    [DataObject]
-    public class OrderContainer {
 
-        public Order order;
-        public string[][] orderArray;
-
-        /* Constructor */
-        public OrderContainer(Order _order) {
-            order = _order;
-            orderArray = PrinterUtility.OrderToArray(order);
-            Status = "Active";
-            PrintStatus = "Not Printed"; //maybe use Enum for print status later?
-            PrintCount = 0;
-        }
-
-        public string Status { get; set; }
-
-        public string Service {
-            get { return order.Service; }
-        }
-
-        public string Name {
-            get { return order.CustomerName; }
-        }
-
-        public string ItemCount {
-            get { return order.OrderSize.ToString(); }
-        }
-
-        /* Returns the time if the order is from today, else it returns the date */
-        public string TimeReceived {
-            get {     
-                string dateNow = DateTime.Now.Date.ToString("d");
-                string receivedDate = order.TimeReceived.ToString("d");
-                string receivedTime = order.TimeReceived.ToString(@"hh\:mm tt");
-
-                bool orderIsFromToday = dateNow == receivedDate;
-
-                if (orderIsFromToday) 
-                    return receivedTime;
-                return receivedDate;    
-            }
-        }
-
-        public string PickUpTime {
-            get {
-                string dateNow = DateTime.Now.Date.ToString("d");
-                string pickUpDate = order.PickUpTime.ToString("d");
-                string pickUpTime = order.PickUpTime.ToString(@"hh\:mm tt");
-
-                bool orderIsFromToday = dateNow == pickUpDate;
-
-                if (orderIsFromToday)
-                    return pickUpTime;
-                return pickUpDate;
-            }
-        }
-
-        public long TimeReceivedTicks {
-            get { return order.TimeReceived.Ticks; }
-        }
-
-        public string PrintStatus { get; set; }
-
-        public int PrintCount { get; set; }
-    }
-
-    /* A work around for binding a List<string> to a dataGridView.
-     * dataGridView looks for properties of containing objects, so we have to wrap string in a class
-     */
-    public class StringValue {
-        public StringValue(string s) {
-            Value = s;
-        }
-
-        public string Value { get; set; }
-    }
 }

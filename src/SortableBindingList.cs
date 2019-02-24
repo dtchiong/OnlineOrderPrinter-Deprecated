@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace GmailQuickstart {
+namespace OnlineOrderPrinter {
 
     /* From https://www.codeproject.com/Articles/31418/Implementing-a-Sortable-BindingList-Very-Very-Quic */
 
