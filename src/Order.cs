@@ -6,8 +6,8 @@ namespace OnlineOrderPrinter {
     /* Stores all meta information about an order including the customer information and order items */
     public class Order {
 
-        public const int Sixteen = 16; //used to format printing with padding
-        public const int Twelve  = 12;
+        private const int Sixteen = 16; //used to format printing with padding
+        private const int Twelve  = 12;
 
         public string Service        { get; set; } //Grubhub or DoorDash
         public string OrderNumber    { get; set; }
