@@ -333,6 +333,7 @@ namespace OnlineOrderPrinter {
             switch(CurrentForm) {
                 case "Last Orders":
                     //remove after
+                    Debug.WriteLine(userControlOrder1.test);
                     userControlOrder1.Show();
                     //
                     tabControlAppTabs.SelectedIndex = 0;

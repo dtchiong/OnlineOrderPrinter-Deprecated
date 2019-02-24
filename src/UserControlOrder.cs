@@ -11,6 +11,9 @@ using System.Diagnostics;
 
 namespace OnlineOrderPrinter.src {
     public partial class UserControlOrder : UserControl {
+
+        public string test = "4Head";
+
         public UserControlOrder() {
             InitializeComponent();
             Debug.WriteLine("USER CONTROL");
