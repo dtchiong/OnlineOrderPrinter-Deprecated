@@ -29,19 +29,24 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(100, 100);
+            this.label1.Location = new System.Drawing.Point(230, 250);
+            this.label1.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.Size = new System.Drawing.Size(361, 30);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Actions";
+            this.label1.Text = "Unimplemented. Coming Soon TM.";
             // 
             // UserControlActions
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.label1);
+            this.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.Name = "UserControlActions";
             this.Size = new System.Drawing.Size(831, 562);
+            this.Load += new System.EventHandler(this.UserControlActions_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

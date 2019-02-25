@@ -13,5 +13,9 @@ namespace OnlineOrderPrinter.src {
         public UserControlAnalytics() {
             InitializeComponent();
         }
+
+        private void UserControlAnalytics_Load(object sender, EventArgs e) {
+            Hide();
+        }
     }
 }

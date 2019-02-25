@@ -14,13 +14,13 @@ namespace OnlineOrderPrinter {
 
     public partial class Form1 : Form {
 
-        public static string CurrentFormLabel = "Last Orders"; //there's a Form.ActiveForm
-        public UserControl CurrentShownForm = null; //Maintain this variable to more easily hide the shown form
+        public static string CurrentControlName = "Last Orders"; //there's a Form.ActiveForm
+        public UserControl CurrentShownControl = null; //Maintain this variable to more easily hide the shown form
 
         public Form1() {
             InitializeComponent();
             LoadSideBarIcons();
-            CurrentShownForm = userControlOrder1; //Can only be initialized here for some reason
+            CurrentShownControl = userControlOrder1; //Can only be initialized here for some reason
         }
 
         /* Only start checking and parsing emails when the form is shown */
@@ -108,8 +108,8 @@ namespace OnlineOrderPrinter {
 
             //Gets the current button's tag and returns if it's already the selected page
             string pressedTag = (string)((Button)sender).Tag;
-       
-            if (pressedTag == CurrentFormLabel) {
+
+            if (pressedTag == CurrentControlName) {
                 return;
             }
 
@@ -129,52 +129,41 @@ namespace OnlineOrderPrinter {
 
                 if (currentTag != pressedTag) {
                     button.BackColor = ColorTranslator.FromHtml("#2A2729");
-                }else {
+                } else {
                     button.BackColor = ColorTranslator.FromHtml("#171516");
-                    CurrentFormLabel = currentTag;
+                    CurrentControlName = currentTag;
                     labelTitle.Text = currentTag;
 
-                    switchUserControl(CurrentFormLabel);
+                    SwitchUserControl(CurrentControlName);
                 }
             }
         }
 
-        /* TODO: Refactor to switch views using userControls later */ 
-        private void switchUserControl(string currentFormLabel) {
-            CurrentShownForm.Hide();
-            Debug.WriteLine("currentFormlabel: " + currentFormLabel);
-            switch(currentFormLabel) {
+        /* Hides the old control and shows the new clicked control */
+        private void SwitchUserControl(string currentFormLabel) {
+            printbutton.Enabled = (currentFormLabel == "Last Orders") ? true : false;
+            CurrentShownControl.Hide();
+            switch (currentFormLabel) {
                 case "Last Orders":
-                    CurrentShownForm = userControlOrder1;
-                    CurrentShownForm.Show();
-                    printbutton.Enabled = true;
+                    CurrentShownControl = userControlOrder1;
                     break;
                 case "Analytics":
-                    CurrentShownForm = userControlAnalytics1;
-                    CurrentShownForm.Show();
-                    printbutton.Enabled = false;
+                    CurrentShownControl = userControlAnalytics1;
                     break;
                 case "Menus":
-                    CurrentShownForm = userControlMenus1;
-                    CurrentShownForm.Show();
-                    printbutton.Enabled = false;
+                    CurrentShownControl = userControlMenus1;
                     break;
                 case "Actions":
-                    CurrentShownForm = userControlActions1;
-                    CurrentShownForm.Show();
-                    printbutton.Enabled = false;
+                    CurrentShownControl = userControlActions1;
                     break;
                 case "Settings":
-                    CurrentShownForm = userControlSettings1;
-                    CurrentShownForm.Show();
-                    printbutton.Enabled = false;
+                    CurrentShownControl = userControlSettings1;
                     break;
                 case "About":
-                    CurrentShownForm = userControlAbout1;
-                    CurrentShownForm.Show();
-                    printbutton.Enabled = false;
+                    CurrentShownControl = userControlAbout1;
                     break;
             }
+            CurrentShownControl.Show();
         }
     }
 

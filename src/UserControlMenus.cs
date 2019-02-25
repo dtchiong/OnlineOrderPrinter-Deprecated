@@ -13,5 +13,9 @@ namespace OnlineOrderPrinter.src {
         public UserControlMenus() {
             InitializeComponent();
         }
+
+        private void UserControlMenus_Load(object sender, EventArgs e) {
+            Hide();
+        }
     }
 }

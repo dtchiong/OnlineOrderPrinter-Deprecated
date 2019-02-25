@@ -13,5 +13,9 @@ namespace OnlineOrderPrinter.src {
         public UserControlAbout() {
             InitializeComponent();
         }
+
+        private void UserControlAbout_Load(object sender, EventArgs e) {
+            Hide();
+        }
     }
 }
