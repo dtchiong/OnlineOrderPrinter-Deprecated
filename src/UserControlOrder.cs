@@ -81,7 +81,7 @@ namespace OnlineOrderPrinter.src {
 
         /* Updates the item details to match the currently selected item if the row changes */
         private void dataGridView2_SelectionChanged(object sender, EventArgs e) {
-            DataGridViewSelectedRowCollection selectedRows = dataGridViewToppings.SelectedRows;
+            DataGridViewSelectedRowCollection selectedRows = dataGridView4.SelectedRows;
             if (selectedRows.Count > 0) {
                 UpdateItemDetailsUI();
             }
