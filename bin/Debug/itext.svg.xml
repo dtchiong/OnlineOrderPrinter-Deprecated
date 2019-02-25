@@ -1,0 +1,1296 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>itext.svg</name>
+    </assembly>
+    <members>
+        <member name="T:iText.Svg.Converter.SvgConverter">
+            <summary>
+            This is the main container class for static methods that do high-level
+            conversion operations from input to PDF, either by drawing on a canvas or by
+            returning an XObject, which can then be used by the calling class for further
+            processing and drawing operations.
+            </summary>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.DrawOnDocument(System.String,iText.Kernel.Pdf.PdfDocument,System.Int32)">
+            <summary>
+            Draws a String containing valid SVG to a document, on a given page
+            number.
+            </summary>
+            <param name="content">the String value containing valid SVG content</param>
+            <param name="document">
+            the
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            instance to draw on
+            </param>
+            <param name="pageNo">the page to draw on</param>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.DrawOnDocument(System.String,iText.Kernel.Pdf.PdfDocument,System.Int32,iText.Svg.Processors.ISvgConverterProperties)">
+            <summary>
+            Draws a String containing valid SVG to a document, on a given page
+            number.
+            </summary>
+            <param name="content">the Stream object containing valid SVG content</param>
+            <param name="document">
+            the
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            instance to draw on
+            </param>
+            <param name="pageNo">the page to draw on</param>
+            <param name="props">a container for extra properties that customize the behavior</param>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.DrawOnDocument(System.IO.Stream,iText.Kernel.Pdf.PdfDocument,System.Int32)">
+            <summary>
+            Draws a Stream containing valid SVG to a document, on a given page
+            number.
+            </summary>
+            <param name="stream">the Stream object containing valid SVG content</param>
+            <param name="document">
+            the
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            instance to draw on
+            </param>
+            <param name="pageNo">the page to draw on</param>
+            <exception cref="T:System.IO.IOException">when the Stream cannot be read correctly</exception>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.DrawOnDocument(System.IO.Stream,iText.Kernel.Pdf.PdfDocument,System.Int32,iText.Svg.Processors.ISvgConverterProperties)">
+            <summary>
+            Draws a Stream containing valid SVG to a document, on a given page
+            number.
+            </summary>
+            <param name="stream">the Stream object containing valid SVG content</param>
+            <param name="document">
+            the
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            instance to draw on
+            </param>
+            <param name="pageNo">the page to draw on</param>
+            <param name="props">a container for extra properties that customize the behavior</param>
+            <exception cref="T:System.IO.IOException">when the Stream cannot be read correctly</exception>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.DrawOnPage(System.String,iText.Kernel.Pdf.PdfPage)">
+            <summary>Draws a String containing valid SVG to a given page</summary>
+            <param name="content">the String value containing valid SVG content</param>
+            <param name="page">
+            the
+            <see cref="T:iText.Kernel.Pdf.PdfPage"/>
+            instance to draw on
+            </param>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.DrawOnPage(System.String,iText.Kernel.Pdf.PdfPage,iText.Svg.Processors.ISvgConverterProperties)">
+            <summary>Draws a String containing valid SVG to a given page</summary>
+            <param name="content">the String value containing valid SVG content</param>
+            <param name="page">
+            the
+            <see cref="T:iText.Kernel.Pdf.PdfPage"/>
+            instance to draw on
+            </param>
+            <param name="props">a container for extra properties that customize the behavior</param>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.DrawOnPage(System.IO.Stream,iText.Kernel.Pdf.PdfPage)">
+            <summary>Draws a Stream containing valid SVG to a given page</summary>
+            <param name="stream">the Stream object containing valid SVG content</param>
+            <param name="page">
+            the
+            <see cref="T:iText.Kernel.Pdf.PdfPage"/>
+            instance to draw on
+            </param>
+            <exception cref="T:System.IO.IOException">when the Stream cannot be read correctly</exception>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.DrawOnPage(System.IO.Stream,iText.Kernel.Pdf.PdfPage,iText.Svg.Processors.ISvgConverterProperties)">
+            <summary>Draws a Stream containing valid SVG to a given page</summary>
+            <param name="stream">the Stream object containing valid SVG content</param>
+            <param name="page">
+            the
+            <see cref="T:iText.Kernel.Pdf.PdfPage"/>
+            instance to draw on
+            </param>
+            <param name="props">a container for extra properties that customize the behavior</param>
+            <exception cref="T:System.IO.IOException">when the Stream cannot be read correctly</exception>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.DrawOnCanvas(System.String,iText.Kernel.Pdf.Canvas.PdfCanvas)">
+            <summary>Draws a String containing valid SVG to a pre-made canvas object</summary>
+            <param name="content">the String value containing valid SVG content</param>
+            <param name="canvas">
+            the
+            <see cref="T:iText.Kernel.Pdf.Canvas.PdfCanvas"/>
+            instance to draw on
+            </param>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.DrawOnCanvas(System.String,iText.Kernel.Pdf.Canvas.PdfCanvas,iText.Svg.Processors.ISvgConverterProperties)">
+            <summary>Draws a String containing valid SVG to a pre-made canvas object</summary>
+            <param name="content">the String value containing valid SVG content</param>
+            <param name="canvas">
+            the
+            <see cref="T:iText.Kernel.Pdf.Canvas.PdfCanvas"/>
+            instance to draw on
+            </param>
+            <param name="props">a container for extra properties that customize the behavior</param>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.DrawOnCanvas(System.IO.Stream,iText.Kernel.Pdf.Canvas.PdfCanvas)">
+            <summary>Draws a String containing valid SVG to a pre-made canvas object</summary>
+            <param name="stream">the Stream object containing valid SVG content</param>
+            <param name="canvas">
+            the
+            <see cref="T:iText.Kernel.Pdf.Canvas.PdfCanvas"/>
+            instance to draw on
+            </param>
+            <exception cref="T:System.IO.IOException">when the Stream cannot be read correctly</exception>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.DrawOnCanvas(System.IO.Stream,iText.Kernel.Pdf.Canvas.PdfCanvas,iText.Svg.Processors.ISvgConverterProperties)">
+            <summary>Draws a String containing valid SVG to a pre-made canvas object</summary>
+            <param name="stream">the Stream object containing valid SVG content</param>
+            <param name="canvas">
+            the
+            <see cref="T:iText.Kernel.Pdf.Canvas.PdfCanvas"/>
+            instance to draw on
+            </param>
+            <param name="props">a container for extra properties that customize the behavior</param>
+            <exception cref="T:System.IO.IOException">when the Stream cannot be read correctly</exception>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.ConvertToXObject(System.String,iText.Kernel.Pdf.PdfDocument)">
+            <summary>
+            Converts a String containing valid SVG content to an
+            <see cref="T:iText.Kernel.Pdf.Xobject.PdfFormXObject">XObject</see>
+            that can then be used on the passed
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            . This method does NOT manipulate the
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            in any way.
+            This method (or its overloads) is the best method to use if you want to
+            reuse the same SVG image multiple times on the same
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            .
+            If you want to reuse this object on other
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            instances,
+            please either use any of the
+            <see cref="M:iText.Svg.Converter.SvgConverter.Process(iText.StyledXmlParser.Node.INode)"/>
+            overloads in this same
+            class and convert its result to an XObject with
+            <see cref="M:iText.Svg.Converter.SvgConverter.ConvertToXObject(iText.Svg.Renderers.ISvgNodeRenderer,iText.Kernel.Pdf.PdfDocument)"/>
+            , or look into
+            using
+            <see cref="M:iText.Kernel.Pdf.PdfObject.CopyTo(iText.Kernel.Pdf.PdfDocument)"/>
+            .
+            </summary>
+            <param name="content">the String value containing valid SVG content</param>
+            <param name="document">
+            the
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            instance to draw on
+            </param>
+            <returns>
+            a
+            <see cref="T:iText.Kernel.Pdf.Xobject.PdfFormXObject">XObject</see>
+            containing the PDF instructions
+            corresponding to the passed SVG content
+            </returns>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.ConvertToXObject(System.String,iText.Kernel.Pdf.PdfDocument,iText.Svg.Processors.ISvgConverterProperties)">
+            <summary>
+            Converts a String containing valid SVG content to an
+            <see cref="T:iText.Kernel.Pdf.Xobject.PdfFormXObject">XObject</see>
+            that can then be used on the passed
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            . This method does NOT manipulate the
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            in any way.
+            This method (or its overloads) is the best method to use if you want to
+            reuse the same SVG image multiple times on the same
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            .
+            If you want to reuse this object on other
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            instances,
+            please either use any of the
+            <see cref="M:iText.Svg.Converter.SvgConverter.Process(iText.StyledXmlParser.Node.INode)"/>
+            overloads in this same
+            class and convert its result to an XObject with
+            <see cref="M:iText.Svg.Converter.SvgConverter.ConvertToXObject(iText.Svg.Renderers.ISvgNodeRenderer,iText.Kernel.Pdf.PdfDocument)"/>
+            , or look into
+            using
+            <see cref="M:iText.Kernel.Pdf.PdfObject.CopyTo(iText.Kernel.Pdf.PdfDocument)"/>
+            .
+            </summary>
+            <param name="content">the String value containing valid SVG content</param>
+            <param name="document">
+            the
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            instance to draw on
+            </param>
+            <param name="props">a container for extra properties that customize the behavior</param>
+            <returns>
+            a
+            <see cref="T:iText.Kernel.Pdf.Xobject.PdfFormXObject">XObject</see>
+            containing the PDF instructions
+            corresponding to the passed SVG content
+            </returns>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.ConvertToXObject(System.IO.Stream,iText.Kernel.Pdf.PdfDocument)">
+            <summary>
+            Converts a String containing valid SVG content to an
+            <see cref="T:iText.Kernel.Pdf.Xobject.PdfFormXObject">XObject</see>
+            that can then be used on the passed
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            . This method does NOT manipulate the
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            in any way.
+            This method (or its overloads) is the best method to use if you want to
+            reuse the same SVG image multiple times on the same
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            .
+            If you want to reuse this object on other
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            instances,
+            please either use any of the
+            <see cref="M:iText.Svg.Converter.SvgConverter.Process(iText.StyledXmlParser.Node.INode)"/>
+            overloads in this same
+            class and convert its result to an XObject with
+            <see cref="M:iText.Svg.Converter.SvgConverter.ConvertToXObject(iText.Svg.Renderers.ISvgNodeRenderer,iText.Kernel.Pdf.PdfDocument)"/>
+            , or look into
+            using
+            <see cref="M:iText.Kernel.Pdf.PdfObject.CopyTo(iText.Kernel.Pdf.PdfDocument)"/>
+            .
+            </summary>
+            <param name="stream">the Stream object containing valid SVG content</param>
+            <param name="document">
+            the
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            instance to draw on
+            </param>
+            <exception cref="T:System.IO.IOException">when the Stream cannot be read correctly</exception>
+            <returns>
+            a
+            <see cref="T:iText.Kernel.Pdf.Xobject.PdfFormXObject">XObject</see>
+            containing the PDF instructions
+            corresponding to the passed SVG content
+            </returns>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.ConvertToXObject(System.IO.Stream,iText.Kernel.Pdf.PdfDocument,iText.Svg.Processors.ISvgConverterProperties)">
+            <summary>
+            Converts a String containing valid SVG content to an
+            <see cref="T:iText.Kernel.Pdf.Xobject.PdfFormXObject">XObject</see>
+            that can then be used on the passed
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            . This method does NOT manipulate the
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            in any way.
+            This method (or its overloads) is the best method to use if you want to
+            reuse the same SVG image multiple times on the same
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            .
+            If you want to reuse this object on other
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            instances,
+            please either use any of the
+            <see cref="M:iText.Svg.Converter.SvgConverter.Process(iText.StyledXmlParser.Node.INode)"/>
+            overloads in this same
+            class and convert its result to an XObject with
+            <see cref="M:iText.Svg.Converter.SvgConverter.ConvertToXObject(iText.Svg.Renderers.ISvgNodeRenderer,iText.Kernel.Pdf.PdfDocument)"/>
+            , or look into
+            using
+            <see cref="M:iText.Kernel.Pdf.PdfObject.CopyTo(iText.Kernel.Pdf.PdfDocument)"/>
+            .
+            </summary>
+            <param name="stream">the Stream object containing valid SVG content</param>
+            <param name="document">
+            the
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            instance to draw on
+            </param>
+            <param name="props">a container for extra properties that customize the behavior</param>
+            <exception cref="T:System.IO.IOException">when the Stream cannot be read correctly</exception>
+            <returns>
+            a
+            <see cref="T:iText.Kernel.Pdf.Xobject.PdfFormXObject">XObject</see>
+            containing the PDF instructions
+            corresponding to the passed SVG content
+            </returns>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.ConvertToXObject(iText.Svg.Renderers.ISvgNodeRenderer,iText.Kernel.Pdf.PdfDocument)">
+            <summary>
+            This method draws a NodeRenderer tree to a canvas that is tied to the
+            passed document.
+            </summary>
+            <remarks>
+            This method draws a NodeRenderer tree to a canvas that is tied to the
+            passed document.
+            This method (or its overloads) is the best method to use if you want to
+            reuse the same SVG image multiple times on the same
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            .
+            If you want to reuse this object on other
+            <see cref="T:iText.Kernel.Pdf.PdfDocument"/>
+            instances,
+            please either use any of the
+            <see cref="M:iText.Svg.Converter.SvgConverter.Process(iText.StyledXmlParser.Node.INode)"/>
+            overloads in this same
+            class and convert its result to an XObject with
+            <see cref="M:iText.Svg.Converter.SvgConverter.ConvertToXObject(iText.Svg.Renderers.ISvgNodeRenderer,iText.Kernel.Pdf.PdfDocument)"/>
+            , or look into
+            using
+            <see cref="M:iText.Kernel.Pdf.PdfObject.CopyTo(iText.Kernel.Pdf.PdfDocument)"/>
+            .
+            </remarks>
+            <param name="rootRenderer">
+            the
+            <see cref="T:iText.Svg.Renderers.ISvgNodeRenderer"/>
+            instance that contains
+            the renderer tree
+            </param>
+            <param name="document">
+            the document that the returned
+            <see cref="T:iText.Kernel.Pdf.Xobject.PdfFormXObject">XObject</see>
+            can be drawn on (on any given page
+            coordinates)
+            </param>
+            <returns>
+            an
+            <see cref="T:iText.Kernel.Pdf.Xobject.PdfFormXObject">XObject</see>
+            containing the PDF instructions
+            corresponding to the passed node renderer tree.
+            </returns>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.Process(iText.StyledXmlParser.Node.INode)">
+            <summary>
+            Use the default implementation of
+            <see cref="T:iText.Svg.Processors.ISvgProcessor"/>
+            to convert an XML
+            DOM tree to a node renderer tree.
+            </summary>
+            <param name="root">the XML DOM tree</param>
+            <returns>a node renderer tree corresponding to the passed XML DOM tree</returns>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.Process(iText.StyledXmlParser.Node.INode,iText.Svg.Processors.ISvgConverterProperties)">
+            <summary>
+            Use the default implementation of
+            <see cref="T:iText.Svg.Processors.ISvgProcessor"/>
+            to convert an XML
+            DOM tree to a node renderer tree.
+            </summary>
+            <param name="root">the XML DOM tree</param>
+            <param name="props">a container for extra properties that customize the behavior</param>
+            <returns>a node renderer tree corresponding to the passed XML DOM tree</returns>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.Parse(System.String)">
+            <summary>
+            Parse a String containing valid SVG into an XML DOM node, using the
+            default JSoup XML parser.
+            </summary>
+            <param name="content">the String value containing valid SVG content</param>
+            <returns>an XML DOM tree corresponding to the passed String input</returns>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.Parse(System.IO.Stream)">
+            <summary>
+            Parse a Stream containing valid SVG into an XML DOM node, using the
+            default JSoup XML parser.
+            </summary>
+            <remarks>
+            Parse a Stream containing valid SVG into an XML DOM node, using the
+            default JSoup XML parser. This method will assume that the encoding of
+            the Stream is
+            <c>UTF-8</c>
+            .
+            </remarks>
+            <param name="stream">the Stream object containing valid SVG content</param>
+            <exception cref="T:System.IO.IOException">when the Stream cannot be read correctly</exception>
+            <returns>an XML DOM tree corresponding to the passed String input</returns>
+        </member>
+        <member name="M:iText.Svg.Converter.SvgConverter.Parse(System.IO.Stream,iText.Svg.Processors.ISvgConverterProperties)">
+            <summary>
+            Parse a Stream containing valid SVG into an XML DOM node, using the
+            default JSoup XML parser.
+            </summary>
+            <remarks>
+            Parse a Stream containing valid SVG into an XML DOM node, using the
+            default JSoup XML parser. This method will assume that the encoding of
+            the Stream is
+            <c>UTF-8</c>
+            , unless specified otherwise by the method
+            <see cref="M:iText.Svg.Processors.ISvgConverterProperties.GetCharset"/>
+            of the
+            <paramref name="props"/>
+            parameter.
+            </remarks>
+            <param name="stream">the Stream object containing valid SVG content</param>
+            <param name="props">a container for extra properties that customize the behavior</param>
+            <exception cref="T:System.IO.IOException">when the Stream cannot be read correctly</exception>
+            <returns>an XML DOM tree corresponding to the passed String input</returns>
+        </member>
+        <member name="T:iText.Svg.Css.Impl.DefaultSvgStyleResolver">
+            <summary>Default CSS resolver implementation.</summary>
+        </member>
+        <member name="M:iText.Svg.Css.Impl.DefaultSvgStyleResolver.#ctor(iText.StyledXmlParser.Node.INode)">
+            <summary>Creates a DefaultSvgStyleResolver.</summary>
+            <remarks>
+            Creates a DefaultSvgStyleResolver. This constructor will instantiate its internal style sheet and it
+            will collect the css declarations from the provided node.
+            </remarks>
+            <param name="rootNode">node to collect css from</param>
+        </member>
+        <member name="T:iText.Svg.Css.SvgCssContext">
+            <summary>
+            Context necessary for evaluating certain Css statements whose final values depends on other statements
+            e.g.
+            </summary>
+            <remarks>
+            Context necessary for evaluating certain Css statements whose final values depends on other statements
+            e.g. relative font-size statements.
+            </remarks>
+        </member>
+        <member name="T:iText.Svg.Exceptions.SvgLogMessageConstant">
+            <summary>Class that holds the logging and exception messages.</summary>
+        </member>
+        <member name="T:iText.Svg.Exceptions.SvgProcessingException">
+            <summary>
+            Exception thrown by
+            <see cref="T:iText.Svg.Processors.ISvgProcessor"/>
+            when it cannot process an SVG
+            </summary>
+        </member>
+        <member name="M:iText.Svg.Exceptions.SvgProcessingException.#ctor(System.String)">
+            <summary>
+            Creates a new
+            <see cref="T:iText.Svg.Exceptions.SvgProcessingException"/>
+            instance.
+            </summary>
+            <param name="message">the message</param>
+        </member>
+        <member name="M:iText.Svg.Exceptions.SvgProcessingException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates a new
+            <see cref="T:iText.Svg.Exceptions.SvgProcessingException"/>
+            instance.
+            </summary>
+            <param name="message">the message</param>
+            <param name="cause">the nested exception</param>
+        </member>
+        <member name="M:iText.Svg.Exceptions.SvgProcessingException.#ctor(System.Exception)">
+            <summary>
+            Creates a new
+            <see cref="T:iText.Svg.Exceptions.SvgProcessingException"/>
+            instance.
+            </summary>
+            <param name="cause">the nested exception</param>
+        </member>
+        <member name="T:iText.Svg.Processors.Impl.DefaultSvgConverterProperties">
+            <summary>
+            Default and fallback implementation of
+            <see cref="T:iText.Svg.Processors.ISvgConverterProperties"/>
+            for
+            <see cref="T:iText.Svg.Processors.Impl.DefaultSvgProcessor"/>
+            </summary>
+        </member>
+        <member name="M:iText.Svg.Processors.Impl.DefaultSvgConverterProperties.#ctor(iText.StyledXmlParser.Node.INode)">
+            <summary>Creates a DefaultSvgConverterProperties object.</summary>
+            <remarks>Creates a DefaultSvgConverterProperties object. Instantiates its members, ICssResolver and ISvgNodeRenderer, to its default implementations.
+                </remarks>
+            <param name="root">the root tag of the SVG image</param>
+        </member>
+        <member name="T:iText.Svg.Processors.Impl.DefaultSvgProcessor">
+            <summary>
+            Default implementation of
+            <see cref="T:iText.Svg.Processors.ISvgProcessor"/>
+            .
+            This implementation traverses the
+            <see cref="T:iText.StyledXmlParser.Node.INode"/>
+            tree depth-first,
+            using a stack to recreate a tree of
+            <see cref="T:iText.Svg.Renderers.ISvgNodeRenderer"/>
+            with the same structure.
+            </summary>
+        </member>
+        <member name="M:iText.Svg.Processors.Impl.DefaultSvgProcessor.#ctor">
+            <summary>Instantiates a DefaultSvgProcessor object.</summary>
+        </member>
+        <member name="M:iText.Svg.Processors.Impl.DefaultSvgProcessor.Process(iText.StyledXmlParser.Node.INode)">
+            <summary><inheritDoc/></summary>
+            <exception cref="T:iText.Svg.Exceptions.SvgProcessingException"/>
+        </member>
+        <member name="M:iText.Svg.Processors.Impl.DefaultSvgProcessor.Process(iText.StyledXmlParser.Node.INode,iText.Svg.Processors.ISvgConverterProperties)">
+            <summary><inheritDoc/></summary>
+            <exception cref="T:iText.Svg.Exceptions.SvgProcessingException"/>
+        </member>
+        <member name="M:iText.Svg.Processors.Impl.DefaultSvgProcessor.PerformSetup(iText.Svg.Processors.ISvgConverterProperties)">
+            <summary>Load in configuration, set initial processorState and create/fill-in context of the processor</summary>
+            <param name="converterProps"/>
+        </member>
+        <member name="M:iText.Svg.Processors.Impl.DefaultSvgProcessor.ExecuteDepthFirstTraversal(iText.StyledXmlParser.Node.INode)">
+            <summary>Start the depth-first traversal of the INode tree, pushing the results on the stack</summary>
+            <param name="startingNode">node to start on</param>
+        </member>
+        <member name="M:iText.Svg.Processors.Impl.DefaultSvgProcessor.CreateResultAndClean">
+            <summary>Extract result from internal processorState and clean up afterwards</summary>
+            <returns>Root renderer of the processed SVG</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:iText.Svg.Processors.Impl.DefaultSvgProcessor.Visit(iText.StyledXmlParser.Node.INode)" -->
+        <member name="M:iText.Svg.Processors.Impl.DefaultSvgProcessor.CreateRenderer(iText.StyledXmlParser.Node.IElementNode,iText.Svg.Renderers.ISvgNodeRenderer)">
+            <summary>Create renderer based on the passed SVG tag and assign its parent</summary>
+            <param name="tag">SVG tag with all style attributes already assigned</param>
+            <param name="parent">renderer of the parent tag</param>
+            <returns>Configured renderer for the tag</returns>
+        </member>
+        <member name="M:iText.Svg.Processors.Impl.DefaultSvgProcessor.ProcessAsText(iText.StyledXmlParser.Node.INode)">
+            <summary>Check if this node is a text node that needs to be processed by the parent</summary>
+            <param name="node">node to check</param>
+            <returns>true if the node should be processed as text, false otherwise</returns>
+        </member>
+        <member name="M:iText.Svg.Processors.Impl.DefaultSvgProcessor.ProcessText(iText.StyledXmlParser.Node.ITextNode)">
+            <summary>Process the text contained in the text-node</summary>
+            <param name="textNode">node containing text to process</param>
+        </member>
+        <member name="M:iText.Svg.Processors.Impl.DefaultSvgProcessor.FindFirstElement(iText.StyledXmlParser.Node.INode,System.String)">
+            <summary>Find the first element in the node-tree that corresponds with the passed tag-name.</summary>
+            <remarks>Find the first element in the node-tree that corresponds with the passed tag-name. Search is performed depth-first
+                </remarks>
+            <param name="node">root-node to start with</param>
+            <param name="tagName">name of the tag that needs to be fonund</param>
+            <returns/>
+        </member>
+        <member name="T:iText.Svg.Processors.Impl.ProcessorState">
+            <summary>
+            Internal ProcessorState representation for
+            <see cref="T:iText.Svg.Processors.Impl.DefaultSvgProcessor"/>
+            </summary>
+        </member>
+        <member name="M:iText.Svg.Processors.Impl.ProcessorState.#ctor">
+            <summary>Instantiates the processor state.</summary>
+        </member>
+        <member name="M:iText.Svg.Processors.Impl.ProcessorState.Size">
+            <summary>Returns the amount of ISvgNodeRenderers being processed.</summary>
+            <returns>amount of ISvgNodeRenderers</returns>
+        </member>
+        <member name="M:iText.Svg.Processors.Impl.ProcessorState.Push(iText.Svg.Renderers.ISvgNodeRenderer)">
+            <summary>Adds an ISvgNodeRenderer to the processor's state.</summary>
+            <param name="svgNodeRenderer">renderer to be added to the state</param>
+        </member>
+        <member name="M:iText.Svg.Processors.Impl.ProcessorState.Pop">
+            <summary>Removes and returns the first renderer of the processor state.</summary>
+            <returns>the removed ISvgNodeRenderer object</returns>
+        </member>
+        <member name="M:iText.Svg.Processors.Impl.ProcessorState.Top">
+            <summary>Returns the first ISvgNodeRenderer object without removing it.</summary>
+            <returns>the first ISvgNodeRenderer</returns>
+        </member>
+        <member name="M:iText.Svg.Processors.Impl.ProcessorState.Empty">
+            <summary>Returns true when the processorstate is empty, false when there is at least one ISvgNodeRenderer in the state.
+                </summary>
+            <returns>true if empty, false if not empty</returns>
+        </member>
+        <member name="T:iText.Svg.Processors.ISvgConverterProperties">
+            <summary>
+            Interface for the configuration classes used by
+            <see cref="T:iText.Svg.Processors.ISvgProcessor"/>
+            </summary>
+        </member>
+        <member name="M:iText.Svg.Processors.ISvgConverterProperties.GetCssResolver">
+            <summary>
+            Retrieve the CSS Resolver that the
+            <see cref="T:iText.Svg.Processors.ISvgProcessor"/>
+            should use for
+            resolving and assigning CSS.
+            </summary>
+            <returns>
+            A
+            <see cref="T:iText.StyledXmlParser.Css.ICssResolver"/>
+            implementation
+            </returns>
+        </member>
+        <member name="M:iText.Svg.Processors.ISvgConverterProperties.GetRendererFactory">
+            <summary>
+            Retrieve the factory responsible for creating
+            <see cref="T:iText.Svg.Renderers.ISvgNodeRenderer"/>
+            </summary>
+            <returns>
+            A
+            <see cref="T:iText.Svg.Renderers.Factories.ISvgNodeRendererFactory"/>
+            implementation
+            </returns>
+        </member>
+        <member name="M:iText.Svg.Processors.ISvgConverterProperties.GetCharset">
+            <summary>Get the name of the Charset to be used when decoding an InputStream.</summary>
+            <remarks>
+            Get the name of the Charset to be used when decoding an InputStream. This
+            method is allowed to return null, in which case
+            <c>UTF-8</c>
+            will
+            be used (by JSoup).
+            Please be aware that this method is NOT used when handling a
+            <c>String</c>
+            variable in the
+            <see cref="T:iText.Svg.Converter.SvgConverter"/>
+            .
+            </remarks>
+            <returns>
+            the String name of the
+            <see cref="T:System.Text.Encoding"/>
+            used for decoding
+            </returns>
+        </member>
+        <member name="T:iText.Svg.Processors.ISvgProcessor">
+            <summary>Interface for SVG processors.</summary>
+            <remarks>
+            Interface for SVG processors.
+            Processors take the root
+            <see cref="T:iText.StyledXmlParser.Node.INode"/>
+            that corresponds to a Svg element
+            and return a
+            <see cref="T:iText.Svg.Renderers.ISvgNodeRenderer"/>
+            that serves as the root for the same SVG
+            </remarks>
+        </member>
+        <member name="M:iText.Svg.Processors.ISvgProcessor.Process(iText.StyledXmlParser.Node.INode)">
+            <summary>Process an SVG, returning the root of a renderer-tree</summary>
+            <param name="root">Root of the INode representation of the SVG</param>
+            <returns>root of the renderer-tree representing the SVG</returns>
+            <exception cref="T:iText.Svg.Exceptions.SvgProcessingException"/>
+        </member>
+        <member name="M:iText.Svg.Processors.ISvgProcessor.Process(iText.StyledXmlParser.Node.INode,iText.Svg.Processors.ISvgConverterProperties)">
+            <summary>Process an SVG, returning the root of a renderer-tree</summary>
+            <param name="root">Root of the INode representation of the SVG</param>
+            <param name="convertorprops">configuration properties</param>
+            <returns>root of the renderer-tree representing the SVG</returns>
+            <exception cref="T:iText.Svg.Exceptions.SvgProcessingException"/>
+        </member>
+        <member name="T:iText.Svg.Renderers.Factories.DefaultSvgNodeRendererFactory">
+            <summary>
+            The default implementation of
+            <see cref="T:iText.Svg.Renderers.Factories.ISvgNodeRendererFactory"/>
+            that will be
+            used by default by the entry points defined by this project.
+            </summary>
+        </member>
+        <member name="M:iText.Svg.Renderers.Factories.DefaultSvgNodeRendererFactory.#ctor">
+            <summary>
+            Default constructor which uses the default
+            <see cref="T:iText.Svg.Renderers.Factories.ISvgNodeRendererMapper"/>
+            implementation.
+            </summary>
+        </member>
+        <member name="M:iText.Svg.Renderers.Factories.DefaultSvgNodeRendererFactory.#ctor(iText.Svg.Renderers.Factories.ISvgNodeRendererMapper)">
+            <summary>
+            Constructor which allows injecting a custom
+            <see cref="T:iText.Svg.Renderers.Factories.ISvgNodeRendererMapper"/>
+            implementation.
+            </summary>
+            <param name="mapper">
+            the custom mapper implementation - if null, then we fall
+            back to the
+            <see cref="T:iText.Svg.Renderers.Factories.DefaultSvgNodeRendererMapper"/>
+            </param>
+        </member>
+        <member name="T:iText.Svg.Renderers.Factories.DefaultSvgNodeRendererMapper">
+            <summary>
+            The implementation of
+            <see cref="T:iText.Svg.Renderers.Factories.ISvgNodeRendererMapper"/>
+            that will be used by
+            default in the
+            <see cref="T:iText.Svg.Renderers.Factories.DefaultSvgNodeRendererFactory"/>
+            . It contains the mapping
+            of the default implementations, provided by this project for the standard SVG
+            tags as defined in the SVG Specification.
+            </summary>
+        </member>
+        <member name="T:iText.Svg.Renderers.Factories.ISvgNodeRendererFactory">
+            <summary>
+            Interface for the factory used by
+            <see cref="T:iText.Svg.Processors.Impl.DefaultSvgProcessor"/>
+            .
+            Pass along using
+            <see cref="T:iText.Svg.Processors.ISvgConverterProperties"/>
+            .
+            </summary>
+        </member>
+        <member name="M:iText.Svg.Renderers.Factories.ISvgNodeRendererFactory.CreateSvgNodeRendererForTag(iText.StyledXmlParser.Node.IElementNode,iText.Svg.Renderers.ISvgNodeRenderer)">
+            <summary>Create a configured renderer based on the passed Svg tag and set its parent.</summary>
+            <param name="tag">Representation of the Svg tag, with all style attributes set</param>
+            <param name="parent">renderer of the parent tag</param>
+            <returns>Configured ISvgNodeRenderer</returns>
+        </member>
+        <member name="M:iText.Svg.Renderers.Factories.ISvgNodeRendererFactory.IsTagIgnored(iText.StyledXmlParser.Node.IElementNode)">
+            <summary>Checks whether the provided tag is an ignored tag of this factory or not.</summary>
+            <remarks>Checks whether the provided tag is an ignored tag of this factory or not. If ignored, the factory won't process this IElementNode into an ISvgNodeRenderer.
+                </remarks>
+            <param name="tag">the IElementNode</param>
+            <returns>true if ignored</returns>
+        </member>
+        <member name="T:iText.Svg.Renderers.Factories.ISvgNodeRendererMapper">
+            <summary>
+            Interface that will provide a mapping from SVG tag names to Renderers that
+            will be able to draw them.
+            </summary>
+            <remarks>
+            Interface that will provide a mapping from SVG tag names to Renderers that
+            will be able to draw them. It's used in
+            <see cref="T:iText.Svg.Renderers.Factories.DefaultSvgNodeRendererFactory"/>
+            to allow customizability in client code, and dependency injection in tests.
+            </remarks>
+        </member>
+        <member name="M:iText.Svg.Renderers.Factories.ISvgNodeRendererMapper.GetMapping">
+            <summary>Gets the map from tag names to Renderer classes.</summary>
+            <returns>
+            a
+            <see cref="!:System.Collections.IDictionary&lt;K, V&gt;"/>
+            with Strings as keys and {link @ISvgNodeRenderer}
+            implementations as values
+            </returns>
+        </member>
+        <member name="M:iText.Svg.Renderers.Factories.ISvgNodeRendererMapper.GetIgnoredTags">
+            <summary>Get the list of tags that do not map to any Renderer and should be ignored</summary>
+            <returns>a collection of ignored tags</returns>
+        </member>
+        <member name="T:iText.Svg.Renderers.Impl.AbstractBranchSvgNodeRenderer">
+            <summary>
+            Abstract class that will be the superclass for any element that can function
+            as a parent.
+            </summary>
+        </member>
+        <member name="M:iText.Svg.Renderers.Impl.AbstractBranchSvgNodeRenderer.DoDraw(iText.Svg.Renderers.SvgDrawContext)">
+            <summary>
+            Method that will set properties to be inherited by this branch renderer's
+            children and will iterate over all children in order to draw them.
+            </summary>
+            <param name="context">
+            the object that knows the place to draw this element and
+            maintains its state
+            </param>
+        </member>
+        <member name="M:iText.Svg.Renderers.Impl.AbstractBranchSvgNodeRenderer.ApplyViewBox(iText.Svg.Renderers.SvgDrawContext)">
+            <summary>Applies a transformation based on a viewBox for a given branch node.</summary>
+            <param name="context">current svg draw context</param>
+        </member>
+        <member name="M:iText.Svg.Renderers.Impl.AbstractBranchSvgNodeRenderer.ApplyViewport(iText.Svg.Renderers.SvgDrawContext)">
+            <summary>Applies a clipping operation based on the view port.</summary>
+            <param name="context">the svg draw context</param>
+        </member>
+        <member name="M:iText.Svg.Renderers.Impl.AbstractBranchSvgNodeRenderer.ProcessAspectRatio(iText.Svg.Renderers.SvgDrawContext,System.Single[])">
+            <summary>If present, process the preserveAspectRatio.</summary>
+            <param name="context">the svg draw context</param>
+            <param name="viewBoxValues">the four values depicting the viewbox [min-x min-y width height]</param>
+            <returns>the transformation based on the preserveAspectRatio value</returns>
+        </member>
+        <member name="M:iText.Svg.Renderers.Impl.AbstractBranchSvgNodeRenderer.CleanUp(iText.Svg.Renderers.SvgDrawContext)">
+            <summary>Cleans up the SvgDrawContext by removing the current viewport and by popping the current canvas.</summary>
+            <param name="context">context to clean</param>
+        </member>
+        <member name="T:iText.Svg.Renderers.Impl.AbstractSvgNodeRenderer">
+            <summary><inheritDoc/></summary>
+        </member>
+        <member name="M:iText.Svg.Renderers.Impl.AbstractSvgNodeRenderer.Draw(iText.Svg.Renderers.SvgDrawContext)">
+            <summary>
+            Applies transformations set to this object, if any, and delegates the drawing of this element and its children
+            to the
+            <see cref="M:iText.Svg.Renderers.Impl.AbstractSvgNodeRenderer.DoDraw(iText.Svg.Renderers.SvgDrawContext)">doDraw</see>
+            method.
+            </summary>
+            <param name="context">the object that knows the place to draw this element and maintains its state</param>
+        </member>
+        <member name="M:iText.Svg.Renderers.Impl.AbstractSvgNodeRenderer.PreDraw(iText.Svg.Renderers.SvgDrawContext)">
+            <summary>Operations to perform before drawing an element.</summary>
+            <remarks>
+            Operations to perform before drawing an element.
+            This includes setting stroke color and width, fill color.
+            </remarks>
+            <param name="context">the svg draw context</param>
+        </member>
+        <member name="M:iText.Svg.Renderers.Impl.AbstractSvgNodeRenderer.PostDraw(iText.Svg.Renderers.SvgDrawContext)">
+            <summary>Operations to be performed after drawing the element.</summary>
+            <remarks>
+            Operations to be performed after drawing the element.
+            This includes filling, stroking.
+            </remarks>
+            <param name="context">the svg draw context</param>
+        </member>
+        <member name="M:iText.Svg.Renderers.Impl.AbstractSvgNodeRenderer.DoDraw(iText.Svg.Renderers.SvgDrawContext)">
+            <summary>Draws this element to a canvas-like object maintained in the context.</summary>
+            <param name="context">the object that knows the place to draw this element and maintains its state</param>
+        </member>
+        <member name="T:iText.Svg.Renderers.Impl.CircleSvgNodeRenderer">
+            <summary>
+            <see cref="T:iText.Svg.Renderers.ISvgNodeRenderer"/>
+            implementation for the &lt;circle&gt; tag.
+            </summary>
+        </member>
+        <member name="T:iText.Svg.Renderers.Impl.EllipseSvgNodeRenderer">
+            <summary>
+            <see cref="T:iText.Svg.Renderers.ISvgNodeRenderer"/>
+            implementation for the &lt;circle&gt; tag.
+            </summary>
+        </member>
+        <member name="T:iText.Svg.Renderers.Impl.LineSvgNodeRenderer">
+            <summary>
+            <see cref="T:iText.Svg.Renderers.ISvgNodeRenderer"/>
+            implementation for the &lt;line&gt; tag.
+            </summary>
+        </member>
+        <member name="T:iText.Svg.Renderers.Impl.NoDrawOperationSvgNodeRenderer">
+            <summary>This renderer doesn't have any drawing operations.</summary>
+        </member>
+        <member name="T:iText.Svg.Renderers.Impl.PathSvgNodeRenderer">
+            <summary>
+            <see cref="T:iText.Svg.Renderers.ISvgNodeRenderer"/>
+            implementation for the &lt;path&gt; tag.
+            </summary>
+        </member>
+        <member name="T:iText.Svg.Renderers.Impl.PolygonSvgNodeRenderer">
+            <summary>
+            <see cref="T:iText.Svg.Renderers.ISvgNodeRenderer"/>
+            implementation for the &lt;polygon&gt; tag.
+            </summary>
+        </member>
+        <member name="M:iText.Svg.Renderers.Impl.PolygonSvgNodeRenderer.SetPoints(System.String)">
+            <summary>
+            Calls
+            <see cref="M:iText.Svg.Renderers.Impl.PolylineSvgNodeRenderer.SetPoints(System.String)"/>
+            to set
+            <see cref="F:iText.Svg.Renderers.Impl.PolylineSvgNodeRenderer.points"/>
+            Then calls
+            <see cref="M:iText.Svg.Renderers.Impl.PolygonSvgNodeRenderer.ConnectPoints"/>
+            to create a path between the first and last point if it doesn't already exist
+            </summary>
+        </member>
+        <member name="M:iText.Svg.Renderers.Impl.PolygonSvgNodeRenderer.ConnectPoints">
+            <summary>
+            Appends the starting point to the end of
+            <see cref="F:iText.Svg.Renderers.Impl.PolylineSvgNodeRenderer.points"/>
+            if it is not already there.
+            </summary>
+        </member>
+        <member name="T:iText.Svg.Renderers.Impl.PolylineSvgNodeRenderer">
+            <summary>
+            <see cref="T:iText.Svg.Renderers.ISvgNodeRenderer"/>
+            implementation for the &lt;polyline&gt; tag.
+            </summary>
+        </member>
+        <member name="F:iText.Svg.Renderers.Impl.PolylineSvgNodeRenderer.points">
+            <summary>
+            A List of
+            <see cref="T:iText.Kernel.Geom.Point"/>
+            objects representing the path to be drawn by the polyline tag
+            </summary>
+        </member>
+        <member name="M:iText.Svg.Renderers.Impl.PolylineSvgNodeRenderer.SetPoints(System.String)">
+            <summary>
+            Parses a string of space separated x,y pairs into individual
+            <see cref="T:iText.Kernel.Geom.Point"/>
+            objects and appends them to
+            <see cref="F:iText.Svg.Renderers.Impl.PolylineSvgNodeRenderer.points"/>
+            .
+            Throws an
+            <see cref="T:iText.Svg.Exceptions.SvgProcessingException"/>
+            if pointsAttribute does not have a valid list of numerical x,y pairs.
+            </summary>
+            <param name="pointsAttribute">A string of space separated x,y value pairs</param>
+        </member>
+        <member name="T:iText.Svg.Renderers.Impl.RectangleSvgNodeRenderer">
+            <summary>
+            <see cref="T:iText.Svg.Renderers.ISvgNodeRenderer"/>
+            implementation for the &lt;rect&gt; tag.
+            </summary>
+        </member>
+        <member name="M:iText.Svg.Renderers.Impl.RectangleSvgNodeRenderer.CheckRadius(System.Single,System.Single)">
+            <summary>
+            a radius must be positive, and cannot be more than half the distance in
+            the dimension it is for.
+            </summary>
+            <remarks>
+            a radius must be positive, and cannot be more than half the distance in
+            the dimension it is for.
+            e.g. rx &lt;= width / 2
+            </remarks>
+        </member>
+        <member name="M:iText.Svg.Renderers.Impl.RectangleSvgNodeRenderer.FindCircularRadius(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            In case of a circular radius, the calculation in
+            <see cref="M:iText.Svg.Renderers.Impl.RectangleSvgNodeRenderer.CheckRadius(System.Single,System.Single)"/>
+            isn't enough: the radius cannot be more than half of the <b>smallest</b>
+            dimension.
+            This method assumes that
+            <see cref="M:iText.Svg.Renderers.Impl.RectangleSvgNodeRenderer.CheckRadius(System.Single,System.Single)"/>
+            has already run, and it is
+            silently assumed (though not necessary for this method) that either
+            <paramref name="rx"/>
+            or
+            <paramref name="ry"/>
+            is zero.
+            </summary>
+        </member>
+        <member name="T:iText.Svg.Renderers.Impl.SvgSvgNodeRenderer">
+            <summary>
+            <see cref="T:iText.Svg.Renderers.ISvgNodeRenderer"/>
+            implementation for the &lt;svg&gt; tag.
+            </summary>
+        </member>
+        <member name="M:iText.Svg.Renderers.Impl.SvgSvgNodeRenderer.CalculateTransformation(iText.Svg.Renderers.SvgDrawContext)">
+            <summary>Calculate the transformation based on the context.</summary>
+            <remarks>
+            Calculate the transformation based on the context. If this renderer is the outermost renderer,
+            we need to flip on the vertical axis and translate the height of the viewport
+            </remarks>
+            <param name="context">the SVG draw context</param>
+            <returns>the transformation that needs to be applied to this renderer</returns>
+        </member>
+        <member name="M:iText.Svg.Renderers.Impl.SvgSvgNodeRenderer.CalculateViewPort(iText.Svg.Renderers.SvgDrawContext)">
+            <summary>Calculate the viewport based on the context.</summary>
+            <param name="context">the SVG draw context</param>
+            <returns>the viewport that applies to this renderer</returns>
+        </member>
+        <member name="T:iText.Svg.Renderers.Impl.TextSvgNodeRenderer">
+            <summary>Draws text to a PdfCanvas.</summary>
+            <remarks>
+            Draws text to a PdfCanvas.
+            Currently supported:
+            - only the default font of PDF
+            - x, y
+            </remarks>
+        </member>
+        <member name="T:iText.Svg.Renderers.ISvgNodeRenderer">
+            <summary>
+            Interface for SvgNodeRenderer, the renderer draws the SVG to its Pdf-canvas
+            passed in
+            <see cref="T:iText.Svg.Renderers.SvgDrawContext"/>
+            , applying styling
+            (CSS and attributes).
+            </summary>
+        </member>
+        <member name="M:iText.Svg.Renderers.ISvgNodeRenderer.SetParent(iText.Svg.Renderers.ISvgNodeRenderer)">
+            <summary>Sets the parent of this renderer.</summary>
+            <remarks>
+            Sets the parent of this renderer. The parent may be the source of
+            inherited properties and default values.
+            </remarks>
+            <param name="parent">the parent renderer</param>
+        </member>
+        <member name="M:iText.Svg.Renderers.ISvgNodeRenderer.GetParent">
+            <summary>Gets the parent of this renderer.</summary>
+            <remarks>
+            Gets the parent of this renderer. The parent may be the source of
+            inherited properties and default values.
+            </remarks>
+            <returns>the parent renderer; null in case of a root node</returns>
+        </member>
+        <member name="M:iText.Svg.Renderers.ISvgNodeRenderer.Draw(iText.Svg.Renderers.SvgDrawContext)">
+            <summary>Draws this element to a canvas-like object maintained in the context.</summary>
+            <param name="context">the object that knows the place to draw this element and maintains its state</param>
+        </member>
+        <member name="M:iText.Svg.Renderers.ISvgNodeRenderer.AddChild(iText.Svg.Renderers.ISvgNodeRenderer)">
+            <summary>Adds a renderer as the last element of the list of children.</summary>
+            <param name="child">any renderer</param>
+        </member>
+        <member name="M:iText.Svg.Renderers.ISvgNodeRenderer.GetChildren">
+            <summary>Gets all child renderers of this object.</summary>
+            <returns>the list of child renderers (in the order that they were added)</returns>
+        </member>
+        <member name="M:iText.Svg.Renderers.ISvgNodeRenderer.SetAttributesAndStyles(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Sets the map of XML node attributes and CSS style properties that this
+            renderer needs.
+            </summary>
+            <param name="attributesAndStyles">the mapping from key names to values</param>
+        </member>
+        <member name="M:iText.Svg.Renderers.ISvgNodeRenderer.GetAttribute(System.String)">
+            <summary>Retrieves the property value for a given key name.</summary>
+            <param name="key">the name of the property to search for</param>
+            <returns>
+            the value for this key, or
+            <see langword="null"/>
+            </returns>
+        </member>
+        <member name="T:iText.Svg.Renderers.Path.DefaultSvgPathShapeFactory">
+            <summary>
+            A factory for creating
+            <see cref="T:iText.Svg.Renderers.Path.IPathShape"/>
+            objects.
+            </summary>
+        </member>
+        <member name="T:iText.Svg.Renderers.Path.Impl.AbstractPathShape">
+            <summary>This class handles common behaviour in IPathShape implementations</summary>
+        </member>
+        <member name="T:iText.Svg.Renderers.Path.Impl.ClosePath">
+            <summary>Implements closePath(Z) attribute of SVG's path element</summary>
+        </member>
+        <member name="T:iText.Svg.Renderers.Path.Impl.CurveTo">
+            <summary>Implements curveTo(L) attribute of SVG's path element</summary>
+        </member>
+        <member name="T:iText.Svg.Renderers.Path.Impl.LineTo">
+            <summary>Implements lineTo(L) attribute of SVG's path element</summary>
+        </member>
+        <member name="T:iText.Svg.Renderers.Path.Impl.MoveTo">
+            <summary>Implements moveTo(M) attribute of SVG's path element</summary>
+        </member>
+        <member name="T:iText.Svg.Renderers.Path.Impl.PathShapeMapper">
+            <summary>
+            The implementation of
+            <see cref="T:iText.Svg.Renderers.Path.IPathShapeMapper"/>
+            that will be used by
+            sub classes of
+            <see cref="T:iText.Svg.Renderers.Impl.PathSvgNodeRenderer"/>
+            To map the path-data
+            instructions(moveto, lineto, corveto ...) to their respective implementations.
+            </summary>
+        </member>
+        <member name="T:iText.Svg.Renderers.Path.Impl.QuadraticCurveTo">
+            <summary>Implements curveTo(L) attribute of SVG's path element</summary>
+        </member>
+        <member name="M:iText.Svg.Renderers.Path.Impl.QuadraticCurveTo.Draw(iText.Kernel.Pdf.Canvas.PdfCanvas)">
+            <summary>Draws a quadratic Bézier curve from the current point to (x,y) using (x1,y1) as the control point
+                </summary>
+        </member>
+        <member name="T:iText.Svg.Renderers.Path.Impl.SmoothSCurveTo">
+            <summary>Implements shorthand/smooth curveTo (S) attribute of SVG's path element</summary>
+        </member>
+        <member name="M:iText.Svg.Renderers.Path.Impl.SmoothSCurveTo.Draw(iText.Kernel.Pdf.Canvas.PdfCanvas)">
+            <summary>Draws a quadratic Bézier curve from the current point to (x,y)</summary>
+        </member>
+        <member name="T:iText.Svg.Renderers.Path.IPathShapeMapper">
+            <summary>
+            Maps
+            <see cref="T:iText.Svg.Renderers.Path.IPathShape"/>
+            on their names.
+            </summary>
+        </member>
+        <member name="M:iText.Svg.Renderers.Path.IPathShapeMapper.GetMapping">
+            <summary>Provides a mapping of Path-data instructions' names to path shape classes.</summary>
+            <returns>
+            a
+            <see cref="!:System.Collections.IDictionary&lt;K, V&gt;"/>
+            with Strings as keys and {link @
+            <see cref="T:iText.Svg.Renderers.Path.IPathShape"/>
+            implementations as values
+            </returns>
+        </member>
+        <member name="T:iText.Svg.Renderers.SvgDrawContext">
+            <summary>
+            The SvgDrawContext keeps a stack of
+            <see cref="T:iText.Kernel.Pdf.Canvas.PdfCanvas"/>
+            instances, which
+            represent all levels of XObjects that are added to the root canvas.
+            </summary>
+        </member>
+        <member name="M:iText.Svg.Renderers.SvgDrawContext.GetCurrentCanvas">
+            <summary>Retrieves the current top of the stack, without modifying the stack.</summary>
+            <returns>the current canvas that can be used for drawing operations.</returns>
+        </member>
+        <member name="M:iText.Svg.Renderers.SvgDrawContext.PopCanvas">
+            <summary>
+            Retrieves the current top of the stack, thereby taking the current item
+            off the stack.
+            </summary>
+            <returns>the current canvas that can be used for drawing operations.</returns>
+        </member>
+        <member name="M:iText.Svg.Renderers.SvgDrawContext.PushCanvas(iText.Kernel.Pdf.Canvas.PdfCanvas)">
+            <summary>
+            Adds a
+            <see cref="T:iText.Kernel.Pdf.Canvas.PdfCanvas"/>
+            to the stack (by definition its top), for use in
+            drawing operations.
+            </summary>
+            <param name="canvas">the new top of the stack</param>
+        </member>
+        <member name="M:iText.Svg.Renderers.SvgDrawContext.Size">
+            <summary>
+            Get the current size of the stack, signifying the nesting level of the
+            XObjects.
+            </summary>
+            <returns>the current size of the stack.</returns>
+        </member>
+        <member name="M:iText.Svg.Renderers.SvgDrawContext.AddViewPort(iText.Kernel.Geom.Rectangle)">
+            <summary>Adds a viewbox to the context.</summary>
+            <param name="viewPort">rectangle representing the current viewbox</param>
+        </member>
+        <member name="M:iText.Svg.Renderers.SvgDrawContext.GetCurrentViewPort">
+            <summary>Get the current viewbox.</summary>
+            <returns>the viewbox as it is currently set</returns>
+        </member>
+        <member name="M:iText.Svg.Renderers.SvgDrawContext.RemoveCurrentViewPort">
+            <summary>Remove the currently set view box.</summary>
+        </member>
+        <member name="M:iText.Svg.Renderers.SvgDrawContext.AddNamedObject(System.String,System.Object)">
+            <summary>Adds a named object to the draw context.</summary>
+            <remarks>Adds a named object to the draw context. These objects can then be referenced from a different tag.
+                </remarks>
+            <param name="name">name of the object</param>
+            <param name="namedObject">object to be referenced</param>
+        </member>
+        <member name="M:iText.Svg.Renderers.SvgDrawContext.GetNamedObject(System.String)">
+            <summary>Get a named object based on its name.</summary>
+            <remarks>Get a named object based on its name. If the name isn't listed, this method will return null.</remarks>
+            <param name="name">name of the object you want to reference</param>
+            <returns>the referenced object</returns>
+        </member>
+        <member name="T:iText.Svg.SvgAttributeConstants">
+            <summary>
+            A class containing constant values signifying attribute and CSS-style
+            property names in SVG XML.
+            </summary>
+        </member>
+        <member name="T:iText.Svg.SvgTagConstants">
+            <summary>Class containing constants to represent all the SVG-tags.</summary>
+        </member>
+        <member name="M:iText.Svg.Utils.DrawUtils.Arc(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,iText.Kernel.Pdf.Canvas.PdfCanvas)">
+            <summary>
+            Draw an arc on the passed canvas,
+            enclosed by the rectangle for which two opposite corners are specified.
+            </summary>
+            <remarks>
+            Draw an arc on the passed canvas,
+            enclosed by the rectangle for which two opposite corners are specified.
+            The arc starts at the passed starting angle and extends to the starting angle + extent
+            </remarks>
+            <param name="x1">corner-coordinate of the enclosing rectangle, first corner</param>
+            <param name="y1">corner-coordinate of the enclosing rectangle, first corner</param>
+            <param name="x2">corner-coordinate of the enclosing rectangle, second corner</param>
+            <param name="y2">corner-coordinate of the enclosing rectangle, second corner</param>
+            <param name="startAng">starting angle in degrees</param>
+            <param name="extent">extent of the arc</param>
+            <param name="cv">canvas to paint on</param>
+        </member>
+        <member name="T:iText.Svg.Utils.SvgCssUtils">
+            <summary>Utility class that facilitates parsing values from CSS.</summary>
+        </member>
+        <member name="M:iText.Svg.Utils.SvgCssUtils.SplitValueList(System.String)">
+            <summary>Splits a given String into a list of substrings.</summary>
+            <remarks>
+            Splits a given String into a list of substrings.
+            The string is split up by commas and whitespace characters (\t, \n, \r, \f).
+            </remarks>
+            <param name="value">the string to be split</param>
+            <returns>a list containing the split strings, an empty list if the value is null or empty</returns>
+        </member>
+        <member name="T:iText.Svg.Utils.TransformUtils">
+            <summary>
+            Utility class responsible for converting Strings containing transformation declarations
+            into AffineTransform objects.
+            </summary>
+            <remarks>
+            Utility class responsible for converting Strings containing transformation declarations
+            into AffineTransform objects.
+            This class only supports the transformations as described in the SVG specification:
+            - matrix
+            - rotate
+            - scale
+            - skewX
+            - skewY
+            - translate
+            </remarks>
+        </member>
+        <member name="F:iText.Svg.Utils.TransformUtils.MATRIX">
+            <summary>Keyword for matrix transformations.</summary>
+            <remarks>
+            Keyword for matrix transformations. Accepts 6 values.
+            matrix(0 1 2 3 4 5)
+            </remarks>
+        </member>
+        <member name="F:iText.Svg.Utils.TransformUtils.ROTATE">
+            <summary>Keyword for rotation transformation.</summary>
+            <remarks>
+            Keyword for rotation transformation. Accepts either 1 or 3 values.
+            In the case of 1 value, x and y are assumed to be the origin of the user space.
+            rotate(angle x y)
+            rotate(angle)
+            </remarks>
+        </member>
+        <member name="F:iText.Svg.Utils.TransformUtils.SCALE">
+            <summary>Keyword for scale transformation.</summary>
+            <remarks>
+            Keyword for scale transformation. Accepts either 1 or 2 values.
+            In the case of 1 value, the second value is assumed to be the same as the first one.
+            scale(x y)
+            scale(x)
+            </remarks>
+        </member>
+        <member name="F:iText.Svg.Utils.TransformUtils.SKEWX">
+            <summary>Keyword for skewX transformation.</summary>
+            <remarks>
+            Keyword for skewX transformation. Accepts 1 value.
+            skewX(angle)
+            </remarks>
+        </member>
+        <member name="F:iText.Svg.Utils.TransformUtils.SKEWY">
+            <summary>Keyword for skewY transformation.</summary>
+            <remarks>
+            Keyword for skewY transformation. Accepts 1 value.
+            skewY(angle)
+            </remarks>
+        </member>
+        <member name="F:iText.Svg.Utils.TransformUtils.TRANSLATE">
+            <summary>Keyword for translate transformation.</summary>
+            <remarks>
+            Keyword for translate transformation. Accepts either 1 or 2 values.
+            In the case of 1 value, the y value is assumed to be 0.
+            translate(x y)
+            translate(x)
+            </remarks>
+        </member>
+        <member name="M:iText.Svg.Utils.TransformUtils.ParseTransform(System.String)">
+            <summary>Converts a string containing a transform declaration into an AffineTransform object.</summary>
+            <remarks>
+            Converts a string containing a transform declaration into an AffineTransform object.
+            This class only supports the transformations as described in the SVG specification:
+            - matrix
+            - translate
+            - skewx
+            - skewy
+            - rotate
+            - scale
+            </remarks>
+            <param name="transform">value to be parsed</param>
+            <returns>the AffineTransform object</returns>
+        </member>
+        <member name="M:iText.Svg.Utils.TransformUtils.SplitString(System.String)">
+            <summary>A transformation attribute can encompass multiple transformation operation (e.g.</summary>
+            <remarks>
+            A transformation attribute can encompass multiple transformation operation (e.g. "translate(10,20) scale(30,40)".
+            This method splits the original transformation string into multiple strings so that they can be handled separately.
+            </remarks>
+            <param name="transform">the transformation value</param>
+            <returns>a list containing strings describing a single transformation operation</returns>
+        </member>
+        <member name="M:iText.Svg.Utils.TransformUtils.TransformationStringToMatrix(System.String)">
+            <summary>This method decides which transformation operation the given transformation strings maps onto.</summary>
+            <param name="transformation">string containing a transformation operation</param>
+            <returns>the mapped AffineTransform object</returns>
+        </member>
+        <member name="M:iText.Svg.Utils.TransformUtils.CreateSkewYTransformation(System.Collections.Generic.IList{System.String})">
+            <summary>Creates a skewY transformation.</summary>
+            <param name="values">values of the transformation</param>
+            <returns>AffineTransform for the skew operation</returns>
+        </member>
+        <member name="M:iText.Svg.Utils.TransformUtils.CreateSkewXTransformation(System.Collections.Generic.IList{System.String})">
+            <summary>Creates a skewX transformation.</summary>
+            <param name="values">values of the transformation</param>
+            <returns>AffineTransform for the skew operation</returns>
+        </member>
+        <member name="M:iText.Svg.Utils.TransformUtils.CreateRotationTransformation(System.Collections.Generic.IList{System.String})">
+            <summary>Creates a rotate transformation.</summary>
+            <param name="values">values of the transformation</param>
+            <returns>AffineTransform for the rotate operation</returns>
+        </member>
+        <member name="M:iText.Svg.Utils.TransformUtils.CreateScaleTransformation(System.Collections.Generic.IList{System.String})">
+            <summary>Creates a scale transformation.</summary>
+            <param name="values">values of the transformation</param>
+            <returns>AffineTransform for the scale operation</returns>
+        </member>
+        <member name="M:iText.Svg.Utils.TransformUtils.CreateTranslateTransformation(System.Collections.Generic.IList{System.String})">
+            <summary>Creates a translate transformation.</summary>
+            <param name="values">values of the transformation</param>
+            <returns>AffineTransform for the translate operation</returns>
+        </member>
+        <member name="M:iText.Svg.Utils.TransformUtils.CreateMatrixTransformation(System.Collections.Generic.IList{System.String})">
+            <summary>Creates a matrix transformation.</summary>
+            <param name="values">values of the transformation</param>
+            <returns>AffineTransform for the matrix keyword</returns>
+        </member>
+        <member name="M:iText.Svg.Utils.TransformUtils.GetNameFromString(System.String)">
+            <summary>This method extracts the transformation name given a transformation.</summary>
+            <param name="transformation">the transformation</param>
+            <returns>the name of the transformation</returns>
+        </member>
+        <member name="M:iText.Svg.Utils.TransformUtils.GetValuesFromTransformationString(System.String)">
+            <summary>This method extracts the values from a transformation.</summary>
+            <param name="transformation">the transformation</param>
+            <returns>values of the transformation</returns>
+        </member>
+    </members>
+</doc>

@@ -1,8 +1,8 @@
 client_secret.json
 itextKeyLicense/
 /obj
-/bin/Release/
+/bin/Release/*
 /bin/Debug/DoorDash-Orders/
 /bin/Debug/Error-Logs/
 /bin/Debug/GrubHub-Orders/
-/bin/Debug/License/*
+
