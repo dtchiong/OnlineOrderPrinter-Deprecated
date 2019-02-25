@@ -197,7 +197,7 @@ namespace OnlineOrderPrinter.src {
 
         /* Updates the Item List in the UI to match the currently selected row */
         private void UpdateItemListUI(OrderContainer orderCon) {
-            dataGridViewToppings.DataSource = orderCon.Order.ItemList;
+            dataGridView4.DataSource = orderCon.Order.ItemList;
             //dataGridViewItemList.DataSource = orderCon.Order.ItemList;
 
         }
@@ -226,7 +226,7 @@ namespace OnlineOrderPrinter.src {
         private void UpdateItemDetailsUI() {
 
             //Get the currectly selected row's item
-            DataGridViewSelectedRowCollection selectedRows = dataGridViewToppings.SelectedRows;
+            DataGridViewSelectedRowCollection selectedRows = dataGridView4.SelectedRows;
             Item item = (Item)selectedRows[0].DataBoundItem;
 
             textBoxQty.Text = item.Quantity.ToString();

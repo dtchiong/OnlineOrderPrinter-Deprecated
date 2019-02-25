@@ -321,6 +321,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\DataSources\Item.datasource" />
     <None Include="Properties\DataSources\OnlineOrderPrinter.StringWrapper.datasource" />
   </ItemGroup>
   <ItemGroup>
