@@ -24,7 +24,7 @@ namespace OnlineOrderPrinter.src {
 
         public UserControlOrder() {
             InitializeComponent();
-            CreateDgvForOrders(); //creating dgv at runtime instead of designer to show example
+            CreateDgvForOrders(); //creating dgv at runtime instead of designer to have an example to show
         }
 
         /* Initialize dgv columns and properties
@@ -87,7 +87,8 @@ namespace OnlineOrderPrinter.src {
             }
         }
 
-        /* Gets the order that is currently selected, if any, and then prints it, and sets the Print Status 
+        /* Called by form1's actual button handle function
+         * Gets the order that is currently selected, if any, and then prints it, and sets the Print Status 
          * To protect from spam, we disable the button on click, and then only enable the button after the 
          * print status is set. Maybe use a timer that starts afer print status is set.
          */
@@ -116,7 +117,8 @@ namespace OnlineOrderPrinter.src {
             mainForm.SetPrintButtonColor("#4A5157");
         }
 
-        /* Encapsulates an order with an OrderContainer, then add it to the order list */
+        /* Called by form1's wrapper function
+         * Encapsulates an order with an OrderContainer, then add it to the order list */
         public void DoAddOrderToList(Order order, bool isAdjustedOrder) {
             OrderContainer orderCon = new OrderContainer(order);
             if (isAdjustedOrder) orderCon.Status = "Active(Adjusted)";
@@ -151,7 +153,8 @@ namespace OnlineOrderPrinter.src {
             }
         }
 
-        /* Given the messageId, change the associated order's status to Ignore */
+        /* Called by form1's wrapper function
+         * Given the messageId, change the associated order's status to Ignore */
         public void DoChangeStatusToAdjusted(string messageId) {
             OrderContainer orderCon;
             if (OrderTableByMsgId.TryGetValue(messageId, out orderCon)) {
@@ -162,7 +165,8 @@ namespace OnlineOrderPrinter.src {
             }
         }
 
-        /* Given the orderNum, set the associated orders' status to Cancelled */
+        /* Called by form1's wrapper function
+         * Given the orderNum, set the associated orders' status to Cancelled */
         public void DoSetOrderToCancelled(string orderNum) {
             List<OrderContainer> orderConList;
             bool cancelledOrder = false;
@@ -222,7 +226,7 @@ namespace OnlineOrderPrinter.src {
             messageIdTextBox.Text = order.MessageId;
         }
 
-        /* Updates the Item List UI to match the currently selected item in the Item List UI*/
+        /* Updates the Item List UI to match the currently selected item in the Item List UI */
         private void UpdateItemDetailsUI() {
 
             //Get the currectly selected row's item
