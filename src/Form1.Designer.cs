@@ -292,9 +292,9 @@
             this.buttonOrdersTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonOrdersTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonOrdersTab.UseVisualStyleBackColor = true;
-            this.buttonOrdersTab.Click += new System.EventHandler(this.handleSideBarButtonClick);
-            this.buttonOrdersTab.MouseEnter += new System.EventHandler(this.button_MouseEnter);
-            this.buttonOrdersTab.MouseLeave += new System.EventHandler(this.button_MouseLeave);
+            this.buttonOrdersTab.Click += new System.EventHandler(this.HandleSideBarButtonClick);
+            this.buttonOrdersTab.MouseEnter += new System.EventHandler(this.PrintButton_MouseEnter);
+            this.buttonOrdersTab.MouseLeave += new System.EventHandler(this.PrintButton_MouseLeave);
             // 
             // buttonAboutTab
             // 
@@ -318,9 +318,9 @@
             this.buttonAboutTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonAboutTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonAboutTab.UseVisualStyleBackColor = true;
-            this.buttonAboutTab.Click += new System.EventHandler(this.handleSideBarButtonClick);
-            this.buttonAboutTab.MouseEnter += new System.EventHandler(this.button_MouseEnter);
-            this.buttonAboutTab.MouseLeave += new System.EventHandler(this.button_MouseLeave);
+            this.buttonAboutTab.Click += new System.EventHandler(this.HandleSideBarButtonClick);
+            this.buttonAboutTab.MouseEnter += new System.EventHandler(this.PrintButton_MouseEnter);
+            this.buttonAboutTab.MouseLeave += new System.EventHandler(this.PrintButton_MouseLeave);
             // 
             // buttonAnalyticsTab
             // 
@@ -344,9 +344,9 @@
             this.buttonAnalyticsTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonAnalyticsTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonAnalyticsTab.UseVisualStyleBackColor = true;
-            this.buttonAnalyticsTab.Click += new System.EventHandler(this.handleSideBarButtonClick);
-            this.buttonAnalyticsTab.MouseEnter += new System.EventHandler(this.button_MouseEnter);
-            this.buttonAnalyticsTab.MouseLeave += new System.EventHandler(this.button_MouseLeave);
+            this.buttonAnalyticsTab.Click += new System.EventHandler(this.HandleSideBarButtonClick);
+            this.buttonAnalyticsTab.MouseEnter += new System.EventHandler(this.PrintButton_MouseEnter);
+            this.buttonAnalyticsTab.MouseLeave += new System.EventHandler(this.PrintButton_MouseLeave);
             // 
             // buttonMenusTab
             // 
@@ -370,9 +370,9 @@
             this.buttonMenusTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonMenusTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonMenusTab.UseVisualStyleBackColor = true;
-            this.buttonMenusTab.Click += new System.EventHandler(this.handleSideBarButtonClick);
-            this.buttonMenusTab.MouseEnter += new System.EventHandler(this.button_MouseEnter);
-            this.buttonMenusTab.MouseLeave += new System.EventHandler(this.button_MouseLeave);
+            this.buttonMenusTab.Click += new System.EventHandler(this.HandleSideBarButtonClick);
+            this.buttonMenusTab.MouseEnter += new System.EventHandler(this.PrintButton_MouseEnter);
+            this.buttonMenusTab.MouseLeave += new System.EventHandler(this.PrintButton_MouseLeave);
             // 
             // buttonActionsTab
             // 
@@ -396,9 +396,9 @@
             this.buttonActionsTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonActionsTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonActionsTab.UseVisualStyleBackColor = true;
-            this.buttonActionsTab.Click += new System.EventHandler(this.handleSideBarButtonClick);
-            this.buttonActionsTab.MouseEnter += new System.EventHandler(this.button_MouseEnter);
-            this.buttonActionsTab.MouseLeave += new System.EventHandler(this.button_MouseLeave);
+            this.buttonActionsTab.Click += new System.EventHandler(this.HandleSideBarButtonClick);
+            this.buttonActionsTab.MouseEnter += new System.EventHandler(this.PrintButton_MouseEnter);
+            this.buttonActionsTab.MouseLeave += new System.EventHandler(this.PrintButton_MouseLeave);
             // 
             // buttonSettingsTab
             // 
@@ -423,9 +423,9 @@
             this.buttonSettingsTab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonSettingsTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonSettingsTab.UseVisualStyleBackColor = true;
-            this.buttonSettingsTab.Click += new System.EventHandler(this.handleSideBarButtonClick);
-            this.buttonSettingsTab.MouseEnter += new System.EventHandler(this.button_MouseEnter);
-            this.buttonSettingsTab.MouseLeave += new System.EventHandler(this.button_MouseLeave);
+            this.buttonSettingsTab.Click += new System.EventHandler(this.HandleSideBarButtonClick);
+            this.buttonSettingsTab.MouseEnter += new System.EventHandler(this.PrintButton_MouseEnter);
+            this.buttonSettingsTab.MouseLeave += new System.EventHandler(this.PrintButton_MouseLeave);
             // 
             // printbutton
             // 
@@ -446,9 +446,9 @@
             this.printbutton.TabStop = false;
             this.printbutton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.printbutton.UseVisualStyleBackColor = false;
-            this.printbutton.Click += new System.EventHandler(this.print_Click);
-            this.printbutton.MouseEnter += new System.EventHandler(this.button_MouseEnter);
-            this.printbutton.MouseLeave += new System.EventHandler(this.button_MouseLeave);
+            this.printbutton.Click += new System.EventHandler(this.HandlePrintButton_Click);
+            this.printbutton.MouseEnter += new System.EventHandler(this.PrintButton_MouseEnter);
+            this.printbutton.MouseLeave += new System.EventHandler(this.PrintButton_MouseLeave);
             // 
             // splitContainer2
             // 
@@ -529,7 +529,6 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.ShowIcon = false;
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

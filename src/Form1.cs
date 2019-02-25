@@ -21,6 +21,11 @@ namespace OnlineOrderPrinter {
             LoadSideBarIcons();
         }
 
+        /* Only start checking and parsing emails when the form is shown */
+        private void Form1_Shown(object sender, EventArgs e) {
+            Program.InitApp();
+        }
+
         /* This solves the weird bug with degrading quality of images in the imagelist 
          * over compiles by loading all the images from the resources at runtime
          */
@@ -47,8 +52,30 @@ namespace OnlineOrderPrinter {
          * the data required to print is only accessible within the userControl
          * while the printButton is located in the form rather than the userControl
          */
-        private void print_Click(object sender, EventArgs e) {
+        private void HandlePrintButton_Click(object sender, EventArgs e) {
             userControlOrder1.HandlePrintButtonClick();
+        }
+
+        private void PrintButton_MouseEnter(object sender, EventArgs e) {
+            Cursor = Cursors.Hand;
+        }
+
+        private void PrintButton_MouseLeave(object sender, EventArgs e) {
+            Cursor = Cursors.Default;
+        }
+
+        /* Calls the userControlOrder's method to change 
+         * the enabled status of the print button 
+         */
+        public void SetPrintButtonEnabledStatus(bool status) {
+            printbutton.Enabled = status;
+        }
+
+        /* Calls the userControlOrder's method to change
+         * the color of the print button
+         */
+        public void SetPrintButtonColor(string hexColor) {
+            printbutton.BackColor = ColorTranslator.FromHtml(hexColor);
         }
 
         /* Calls the userControlOrder's method to add the other to the list */
@@ -70,20 +97,12 @@ namespace OnlineOrderPrinter {
             userControlOrder1.DoSetOrderToCancelled(orderNum);
         }
 
-        private void Form1_Load(object sender, EventArgs e) {         
-        }
-
-        /* Only start checking and parsing emails when the form is shown */
-        private void Form1_Shown(object sender, EventArgs e) {
-            Program.InitApp();
-        }
-
         /* Handles the click for each of the side bar buttons. 
          * Currently switches tabs to show a different control, but later 
          * we will show the Usercontrol corresponding to the button pressed, 
          * and set the color highlighting appropriately for each button
          */
-        private void handleSideBarButtonClick(object sender, EventArgs e) {
+        private void HandleSideBarButtonClick(object sender, EventArgs e) {
 
             //Gets the current button's tag and returns if it's already the selected page
             string pressedTag = (string)((Button)sender).Tag;
@@ -134,28 +153,6 @@ namespace OnlineOrderPrinter {
                     printbutton.Enabled = false;
                     break;
             }
-        }
-
-        private void button_MouseEnter(object sender, EventArgs e) {
-            Cursor = Cursors.Hand;
-        }
-
-        private void button_MouseLeave(object sender, EventArgs e) {
-            Cursor = Cursors.Default;
-        }
-
-        /* Calles the userControlOrder's method to change 
-         * the enabled status of the print button 
-         */
-        public void SetPrintButtonEnabledStatus(bool status) {
-            printbutton.Enabled = status;
-        }
-
-        /* Calls the userControlOrder's method to change
-         * the color of the print button
-         */
-        public void SetPrintButtonColor(string hexColor) {
-            printbutton.BackColor = ColorTranslator.FromHtml(hexColor);
         }
     }
 
