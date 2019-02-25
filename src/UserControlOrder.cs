@@ -43,6 +43,7 @@ namespace OnlineOrderPrinter.src {
             dataGridViewOrderList.Columns.Add(NewTextBoxCol("TimeReceived", "Time Received"));
             dataGridViewOrderList.Columns.Add(NewTextBoxCol("PickUpTime", "Pick-Up Time"));
             dataGridViewOrderList.Columns.Add(NewTextBoxCol("Status", "Order Status"));
+            dataGridViewOrderList.Columns.Add(NewTextBoxCol("ConfirmStatus", "Confirm Status"));
             dataGridViewOrderList.Columns.Add(NewTextBoxCol("PrintStatus", "Print Status"));
 
             dataGridViewOrderList.Columns["Service"].FillWeight = 80;

@@ -66,14 +66,14 @@ namespace OnlineOrderPrinter {
             Cursor = Cursors.Default;
         }
 
-        /* Calls the userControlOrder's method to change 
+        /* Called by the userControlOrder to change 
          * the enabled status of the print button 
          */
         public void SetPrintButtonEnabledStatus(bool status) {
             printbutton.Enabled = status;
         }
 
-        /* Calls the userControlOrder's method to change
+        /* Called by the userControlOrder to change
          * the color of the print button
          */
         public void SetPrintButtonColor(string hexColor) {
@@ -109,9 +109,7 @@ namespace OnlineOrderPrinter {
             //Gets the current button's tag and returns if it's already the selected page
             string pressedTag = (string)((Button)sender).Tag;
 
-            if (pressedTag == CurrentControlName) {
-                return;
-            }
+            if (pressedTag == CurrentControlName) return;
 
             List<Button> buttons = new List<Button>() {
                 buttonOrdersTab,

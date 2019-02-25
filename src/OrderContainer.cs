@@ -16,7 +16,7 @@ namespace OnlineOrderPrinter {
             OrderArray = PrinterUtility.OrderToArray(Order);
             Status = "Active";
             PrintStatus = "Not Printed"; //maybe use Enum for print status later?
-            PrintCount = 0;
+            ConfirmStatus = "Not Confirmed";
         }
 
         public Order Order { get; set; }
@@ -71,7 +71,7 @@ namespace OnlineOrderPrinter {
 
         public string PrintStatus { get; set; }
 
-        public int PrintCount { get; set; }
+        public string ConfirmStatus { get; set; }
     }
 
     /* A work around for binding a List<string> to a dataGridView.

@@ -139,7 +139,8 @@ namespace OnlineOrderPrinter {
         }
 
         /* Full sync grabs the latest messages and stores the historyId. 
-         * Still need to save messageIds to list though 
+         * TODO: Still need to parse messageIds messages and show in the list and 
+         * make the last ~10 orders be shown in the list
          */
         private static void FullSyncAppToEmail() {
 
@@ -217,7 +218,8 @@ namespace OnlineOrderPrinter {
             }
         }
 
-        /* Checks if the email needs to be parsed for Door Dash or GrubHub,
+        /* TODO: Refactor to smaller functions
+         * Checks if the email needs to be parsed for Door Dash or GrubHub,
          * and saves the order to file for reference
          */
         private static Order HandleMessage(string messageId) {

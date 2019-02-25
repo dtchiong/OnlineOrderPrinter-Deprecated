@@ -5,10 +5,6 @@ namespace OnlineOrderPrinter {
     
     /* Stores all meta information about an order including the customer information and order items */
     public class Order {
-
-        private const int Sixteen = 16; //used to format printing with padding
-        private const int Twelve  = 12;
-
         public string Service        { get; set; } //Grubhub or DoorDash
         public string OrderNumber    { get; set; }
 
@@ -46,6 +42,9 @@ namespace OnlineOrderPrinter {
 
         //Prints all information of the order
         public void PrintOrder() {
+            const int Sixteen = 16; //used to format printing with padding
+            const int Twelve  = 12;
+
             PrintField("Service", this.Service, Sixteen);
             PrintField("Order Number", this.OrderNumber, Sixteen);
             PrintField("Delivery Method", this.DeliveryMethod, Sixteen);
