@@ -32,24 +32,24 @@ namespace OnlineOrderPrinter.src {
          * columns before setting datasource, or else columns get duplicated for some reason.
          */
         private void CreateDgvForOrders() {
-            dataGridView1.AutoGenerateColumns = false;
+            dataGridViewOrderList.AutoGenerateColumns = false;
             orderListBindingSrc.DataSource = OrderList;
-            dataGridView1.DataSource = orderListBindingSrc;
+            dataGridViewOrderList.DataSource = orderListBindingSrc;
             orderListBindingSrc.Sort = "TimeReceivedTicks DESC"; //set to sort DESC on the Ticks property
 
-            dataGridView1.Columns.Add(NewTextBoxCol("Service", "Service"));
-            dataGridView1.Columns.Add(NewTextBoxCol("Name", "Name"));
-            dataGridView1.Columns.Add(NewTextBoxCol("ItemCount", "Order Size"));
-            dataGridView1.Columns.Add(NewTextBoxCol("TimeReceived", "Time Received"));
-            dataGridView1.Columns.Add(NewTextBoxCol("PickUpTime", "Pick-Up Time"));
-            dataGridView1.Columns.Add(NewTextBoxCol("Status", "Order Status"));
-            dataGridView1.Columns.Add(NewTextBoxCol("PrintStatus", "Print Status"));
+            dataGridViewOrderList.Columns.Add(NewTextBoxCol("Service", "Service"));
+            dataGridViewOrderList.Columns.Add(NewTextBoxCol("Name", "Name"));
+            dataGridViewOrderList.Columns.Add(NewTextBoxCol("ItemCount", "Order Size"));
+            dataGridViewOrderList.Columns.Add(NewTextBoxCol("TimeReceived", "Time Received"));
+            dataGridViewOrderList.Columns.Add(NewTextBoxCol("PickUpTime", "Pick-Up Time"));
+            dataGridViewOrderList.Columns.Add(NewTextBoxCol("Status", "Order Status"));
+            dataGridViewOrderList.Columns.Add(NewTextBoxCol("PrintStatus", "Print Status"));
 
-            dataGridView1.Columns["Service"].FillWeight = 80;
-            dataGridView1.Columns["Order Size"].FillWeight = 80;
+            dataGridViewOrderList.Columns["Service"].FillWeight = 80;
+            dataGridViewOrderList.Columns["Order Size"].FillWeight = 80;
 
-            dataGridView1.Columns.Add(NewTextBoxCol("TimeReceivedTicks", "TIMERECEIVEDTICKS"));
-            dataGridView1.Columns["TIMERECEIVEDTICKS"].Visible = false;
+            dataGridViewOrderList.Columns.Add(NewTextBoxCol("TimeReceivedTicks", "TIMERECEIVEDTICKS"));
+            dataGridViewOrderList.Columns["TIMERECEIVEDTICKS"].Visible = false;
         }
 
         /* Returns a new DataGridViewColumn given the databinding propertyname, and the header name */
@@ -61,18 +61,18 @@ namespace OnlineOrderPrinter.src {
         }
 
         /* Sort new rows by the TimeReceieved field of the Orders */
-        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
+        private void DataGridViewOrderList_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
             //OrderContainer orderCon = new OrderContainer(new Order());
             //PropertyDescriptor pd = TypeDescriptor.GetProperties(orderCon)["TimeReceivedTicks"];
-            dataGridView1.Sort(dataGridView1.Columns["TimeReceivedTicks"], ListSortDirection.Descending);
+            dataGridViewOrderList.Sort(dataGridViewOrderList.Columns["TimeReceivedTicks"], ListSortDirection.Descending);
         }
 
         /* Changes the backcolor when the is visited. Doesn't follow the row yet and only highlights
          * the row's location, so it's not sort proof
          */
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e) {
+        private void DataGridViewOrderList_SelectionChanged(object sender, EventArgs e) {
 
-            DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
+            DataGridViewSelectedRowCollection selectedRows = dataGridViewOrderList.SelectedRows;
             if (selectedRows.Count > 0) {
                 //selectedRows[0].DefaultCellStyle.BackColor = Color.BlanchedAlmond;
                 UpdateOrderUI();
@@ -80,8 +80,8 @@ namespace OnlineOrderPrinter.src {
         }
 
         /* Updates the item details to match the currently selected item if the row changes */
-        private void dataGridView2_SelectionChanged(object sender, EventArgs e) {
-            DataGridViewSelectedRowCollection selectedRows = dataGridView4.SelectedRows;
+        private void DataGridViewItemList_SelectionChanged(object sender, EventArgs e) {
+            DataGridViewSelectedRowCollection selectedRows = dataGridViewItemList.SelectedRows;
             if (selectedRows.Count > 0) {
                 UpdateItemDetailsUI();
             }
@@ -96,7 +96,7 @@ namespace OnlineOrderPrinter.src {
             mainForm.SetPrintButtonEnabledStatus(false);
             mainForm.SetPrintButtonColor("#90979B");
 
-            DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
+            DataGridViewSelectedRowCollection selectedRows = dataGridViewOrderList.SelectedRows;
 
             if (selectedRows.Count > 0) {
                 OrderContainer orderCon = (OrderContainer)selectedRows[0].DataBoundItem;
@@ -108,7 +108,7 @@ namespace OnlineOrderPrinter.src {
                 }//else error messages are handled in the print utility
 
                 //To force the form to update the print status value. 
-                //dataGridView1.Refresh() maybe useful if using a "Print All" button
+                //dataGridViewOrderList.Refresh() maybe useful if using a "Print All" button
                 orderListBindingSrc.ResetCurrentItem();
             }
 
@@ -158,7 +158,7 @@ namespace OnlineOrderPrinter.src {
                 orderCon.Status = "Ignore(See adjusted)";
                 //refresh the view so that the status in the UI is updated, 
                 //would be more efficient if I had the current binded object to reset, instead of the entire view
-                dataGridView1.Refresh();
+                dataGridViewOrderList.Refresh();
             }
         }
 
@@ -170,7 +170,7 @@ namespace OnlineOrderPrinter.src {
                 foreach (var orderCon in orderConList) {
                     cancelledOrder = true;
                     orderCon.Status = "Cancelled";
-                    dataGridView1.Refresh();
+                    dataGridViewOrderList.Refresh();
                 }
             }
             //this prevents from playing sound if no orders in the list were actually cancelled
@@ -187,7 +187,7 @@ namespace OnlineOrderPrinter.src {
          * updating the Order Details and Item List
          */
         private void UpdateOrderUI() {
-            DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
+            DataGridViewSelectedRowCollection selectedRows = dataGridViewOrderList.SelectedRows;
             OrderContainer selectedRow = (OrderContainer)selectedRows[0].DataBoundItem;
 
             UpdateItemListUI(selectedRow);
@@ -197,7 +197,7 @@ namespace OnlineOrderPrinter.src {
 
         /* Updates the Item List in the UI to match the currently selected row */
         private void UpdateItemListUI(OrderContainer orderCon) {
-            dataGridView4.DataSource = orderCon.Order.ItemList;
+            dataGridViewItemList.DataSource = orderCon.Order.ItemList;
             //dataGridViewItemList.DataSource = orderCon.Order.ItemList;
 
         }
@@ -226,7 +226,7 @@ namespace OnlineOrderPrinter.src {
         private void UpdateItemDetailsUI() {
 
             //Get the currectly selected row's item
-            DataGridViewSelectedRowCollection selectedRows = dataGridView4.SelectedRows;
+            DataGridViewSelectedRowCollection selectedRows = dataGridViewItemList.SelectedRows;
             Item item = (Item)selectedRows[0].DataBoundItem;
 
             textBoxQty.Text = item.Quantity.ToString();
