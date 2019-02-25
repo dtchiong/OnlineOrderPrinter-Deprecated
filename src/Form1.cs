@@ -14,11 +14,13 @@ namespace OnlineOrderPrinter {
 
     public partial class Form1 : Form {
 
-        public static string CurrentForm = "Last Orders"; //there's a Form.ActiveForm
+        public static string CurrentFormLabel = "Last Orders"; //there's a Form.ActiveForm
+        public UserControl CurrentShownForm = null; //Maintain this variable to more easily hide the shown form
 
         public Form1() {
             InitializeComponent();
             LoadSideBarIcons();
+            CurrentShownForm = userControlOrder1; //Can only be initialized here for some reason
         }
 
         /* Only start checking and parsing emails when the form is shown */
@@ -107,7 +109,7 @@ namespace OnlineOrderPrinter {
             //Gets the current button's tag and returns if it's already the selected page
             string pressedTag = (string)((Button)sender).Tag;
        
-            if (pressedTag == CurrentForm) {
+            if (pressedTag == CurrentFormLabel) {
                 return;
             }
 
@@ -129,27 +131,47 @@ namespace OnlineOrderPrinter {
                     button.BackColor = ColorTranslator.FromHtml("#2A2729");
                 }else {
                     button.BackColor = ColorTranslator.FromHtml("#171516");
-                    CurrentForm = currentTag;
+                    CurrentFormLabel = currentTag;
                     labelTitle.Text = currentTag;
 
-                    switchUserControl(CurrentForm);
+                    switchUserControl(CurrentFormLabel);
                 }
             }
         }
 
         /* TODO: Refactor to switch views using userControls later */ 
-        private void switchUserControl(string CurrentForm) {
-            switch(CurrentForm) {
+        private void switchUserControl(string currentFormLabel) {
+            CurrentShownForm.Hide();
+            Debug.WriteLine("currentFormlabel: " + currentFormLabel);
+            switch(currentFormLabel) {
                 case "Last Orders":
-                    userControlOrder1.Show();
+                    CurrentShownForm = userControlOrder1;
+                    CurrentShownForm.Show();
                     printbutton.Enabled = true;
                     break;
                 case "Analytics":
+                    CurrentShownForm = userControlAnalytics1;
+                    CurrentShownForm.Show();
+                    printbutton.Enabled = false;
+                    break;
                 case "Menus":
+                    CurrentShownForm = userControlMenus1;
+                    CurrentShownForm.Show();
+                    printbutton.Enabled = false;
+                    break;
                 case "Actions":
+                    CurrentShownForm = userControlActions1;
+                    CurrentShownForm.Show();
+                    printbutton.Enabled = false;
+                    break;
                 case "Settings":
+                    CurrentShownForm = userControlSettings1;
+                    CurrentShownForm.Show();
+                    printbutton.Enabled = false;
+                    break;
                 case "About":
-                    userControlOrder1.Hide();
+                    CurrentShownForm = userControlAbout1;
+                    CurrentShownForm.Show();
                     printbutton.Enabled = false;
                     break;
             }

@@ -51,6 +51,11 @@
             this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.stringValueBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.itemBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.userControlAbout1 = new OnlineOrderPrinter.src.UserControlAbout();
+            this.userControlSettings1 = new OnlineOrderPrinter.src.UserControlSettings();
+            this.userControlActions1 = new OnlineOrderPrinter.src.UserControlActions();
+            this.userControlMenus1 = new OnlineOrderPrinter.src.UserControlMenus();
+            this.userControlAnalytics1 = new OnlineOrderPrinter.src.UserControlAnalytics();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -467,6 +472,11 @@
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(194)))), ((int)(((byte)(194)))));
             this.splitContainer2.Panel2.Controls.Add(this.userControlOrder1);
+            this.splitContainer2.Panel2.Controls.Add(this.userControlAbout1);
+            this.splitContainer2.Panel2.Controls.Add(this.userControlSettings1);
+            this.splitContainer2.Panel2.Controls.Add(this.userControlAnalytics1);
+            this.splitContainer2.Panel2.Controls.Add(this.userControlMenus1);
+            this.splitContainer2.Panel2.Controls.Add(this.userControlActions1);
             this.splitContainer2.Size = new System.Drawing.Size(845, 626);
             this.splitContainer2.SplitterDistance = 45;
             this.splitContainer2.TabIndex = 0;
@@ -520,6 +530,46 @@
             // itemBindingSource1
             // 
             this.itemBindingSource1.DataSource = typeof(OnlineOrderPrinter.Item);
+            // 
+            // userControlAbout1
+            // 
+            this.userControlAbout1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControlAbout1.Location = new System.Drawing.Point(0, 0);
+            this.userControlAbout1.Name = "userControlAbout1";
+            this.userControlAbout1.Size = new System.Drawing.Size(845, 577);
+            this.userControlAbout1.TabIndex = 2;
+            // 
+            // userControlSettings1
+            // 
+            this.userControlSettings1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControlSettings1.Location = new System.Drawing.Point(0, 0);
+            this.userControlSettings1.Name = "userControlSettings1";
+            this.userControlSettings1.Size = new System.Drawing.Size(845, 577);
+            this.userControlSettings1.TabIndex = 3;
+            // 
+            // userControlActions1
+            // 
+            this.userControlActions1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControlActions1.Location = new System.Drawing.Point(0, 0);
+            this.userControlActions1.Name = "userControlActions1";
+            this.userControlActions1.Size = new System.Drawing.Size(845, 577);
+            this.userControlActions1.TabIndex = 4;
+            // 
+            // userControlMenus1
+            // 
+            this.userControlMenus1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControlMenus1.Location = new System.Drawing.Point(0, 0);
+            this.userControlMenus1.Name = "userControlMenus1";
+            this.userControlMenus1.Size = new System.Drawing.Size(845, 577);
+            this.userControlMenus1.TabIndex = 5;
+            // 
+            // userControlAnalytics1
+            // 
+            this.userControlAnalytics1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControlAnalytics1.Location = new System.Drawing.Point(0, 0);
+            this.userControlAnalytics1.Name = "userControlAnalytics1";
+            this.userControlAnalytics1.Size = new System.Drawing.Size(845, 577);
+            this.userControlAnalytics1.TabIndex = 6;
             // 
             // Form1
             // 
@@ -589,5 +639,10 @@
         private System.Windows.Forms.Button buttonOrdersTab;
         private System.Windows.Forms.Panel panelBarTopSeperator;
         private src.UserControlOrder userControlOrder1;
+        private src.UserControlMenus userControlMenus1;
+        private src.UserControlActions userControlActions1;
+        private src.UserControlAbout userControlAbout1;
+        private src.UserControlSettings userControlSettings1;
+        private src.UserControlAnalytics userControlAnalytics1;
     }
 }

@@ -304,11 +304,41 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="src\SortableBindingList.cs" />
+    <Compile Include="src\UserControlAbout.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\UserControlAbout.Designer.cs">
+      <DependentUpon>UserControlAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\UserControlActions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\UserControlActions.Designer.cs">
+      <DependentUpon>UserControlActions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\UserControlAnalytics.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\UserControlAnalytics.Designer.cs">
+      <DependentUpon>UserControlAnalytics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\UserControlMenus.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\UserControlMenus.Designer.cs">
+      <DependentUpon>UserControlMenus.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\UserControlOrder.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\UserControlOrder.Designer.cs">
       <DependentUpon>UserControlOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\UserControlSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\UserControlSettings.Designer.cs">
+      <DependentUpon>UserControlSettings.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -333,8 +363,23 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="src\UserControlAbout.resx">
+      <DependentUpon>UserControlAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\UserControlActions.resx">
+      <DependentUpon>UserControlActions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\UserControlAnalytics.resx">
+      <DependentUpon>UserControlAnalytics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\UserControlMenus.resx">
+      <DependentUpon>UserControlMenus.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\UserControlOrder.resx">
       <DependentUpon>UserControlOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\UserControlSettings.resx">
+      <DependentUpon>UserControlSettings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
