@@ -303,6 +303,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="src\Requests.cs" />
     <Compile Include="src\SortableBindingList.cs" />
     <Compile Include="src\UserControlAbout.cs">
       <SubType>UserControl</SubType>

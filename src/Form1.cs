@@ -82,7 +82,7 @@ namespace OnlineOrderPrinter {
 
         /* Calls the userControlOrder's method to add the other to the list */
         public void AddOrderToList(Order order, bool isAdjustedOrder) {
-            userControlOrder1.DoAddOrderToList(order, isAdjustedOrder);
+            userControlOrder1.DoAddOrderToListAndConfirmOrder(order, isAdjustedOrder);
         }
 
         /* Given the messageId, calls the userControlOrder to

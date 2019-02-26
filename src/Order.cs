@@ -7,7 +7,6 @@ namespace OnlineOrderPrinter {
     public class Order {
         public string Service        { get; set; } //Grubhub or DoorDash
         public string OrderNumber    { get; set; }
-
         public string CustomerName   { get; set; }
         public string ContactNumber  { get; set; }
         public string DeliverAddress { get; set; }
@@ -18,10 +17,10 @@ namespace OnlineOrderPrinter {
         public int UniqueItemCount   { get; set; } //The number of unique items in the order -excluding quantity
         public int NumOfDrinks       { get; set; } //The numer of drinks in the order
         public int NumOfSnacks       { get; set; } //The number of snacks in the order
-
         public List<Item> ItemList   { get; set; }
 
-        public string MessageId      { get; set; } //The messageID in the gmail message
+        public string MessageId      { get; set; } //The messageID of the corresponding gmail message
+        public string ConfirmURL     { get; set; } //The URL used to confirm the order programatically using a request
 
         //Constructor
         public Order() {
@@ -119,7 +118,7 @@ namespace OnlineOrderPrinter {
         public string MilkSubsitution { get; set; } // null, Wholemilk, or Soymilk
         public string SpecialInstructions { get; set; }
         public string Price           { get; set; }
-        public string LabelName       { get; set; } // (doordash) specific name for who the drink is for
+        public string LabelName       { get; set; } // (doordash) specific name for who the item is for
 
         public List<string> AddOnList { get; set; }
 

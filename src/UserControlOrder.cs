@@ -119,8 +119,10 @@ namespace OnlineOrderPrinter.src {
         }
 
         /* Called by form1's wrapper function
-         * Encapsulates an order with an OrderContainer, then add it to the order list */
-        public void DoAddOrderToList(Order order, bool isAdjustedOrder) {
+         * Encapsulates an order with an OrderContainer, adds the order to the order list.
+         * Then confirms the order
+         */
+        public void DoAddOrderToListAndConfirmOrder(Order order, bool isAdjustedOrder) {
             OrderContainer orderCon = new OrderContainer(order);
             if (isAdjustedOrder) orderCon.Status = "Active(Adjusted)";
 
@@ -260,6 +262,19 @@ namespace OnlineOrderPrinter.src {
 
             dataGridViewAdjustments.DataSource = adjustmentList;
             dataGridViewToppings.DataSource = addOnList;
+        }
+
+        public void Test() {
+            var cb = new Requests.CallBackFunction(TestFunc);
+            Requests.DoRequest("OMEGALUL", cb);
+        }
+
+        public static void TestFunc(string s) {
+           Debug.WriteLine("s: "+s);
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            Requests.ConfirmGrubHubOrder();
         }
     }
 }
