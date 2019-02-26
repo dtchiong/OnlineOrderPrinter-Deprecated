@@ -314,6 +314,11 @@ namespace OnlineOrderPrinter {
         /* We set the confirm url for the order by looking for the node after the comment "<!-- CONFIRMATION LINK -->
          * Then we extract the first <a> node from the earlier node, and finally extract the href's value from the <a> node
          * If parsing fails, we set the confirmURL to an error message.
+         * 
+         * After visiting the parsed GET url, it doesn't seem like it's the actual URL to confirm the order because
+         * looking at the network requests, there's another POST request made with the base path
+         * "https://api-order-processing-gtm.grubhub.com/order/email/confirm/" which looks to be the actual one.
+         * So we have append the extracted location to the above URL.
          */
         public static void ParseConfirmURL(Order order, HtmlDocument htmlDoc) {
             try {
@@ -325,10 +330,20 @@ namespace OnlineOrderPrinter {
                 Debug.WriteLine(e.Message);
                 order.ConfirmURL = "Failed to parse";
             }
-
         }
 
-        //Node printing function for debugging
+        /* Given the parsedURL from the GrubHub email, we extract the location
+         * and append it to the actual URL for confirming GrubHub orders
+         */
+        public string GetCorrectConfirmURL(string parsedURL) {
+            //[0]: "https, [1]: "", [2]: "orderemails.grubhub.com", [3]: {part1}, [4]: {part2}
+            string[] splitURL = parsedURL.Split('/');
+            string path = string.Concat(splitURL[3], "/", splitURL[4]); //reform the parts we need
+            string apiURL = "https://api-order-processing-gtm.grubhub.com/order/email/confirm/" + path;
+            return apiURL;
+        }
+
+        /* Node printing for debugging */
         public static void PrintNode(string title, HtmlNode node) {
             if (node != null)
                 Debug.WriteLine(title + ": " + node.InnerHtml);
