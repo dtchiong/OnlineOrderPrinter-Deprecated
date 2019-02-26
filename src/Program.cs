@@ -57,7 +57,7 @@ namespace OnlineOrderPrinter {
         * 164b501111cebfe1
         * 164aebfdb8b7a59a
         */
-        static string testMessageId = "1691c8b4a6b606d3"; //1691c8b4a6b606d3
+        static string testMessageId = "169284372254346e"; //1691c8b4a6b606d3
         static string userId = "t4milpitasonline@gmail.com";
 
         static TimerT timer;
@@ -320,6 +320,11 @@ namespace OnlineOrderPrinter {
                 DoorDashParser doorDashParser = new DoorDashParser();
                 List<string> lines = doorDashParser.ExtractTextFromPDF(filePath, messageId);
                 Order order = doorDashParser.ParseOrder(lines, dateTime, messageId);
+
+                string s = emailResponse.Payload.Parts[0].Parts[1].Body.Data;
+                byte[] data2 = FromBase64ForUrlString(emailResponse.Payload.Parts[0].Parts[1].Body.Data);
+                string decodedBody = Encoding.UTF8.GetString(data2);
+                doorDashParser.ParseConfirmURL(order, decodedBody);
 
                 if (DebugPrint) order.PrintOrder();
                 return order;

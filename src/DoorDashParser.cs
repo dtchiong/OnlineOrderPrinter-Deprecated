@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 
+using HtmlAgilityPack;
 using iText.Kernel.Pdf.Canvas.Parser;
 using iText.Kernel.Pdf;
 using iText.License;
@@ -56,6 +57,25 @@ namespace OnlineOrderPrinter {
                 Debug.WriteLine(e);
             }
             */
+        }
+
+        /* Parses the confirmURL for DoorDash orders which is
+         * located inside the href of the given <a> node. If parsing fails,
+         * then we set the confirmURL to an error message
+         */
+        public void ParseConfirmURL(Order order, string html) {
+            try {
+                var htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                HtmlNode aNode = htmlDoc.DocumentNode.SelectSingleNode("a");
+                string confirmURL = aNode.Attributes["href"].Value;
+                order.ConfirmURL = confirmURL;
+            } catch(Exception e) {
+                Debug.WriteLine(e.Message);
+                order.ConfirmURL = "Failed to parse";
+            }
+
         }
 
         /* Extracts the text from the pdf and returns it as a List of strings */
