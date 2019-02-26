@@ -138,8 +138,8 @@ namespace OnlineOrderPrinter.src {
 
             if (order.Service == "GrubHub") InsertToOrderNumTable(orderCon); //We insert the entry into the table with orderNum as the key
 
-            //Update the Item List in the GUI to match the selected row 
-            UpdateOrderUI();
+            ConfirmOrder(orderCon); //Automatically confirm the order
+            UpdateOrderUI(); //Update the Item List in the GUI to match the selected row 
             PlaySound(Program.NotificationSoundPath); //play the nofication sound
         }
 

@@ -29,17 +29,16 @@ namespace OnlineOrderPrinter {
          * but rather the redirected POST request, so we have to change the base URL
          */
         public static async Task ConfirmGrubHubOrder(OrderContainer orderCon, ConfirmOrderCallBack cb) {
-            string data = "filler"; //required as the 2nd param for clientAsync, doesn't seem to do anything
-            HttpContent content = new StringContent(data);
+            //[0]: "https, [1]: "", [2]: "orderemails.grubhub.com", [3]: {part1}, [4]: {part2}
+            string[] splitURL = orderCon.Order.ConfirmURL.Split('/');
+            string path = splitURL[3] + "/" + splitURL[4]; //reform the parts we need
+            string apiURL = "https://api-order-processing-gtm.grubhub.com/order/email/confirm/" + path;
 
-            HttpResponseMessage res = await client.PostAsync(
-                "https://api-order-processing-gtm.grubhub.com/order/email/confirm/a5aea472-18ad-4bb8-9233-7d9e6f8f93bc/8b73fb4e-1953-3ae5-85e0-8539dd84609b", content);
-        
+            //The 2nd StringContent param is required for PostAsync, it doesn't seem to do anything though
+            HttpResponseMessage res = await client.PostAsync(apiURL, new StringContent(""));
 
             cb(orderCon, res.StatusCode);
             return;
         }
-
-
     }
 }
