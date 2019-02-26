@@ -59,25 +59,6 @@ namespace OnlineOrderPrinter {
             */
         }
 
-        /* Parses the confirmURL for DoorDash orders which is
-         * located inside the href of the given <a> node. If parsing fails,
-         * then we set the confirmURL to an error message
-         */
-        public void ParseConfirmURL(Order order, string html) {
-            try {
-                var htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(html);
-
-                HtmlNode aNode = htmlDoc.DocumentNode.SelectSingleNode("a");
-                string confirmURL = aNode.Attributes["href"].Value;
-                order.ConfirmURL = confirmURL;
-            } catch(Exception e) {
-                Debug.WriteLine(e.Message);
-                order.ConfirmURL = "Failed to parse";
-            }
-
-        }
-
         /* Extracts the text from the pdf and returns it as a List of strings */
         public List<string> ExtractTextFromPDF(string pathToPdf, string messageId) {
 
@@ -117,6 +98,40 @@ namespace OnlineOrderPrinter {
             if (Program.DebugBuild) PrintToFile(lines, messageId);
 
             return lines;
+        }
+
+        /* Parses the confirmURL for DoorDash orders which is
+         * located inside the href of the given <a> node. If parsing fails,
+         * then we set the confirmURL to an error message
+         * 
+         * The parsedURL doesn't seem to be the actual URL to confirm the order
+         * because when going to it, we get http code 301, which means that the url
+         * is used for redirection. So we add "www." after "https://" which seems
+         * to be the actual confirm URL.
+         */
+        public void ParseConfirmURL(Order order, string html) {
+            try {
+                var htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                HtmlNode aNode = htmlDoc.DocumentNode.SelectSingleNode("a");
+                string parsedConfirmURL = aNode.Attributes["href"].Value;
+
+                order.ConfirmURL = GetCorrectConfirmURL(parsedConfirmURL);
+            } catch (Exception e) {
+                Debug.WriteLine(e.Message);
+                order.ConfirmURL = "Failed to parse";
+            }
+
+        }
+
+        /* Given the parsedURL found in the DoorDash email, we set the actual URL 
+         * to confirm the order by adding "www." between https:// and the next part
+         */
+        private string GetCorrectConfirmURL(string parsedUrl) {
+            int startIdx = "https://".Length;
+            string apiURL = string.Concat("https://www.", parsedUrl.Substring(startIdx));
+            return apiURL;
         }
 
         /* Parses the information from the lines and returns the information in a Order object */
@@ -526,13 +541,9 @@ namespace OnlineOrderPrinter {
             StreamWriter file = new StreamWriter(path);
 
             for (int i=0; i<lines.Count; i++) { 
-
                 file.WriteLine( ("LINE " + i.ToString().PadLeft(3) + "  " + lines[i]) );
             }
-
             file.Close();
         }
-
     }
-
 }
