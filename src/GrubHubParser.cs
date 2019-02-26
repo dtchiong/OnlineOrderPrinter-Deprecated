@@ -313,12 +313,19 @@ namespace OnlineOrderPrinter {
 
         /* We set the confirm url for the order by looking for the node after the comment "<!-- CONFIRMATION LINK -->
          * Then we extract the first <a> node from the earlier node, and finally extract the href's value from the <a> node
+         * If parsing fails, we set the confirmURL to an error message.
          */
         public static void ParseConfirmURL(Order order, HtmlDocument htmlDoc) {
-            HtmlNode tableNode = htmlDoc.DocumentNode.SelectSingleNode("//comment()[contains(., 'CONFIRMATION')]/following-sibling::table");
-            HtmlNode aNode = tableNode.Descendants("a").First();
-            string confirmURL = aNode.Attributes["href"].Value;
-            order.ConfirmURL = confirmURL;
+            try {
+                HtmlNode tableNode = htmlDoc.DocumentNode.SelectSingleNode("//comment()[contains(., 'CONFIRMATION')]/following-sibling::table");
+                HtmlNode aNode = tableNode.Descendants("a").First();
+                string confirmURL = aNode.Attributes["href"].Value;
+                order.ConfirmURL = confirmURL;
+            } catch (Exception e) {
+                Debug.WriteLine(e.Message);
+                order.ConfirmURL = "Failed to parse";
+            }
+
         }
 
         //Node printing function for debugging

@@ -14,13 +14,14 @@ namespace OnlineOrderPrinter {
         //declares the type of type of function ConfirmOrderCallBack()
         public delegate void ConfirmOrderCallBack(OrderContainer orderCon, HttpStatusCode code);
 
-
         /* Makes a GET request to confirm the DoorDash order, then calls the callback function with
          * the orderContainer and the retrieved HttpStatus code to update the UI.
          * It seems like the request to confirm the order is the GET request provided in DoorDash's PDF.
          */
         public static async Task ConfirmDoorDashOrder(OrderContainer orderCon, ConfirmOrderCallBack cb) {
-            string apiURL = orderCon.Order.ConfirmURL;
+            int startIdx = "https://".Length;
+            string apiURL = string.Concat("https://www.", orderCon.Order.ConfirmURL.Substring(startIdx));
+
             HttpResponseMessage res = await client.GetAsync(apiURL);
             cb(orderCon, res.StatusCode);
             return;
