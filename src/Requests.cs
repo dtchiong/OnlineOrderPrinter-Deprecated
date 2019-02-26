@@ -20,6 +20,9 @@ namespace OnlineOrderPrinter {
          * It seems like the request to confirm the order is the GET request provided in DoorDash's PDF.
          */
         public static async Task ConfirmDoorDashOrder(OrderContainer orderCon, ConfirmOrderCallBack cb) {
+            string apiURL = orderCon.Order.ConfirmURL;
+            HttpResponseMessage res = await client.GetAsync(apiURL);
+            cb(orderCon, res.StatusCode);
             return;
         }
         
