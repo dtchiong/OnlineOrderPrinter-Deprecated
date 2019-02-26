@@ -57,14 +57,14 @@ namespace OnlineOrderPrinter {
         * 164b501111cebfe1
         * 164aebfdb8b7a59a
         */
-        static string testMessageId = "1691c8b4a6b606d3";
+        static string testMessageId = "1691c8b4a6b606d3"; //1691c8b4a6b606d3
         static string userId = "t4milpitasonline@gmail.com";
 
         static TimerT timer;
 
         public static bool DebugBuild = false;  //turns on saving DoorDash extracted pdf lines to file
         public static bool DebugPrint = false; //turns on debug statements
-        private static bool debugMailMode = false; //if true, only parses the email with testMessageId, and doesn't poll for new emails
+        private static bool debugMailMode = true; //if true, only parses the email with testMessageId, and doesn't poll for new emails
 
         public static Form1 form1;
 

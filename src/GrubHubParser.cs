@@ -153,6 +153,7 @@ namespace OnlineOrderPrinter {
 
             DoorDashParser.SetDrinkAndSnackCount(order);
             DoorDashParser.SetOrderSize(order); //Need to move function to be general
+            ParseConfirmURL(order, htmlDoc);
             return order;
         }
 
@@ -308,6 +309,16 @@ namespace OnlineOrderPrinter {
         public static void ParsePrice(HtmlNode node, Item item) {
             node.InnerHtml = node.InnerHtml.Trim(); //trim the white space
             item.Price = node.InnerHtml;
+        }
+
+        /* We set the confirm url for the order by looking for the node after the comment "<!-- CONFIRMATION LINK -->
+         * Then we extract the first <a> node from the earlier node, and finally extract the href's value from the <a> node
+         */
+        public static void ParseConfirmURL(Order order, HtmlDocument htmlDoc) {
+            HtmlNode tableNode = htmlDoc.DocumentNode.SelectSingleNode("//comment()[contains(., 'CONFIRMATION')]/following-sibling::table");
+            HtmlNode aNode = tableNode.Descendants("a").First();
+            string confirmURL = aNode.Attributes["href"].Value;
+            order.ConfirmURL = confirmURL;
         }
 
         //Node printing function for debugging
