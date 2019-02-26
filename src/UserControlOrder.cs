@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Media;
+using System.Net;
 
 namespace OnlineOrderPrinter.src {
 
@@ -264,17 +265,37 @@ namespace OnlineOrderPrinter.src {
             dataGridViewToppings.DataSource = addOnList;
         }
 
-        public void Test() {
-            var cb = new Requests.CallBackFunction(TestFunc);
-            Requests.DoRequest("OMEGALUL", cb);
+        /* Initializes the callback function and calls the appropriate
+         * function to confirm the order
+         */
+        private void ConfirmOrder(OrderContainer orderCon) {
+            var cb = new Requests.ConfirmOrderCallBack(UpdateConfirmStatusUI);
+            switch(orderCon.Service) {
+                case "DoorDash":
+                    Requests.ConfirmDoorDashOrder(orderCon, cb);
+                    break;
+                case "GrubHub":
+                    Requests.ConfirmGrubHubOrder(orderCon, cb);
+                    break;
+                default:
+                    Debug.WriteLine("Unhandled confirm for service: " + orderCon.Service);
+                    break;
+            }
         }
 
-        public static void TestFunc(string s) {
-           Debug.WriteLine("s: "+s);
-        }
-
-        private void button1_Click(object sender, EventArgs e) {
-            Requests.ConfirmGrubHubOrder();
+        /* The callback used by Request's Confirm order functions to update
+         * the orderCon's confirm status in the associated row
+         */
+        private void UpdateConfirmStatusUI(OrderContainer orderCon, HttpStatusCode code) {
+            switch(code) {
+                case HttpStatusCode.OK:
+                    orderCon.ConfirmStatus = "Confirmed";
+                    break;
+                default:
+                    orderCon.ConfirmStatus = "Failed";
+                    break;
+            }
+            dataGridViewOrderList.Refresh();
         }
     }
 }

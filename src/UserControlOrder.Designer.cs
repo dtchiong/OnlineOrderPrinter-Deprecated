@@ -58,7 +58,6 @@
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewToppings)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -601,7 +600,6 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.button1);
             this.splitContainer1.Panel1.Controls.Add(this.dataGridViewOrderList);
             // 
             // splitContainer1.Panel2
@@ -610,16 +608,6 @@
             this.splitContainer1.Size = new System.Drawing.Size(831, 562);
             this.splitContainer1.SplitterDistance = 400;
             this.splitContainer1.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(665, 342);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // UserControlOrder
             // 
@@ -685,6 +673,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource bindingSource1;
-        private System.Windows.Forms.Button button1;
     }
 }
