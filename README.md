@@ -1,17 +1,18 @@
 # OnlineOrderPrinter
 An app that allows easy viewing and printing of online orders
 
-![Sample screenshot](https://i.imgur.com/L7r7O5t.png)
+![Sample screenshot](https://i.imgur.com/Y1YNBgW.png)
 
 ### About
 This application streamlines the process of preparing online orders at T4 Milpitas by enabling workers to view orders from different services such as DoorDash and GrubHub, in a single interface, and allows these orders to be easily printed to labels with a click of a button. Therefore, not only does this solution eliminate the possibility of human errors from workers having to maintain mental overhead from constantly switching between reading the order in the email that can span multiple pages, and entering the order in the POS machine, but also, this app significantly improves the efficiency of the store by allowing workers to immediately begin preparing the order.
 
-### Functionality
+### Features
 * See new orders appear at the top of the list with standard information such as name and pickup-time
 * View exact details about the order such as contact number, and specific items in the order in the lower panel
+* Have orders automatically confirmed as they are received
 * Be alerted for new orders in real time through sound notifications
-* Print orders to labels from a thermal printer
-* More features such as self menu updates and items sold analytics coming later
+* Print orders with 1-click to physical labels with a thermal printer
+* More features such in-app menu item editing to match online names and items sold analytics coming later
 * Supports DoorDash and GrubHub for T4 Milpitas
 
 ### Prerequisites

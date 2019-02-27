@@ -64,7 +64,7 @@ namespace OnlineOrderPrinter {
 
         public static bool DebugBuild = false;  //turns on saving DoorDash extracted pdf lines to file
         public static bool DebugPrint = false; //turns on debug statements
-        private static bool debugMailMode = true; //if true, only parses the email with testMessageId, and doesn't poll for new emails
+        private static bool debugMailMode = false; //if true, only parses the email with testMessageId, and doesn't poll for new emails
 
         public static Form1 form1;
 
