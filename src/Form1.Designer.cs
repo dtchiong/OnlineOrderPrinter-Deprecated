@@ -48,14 +48,14 @@
             this.tableLayoutPanelTitleBar = new System.Windows.Forms.TableLayoutPanel();
             this.labelTitle = new System.Windows.Forms.Label();
             this.userControlOrder1 = new OnlineOrderPrinter.src.UserControlOrder();
+            this.userControlAbout1 = new OnlineOrderPrinter.src.UserControlAbout();
+            this.userControlSettings1 = new OnlineOrderPrinter.src.UserControlSettings();
+            this.userControlAnalytics1 = new OnlineOrderPrinter.src.UserControlAnalytics();
+            this.userControlMenus1 = new OnlineOrderPrinter.src.UserControlMenus();
+            this.userControlActions1 = new OnlineOrderPrinter.src.UserControlActions();
             this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.stringValueBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.itemBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.userControlAbout1 = new OnlineOrderPrinter.src.UserControlAbout();
-            this.userControlSettings1 = new OnlineOrderPrinter.src.UserControlSettings();
-            this.userControlActions1 = new OnlineOrderPrinter.src.UserControlActions();
-            this.userControlMenus1 = new OnlineOrderPrinter.src.UserControlMenus();
-            this.userControlAnalytics1 = new OnlineOrderPrinter.src.UserControlAnalytics();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -519,6 +519,57 @@
             this.userControlOrder1.Size = new System.Drawing.Size(845, 577);
             this.userControlOrder1.TabIndex = 1;
             // 
+            // userControlAbout1
+            // 
+            this.userControlAbout1.BackColor = System.Drawing.Color.White;
+            this.userControlAbout1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControlAbout1.Location = new System.Drawing.Point(0, 0);
+            this.userControlAbout1.Name = "userControlAbout1";
+            this.userControlAbout1.Size = new System.Drawing.Size(845, 577);
+            this.userControlAbout1.TabIndex = 2;
+            // 
+            // userControlSettings1
+            // 
+            this.userControlSettings1.BackColor = System.Drawing.Color.White;
+            this.userControlSettings1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControlSettings1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userControlSettings1.Location = new System.Drawing.Point(0, 0);
+            this.userControlSettings1.Margin = new System.Windows.Forms.Padding(7);
+            this.userControlSettings1.Name = "userControlSettings1";
+            this.userControlSettings1.Size = new System.Drawing.Size(845, 577);
+            this.userControlSettings1.TabIndex = 3;
+            // 
+            // userControlAnalytics1
+            // 
+            this.userControlAnalytics1.BackColor = System.Drawing.Color.White;
+            this.userControlAnalytics1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControlAnalytics1.Location = new System.Drawing.Point(0, 0);
+            this.userControlAnalytics1.Name = "userControlAnalytics1";
+            this.userControlAnalytics1.Size = new System.Drawing.Size(845, 577);
+            this.userControlAnalytics1.TabIndex = 6;
+            // 
+            // userControlMenus1
+            // 
+            this.userControlMenus1.BackColor = System.Drawing.Color.White;
+            this.userControlMenus1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControlMenus1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userControlMenus1.Location = new System.Drawing.Point(0, 0);
+            this.userControlMenus1.Margin = new System.Windows.Forms.Padding(7);
+            this.userControlMenus1.Name = "userControlMenus1";
+            this.userControlMenus1.Size = new System.Drawing.Size(845, 577);
+            this.userControlMenus1.TabIndex = 5;
+            // 
+            // userControlActions1
+            // 
+            this.userControlActions1.BackColor = System.Drawing.Color.White;
+            this.userControlActions1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControlActions1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userControlActions1.Location = new System.Drawing.Point(0, 0);
+            this.userControlActions1.Margin = new System.Windows.Forms.Padding(7);
+            this.userControlActions1.Name = "userControlActions1";
+            this.userControlActions1.Size = new System.Drawing.Size(845, 577);
+            this.userControlActions1.TabIndex = 4;
+            // 
             // itemBindingSource
             // 
             this.itemBindingSource.DataSource = typeof(OnlineOrderPrinter.Item);
@@ -531,46 +582,6 @@
             // 
             this.itemBindingSource1.DataSource = typeof(OnlineOrderPrinter.Item);
             // 
-            // userControlAbout1
-            // 
-            this.userControlAbout1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControlAbout1.Location = new System.Drawing.Point(0, 0);
-            this.userControlAbout1.Name = "userControlAbout1";
-            this.userControlAbout1.Size = new System.Drawing.Size(845, 577);
-            this.userControlAbout1.TabIndex = 2;
-            // 
-            // userControlSettings1
-            // 
-            this.userControlSettings1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControlSettings1.Location = new System.Drawing.Point(0, 0);
-            this.userControlSettings1.Name = "userControlSettings1";
-            this.userControlSettings1.Size = new System.Drawing.Size(845, 577);
-            this.userControlSettings1.TabIndex = 3;
-            // 
-            // userControlActions1
-            // 
-            this.userControlActions1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControlActions1.Location = new System.Drawing.Point(0, 0);
-            this.userControlActions1.Name = "userControlActions1";
-            this.userControlActions1.Size = new System.Drawing.Size(845, 577);
-            this.userControlActions1.TabIndex = 4;
-            // 
-            // userControlMenus1
-            // 
-            this.userControlMenus1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControlMenus1.Location = new System.Drawing.Point(0, 0);
-            this.userControlMenus1.Name = "userControlMenus1";
-            this.userControlMenus1.Size = new System.Drawing.Size(845, 577);
-            this.userControlMenus1.TabIndex = 5;
-            // 
-            // userControlAnalytics1
-            // 
-            this.userControlAnalytics1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControlAnalytics1.Location = new System.Drawing.Point(0, 0);
-            this.userControlAnalytics1.Name = "userControlAnalytics1";
-            this.userControlAnalytics1.Size = new System.Drawing.Size(845, 577);
-            this.userControlAnalytics1.TabIndex = 6;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -579,6 +590,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.ShowIcon = false;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
