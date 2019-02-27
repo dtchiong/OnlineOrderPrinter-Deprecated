@@ -455,7 +455,6 @@ namespace OnlineOrderPrinter {
             } catch (Exception e) {
                 order.ContactNumber = "Error";
             }
-
         }
 
         /* Returns the label name from line in form:

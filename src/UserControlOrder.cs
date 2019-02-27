@@ -138,7 +138,10 @@ namespace OnlineOrderPrinter.src {
 
             if (order.Service == "GrubHub") InsertToOrderNumTable(orderCon); //We insert the entry into the table with orderNum as the key
 
-            ConfirmOrder(orderCon); //Automatically confirm the order
+            //Automatically confirm the order, if the URL was successfully parsed
+            if (order.ConfirmURL != "Failed to parse") {
+                ConfirmOrder(orderCon); 
+            }
             UpdateOrderUI(); //Update the Item List in the GUI to match the selected row 
             PlaySound(Program.NotificationSoundPath); //play the nofication sound
         }
@@ -284,16 +287,16 @@ namespace OnlineOrderPrinter.src {
         }
 
         /* The callback used by Request's Confirm order functions to update
-         * the orderCon's confirm status in the associated row
+         * the orderCon's confirm status in the associated row, based on the 
+         * http code
          */
         private void UpdateConfirmStatusUI(OrderContainer orderCon, HttpStatusCode code) {
-            switch(code) {
-                case HttpStatusCode.OK:
-                    orderCon.ConfirmStatus = "Confirmed";
-                    break;
-                default:
-                    orderCon.ConfirmStatus = "Failed";
-                    break;
+            int codeNum = (int)code;
+
+            if (codeNum >= 200 && codeNum <= 299) {
+                orderCon.ConfirmStatus = string.Concat("Confirmed (", ((int)code), ")");
+            }else {
+                orderCon.ConfirmStatus = string.Concat("Failed (", ((int)code), ")");
             }
             dataGridViewOrderList.Refresh();
         }

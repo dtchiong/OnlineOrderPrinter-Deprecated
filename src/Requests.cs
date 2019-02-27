@@ -11,11 +11,11 @@ namespace OnlineOrderPrinter {
     class Requests {
         private static HttpClient client = new HttpClient();
 
-        //declares the type of type of function ConfirmOrderCallBack()
+        //Declares the type of type of function ConfirmOrderCallBack()
         public delegate void ConfirmOrderCallBack(OrderContainer orderCon, HttpStatusCode code);
 
         /* The DoorDash confirm api is a GET request, so we make that request 
-         * to confirm the DoorDash order, then calls the callback function with
+         * to confirm the DoorDash order, then we call the callback function with
          * the orderContainer and the retrieved HttpStatus code to update the UI.
          */
         public static async Task ConfirmDoorDashOrder(OrderContainer orderCon, ConfirmOrderCallBack cb) {
@@ -27,7 +27,7 @@ namespace OnlineOrderPrinter {
         }
         
         /* The GrubHub confirm api is a POST request, so we make that request
-         * to confirm the GrubHub order, then calls the callback function with
+         * to confirm the GrubHub order, then we call the callback function with
          * the orderContainer and the retrieved HttpStatus code to update the UI.
          */
         public static async Task ConfirmGrubHubOrder(OrderContainer orderCon, ConfirmOrderCallBack cb) {

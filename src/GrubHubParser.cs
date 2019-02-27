@@ -350,6 +350,5 @@ namespace OnlineOrderPrinter {
             else
                 Debug.WriteLine(title + ": NULL");
         }
-
     }
 }
