@@ -486,7 +486,6 @@ namespace OnlineOrderPrinter {
             }else {
                 Debug.WriteLine("Error: thread is null");
             }
-
             return false;
         }
 

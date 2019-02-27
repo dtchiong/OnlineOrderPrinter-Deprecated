@@ -46,17 +46,16 @@ namespace OnlineOrderPrinter {
 
         //Constructor
         public DoorDashParser() {
-
             menu = new DoorDashMenu();
+        }
 
-            /*
-            //Load the itext license (license is expired)
+        /* Loads the itext license, but the license is expired */
+        private void LoadItextLicense() {
             try {
                 LicenseKey.LoadLicenseFile(Program.iTextLicensePath);
             } catch (LicenseKeyException e) {
                 Debug.WriteLine(e);
             }
-            */
         }
 
         /* Extracts the text from the pdf and returns it as a List of strings */
@@ -392,12 +391,7 @@ namespace OnlineOrderPrinter {
          */
         private void ParseCustomerName(string line, Order order) {
             string[] words = line.Split(' ');
-
-            StringBuilder sb = new StringBuilder();
-            sb.Append(words[0]);
-            sb.Append(' ');
-            sb.Append(words[1]);
-            string custName = sb.ToString();
+            string custName = string.Concat(words[0], ' ', words[1]);
             //Debug.WriteLine("Customer Name: " + custName);
             order.CustomerName = custName;
         }
@@ -439,7 +433,6 @@ namespace OnlineOrderPrinter {
          */
         private void ParseOrderNumber(string line, Order order) {
             string orderNumber = line.Split(' ')[2];
-
             order.OrderNumber = orderNumber;
         }
 
@@ -447,11 +440,10 @@ namespace OnlineOrderPrinter {
          * Sample: "(415) 994-4429 at 10:05 PM"
          */
         private void ParseContactNumber(string line, Order order) {
-
             try {
                 string contactNumber = Regex.Replace(line, @"\s+", " ");
-                //Debug.WriteLine("Contact Number: " + contactNumber);
                 order.ContactNumber = contactNumber;
+                //Debug.WriteLine("Contact Number: " + contactNumber);
             } catch (Exception e) {
                 order.ContactNumber = "Error";
             }
@@ -533,9 +525,7 @@ namespace OnlineOrderPrinter {
             string fileName = messageId + ".txt";
             string path = Path.Combine(Program.DoorDashDebugDir, fileName);
 
-            if (File.Exists(path)) {
-                return;
-            }
+            if (File.Exists(path)) return;
 
             StreamWriter file = new StreamWriter(path);
 
