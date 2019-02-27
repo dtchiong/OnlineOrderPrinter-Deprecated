@@ -324,8 +324,8 @@ namespace OnlineOrderPrinter {
             try {
                 HtmlNode tableNode = htmlDoc.DocumentNode.SelectSingleNode("//comment()[contains(., 'CONFIRMATION')]/following-sibling::table");
                 HtmlNode aNode = tableNode.Descendants("a").First();
-                string confirmURL = aNode.Attributes["href"].Value;
-                order.ConfirmURL = confirmURL;
+                string parsedConfirmURL = aNode.Attributes["href"].Value;
+                order.ConfirmURL = GetCorrectConfirmURL(parsedConfirmURL);
             } catch (Exception e) {
                 Debug.WriteLine(e.Message);
                 order.ConfirmURL = "Failed to parse";
@@ -335,11 +335,12 @@ namespace OnlineOrderPrinter {
         /* Given the parsedURL from the GrubHub email, we extract the location
          * and append it to the actual URL for confirming GrubHub orders
          */
-        public string GetCorrectConfirmURL(string parsedURL) {
+        private static string GetCorrectConfirmURL(string parsedURL) {
             //[0]: "https, [1]: "", [2]: "orderemails.grubhub.com", [3]: {part1}, [4]: {part2}
             string[] splitURL = parsedURL.Split('/');
             string path = string.Concat(splitURL[3], "/", splitURL[4]); //reform the parts we need
             string apiURL = "https://api-order-processing-gtm.grubhub.com/order/email/confirm/" + path;
+            //https://api-order-processing-gtm.grubhub.com/order/email/confirm/cefe5e4b-03e4-433f-b84f-af1162a92b5b/ee0b1851-4cc8-38dc-930c-568522e65bfb
             return apiURL;
         }
 
