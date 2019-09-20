@@ -143,15 +143,15 @@ namespace OnlineOrderPrinter {
 
             ParseOrderNumber(lines[0], order);
             ParseCustomerName(lines[2], order);
-            ParsePickUpTime(lines[2], order);
-            ParseContactNumber(lines[3], order);
-            
+            ParsePickUpTime(lines[2], lines[4], order);
+            ParseContactNumber(lines[4], order);
+
             int startOfOrderIndex = 5;
 
             Item item = null;
             string labelName = null;
 
-            for (int i=startOfOrderIndex; i<lines.Count; i++) {
+            for (int i = startOfOrderIndex; i < lines.Count; i++) {
 
                 //Once we encounter this line, we add the last item, break, and return the order
                 if (lines[i] == "~ End of Order ~") {
@@ -162,8 +162,8 @@ namespace OnlineOrderPrinter {
                 }
 
                 //If the line starts with "Please Label", we set the labelName for use in future items
-                if (lines[i].StartsWith("Please label")) {  
-                    
+                if (lines[i].StartsWith("Please label")) {
+
                     labelName = ParseLabelName(lines[i]);
                     continue;
                 }
@@ -193,12 +193,12 @@ namespace OnlineOrderPrinter {
                     if (lines[i].StartsWith("-Special")) {
                         ParseSpecialInstructions(lines[i + 1], item);
                         i++;
-                    }else {
+                    } else {
                         ParseAddOn(lines[i], item);
                     }
                     continue;
                 }
-                
+
                 Debug.WriteLine("Unmatched: " + lines[i]);
             }
 
@@ -238,7 +238,7 @@ namespace OnlineOrderPrinter {
                 case "-Flavor":
                     if (words[1] == "Choice") {
                         ParseFlavorChoice(words, item);
-                    }else if (words[1] == "Addition") {
+                    } else if (words[1] == "Addition") {
                         ParseFlavorAddition(words, item);
                     }
                     break;
@@ -261,7 +261,7 @@ namespace OnlineOrderPrinter {
         private void ParseToppings(string[] words, Item item) {
             string topping = "";
             int startInd = 2; //Skips "Additional" and "Toppings"
-            for (int i=startInd; i<words.Length; i++) {
+            for (int i = startInd; i < words.Length; i++) {
 
                 //Stop creating the addon string if we've reached the price
                 if (words[i].StartsWith("(")) break;
@@ -269,7 +269,7 @@ namespace OnlineOrderPrinter {
                 topping = topping + words[i] + ' ';
             }
             topping = topping.Trim(); //get rid of extra space character at the end
-            
+
             if (item.AddOnList == null) {
                 item.AddOnList = new List<string>();
             }
@@ -304,9 +304,9 @@ namespace OnlineOrderPrinter {
         private void ParseIce(string[] words, Item item) {
             if (words.Length == 3) {
                 item.IceLevel = (words[2] == "Standard") ? words[2] : words[2] + " I";
-            }else if (words.Length == 5) {
+            } else if (words.Length == 5) {
                 item.IceLevel = words[2] + " I";   //new DD format - only 0% ice has 5 words
-            }else if (words[2] == "More" && words[3] == "Ice") {
+            } else if (words[2] == "More" && words[3] == "Ice") {
                 item.IceLevel = "More Ice";
             }
             //Debug.WriteLine(item.IceLevel);
@@ -317,14 +317,14 @@ namespace OnlineOrderPrinter {
          */
         private void ParseStyle(string[] words, Item item) {
 
-            switch(words[2]) {
+            switch (words[2]) {
                 case "Hot":
                     item.Temperature = "Hot";
                     break;
                 case "Cold":
                     //This handles the case that Hot drinks that select "Cold", do not print "Cold"
                     //because default options such as "Cold" are not printed
-                    bool needToAddTemp = ( item.ItemName.Contains("Ginger") || item.ItemName.Contains("Hot") );
+                    bool needToAddTemp = (item.ItemName.Contains("Ginger") || item.ItemName.Contains("Hot"));
                     if (needToAddTemp) {
                         item.ItemName = item.ItemName + " (Cold)";
                     }
@@ -336,7 +336,7 @@ namespace OnlineOrderPrinter {
                     item.ItemName = "Honey " + item.ItemName;
                     break;
                 default:
-                    Debug.WriteLine("Unidentified Style Choice: " + "-"+ words[2] + "-");
+                    Debug.WriteLine("Unidentified Style Choice: " + "-" + words[2] + "-");
                     break;
             }
         }
@@ -345,7 +345,7 @@ namespace OnlineOrderPrinter {
          * "Flavor", "Choice", {Tea}
          * Used for flavored teas that choose tea base
          */
-        private void ParseFlavorChoice(string[] words, Item item) {        
+        private void ParseFlavorChoice(string[] words, Item item) {
             item.ItemName = item.ItemName.Replace("Tea", (words[2] + " Tea"));
         }
 
@@ -364,7 +364,7 @@ namespace OnlineOrderPrinter {
         private void ParseRiceDishAddons(string[] words, Item item) {
             int startIdx = 3;
             string addon = "";
-            for (int i=startIdx; i<words.Length; i++) {
+            for (int i = startIdx; i < words.Length; i++) {
                 if (words[i].StartsWith("(")) break;
                 addon = addon + words[i] + " ";
             }
@@ -378,7 +378,7 @@ namespace OnlineOrderPrinter {
         private void ParseRamenAddons(string[] words, Item item) {
             int startIdx = 2;
             string addon = "";
-            for (int i=startIdx; i<words.Length; i++) {
+            for (int i = startIdx; i < words.Length; i++) {
                 if (words[i].StartsWith("(")) break;
                 addon = addon + words[i] + " ";
             }
@@ -398,22 +398,25 @@ namespace OnlineOrderPrinter {
 
         /* Parses the pickup time from line:
          * Samples:
-         * Rita Crum 2 items Wed Sep 12 at 5:26 PM
+         * 1st param line: Bob Y Today at 09:09PM
+         * 2nd param line: 1-(855) 973-1040 Sep 19, 2019
          */
-        private void ParsePickUpTime(string line, Order order) {
+        private void ParsePickUpTime(string lineWithTime, string lineWithDate, Order order) {
             try {
-                char[] delim = { ' ', ':' };
+                char[] lineWithTimeDelim = { ' ', ':' };
+                char[] lineWithDateDelim = { ' ', ',' };
 
-                string[] words = line.Split(delim);
-               
-                int year  = DateTime.Now.Year;
-                int month = Program.GetMonthNum( words[words.Length - 6]);
-                int day   = Int32.Parse(         words[words.Length - 5]);
-                int hour  = Int32.Parse(         words[words.Length - 3]);
-                int min   = Int32.Parse(         words[words.Length - 2]);
+                string[] timeWords = lineWithTime.Split(lineWithTimeDelim);
+                string[] dateWords = lineWithDate.Split(lineWithDateDelim);
+
+                int year = Int32.Parse(dateWords[dateWords.Length - 1]);
+                int month = Program.GetMonthNum(dateWords[dateWords.Length - 4]);
+                int day = Int32.Parse(dateWords[dateWords.Length - 3]);
+                int hour = Int32.Parse(timeWords[timeWords.Length - 2]);
+                int min = Int32.Parse(Regex.Match(timeWords[timeWords.Length - 1], @"\d{2}").Value);
 
                 //Convert hours to military
-                bool isPM = words[words.Length - 1] == "PM";
+                bool isPM = timeWords[timeWords.Length - 1].Contains("PM");
                 if (isPM) {
                     if (hour != 12)
                         hour += 12;
@@ -422,8 +425,8 @@ namespace OnlineOrderPrinter {
                 DateTime pickUpDate = new DateTime(year, month, day, hour, min, 0);
                 //Debug.WriteLine("Parsed DateTime: " + pickUpDate.ToString());
                 order.PickUpTime = pickUpDate;
-                
-            } catch(Exception e) {
+
+            } catch (Exception e) {
                 Debug.WriteLine("ParsePickUpTime: " + e.ToString());
             }
         }
@@ -437,11 +440,12 @@ namespace OnlineOrderPrinter {
         }
 
         /* Parses Contact Number from line in form:
-         * Sample: "(415) 994-4429 at 10:05 PM"
+         * Sample: "1-(855) 973-1040 Sep 19, 2019"
          */
         private void ParseContactNumber(string line, Order order) {
             try {
-                string contactNumber = Regex.Replace(line, @"\s+", " ");
+                Match match = Regex.Match(line, @"[\d\s()-]+");
+                string contactNumber = match.Value.Trim();
                 order.ContactNumber = contactNumber;
                 //Debug.WriteLine("Contact Number: " + contactNumber);
             } catch (Exception e) {
@@ -462,7 +466,7 @@ namespace OnlineOrderPrinter {
          * Also sets the item type using the menu table.
          */
         private void ParseItemName(string line, Item item) {
-            Regex regex = new Regex(@"\d+x", RegexOptions.ECMAScript); 
+            Regex regex = new Regex(@"\d+x", RegexOptions.ECMAScript);
             string itemName = regex.Replace(line, "", 1);
             int parenInd = itemName.IndexOf('(');
             itemName = itemName.Remove(parenInd).Trim();
@@ -487,7 +491,7 @@ namespace OnlineOrderPrinter {
 
         /* Sets the itemCount for each item in itemList - does not account for quantity */
         private void SetItemCounts(List<Item> itemList) {
-            for (int i=0; i<itemList.Count; i++) {
+            for (int i = 0; i < itemList.Count; i++) {
                 itemList[i].ItemCount = (i + 1) + "/" + itemList.Count;
             }
         }
@@ -496,9 +500,9 @@ namespace OnlineOrderPrinter {
         public static void SetDrinkAndSnackCount(Order order) {
             foreach (Item item in order.ItemList) {
                 if (item.ItemType == "Drink") {
-                    order.NumOfDrinks+= item.Quantity;
-                }else if (item.ItemType == "Snack") {
-                    order.NumOfSnacks+= item.Quantity;
+                    order.NumOfDrinks += item.Quantity;
+                } else if (item.ItemType == "Snack") {
+                    order.NumOfSnacks += item.Quantity;
                 }
             }
         }
@@ -529,8 +533,8 @@ namespace OnlineOrderPrinter {
 
             StreamWriter file = new StreamWriter(path);
 
-            for (int i=0; i<lines.Count; i++) { 
-                file.WriteLine( ("LINE " + i.ToString().PadLeft(3) + "  " + lines[i]) );
+            for (int i = 0; i < lines.Count; i++) {
+                file.WriteLine(("LINE " + i.ToString().PadLeft(3) + "  " + lines[i]));
             }
             file.Close();
         }
