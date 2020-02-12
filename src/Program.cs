@@ -57,7 +57,7 @@ namespace OnlineOrderPrinter {
         * 164b501111cebfe1
         * 164aebfdb8b7a59a
         */
-        static string testMessageId = "1702cc093428a10e"; //1691c8b4a6b606d3
+        static string testMessageId = "1703b09eafc8717a"; //1691c8b4a6b606d3
         static string userId = "t4milpitasonline@gmail.com";
 
         static TimerT timer;

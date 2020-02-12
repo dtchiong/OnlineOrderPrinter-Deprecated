@@ -204,6 +204,13 @@ namespace OnlineOrderPrinter {
                     continue;
                 }
 
+                // If there's still "(in" in the line, then this is part of the current item's name
+                // since it was too long to fit on 1 line.
+                if (lines[i].Contains("(in")) {
+                    ParseRemainingItemName(lines[i], item);
+                    continue;
+                }
+
                 Debug.WriteLine("Unmatched: " + lines[i]);
             }
 
@@ -490,8 +497,18 @@ namespace OnlineOrderPrinter {
         private void ParseItemName(string line, Item item) {
             Regex regex = new Regex(@"\d+x", RegexOptions.ECMAScript);
             string itemName = regex.Replace(line, "", 1);
-            int parenInd = itemName.IndexOf('(');
-            itemName = itemName.Remove(parenInd).Trim();
+
+            int parenIdx = itemName.IndexOf('(');
+            if (parenIdx != -1) {
+                itemName = itemName.Remove(parenIdx).Trim();
+            } else {
+                int dollarIdx = itemName.IndexOf('$');
+                if (dollarIdx != -1) {
+                    itemName = itemName.Substring(0, dollarIdx);
+                }
+            }
+
+
 
             item.ItemName = itemName;
             //Set item type
@@ -499,6 +516,15 @@ namespace OnlineOrderPrinter {
             if (itemType != null) {
                 item.ItemType = itemType;
             }
+        }
+
+        /* Parses the remaining part of the item name
+         * Example line: "Bento (in Rice Dish)"
+         */
+        private void ParseRemainingItemName(string line, Item item) {
+            Regex regex = new Regex(@"\s\(in.*", RegexOptions.ECMAScript);
+            string remainingName = regex.Replace(line, "", 1);
+            item.ItemName = item.ItemName + remainingName;
         }
 
         /* Parses quantity from line in form:
