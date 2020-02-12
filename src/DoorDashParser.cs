@@ -126,8 +126,13 @@ namespace OnlineOrderPrinter {
 
         /* Given the parsedURL found in the DoorDash email, we set the actual URL 
          * to confirm the order by adding "www." between https:// and the next part
+         * DoorDash sometimes uses a different url where we don't have to add "www"
          */
         private string GetCorrectConfirmURL(string parsedUrl) {
+            if (parsedUrl.Contains("store-webhook")) {
+                return parsedUrl;
+            }
+
             int startIdx = "https://".Length;
             string apiURL = string.Concat("https://www.", parsedUrl.Substring(startIdx));
             return apiURL;
