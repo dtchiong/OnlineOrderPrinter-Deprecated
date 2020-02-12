@@ -253,6 +253,9 @@ namespace OnlineOrderPrinter {
                 case "-Rice":
                     ParseRiceDishAddons(words, item);
                     break;
+                case "-Snack":
+                    ParseSnackToppings(words, item);
+                    break;
                 default:
                     Debug.WriteLine("Unidentified addon starter word: " + words[0] + "-");
                     break;
@@ -368,6 +371,20 @@ namespace OnlineOrderPrinter {
          */
         private void ParseRiceDishAddons(string[] words, Item item) {
             int startIdx = 3;
+            string addon = "";
+            for (int i = startIdx; i < words.Length; i++) {
+                if (words[i].StartsWith("(")) break;
+                addon = addon + words[i] + " ";
+            }
+            if (item.AddOnList == null) item.AddOnList = new List<string>();
+            item.AddOnList.Add(addon);
+        }
+
+        /* Parses snack toppings from string[]
+         * Example: "Snack Topping Basil Leaf (+ $0.60)
+         */
+        private void ParseSnackToppings(string[] words, Item item) {
+            int startIdx = 2;
             string addon = "";
             for (int i = startIdx; i < words.Length; i++) {
                 if (words[i].StartsWith("(")) break;
