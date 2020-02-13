@@ -498,7 +498,7 @@ namespace OnlineOrderPrinter {
             Regex regex = new Regex(@"\d+x", RegexOptions.ECMAScript);
             string itemName = regex.Replace(line, "", 1);
 
-            int parenIdx = itemName.IndexOf('(');
+            int parenIdx = itemName.IndexOf("(in");
             if (parenIdx != -1) {
                 itemName = itemName.Remove(parenIdx).Trim();
             } else {
